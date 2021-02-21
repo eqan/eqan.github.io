@@ -1,3 +1,5 @@
+@import "compass/css3";
+
 :root {
   --blue: #494eff;
   --indigo: #6610f2;
@@ -12309,22 +12311,39 @@ a.badge-danger:focus {
   height: 140px;
   height: 10rem;
   margin-bottom: 4rem;
-	box-shadow: 0 0 0 5px black;
+  box-shadow: 0 0 0 5px black;
   border-radius: 50%;
 }
 
 .jumbotron-img:hover {
-	cursor: pointer; 
-	animation:bounceOut .4s linear;
+  box-shadow: 0 0 0 5px black;
+  border-radius: 50%;
+  cursor: pointer;
+  animation: bounceOut 10s linear;
 }
 
 @keyframes bounceOut {
-  0%  {box-shadow: 0 0 0 4px black; opacity:1;}
-  25% {box-shadow: 0 0 0 1px black; opacity:1;}
-  50% {box-shadow: 0 0 0 7px black; opacity:1;}
-  75% {box-shadow: 0 0 0 4px black; opacity:1;}
-  100%{box-shadow: 0 0 0 5px black; opacity:1;}
-} 
+  0%{
+    box-shadow: 0 0 0 4px black;
+    opacity: 1;
+  }
+  25%{
+    box-shadow: 0 0 0 1px black;
+    opacity: 1;
+  }
+  50%{
+    box-shadow: 0 0 0 7px black;
+    opacity: 1;
+  }
+  75%{
+    box-shadow: 0 0 0 4px black;
+    opacity: 1;
+  }
+  100%{
+    box-shadow: 0 0 0 5px black;
+    opacity: 1;
+  }
+}
 
 .alert {
   position: relative;
@@ -14209,10 +14228,9 @@ a.badge-danger:focus {
   line-height: 1.25;
   font-style: italic;
 }
-.year-counter:after
-{
-  display:inline;
-  content:" Year(s)";
+.year-counter:after {
+  display: inline;
+  content: " Year(s)";
 }
 
 .month-counter {
@@ -14222,10 +14240,9 @@ a.badge-danger:focus {
   line-height: 1.25;
   font-style: italic;
 }
-.month-counter:after
-{
-  display:inline;
-  content:" Month(s)";
+.month-counter:after {
+  display: inline;
+  content: " Month(s)";
 }
 
 .y-counter {
@@ -14235,10 +14252,9 @@ a.badge-danger:focus {
   line-height: 1.25;
   font-style: italic;
 }
-.y-counter:after
-{
-  display:inline;
-  content:"Y";
+.y-counter:after {
+  display: inline;
+  content: "Y";
 }
 
 .m-counter {
@@ -14248,10 +14264,9 @@ a.badge-danger:focus {
   line-height: 1.25;
   font-style: italic;
 }
-.m-counter:after
-{
-  display:inline;
-  content:"M";
+.m-counter:after {
+  display: inline;
+  content: "M";
 }
 
 .year-label {

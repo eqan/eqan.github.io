@@ -16,8 +16,9 @@
       var d = new Date();
       var currentYear = d.getFullYear();
       currentYear = currentYear - year;
-      alert(currentYear);
-      request.setAttribute("currentYear", currentYear);
+      // alert(currentYear);
+      // request.setAttribute("currentYear", currentYear);
+      return currentYear;
     }
   </script>
   <title>Eqan Ahmad | Portfolio</title>
@@ -260,7 +261,7 @@
                     <strong class="progress-label">Flutter
                       <script>totalExperience(2019)</script>
                       <span class="month-counter" style="margin-left: 51%" data-counter-from="0"
-                        data-counter-to="${currentYear}"></span>
+                        data-counter-to=""></span>
                     </strong>
                     <div class="progress progress-animated mb-9">
                       <div class="progress-bar" role="progressbar" style="width: 20%" aria-valuenow="20%"
