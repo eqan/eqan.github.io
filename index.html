@@ -11,12 +11,13 @@
   <link href="./CSS/css" rel="stylesheet" />
   <link href="./CSS/yellow-black.css" rel="stylesheet" />
   <link href="./CSS/preview.css" rel="stylesheet" />
-  <script src="./JS/moment.js">
-    alert(moment().format('YYYY'));
+  <script type="text/javascript">
     function totalExperience(year) {
-      let currentYear = parseInt(moment().format('YYYY'));
+      var d = new Date();
+      var currentYear = d.getFullYear();
       currentYear = currentYear - year;
-      return currentYear.toString();
+      alert(currentYear);
+      request.setAttribute("currentYear", currentYear);
     }
   </script>
   <title>Eqan Ahmad | Portfolio</title>
@@ -257,8 +258,9 @@
                 <div class="col-12 col-md-6">
                   <div>
                     <strong class="progress-label">Flutter
+                      <script>totalExperience(2019)</script>
                       <span class="month-counter" style="margin-left: 51%" data-counter-from="0"
-                        data-counter-to="totalExperience(2019)"></span>
+                        data-counter-to="${currentYear}"></span>
                     </strong>
                     <div class="progress progress-animated mb-9">
                       <div class="progress-bar" role="progressbar" style="width: 20%" aria-valuenow="20%"
