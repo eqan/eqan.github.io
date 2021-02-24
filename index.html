@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html>
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -8,14 +8,13 @@
   <link rel="icon" type="image/png" href="./Assets/logo.png" />
   <link rel="stylesheet" href="./Font-Awesome/css/font-awesome.min.css" />
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,800&display=swap" rel="stylesheet" />
-  <link href="./CSS/css" rel="stylesheet" />
   <link href="./CSS/yellow-black.css" rel="stylesheet" />
-  <link href="./CSS/preview.css" rel="stylesheet" />
   <script type="text/javascript">
     function totalExperience(year) {
       var d = new Date();
       var currentYear = d.getFullYear();
       currentYear = currentYear - year;
+      document.getElementById("flutter").innerHTML=data;
       // alert(currentYear);
       // request.setAttribute("currentYear", currentYear);
       return currentYear;
@@ -260,8 +259,8 @@
                   <div>
                     <strong class="progress-label">Flutter
                       <script>totalExperience(2019)</script>
-                      <span class="month-counter" style="margin-left: 51%" data-counter-from="0"
-                        data-counter-to=""></span>
+                      <span id="flutter" class="month-counter" style="margin-left: 51%" data-counter-from="0"
+                        data-counter-to="2"></span>
                     </strong>
                     <div class="progress progress-animated mb-9">
                       <div class="progress-bar" role="progressbar" style="width: 20%" aria-valuenow="20%"
