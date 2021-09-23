@@ -5,10 +5,9 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta content="width=device-width, initial-scale=1" name="viewport" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link href="./CSS/yellow-black.css" id = "theme" rel="stylesheet" />
   <link rel="icon" type="image/png" href="./Assets/logo.png" />
   <link rel="stylesheet" href="./Font-Awesome/css/font-awesome.min.css" />
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,800&display=swap" rel="stylesheet" />
-  <link href="./CSS/yellow-black.css" rel="stylesheet" />
   <link href="./CSS/preview.css" rel="stylesheet" />
   <title>Eqan Ahmad | Portfolio</title>
 </head>
@@ -973,10 +972,10 @@ aria-hidden="true">
 
 <!-- Themes -->
 <div class="preview-themes">
-  <a href="#theme-yellow-black" class="preview-theme preview-color-yellow-black" title="Select theme" data-toggle="tooltip" data-theme="CSS/yellow-black.css" data-theme-bg="light"></a>
-  <a href="#theme-black-white" class="preview-theme preview-color-black-white" title="Select theme" data-toggle="tooltip" data-theme="CSS/black-white.css" data-theme-bg="dark"></a>
-  <a href="#theme-pink-black" class="preview-theme preview-color-pink-black" title="Select theme" data-toggle="tooltip" data-theme="CSS/pink-black.css" data-theme-bg="light"></a>
-  <a href="#theme-blue-black" class="preview-theme preview-color-blue-black" title="Select theme" data-toggle="tooltip" data-theme="CSS/blue-black.css" data-theme-bg="light"></a>
+  <a  class="preview-theme preview-color-yellow-black" title="Select theme" data-toggle="tooltip" data-theme="./CSS/yellow-black.css" data-theme-bg="light"></a>
+  <a  class="preview-theme preview-color-black-white" title="Select theme" data-toggle="tooltip" data-theme="./CSS/black-white.css" data-theme-bg="dark"></a>
+  <a  class="preview-theme preview-color-pink-black" title="Select theme" data-toggle="tooltip" data-theme="./CSS/pink-black.css" data-theme-bg="light"></a>
+  <a  class="preview-theme preview-color-blue-black" title="Select theme" data-toggle="tooltip" data-theme="./CSS/blue-black.css" data-theme-bg="light"></a>
 </div>
 </body>
 <!-- Themes End -->
@@ -987,13 +986,13 @@ aria-hidden="true">
 
 <script>
   $(function () {
-    $('[data-toggle="tooltip"]').tooltip();
     $('.preview-theme').click(function () {
-      $('link')[1].href = $(this).data('theme');
-      var imgSrcData = $(this).data('theme-bg') === 'light' ? 'dark-src' : 'light-src';
-      $('img[data-' + imgSrcData + ']').each(function () {
-        $(this).attr('src', $(this).data(imgSrcData));
-      });
+      let link = document.querySelector('#theme');
+      if (link) {
+        var clickedThemeHref = $(this).attr('data-theme');
+        var currentTheme = document.getElementById('theme');
+        currentTheme.href = clickedThemeHref;
+        }
       return false;
     });
   });
