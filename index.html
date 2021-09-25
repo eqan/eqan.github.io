@@ -1035,8 +1035,7 @@ aria-hidden="true">
       let link = document.querySelector('#theme');
       if (link) {
         var clickedThemeHref = $(this).attr('data-theme');
-        var currentTheme = document.getElementById('theme');
-        currentTheme.href = clickedThemeHref;
+        link.href = clickedThemeHref;
         }
       return false;
     });
