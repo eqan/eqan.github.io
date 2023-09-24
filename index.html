@@ -52,6 +52,9 @@
           width: 24px;
           height: 24px;
         }
+        .hidden-address {
+          display: none;
+        }
   </style>
 </head>
 
@@ -1339,10 +1342,12 @@
                       <svg  class="custom-svg"role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.561 13.158c-1.102 0-2.135-.467-3.074-1.227l.228-1.076.008-.042c.207-1.143.849-3.06 2.839-3.06 1.492 0 2.703 1.212 2.703 2.703-.001 1.489-1.212 2.702-2.704 2.702zm0-8.14c-2.539 0-4.51 1.649-5.31 4.366-1.22-1.834-2.148-4.036-2.687-5.892H7.828v7.112c-.002 1.406-1.141 2.546-2.547 2.548-1.405-.002-2.543-1.143-2.545-2.548V3.492H0v7.112c0 2.914 2.37 5.303 5.281 5.303 2.913 0 5.283-2.389 5.283-5.303v-1.19c.529 1.107 1.182 2.229 1.974 3.221l-1.673 7.873h2.797l1.213-5.71c1.063.679 2.285 1.109 3.686 1.109 3 0 5.439-2.452 5.439-5.45 0-3-2.439-5.439-5.439-5.439z"/></svg>
                       Upwork</a><br />
                     <a href="https://patreon.com/eqan">
-                      <svg class="custom-svg" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 24 24"><path d="M512 194.8c0 101.3-82.4 183.8-183.8 183.8-101.7 0-184.4-82.4-184.4-183.8 0-101.6 82.7-184.3 184.4-184.3C429.6 10.5 512 93.2 512 194.8zM0 501.5h90v-491H0v491z"/></svg>
                       Patreon</a><br />
-                      <p style="font-size: 20px">Bitcoin: 1FkAiAAbEgb69gqrZtSr3Ew7dsnmTaUwen<br /></p>
-                      <p style="font-size: 20px">Ethereum: 0x0eb2ee8ab45635cc2aea598f9968a93c550450e9<br /></p>
+                      <a href="" style="font-size: 20px" id="bitcoin-text">Bitcoin <span class="hidden-address">1FkAiAAbEgb69gqrZtSr3Ew7dsnmTaUwen</span></a></br>
+                      <a href="" style="font-size: 20px" id="ethereum-text">Ethereum <span class="hidden-address">0x0eb2ee8ab45635cc2aea598f9968a93c550450e9</span></a></br>
+                    </br>
+                    </br>
+                  </div>
                   </div>
               </div>
               <div class="row">
@@ -1975,5 +1980,25 @@
     });
   });
 </script>
+<script>
+  document.getElementById("bitcoin-text").addEventListener("click", function() {
+    copyToClipboard(this.querySelector(".hidden-address").innerText);
+  });
+
+  document.getElementById("ethereum-text").addEventListener("click", function() {
+    copyToClipboard(this.querySelector(".hidden-address").innerText);
+  });
+
+  function copyToClipboard(text) {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textarea);
+    alert("Address copied to clipboard");
+  }
+</script>
+
 
 </html>
