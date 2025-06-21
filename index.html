@@ -112,6 +112,22 @@
         .contact-icon:hover {
           color: var(--contact-border);
         }
+
+        /* Mobile optimisations for My Profiles cards */
+        @media (max-width: 767.98px) {
+          #section-03 .card {
+            margin-bottom: 1.5rem;
+          }
+          #section-03 .card-body {
+            padding: 1rem;
+          }
+          #section-03 .card-counter i {
+            font-size: 2.3rem;
+          }
+          #section-03 .card-title {
+            font-size: 1.1rem;
+          }
+        }
   </style>
 </head>
 
@@ -281,7 +297,7 @@
                 My Profiles
               </h2>
               <div class="row animation-translate animation-item-2">
-                <div class="col-12 col-md-4">
+                <div class="col-6 col-md-4 mb-4">
                   <div class="card card">
                     <a href="#programming-profile-modal" data-toggle="modal">
                       <div class="card-body">
@@ -289,14 +305,14 @@
                           <i class="fa fa-code"></i>
                         </strong>
                         <h3 class="card-title">
-                          Programming Profile
+                          Programming
                           <hr />
                         </h3>
                       </div>
                     </a>
                   </div>
                 </div>
-                <div class="col-12 col-md-4">
+                <div class="col-6 col-md-4 mb-4">
                   <a href="https://www.behance.net/eqanahmad" target="_blank">
                     <div class="card card">
                       <div class="card-body">
@@ -304,14 +320,14 @@
                           <i class="fa fa-crop"></i>
                         </strong>
                         <h3 class="card-title">
-                          UI/UX Designing Profile
+                          UI/UX
                           <hr />
                         </h3>
                       </div>
                     </div>
                   </a>
                 </div>
-                <div class="col-12 col-md-4">
+                <div class="col-6 col-md-4 mb-4">
                   <a href="https://medium.com/@eqan" target="_blank">
                     <div class="card card">
                       <div class="card-body">
@@ -326,30 +342,30 @@
                     </div>
                   </a>
                 </div>
-                <div class="col-12 col-md-4">
+                <div class="col-6 col-md-4 mb-4">
                   <div class="card card">
                     <a href="#freelance-profile-modal" data-toggle="modal">
                       <div class="card-body">
                         <strong class="card-counter">
-                          <i class="fa fa-code"></i>
+                          <i class="fa fa-briefcase"></i>
                         </strong>
                         <h3 class="card-title">
-                         Freelance Profiles
+                         Freelance
                           <hr />
                         </h3>
                       </div>
                     </a>
                   </div>
                 </div>
-               <div class="col-12 col-md-4">
+               <div class="col-6 col-md-4 mb-4">
                   <a href="https://www.youtube.com/@eqanio" target="_blank">
                     <div class="card card">
                       <div class="card-body">
                         <strong class="card-counter">
-                          <i class="fa fa-youtube"></i>
+                          <i class="fa fa-youtube-play"></i>
                         </strong>
                         <h3 class="card-title">
-                          Eqan IO Channel
+                          Eqan Youtube
                           <hr />
                         </h3>
                       </div>
@@ -1044,7 +1060,7 @@
                   </a>
                 </div>
                 
-                <div class="col-12 col-md-4">
+                <div class="col-6 col-md-4 mb-4">
                   <a class="card" href="#modal-project-1" data-toggle="modal">
                     <img class="card-img-top" src="./Assets/project_1.webp" alt="Netflix" />
                     <div class="card-body">
@@ -1054,7 +1070,7 @@
                     </div>
                   </a>
                 </div>
-                <div class="col-12 col-md-4">
+                <div class="col-6 col-md-4 mb-4">
                   <a class="card" href="#modal-project-2" data-toggle="modal">
                     <img class="card-img-top" src="./Assets/project_2.webp" alt="Awesome" />
                     <div class="card-body">
@@ -1064,7 +1080,7 @@
                     </div>
                   </a>
                 </div>
-                <div class="col-12 col-md-4">
+                <div class="col-6 col-md-4 mb-4">
                   <a class="card" href="#modal-project-3" data-toggle="modal">
                     <img class="card-img-top" src="./Assets/project_3.webp" alt="Instagram" />
                     <div class="card-body">
@@ -1076,7 +1092,7 @@
                 </div>
               </div>
               <div class="row animation-translate animation-item-2">
-                <div class="col-12 col-md-4">
+                <div class="col-6 col-md-4 mb-4">
                   <a class="card" href="#modal-project-4" data-toggle="modal">
                     <img class="card-img-top" src="./Assets/project_4.webp" alt="BKrypt" />
                     <div class="card-body">
@@ -1086,7 +1102,7 @@
                     </div>
                   </a>
                 </div>
-                <div class="col-12 col-md-4">
+                <div class="col-6 col-md-4 mb-4">
                   <a class="card" href="#modal-project-5" data-toggle="modal">
                     <img class="card-img-top" src="./Assets/project_5.webp" alt="Starvation Analysis" />
                     <div class="card-body">
@@ -1098,7 +1114,7 @@
                     </div>
                   </a>
                 </div>
-                <div class="col-12 col-md-4">
+                <div class="col-6 col-md-4 mb-4">
                   <a class="card" href="#modal-project-6" data-toggle="modal">
                     <img class="card-img-top" src="./Assets/project_6.webp" alt="X-axis OS" />
                     <div class="card-body">
@@ -1110,7 +1126,7 @@
                 </div>
               </div>
               <div class="row animation-translate animation-item-2">
-                <div class="col-12 col-md-4">
+                <div class="col-6 col-md-4 mb-4">
                   <a class="card" href="#modal-project-7" data-toggle="modal">
                     <img class="card-img-top" src="./Assets/project_7.webp" alt="Hangman" />
                     <div class="card-body">
@@ -1120,7 +1136,7 @@
                     </div>
                   </a>
                 </div>
-                <div class="col-12 col-md-4">
+                <div class="col-6 col-md-4 mb-4">
                   <a class="card" href="#modal-project-8" data-toggle="modal">
                     <img class="card-img-top" src="./Assets/project_8.webp" alt="IGI Predator" />
                     <div class="card-body">
@@ -1130,7 +1146,7 @@
                     </div>
                   </a>
                 </div>
-                <div class="col-12 col-md-4">
+                <div class="col-6 col-md-4 mb-4">
                   <a class="card" href="#modal-project-9" data-toggle="modal">
                     <img class="card-img-top" src="./Assets/project_9.webp" alt="Sneaker Ecommerce" />
                     <div class="card-body">
