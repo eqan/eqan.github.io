@@ -155,6 +155,23 @@
         @media(max-width:767.98px){
           #section-03 .domain-card i{font-size:2.2rem}
         }
+
+        /* Prevent text cutoff in project cards */
+         #section-05 .card-subtitle,
+         #section-05 .card-tags {
+           word-break: break-word;
+           white-space:normal;
+         }
+         #section-05 .card-subtitle {
+           padding: 0 0.75rem;
+         }
++        /* Mobile fix: make wide project cards span full width */
++        @media (max-width: 767.98px) {
++          #section-05 .col-12 {
++            max-width: 100% !important;
++            flex: 0 0 100% !important;
++          }
++        }
   </style>
 </head>
 
@@ -273,7 +290,7 @@
             </div>
             <div class="section-footer animation-translate animation-item-4">
               <a class="section-next goto-section" href="#section-02">
-                <span class="section-next-counter">01/11</span>
+                <span class="section-next-counter">01/10</span>
                 <span class="section-next-label">Next chapter</span>
                 <span class="section-next-icon"></span>
               </a>
@@ -303,7 +320,7 @@
             </div>
             <div class="section-footer animation-translate animation-item-3">
               <a class="section-next goto-section" href="#section-03">
-                <span class="section-next-counter">02/11</span>
+                <span class="section-next-counter">02/10</span>
                 <span class="section-next-label">Next chapter</span>
                 <span class="section-next-icon"></span>
               </a>
@@ -352,7 +369,7 @@
             </div>
             <div class="section-footer">
               <a class="section-next goto-section" href="#section-04">
-                <span class="section-next-counter">03/11</span>
+                <span class="section-next-counter">03/10</span>
                 <span class="section-next-label">Next chapter</span>
                 <span class="section-next-icon"></span>
               </a>
@@ -402,7 +419,7 @@
             </div>
             <div class="section-footer animation-translate animation-item-3">
               <a class="section-next goto-section" href="#section-05">
-                <span class="section-next-counter">04/11</span>
+                <span class="section-next-counter">04/10</span>
                 <span class="section-next-label">Next chapter</span>
                 <span class="section-next-icon"></span>
               </a>
@@ -555,7 +572,7 @@
             </div>
             <div class="section-footer animation-translate animation-item-3">
               <a class="section-next goto-section" href="#section-06">
-                <span class="section-next-counter">05/11</span>
+                <span class="section-next-counter">05/10</span>
                 <span class="section-next-label">Next chapter</span>
                 <span class="section-next-icon"></span>
               </a>
@@ -649,7 +666,7 @@
             </div>
             <div class="section-footer animation-translate animation-item-2">
               <a class="section-next goto-section" href="#section-07">
-                <span class="section-next-counter">07/11</span>
+                <span class="section-next-counter">07/10</span>
                 <span class="section-next-label">Next chapter</span>
                 <span class="section-next-icon"></span>
               </a>
@@ -694,7 +711,7 @@
             </div>
             <div class="section-footer animation-translate animation-item-3">
               <a class="section-next goto-section" href="#section-08">
-                <span class="section-next-counter">06/11</span>
+                <span class="section-next-counter">06/10</span>
                 <span class="section-next-label">Next chapter</span>
                 <span class="section-next-icon"></span>
               </a>
@@ -721,7 +738,7 @@
             </div>
             <div class="section-footer animation-translate animation-item-2">
               <a class="section-next goto-section" href="#section-09">
-                <span class="section-next-counter">08/11</span>
+                <span class="section-next-counter">08/10</span>
                 <span class="section-next-label">Next chapter</span>
                 <span class="section-next-icon"></span>
               </a>
@@ -868,7 +885,7 @@
             </div>
             <div class="section-footer animation-translate animation-item-3">
               <a class="section-next goto-section" href="#section-10">
-                <span class="section-next-counter">09/11</span>
+                <span class="section-next-counter">09/10</span>
                 <span class="section-next-label">Next chapter</span>
                 <span class="section-next-icon"></span>
               </a>
@@ -911,11 +928,11 @@
             </div>
             <div class="section-footer animation-translate animation-item-5">
               <span class="section-next goto-section">
-                <span class="section-next-counter">10/11</span>
+                <span class="section-next-counter">10/10</span>
               </span>
             </div>
           </section>
-          <!-- Section 11[Contact] End-->
+          <!-- Section 10[Contact] End-->
         </div>
       </div>
     </div>
