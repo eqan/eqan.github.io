@@ -67,6 +67,7 @@
           --scrollbar-thumb: #000;
           --scrollbar-track: rgba(0, 0, 0, 0.05);
           --contact-border: #000;
+          --contrast-color: #fff;
         }
 
         /* For WebKit browsers */
@@ -128,6 +129,31 @@
             font-size: 1.1rem;
           }
         }
+
+        /* Domain Experience Cards */
+        .domain-card{background:transparent;text-align:center;padding:1.5rem 0;border:2px solid var(--contact-border);border-radius:12px;transition:background-color .2s,color .2s}
+        .domain-card i{font-size:3rem;margin-bottom:.75rem}
+        .domain-card:hover{background:var(--contact-border);color:var(--contrast-color)}
+        @media(max-width:767.98px){.domain-card i{font-size:2.2rem}}
+
+        /* Hide old detailed skills */
+        #section-04 .progress,
+        #section-04 .progress-label,
+        #section-04 .section-subtitle,
+        #section-04 .timeline,
+        #section-04 .month-counter,
+        #section-04 .year-counter,
+        #section-04 .y-counter,
+        #section-04 .m-counter{
+          display:none !important;
+        }
+
+        /* My Profiles button style */
+        #section-03 .card{border:2px solid var(--contact-border);border-radius:12px;transition:background-color .2s,color .2s}
+        #section-03 .card:hover{background:var(--contact-border);color:var(--contrast-color)}
+        #section-03 .card:hover i{color:var(--contrast-color)}
+        #section-03 .card-title hr{display:none}
+        #section-03 .card:hover .card-title, #section-03 .card:hover h3{color:var(--contrast-color)}
   </style>
 </head>
 
@@ -166,7 +192,7 @@
       <li class="sections-nav-item">
         <a href="#section-04" class="nav-link sections-nav-link goto-section">
           <span class="sections-nav-counter">04</span>
-          Skills
+          Domain Expertise
         </a>
       </li>
       <li class="sections-nav-item">
@@ -384,415 +410,45 @@
           </section>
           <!-- Section 03[My Services] End -->
 
-          <!-- Section 04[Skills] Start -->
+          <!-- Section 04[Domain Expertise] Start -->
           <section id="section-04" class="section animation">
             <div class="section-body">
               <h2 class="section-title animation-translate-overline animation-item-1">
-                Skills
+                Domain Expertise
               </h2>
-              <!-- Subsection 01[Beginner] -->
-              <h3 id="beginner-section" class="section-subtitle animation-translate animation-item-2">
-                Beginner
-              </h3>
-              <div class="row animation-translate animation-item-2">
-                <!-- Column 1 Start-->
-                <div class="col-12 col-md-6">
-                  <div>
-                    <strong class="progress-label">Latex
-                      <span class="month-counter" style="margin-left: 55%" data-counter-from="0"
-                        data-counter-to="6"></span>
-                    </strong>
-                    <div class="progress progress-animated mb-9">
-                      <div class="progress-bar" role="progressbar" style="width: 30%" aria-valuenow="30%"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                  <div>
-                    <strong class="progress-label">Selenium
-                      <span class="month-counter" style="margin-left: 48%" data-counter-from="0"
-                        data-counter-to="4"></span>
-                    </strong>
-                    <div class="progress progress-animated mb-9">
-                      <div class="progress-bar" role="progressbar" style="width: 10%" aria-valuenow="10%"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                  <div>
-                    <strong class="progress-label">Robot Frame Work
-                      <span class="month-counter" style="margin-left: 22%" data-counter-from="0"
-                        data-counter-to="1"></span>
-                    </strong>
-                    <div class="progress progress-animated mb-9">
-                      <div class="progress-bar" role="progressbar" style="width: 10%" aria-valuenow="10%"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                  <div>
-                    <strong class="progress-label">Regex
-                      <span class="month-counter" style="margin-left: 55%" data-counter-from="0"
-                        data-counter-to="4"></span>
-                    </strong>
-                    <div class="progress progress-animated mb-9">
-                      <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25%"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                  <div>
-                    <strong class="progress-label">Block Chain[Clarity]
-                      <span class="month-counter" style="margin-left: 18%" data-counter-from="0"
-                        data-counter-to="5"></span>
-                    </strong>
-                    <div class="progress progress-animated mb-9">
-                      <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60%"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                  <div>
-                    <strong class="progress-label">Forex
-                      <span class="month-counter" style="margin-left: 55%" data-counter-from="0"
-                        data-counter-to="5"></span>
-                    </strong>
-                    <div class="progress progress-animated mb-9">
-                      <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60%"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                  <div>
-                    <strong class="progress-label">Amazon AWS
-                      <span class="month-counter" style="margin-left: 40%" data-counter-from="0"
-                        data-counter-to="8"></span>
-                    </strong>
-                    <div class="progress progress-animated mb-9">
-                      <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="70%"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
+              <div class="row animation-translate animation-item-2 mb-5">
+                <div class="col-6 col-md-3 mb-4">
+                  <div class="domain-card">
+                    <i class="fa fa-globe"></i>
+                    <h4 class="mb-1">Web</h4>
+                    <small>5 Years</small>
                   </div>
                 </div>
-
-                <!-- Column 2 Start-->
-                <div class="col-12 col-md-6">
-                  <div>
-                    <strong class="progress-label">OpenCV
-                      <span class="month-counter" style="margin-left: 52%" data-counter-from="0"
-                        data-counter-to="6"></span>
-                    </strong>
-                    <div class="progress progress-animated mb-9">
-                      <div class="progress-bar" role="progressbar" style="width: 10%" aria-valuenow="10%"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
+                <div class="col-6 col-md-3 mb-4">
+                  <div class="domain-card">
+                    <i class="fa fa-chain"></i>
+                    <h4 class="mb-1">Blockchain</h4>
+                    <small>2 Years</small>
                   </div>
-                  <div>
-                    <strong class="progress-label">Lua
-                      <span class="month-counter" style="margin-left: 60%" data-counter-from="0"
-                        data-counter-to="4"></span>
-                    </strong>
-                    <div class="progress progress-animated mb-9">
-                      <div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="40%"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
+                </div>
+                <div class="col-6 col-md-3 mb-4">
+                  <div class="domain-card">
+                    <i class="fa fa-cloud"></i>
+                    <h4 class="mb-1">Cloud Infra</h4>
+                    <small>1.5 Years</small>
                   </div>
-                  <div>
-                    <strong class="progress-label">Shell Scripting
-                      <span class="month-counter" style="margin-left: 29%" data-counter-from="0"
-                        data-counter-to="6"></span>
-                    </strong>
-                    <div class="progress progress-animated mb-9">
-                      <div class="progress-bar" role="progressbar" style="width: 30%" aria-valuenow="30%"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                  <div>
-                    <strong class="progress-label">Scapy
-                      <span class="month-counter" style="margin-left: 52%" data-counter-from="0"
-                        data-counter-to="2"></span>
-                    </strong>
-                    <div class="progress progress-animated mb-9">
-                      <div class="progress-bar" role="progressbar" style="width: 15%" aria-valuenow="15%"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                  <div>
-                    <strong class="progress-label">Auto Hot Key
-                      <span class="month-counter" style="margin-left: 33%" data-counter-from="0"
-                        data-counter-to="1"></span>
-                    </strong>
-                    <div class="progress progress-animated mb-9">
-                      <div class="progress-bar" role="progressbar" style="width: 10%" aria-valuenow="10%"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                  <div>
-                    <strong class="progress-label">BootStrap
-                      <span class="y-counter" style="margin-left: 50%" data-counter-from="0" data-counter-to="1"></span>
-                      <span class="m-counter" style="margin-left: 1%" data-counter-from="0" data-counter-to="5"></span>
-                    </strong>
-                    <div class="progress progress-animated mb-9">
-                      <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60%"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                  <div>
-                    <strong class="progress-label">Microsoft Azure
-                      <span class="month-counter" style="margin-left: 30%" data-counter-from="0"
-                        data-counter-to="8"></span>
-                    </strong>
-                    <div class="progress progress-animated mb-9">
-                      <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="70%"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
+                </div>
+                <div class="col-6 col-md-3 mb-4">
+                  <div class="domain-card">
+                    <i class="fa fa-magic"></i>
+                    <h4 class="mb-1">Gen AI</h4>
+                    <small>2 Years</small>
                   </div>
                 </div>
               </div>
-            </div>
-            <!-- Subsection 02[Intermediate] -->
-            <h3 id="intermediate-section" class="section-subtitle animation-translate animation-item-2">
-              Intermediate
-            </h3>
-            <div class="row animation-translate animation-item-2">
-              <!-- Column 1 Start-->
-              <div class="col-12 col-md-6">
-                <div>
-                  <strong class="progress-label">C# + .NET FrameWork + ASP.NET
-                    <span class="year-counter" style="margin-left: 0%" data-counter-from="0"
-                      data-counter-to="1"></span>
-                  </strong>
-                  <div class="progress progress-animated mb-9">
-                    <div class="progress-bar" role="progressbar" style="width: 20%" aria-valuenow="20%"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-                <div>
-                  <strong class="progress-label">Python
-                    <span class="year-counter" style="margin-left: 50%" data-counter-from="0"
-                      data-counter-to="3"></span>
-                  </strong>
-                  <div class="progress progress-animated mb-9">
-                    <div class="progress-bar" role="progressbar" style="width: 20%" aria-valuenow="20%"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-                <div>
-                  <strong class="progress-label">CLI(Unix/Linux/Windows)
-                    <span class="year-counter" style="margin-left: 10%" data-counter-from="0"
-                      data-counter-to="2"></span>
-                  </strong>
-                  <div class="progress progress-animated mb-9">
-                    <div class="progress-bar" role="progressbar" style="width: 10%" aria-valuenow="10%"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-                <div>
-                  <strong class="progress-label">C++
-                    <span class="year-counter" style="margin-left: 61%" data-counter-from="0"
-                      data-counter-to="3"></span>
-                  </strong>
-                  <div class="progress progress-animated mb-9">
-                    <div class="progress-bar" role="progressbar" style="width: 10%" aria-valuenow="10%"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-                <strong class="progress-label">CSS
-                  <span class="year-counter" style="margin-left: 60%" data-counter-from="0" data-counter-to="2"></span>
-                </strong>
-                <div class="progress progress-animated mb-9">
-                  <div class="progress-bar" role="progressbar" style="width: 10%" aria-valuenow="10%" aria-valuemin="0"
-                    aria-valuemax="100"></div>
-                </div>
-                  <div>
-                    <strong class="progress-label">NEXT.JS
-                      <span class="year-counter" style="margin-left: 55%" data-counter-from="0"
-                        data-counter-to="3"></span>
-                    </strong>
-                    <div class="progress progress-animated mb-9">
-                      <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60%"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                  <div>
-                    <strong class="progress-label">MERN Stack
-                      <span class="y-counter" style="margin-left: 50%" data-counter-from="0" data-counter-to="3"></span>
-                      <span class="m-counter" style="margin-left: 1%" data-counter-from="0" data-counter-to="5"></span>
-                    </strong>
-                    <div class="progress progress-animated mb-9">
-                      <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60%"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                  <div>
-                    <strong class="progress-label">Git + Github
-                      <span class="year-counter" style="margin-left: 42%" data-counter-from="0"
-                        data-counter-to="5"></span>
-                    </strong>
-                    <div class="progress progress-animated mb-9">
-                      <div class="progress-bar" role="progressbar" style="width: 10%" aria-valuenow="10%"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                <div>
-                  <strong class="progress-label"> TypeScript
-                    <span class="year-counter" style="margin-left: 47%" data-counter-from="0"
-                      data-counter-to="3"></span>
-                  </strong>
-                  <div class="progress progress-animated mb-9">
-                    <div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="60%"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-                <div>
-                  <strong class="progress-label"> Postgres
-                    <span class="year-counter" style="margin-left: 50%" data-counter-from="0"
-                      data-counter-to="3"></span>
-                  </strong>
-                  <div class="progress progress-animated mb-9">
-                    <div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="60%"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-                <div>
-                  <strong class="progress-label"> FAST API
-                    <span class="year-counter" style="margin-left: 50%" data-counter-from="0"
-                      data-counter-to="3"></span>
-                  </strong>
-                  <div class="progress progress-animated mb-9">
-                    <div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="60%"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <div>
-                    <strong class="progress-label"> PineCone
-                      <span class="year-counter" style="margin-left: 50%" data-counter-from="0"
-                        data-counter-to="1"></span>
-                    </strong>
-                    <div class="progress progress-animated mb-9">
-                      <div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="60%"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Column 2 Start-->
-              <div class="col-12 col-md-6">
-                <div>
-                  <strong class="progress-label">PhotoShop
-                    <span class="y-counter" style="margin-left: 50%" data-counter-from="0" data-counter-to="2"></span>
-                    <span class="m-counter" style="margin-left: 1%" data-counter-from="0" data-counter-to="5"></span>
-                  </strong>
-                  <div class="progress progress-animated mb-9">
-                    <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50%"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-                <div>
-                  <strong class="progress-label">Illustrator
-                    <span class="y-counter" style="margin-left: 48%" data-counter-from="0" data-counter-to="2"></span>
-                    <span class="m-counter" style="margin-left: 1%" data-counter-from="0" data-counter-to="5"></span>
-                  </strong>
-                  <div class="progress progress-animated mb-9">
-                    <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50%"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-                <div>
-                  <strong class="progress-label">XD
-                    <span class="y-counter" style="margin-left: 68%" data-counter-from="0" data-counter-to="1"></span>
-                    <span class="m-counter" style="margin-left: 1%" data-counter-from="0" data-counter-to="5"></span>
-                  </strong>
-                  <div class="progress progress-animated mb-9">
-                    <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50%"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-                <div>
-                  <strong class="progress-label">HTML
-                    <span class="year-counter" style="margin-left: 56%" data-counter-from="0"
-                      data-counter-to="4"></span>
-                  </strong>
-                  <div class="progress progress-animated mb-9">
-                    <div class="progress-bar" role="progressbar" style="width: 10%" aria-valuenow="10%"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-                <div>
-                  <strong class="progress-label">SQL
-                    <span class="year-counter" style="margin-left: 55%" data-counter-from="0"
-                      data-counter-to="4"></span>
-                  </strong>
-                  <div class="progress progress-animated mb-9">
-                    <div class="progress-bar" role="progressbar" style="width: 20%" aria-valuenow="20%"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-                  <div>
-                    <strong class="progress-label">BlockChain[Solidity]
-                    <span class="y-counter" style="margin-left: 25%" data-counter-from="0" data-counter-to="2"></span>
-                    <span class="m-counter" style="margin-left: 1%" data-counter-from="0" data-counter-to="2"></span>
-                    </strong>
-                    <div class="progress progress-animated mb-9">
-                      <div class="progress-bar" role="progressbar" style="width: 30%" aria-valuenow="60%"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-              <div>
-                <strong class="progress-label">NEST.js
-                  <span class="year-counter" style="margin-left: 53%" data-counter-from="0"
-                    data-counter-to="2"></span>
-                </strong>
-                <div class="progress progress-animated mb-9">
-                  <div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="60%"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-              </div>
-              <div>
-                <strong class="progress-label">GraphQL
-                  <span class="year-counter" style="margin-left: 53%" data-counter-from="0"
-                    data-counter-to="2"></span>
-                </strong>
-                <div class="progress progress-animated mb-9">
-                  <div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="60%"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-              </div>
-                <div>
-                  <strong class="progress-label"> TypeORM
-                    <span class="year-counter" style="margin-left: 47%" data-counter-from="0"
-                      data-counter-to="2"></span>
-                  </strong>
-                  <div class="progress progress-animated mb-9">
-                    <div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="60%"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                <div>
-                  <strong class="progress-label"> JavaScript
-                    <span class="year-counter" style="margin-left: 47%" data-counter-from="0"
-                      data-counter-to="3"></span>
-                  </strong>
-                  <div class="progress progress-animated mb-9">
-                    <div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="60%"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-                <div>
-                  <strong class="progress-label"> SQL Alchemy
-                    <span class="year-counter" style="margin-left: 44%" data-counter-from="0"
-                      data-counter-to="3"></span>
-                  </strong>
-                  <div class="progress progress-animated mb-9">
-                    <div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="60%"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-                <div>
-                  <strong class="progress-label"> MS Word API
-                    <span class="year-counter" style="margin-left: 50%" data-counter-from="0"
-                      data-counter-to="1"></span>
-                  </strong>
-                  <div class="progress progress-animated mb-9">
-                    <div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="60%"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-                </div>
-              </div>
+              <!-- OLD detailed skills hidden -->
+              <div style="display:none">
+              
             </div>
             <div class="section-footer animation-translate animation-item-3">
               <a class="section-next goto-section" href="#section-05">
@@ -802,7 +458,7 @@
               </a>
             </div>
           </section>
-          <!-- Section 4[Skills] END-->
+          <!-- Section 4[Domain Expertise] END-->
 
           <!-- Section 5[Programming] Start-->
           <section id="section-05" class="section animation">
@@ -2075,10 +1731,12 @@
         document.documentElement.style.setProperty('--scrollbar-thumb', '#fff');
         document.documentElement.style.setProperty('--scrollbar-track', 'rgba(255,255,255,0.15)');
         document.documentElement.style.setProperty('--contact-border', '#fff');
+        document.documentElement.style.setProperty('--contrast-color', '#000');
       } else {
         document.documentElement.style.setProperty('--scrollbar-thumb', '#000');
         document.documentElement.style.setProperty('--scrollbar-track', 'rgba(0,0,0,0.05)');
         document.documentElement.style.setProperty('--contact-border', '#000');
+        document.documentElement.style.setProperty('--contrast-color', '#fff');
       }
 
       return false;
