@@ -18,7 +18,7 @@
   <meta name="image" property="og:image" content="https://live.staticflickr.com/65535/51822943239_b4c2530f31_z.webp" />
   <meta name="author" content="Eqan Ahmad" />
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9CXBW91L24"></script>
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-9CXBW91L24"></script> -->
   <!-- Microsoft Clarity -->
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -165,9 +165,19 @@
          #section-05 .card-subtitle {
            padding: 0 0.75rem;
          }
-         /* Mobile fix: make wide project cards span full width */
-         @media (max-width: 767.98px) {
-           #section-05 .col-12 {
+        /* Mobile fix: force single-column cards in Sections 03 and 04 */
+        @media (max-width: 575px) {
+           #section-03 .col-6,
+           #section-04 .col-6 {
+             max-width: 100% !important;
+             flex: 0 0 100% !important;
+           }
+         }
+
+         /* Mobile fix: large thumbnails for project cards in Section 05 */
+         @media (max-width: 575px) {
+           #section-05 .col-6,
+           #section-05 .col-md-4 {
              max-width: 100% !important;
              flex: 0 0 100% !important;
            }
