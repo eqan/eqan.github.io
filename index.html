@@ -41,7 +41,7 @@
       }
     }
   
-    @media (min-width: 768px) and (max-width: 991px) {
+    @media (min-width: 700px) and (max-width: 991px) {
       .specific-card-tags {
         margin-left: 5%;
       }
@@ -121,7 +121,7 @@
         }
 
         /* Mobile optimisations for Services cards */
-        @media (min-width: 769px) {
+        @media (min-width: 845px) {
           #section-03 .card {
             margin-bottom: 1.5rem;
           }
@@ -140,7 +140,7 @@
         .domain-card{background:transparent;text-align:center;padding:1.5rem 0;border:2px solid var(--contact-border);border-radius:12px;transition:background-color .2s,color .2s}
         .domain-card i{font-size:3rem;margin-bottom:.75rem}
         .domain-card:hover{background:var(--contact-border);color:var(--contrast-color)}
-        @media(min-width:769px){.domain-card i{font-size:2.2rem}}
+        @media(min-width:845px){.domain-card i{font-size:2.2rem}}
 
         /* Hide old detailed skills */
         #section-04 .progress,
@@ -159,7 +159,7 @@
         #section-03 .domain-card i{font-size:3rem;margin-bottom:.75rem}
         #section-03 .domain-card:hover{background:var(--contact-border);color:var(--contrast-color)}
 
-        @media(min-width:769px){
+        @media(min-width:845px){
           #section-03 .domain-card i{font-size:2.2rem}
         }
 
@@ -189,6 +189,31 @@
              flex: 0 0 100% !important;
            }
          }
+
+        /* Click-hint chevron inside each card */
+        .domain-card::after {
+          content: '›';
+          position: absolute;
+          right: 16px;
+          bottom: 12px;
+          font-size: 32px; /* bigger visual cue */
+          line-height: 1;
+          color: var(--contact-border); /* adapts to light/dark theme */
+          opacity: 0;
+          transition: opacity .25s, color .25s;
+        }
+        .domain-card:hover::after {
+          opacity: 1;
+          color: var(--contrast-color); /* flips when card background changes on hover */
+        }
+
+        /* Medium-screen (tablet) layout: show two cards per row in Expertise section */
+        @media (min-width: 768px) and (max-width: 991px) {
+          #section-04 .col-md-3, #section-03 .col-md-4 {
+            max-width: 50% !important;
+            flex: 0 0 50% !important;
+          }
+        }
   </style>
 </head>
 
@@ -409,14 +434,14 @@
                 <div class="col-6 col-md-3 mb-4">
                   <div class="domain-card">
                     <i class="fa fa-chain"></i>
-                    <h4 class="mb-1">Blockchain</h4>
+                    <h4 class="mb-3">Blockchain</h4>
                     <small>2 Years</small>
                   </div>
                 </div>
                 <div class="col-6 col-md-3 mb-4">
                   <div class="domain-card">
                     <i class="fa fa-cloud"></i>
-                    <h4 class="mb-1">Cloud Infra</h4>
+                    <h4 class="mb-1">Cloud</h4>
                     <small>1.5 Years</small>
                   </div>
                 </div>
