@@ -214,6 +214,30 @@
             flex: 0 0 50% !important;
           }
         }
+        /* Optional: add class .arrow-left to any card that should display a left-pointing chevron */
+        .domain-card.arrow-left::after {
+          content: '‹'; /* left chevron */
+          left: 16px;
+          right: auto;
+        }
+
+        /* Mobile viewport: vertical arrows */
+        @media (max-width: 575px) {
+          .domain-card::after {
+            content: '⌄';            /* down arrow */
+            left: 50%;
+            bottom: 10px;
+            right: auto; top: auto;
+            transform: translateX(-50%);
+          }
+          .domain-card.arrow-left::after {
+            content: '⌃';            /* up arrow */
+            top: 2px;
+            bottom: auto;
+            left: 50%;
+            transform: translateX(-50%);
+          }
+        }
   </style>
 </head>
 
@@ -400,7 +424,7 @@
                   </a>
                 </div>
                 <div class="col-6 col-md-4 mb-4">
-                  <a href="https://www.youtube.com/@eqanio" target="_blank" class="domain-card d-block text-center no-decoration">
+                  <a href="https://www.youtube.com/@eqanio" target="_blank" class="domain-card d-block text-center no-decoration arrow-left">
                     <i class="fa fa-youtube-play"></i>
                     <h4 class="mb-1">YouTube</h4>
                   </a>
@@ -446,7 +470,7 @@
                   </div>
                 </div>
                 <div class="col-6 col-md-3 mb-4">
-                  <div class="domain-card">
+                  <div class="domain-card arrow-left">
                     <i class="fa fa-magic"></i>
                     <h4 class="mb-1">Gen AI</h4>
                     <small>2 Years</small>
@@ -1719,6 +1743,4 @@
     alert("Address copied to clipboard");
   }
 </script>
-
-
 </html>
