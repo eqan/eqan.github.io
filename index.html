@@ -239,6 +239,46 @@
             transform: translateX(-50%);
           }
         }
+
+        /* Popover preview */
+        .popover-preview{
+          max-width:280px;
+        }
+        .popover-preview img{
+          max-width:100%;
+          height:auto;
+        }
+
+        /* Responsive popover sizing */
+        .popover{
+          max-width:280px;
+          width:auto;
+        }
+        @media (min-width:576px){
+          .popover{max-width:340px;}
+        }
+        @media (min-width:768px){
+          .popover{max-width:560px;}
+        }
+        @media (min-width:992px){
+          .popover{max-width:560px;}
+        }
+        @media (min-width:1200px){
+          .popover{max-width:760px;}
+        }
+        @media (min-width:1400px){
+          .popover{max-width:860px;}
+        }
+        .popover-preview .row{margin:0;display:flex;flex-wrap:wrap;justify-content:center;}
+        .popover-preview [class*='col-']{flex:1 1 140px;max-width:160px;padding:0 .5rem;display:flex;flex-direction:column;align-items:center;}
+        .popover-preview .card{box-shadow:none;border:none;background:transparent;}
+        .popover-preview h4{font-size:0.9rem;margin-top:.5rem;white-space:nowrap;}
+        .popover-preview i{font-size:1.75rem;}
+        .popover-preview h2{
+          font-size:1.25rem;
+          line-height:1.3;
+          margin-bottom:.75rem;
+        }
   </style>
 </head>
 
@@ -1737,6 +1777,31 @@
       return false;
     });
   });
+</script>
+<script>
+$(function(){
+  $('.domain-card').each(function(){
+    var $card = $(this);
+    var href = $card.attr('href') || '';
+    var isModal = $card.data('toggle') === 'modal' && href.startsWith('#');
+    if(isModal){
+      var $modal = $(href);
+      if($modal.length){
+        var previewHtml = $modal.find('.modal-body').html() || '';
+        $card.popover({
+          html: true,
+          trigger: 'hover',
+          placement: ($(window).width() < 576) ? 'bottom' : 'auto',
+          container: 'body',
+          content: '<div class="popover-preview">'+ previewHtml +'</div>'
+        });
+      }
+    } else if ($card.attr('target') === '_blank'){
+      var label = $card.find('h4').text() || 'Open link';
+      $card.tooltip({title: label, placement:'bottom'});
+    }
+  });
+});
 </script>
 <script>
   document.getElementById("bitcoin-text").addEventListener("click", function() {
