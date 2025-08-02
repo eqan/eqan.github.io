@@ -1766,11 +1766,16 @@
       blinkState = !blinkState;
       $initialThemeTip.tooltip(blinkState ? 'show' : 'hide');
     }, 600);
-    // stop blinking after 5 seconds
-    setTimeout(function(){
-      clearInterval(blinkInterval);
-      $initialThemeTip.tooltip('hide');
-    }, 5000);
+    // stop blinking when user interacts or after 5 seconds
+    function stopBlink(){
+      if(blinkInterval){
+        clearInterval(blinkInterval);
+        blinkInterval = null;
+        $initialThemeTip.tooltip('hide');
+      }
+    }
+    $('.preview-theme').on('mouseenter focus click', stopBlink);
+    setTimeout(stopBlink, 5000);
     $('.preview-theme').click(function () {
       let link = document.querySelector('#theme');
       if (link) {
