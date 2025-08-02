@@ -274,6 +274,12 @@
         .popover-preview .card{box-shadow:none;border:none;background:transparent;}
         .popover-preview h4{font-size:0.9rem;margin-top:.5rem;white-space:nowrap;}
         .popover-preview i{font-size:1.75rem;}
+        /* Modal cards */
+        .modal-body .card{background:transparent;border:2px solid var(--contact-border);border-radius:12px;text-align:center;transition:background-color .25s,color .25s;}
+        .modal-body .card:hover{background:var(--contact-border);color:var(--contrast-color);} .modal-body .card:hover *, .modal-body .card:hover i{color:var(--contrast-color);}
+        .modal-body .card i{font-size:3rem;margin-bottom:.75rem;}
+        @media(min-width:768px){.modal-body .card i{font-size:2.2rem;}}
+
         .popover-preview h2{
           font-size:1.25rem;
           line-height:1.3;
@@ -1753,6 +1759,18 @@
 <script>
   $(function () {
     $('[data-toggle="tooltip"]').tooltip();
+    // Show theme tooltip on load for 5 seconds so users notice theme selector
+    var $initialThemeTip = $('.preview-theme').first();
+    var blinkState = false;
+    var blinkInterval = setInterval(function(){
+      blinkState = !blinkState;
+      $initialThemeTip.tooltip(blinkState ? 'show' : 'hide');
+    }, 600);
+    // stop blinking after 5 seconds
+    setTimeout(function(){
+      clearInterval(blinkInterval);
+      $initialThemeTip.tooltip('hide');
+    }, 5000);
     $('.preview-theme').click(function () {
       let link = document.querySelector('#theme');
       if (link) {
