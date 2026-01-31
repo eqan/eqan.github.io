@@ -17,8 +17,6 @@
   <meta property="og:type" content="Website" />
   <meta name="image" property="og:image" content="https://live.staticflickr.com/65535/51822943239_b4c2530f31_z.webp" />
   <meta name="author" content="Eqan Ahmad" />
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-9CXBW91L24"></script> -->
   <!-- Microsoft Clarity -->
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -26,270 +24,130 @@
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "hbem75z47m");
-</script>
+  </script>
+  <!-- Google Analytics -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'G-9CXBW91L24');
   </script>
   <style>
-    @media (min-width: 992px) {
-      .specific-card-tags {
-        margin-left: 20%;
-      }
+    /* Card Tags Responsive */
+    @media (min-width: 992px) { .specific-card-tags { margin-left: 20%; } }
+    @media (min-width: 700px) and (max-width: 991px) { .specific-card-tags { margin-left: 5%; } }
+
+    /* Custom SVG and Utilities */
+    .custom-svg { width: 24px; height: 24px; }
+    .hidden-address { display: none; }
+    .programming-card { background-color: rgba(0, 0, 0, 0.35); color: #fff; }
+    .programming-card i { color: #fff; }
+
+    /* CSS Variables */
+    :root {
+      --scrollbar-thumb: #000;
+      --scrollbar-track: rgba(0, 0, 0, 0.05);
+      --contact-border: #000;
+      --contrast-color: #fff;
     }
-  
-    @media (min-width: 700px) and (max-width: 991px) {
-      .specific-card-tags {
-        margin-left: 5%;
-      }
+
+    /* Scrollbar Styles */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+    ::-webkit-scrollbar-thumb { background-color: var(--scrollbar-thumb); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background-color: var(--scrollbar-thumb); opacity: 0.8; }
+    html { scrollbar-width: thin; scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track); scroll-behavior: smooth; }
+
+    /* Contact Icons */
+    .contact-icons { display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: flex-start; }
+    .contact-icon { display: flex; flex-direction: column; align-items: center; text-decoration: none; font-size: 0.9rem; color: inherit; }
+    .contact-icon i { font-size: 1.6rem; margin-bottom: 0.35rem; }
+    .contact-icon:hover { color: var(--contact-border); }
+
+    /* No decoration utility */
+    .no-decoration, .no-decoration:hover, .no-decoration:focus { text-decoration: none !important; }
+
+    /* Services cards (desktop) */
+    @media (min-width: 845px) {
+      #section-03 .card { margin-bottom: 1.5rem; }
+      #section-03 .card-body { padding: 1rem; }
+      #section-03 .card-counter i { font-size: 2.3rem; }
+      #section-03 .card-title { font-size: 1.1rem; }
     }
-        /* Set the size of SVG to match FontAwesome icon */
-        .custom-svg {
-          width: 24px;
-          height: 24px;
-        }
-        .hidden-address {
-          display: none;
-        }
-        .programming-card {
-          background-color: rgba(0, 0, 0, 0.35);
-          color: #fff;
-        }
-        .programming-card i {
-          color: #fff;
-        }
 
-        :root {
-          --scrollbar-thumb: #000;
-          --scrollbar-track: rgba(0, 0, 0, 0.05);
-          --contact-border: #000;
-          --contrast-color: #fff;
-        }
+    /* Domain Experience Cards */
+    .domain-card { background: transparent; text-align: center; padding: 1.5rem 0; border: 2px solid var(--contact-border); border-radius: 12px; transition: background-color .2s, color .2s; }
+    .domain-card i { font-size: 3rem; margin-bottom: .75rem; }
+    .domain-card:hover { background: var(--contact-border); color: var(--contrast-color); }
+    @media (min-width: 845px) { .domain-card i { font-size: 2.2rem; } }
 
-        /* For WebKit browsers */
-        ::-webkit-scrollbar {
-          width: 8px;
-          height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-          background: var(--scrollbar-track);
-        }
-        ::-webkit-scrollbar-thumb {
-          background-color: var(--scrollbar-thumb);
-          border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-          background-color: var(--scrollbar-thumb);
-          opacity: 0.8;
-        }
-        /* For Firefox */
-        html {
-          scrollbar-width: thin;
-          scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
-          scroll-behavior: smooth;
-        }
-        .contact-icons {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 1rem 2rem;
-          align-items: flex-start;
-        }
-        .contact-icon {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-decoration: none;
-          font-size: 0.9rem;
-          color: inherit;
-        }
-        .contact-icon i {
-          font-size: 1.6rem;
-          margin-bottom: 0.35rem;
-        }
-        .contact-icon:hover {
-          color: var(--contact-border);
-        }
+    /* Hide old detailed skills */
+    #section-04 .progress, #section-04 .progress-label, #section-04 .section-subtitle,
+    #section-04 .timeline, #section-04 .month-counter, #section-04 .year-counter,
+    #section-04 .y-counter, #section-04 .m-counter { display: none !important; }
 
-        /* Utility helper: remove underline from links */
-        .no-decoration,
-        .no-decoration:hover,
-        .no-decoration:focus {
-          text-decoration: none !important;
-        }
+    /* Services same look as Domain cards */
+    #section-03 .domain-card { background: transparent; border: 2px solid var(--contact-border); border-radius: 12px; padding: 1.5rem 0; text-align: center; transition: background-color .2s, color .2s; }
+    #section-03 .domain-card i { font-size: 3rem; margin-bottom: .75rem; }
+    #section-03 .domain-card:hover { background: var(--contact-border); color: var(--contrast-color); }
+    @media (min-width: 845px) { #section-03 .domain-card i { font-size: 2.2rem; } }
 
-        /* Mobile optimisations for Services cards */
-        @media (min-width: 845px) {
-          #section-03 .card {
-            margin-bottom: 1.5rem;
-          }
-          #section-03 .card-body {
-            padding: 1rem;
-          }
-          #section-03 .card-counter i {
-            font-size: 2.3rem;
-          }
-          #section-03 .card-title {
-            font-size: 1.1rem;
-          }
-        }
+    /* Project cards text */
+    #section-05 .card-subtitle, #section-05 .card-tags { word-break: break-word; white-space: normal; }
+    #section-05 .card-subtitle { padding: 0 0.75rem; }
 
-        /* Domain Experience Cards */
-        .domain-card{background:transparent;text-align:center;padding:1.5rem 0;border:2px solid var(--contact-border);border-radius:12px;transition:background-color .2s,color .2s}
-        .domain-card i{font-size:3rem;margin-bottom:.75rem}
-        .domain-card:hover{background:var(--contact-border);color:var(--contrast-color)}
-        @media(min-width:845px){.domain-card i{font-size:2.2rem}}
+    /* Mobile: single-column cards */
+    @media (max-width: 575px) {
+      #section-03 .col-6, #section-04 .col-6 { max-width: 100% !important; flex: 0 0 100% !important; }
+      #section-05 .col-6, #section-05 .col-md-4 { max-width: 100% !important; flex: 0 0 100% !important; }
+    }
 
-        /* Hide old detailed skills */
-        #section-04 .progress,
-        #section-04 .progress-label,
-        #section-04 .section-subtitle,
-        #section-04 .timeline,
-        #section-04 .month-counter,
-        #section-04 .year-counter,
-        #section-04 .y-counter,
-        #section-04 .m-counter{
-          display:none !important;
-        }
+    /* Click-hint chevron (desktop only - hidden on mobile) */
+    .domain-card { position: relative; }
+    .domain-card::after { content: '›'; position: absolute; right: 16px; bottom: 12px; font-size: 32px; line-height: 1; color: var(--contact-border); opacity: 0; transition: opacity .25s, color .25s; }
+    .domain-card:hover::after { opacity: 1; color: #fff; }
 
-        /* Services use the same look as Domain cards */
-        #section-03 .domain-card{background:transparent;border:2px solid var(--contact-border);border-radius:12px;padding:1.5rem 0;text-align:center;transition:background-color .2s,color .2s}
-        #section-03 .domain-card i{font-size:3rem;margin-bottom:.75rem}
-        #section-03 .domain-card:hover{background:var(--contact-border);color:var(--contrast-color)}
+    /* Tablet layout */
+    @media (min-width: 768px) and (max-width: 991px) {
+      #section-04 .col-md-3, #section-03 .col-md-4 { max-width: 50% !important; flex: 0 0 50% !important; }
+    }
 
-        @media(min-width:845px){
-          #section-03 .domain-card i{font-size:2.2rem}
-        }
+    /* Arrow left variant */
+    .domain-card.arrow-left::after { content: '‹'; left: 16px; right: auto; }
 
-        /* Prevent text cutoff in project cards */
-         #section-05 .card-subtitle,
-         #section-05 .card-tags {
-           word-break: break-word;
-           white-space:normal;
-         }
-         #section-05 .card-subtitle {
-           padding: 0 0.75rem;
-         }
-        /* Mobile fix: force single-column cards in Sections 03 and 04 */
-        @media (max-width: 575px) {
-           #section-03 .col-6,
-           #section-04 .col-6 {
-             max-width: 100% !important;
-             flex: 0 0 100% !important;
-           }
-         }
+    /* Mobile: hide chevron arrows completely - they don't work well on touch */
+    @media (max-width: 575px) {
+      .domain-card::after { display: none; }
+      .domain-card.arrow-left::after { display: none; }
+    }
 
-         /* Mobile fix: large thumbnails for project cards in Section 05 */
-         @media (max-width: 575px) {
-           #section-05 .col-6,
-           #section-05 .col-md-4 {
-             max-width: 100% !important;
-             flex: 0 0 100% !important;
-           }
-         }
+    /* Popover styles */
+    .popover-preview { max-width: 280px; }
+    .popover-preview img { max-width: 100%; height: auto; }
+    .popover { max-width: 280px; width: auto; }
+    @media (min-width: 576px) { .popover { max-width: 340px; } }
+    @media (min-width: 768px) { .popover { max-width: 560px; } }
+    @media (min-width: 992px) { .popover { max-width: 560px; } }
+    @media (min-width: 1200px) { .popover { max-width: 760px; } }
+    @media (min-width: 1400px) { .popover { max-width: 860px; } }
+    .popover-preview .row { margin: 0; display: flex; flex-wrap: wrap; justify-content: center; }
+    .popover-preview [class*='col-'] { flex: 1 1 140px; max-width: 160px; padding: 0 .5rem; display: flex; flex-direction: column; align-items: center; }
+    .popover-preview .card { box-shadow: none; border: none; background: transparent; }
+    .popover-preview h4 { font-size: 0.9rem; margin-top: .5rem; white-space: nowrap; }
+    .popover-preview i { font-size: 1.75rem; }
+    .popover-preview h2 { font-size: 1.25rem; line-height: 1.3; margin-bottom: .75rem; }
 
-        /* Click-hint chevron inside each card */
-        .domain-card::after {
-          content: '›';
-          position: absolute;
-          right: 16px;
-          bottom: 12px;
-          font-size: 32px; /* bigger visual cue */
-          line-height: 1;
-          color: var(--contact-border); /* adapts to light/dark theme */
-          opacity: 0;
-          transition: opacity .25s, color .25s;
-        }
-
-        .domain-card:hover::after {
-          opacity: 1;
-          color: #fff; /* flips when card background changes on hover */
-        }
-
-        /* Medium-screen (tablet) layout: show two cards per row in Expertise section */
-        @media (min-width: 768px) and (max-width: 991px) {
-          #section-04 .col-md-3, #section-03 .col-md-4 {
-            max-width: 50% !important;
-            flex: 0 0 50% !important;
-          }
-        }
-        /* Optional: add class .arrow-left to any card that should display a left-pointing chevron */
-        .domain-card.arrow-left::after {
-          content: '‹'; /* left chevron */
-          left: 16px;
-          right: auto;
-        }
-
-        /* Mobile viewport: vertical arrows */
-        @media (max-width: 575px) {
-          .domain-card::after {
-            content: '⌄';            /* down arrow */
-            left: 50%;
-            bottom: 10px;
-            right: auto; top: auto;
-            transform: translateX(-50%);
-          }
-          .domain-card.arrow-left::after {
-            content: '⌃';            /* up arrow */
-            top: 2px;
-            bottom: auto;
-            left: 50%;
-            transform: translateX(-50%);
-          }
-        }
-
-        /* Popover preview */
-        .popover-preview{
-          max-width:280px;
-        }
-        .popover-preview img{
-          max-width:100%;
-          height:auto;
-        }
-
-        /* Responsive popover sizing */
-        .popover{
-          max-width:280px;
-          width:auto;
-        }
-        @media (min-width:576px){
-          .popover{max-width:340px;}
-        }
-        @media (min-width:768px){
-          .popover{max-width:560px;}
-        }
-        @media (min-width:992px){
-          .popover{max-width:560px;}
-        }
-        @media (min-width:1200px){
-          .popover{max-width:760px;}
-        }
-        @media (min-width:1400px){
-          .popover{max-width:860px;}
-        }
-        .popover-preview .row{margin:0;display:flex;flex-wrap:wrap;justify-content:center;}
-        .popover-preview [class*='col-']{flex:1 1 140px;max-width:160px;padding:0 .5rem;display:flex;flex-direction:column;align-items:center;}
-        .popover-preview .card{box-shadow:none;border:none;background:transparent;}
-        .popover-preview h4{font-size:0.9rem;margin-top:.5rem;white-space:nowrap;}
-        .popover-preview i{font-size:1.75rem;}
-        /* Modal cards */
-        .modal-body .card{background:transparent;border:2px solid var(--contact-border);border-radius:12px;text-align:center;transition:background-color .25s,color .25s;}
-        .modal-body .card:hover{background:var(--contact-border);color:var(--contrast-color);} .modal-body .card:hover *, .modal-body .card:hover i{color:var(--contrast-color);}
-        .modal-body .card i{font-size:3rem;margin-bottom:.75rem;}
-        @media(min-width:768px){.modal-body .card i{font-size:2.2rem;}}
-
-        .popover-preview h2{
-          font-size:1.25rem;
-          line-height:1.3;
-          margin-bottom:.75rem;
-        }
+    /* Modal cards */
+    .modal-body .card { background: transparent; border: 2px solid var(--contact-border); border-radius: 12px; text-align: center; transition: background-color .25s, color .25s; }
+    .modal-body .card:hover { background: var(--contact-border); color: var(--contrast-color); }
+    .modal-body .card:hover *, .modal-body .card:hover i { color: var(--contrast-color); }
+    .modal-body .card i { font-size: 3rem; margin-bottom: .75rem; }
+    @media (min-width: 768px) { .modal-body .card i { font-size: 2.2rem; } }
   </style>
 </head>
 
 <body class="with-header position-relative" data-spy="scroll" data-target="#sections-nav" data-offset="80">
-  <!-- Side Bar Start-->
+  <!-- Side Bar -->
   <header class="header">
     <div class="container-fluid-limited d-flex align-items-center justify-content-between">
       <button class="sections-nav-toggler" aria-label="Toggle navigation">
@@ -301,93 +159,16 @@
     </div>
   </header>
   <nav class="sections-nav-container">
-    <ul id="sections-nav" class="nav sections-nav sections-nav-animated">
-      <li class="sections-nav-item">
-        <a href="#section-01" class="nav-link sections-nav-link goto-section active">
-          <span class="sections-nav-counter">01</span>
-          Top
-        </a>
-      </li>
-      <li class="sections-nav-item">
-        <a href="#section-02" class="nav-link sections-nav-link goto-section">
-          <span class="sections-nav-counter">02</span>
-          About me
-        </a>
-      </li>
-      <li class="sections-nav-item">
-        <a href="#section-03" class="nav-link sections-nav-link goto-section">
-          <span class="sections-nav-counter">03</span>
-          Services
-        </a>
-      </li>
-      <li class="sections-nav-item">
-        <a href="#section-04" class="nav-link sections-nav-link goto-section">
-          <span class="sections-nav-counter">04</span>
-          Expertise
-        </a>
-      </li>
-      <li class="sections-nav-item">
-        <a href="#section-05" class="nav-link sections-nav-link goto-section">
-          <span class="sections-nav-counter">05</span>
-          Projects
-        </a>
-      </li>
-      <li class="sections-nav-item">
-        <a href="#section-06" class="nav-link sections-nav-link goto-section">
-          <span class="sections-nav-counter">06</span>
-          Experiences
-        </a>
-      </li>
-      <li class="sections-nav-item">
-        <a href="#section-07" class="nav-link sections-nav-link goto-section">
-          <span class="sections-nav-counter">07</span>
-          Honors
-        </a>
-      </li>
-      <li class="sections-nav-item">
-        <a href="#section-08" class="nav-link sections-nav-link goto-section">
-          <span class="sections-nav-counter">08</span>
-          Education
-        </a>
-      </li>
-      <li class="sections-nav-item">
-        <a href="#section-09" class="nav-link sections-nav-link goto-section">
-          <span class="sections-nav-counter">09</span>
-          Testimonials
-        </a>
-      </li>
-      <li class="sections-nav-item">
-        <a href="#section-10" class="nav-link sections-nav-link goto-section">
-          <span class="sections-nav-counter">10</span>
-          Contact
-        </a>
-      </li>
-      <li class="sections-nav-item">
-        <div class="sections-nav-info">
-          <div class="contact-icons">
-            <a href="mailto:eqan.ahmad123@gmail.com" class="contact-icon" data-toggle="tooltip" title="eqan.ahmad123@gmail.com">
-              <i class="fa fa-envelope"></i><span>Email</span>
-            </a>
-            <a href="https://resume.eqanahmad.com" class="contact-icon" target="_blank" data-toggle="tooltip" title="Download Resume">
-              <i class="fa fa-file-pdf-o"></i><span>Resume</span>
-            </a>
-            <a href="https://meet.eqanahmad.com/" class="contact-icon" data-toggle="tooltip" title="Let's Talk Strategy">
-              <i class="fa fa-phone"></i><span>Strategy Call</span>
-            </a>
-          </div>
-        </div>
-      </li>
-    </ul>
+    <!-- Navigation rendered by JS -->
   </nav>
-  <!-- Side Bar End-->
 
-  <!-- Main Content Start-->
+  <!-- Main Content -->
   <main class="content">
     <div class="container-fluid-limited">
       <div class="row">
         <div class="col col-xl-9">
 
-          <!-- Section 01[Top] Start-->
+          <!-- Section 01: Top -->
           <section id="section-01" class="section section-sub-header animation interaction-in">
             <div class="section-body">
               <div class="jumbotron jumbotron-fluid pt-6 pt-lg-8 pb-0 mb-0 text-center d-flex flex-column align-items-center">
@@ -409,22 +190,17 @@
               </a>
             </div>
           </section>
-          <!-- Section 01[Top] End-->
 
-          <!-- Section 02[About Me] Start -->
+          <!-- Section 02: About Me -->
           <section id="section-02" class="section animation">
             <div class="section-body">
               <div class="row">
                 <div class="col col-xl-10">
-                  <h2 class="section-title animation-translate-overline animation-item-1">
-                    About me
-                  </h2>
+                  <h2 class="section-title animation-translate-overline animation-item-1">About me</h2>
                   <article class="article animation-translate animation-item-2">
-                    <p>
-                      <p>Hey there! I'm Eqan Ahmad, your go-to engineer for crafting MVPs that shine.</p>
-                      <p>With <span style="font-weight: bold; color: var(--highlight-color);">5+ years</span> in the tech arena, I've been involved in blockchain, fintech, cloud computing, GenAI, and full-stack development. I'm focused on building smart solutions that <span style="font-weight: bold; color: var(--highlight-color);">cut costs</span> and enhance user satisfaction. I've successfully scaled <span style="font-weight: bold; color: var(--highlight-color);">4 large-scale MVPs</span>, including a cloud computing service developed from scratch to deploy AI models. Over the past <span style="font-weight: bold; color: var(--highlight-color);">5 years</span>, I've completed <span style="font-weight: bold; color: var(--highlight-color);">300+ projects</span> with a <span style="font-weight: bold; color: var(--highlight-color);">4.8+ rating</span>, and I'm top vetted on Toptal.</p>
-                      <p>Let's harness the power of technology to streamline your processes and spark innovation. Together, we'll propel your startup to its fullest potential!</p>
-                    </p>
+                    <p>Hey there! I'm Eqan Ahmad, your go-to engineer for crafting MVPs that shine.</p>
+                    <p>With <span style="font-weight: bold; color: var(--highlight-color);">5+ years</span> in the tech arena, I've been involved in blockchain, fintech, cloud computing, GenAI, and full-stack development. I'm focused on building smart solutions that <span style="font-weight: bold; color: var(--highlight-color);">cut costs</span> and enhance user satisfaction. I've successfully scaled <span style="font-weight: bold; color: var(--highlight-color);">4 large-scale MVPs</span>, including a cloud computing service developed from scratch to deploy AI models. Over the past <span style="font-weight: bold; color: var(--highlight-color);">5 years</span>, I've completed <span style="font-weight: bold; color: var(--highlight-color);">300+ projects</span> with a <span style="font-weight: bold; color: var(--highlight-color);">4.8+ rating</span>, and I'm top vetted on Toptal.</p>
+                    <p>Let's harness the power of technology to streamline your processes and spark innovation. Together, we'll propel your startup to its fullest potential!</p>
                   </article>
                 </div>
               </div>
@@ -437,45 +213,13 @@
               </a>
             </div>
           </section>
-          <!-- Section 02[About Me] End -->
 
-          <!-- Section 03[Services] Start -->
+          <!-- Section 03: Services -->
           <section id="section-03" class="section animation">
             <div class="section-body">
-              <h2 class="section-title animation-translate-overline animation-item-1">
-                Services
-              </h2>
-              <div class="row animation-translate animation-item-2 mb-5">
-                <div class="col-6 col-md-4 mb-4">
-                  <a href="#programming-profile-modal" data-toggle="modal" class="domain-card d-block text-center no-decoration">
-                    <i class="fa fa-code"></i>
-                    <h4 class="mb-1">Programming</h4>
-                  </a>
-                </div>
-                <div class="col-6 col-md-4 mb-4">
-                  <a href="https://www.behance.net/eqanahmad" target="_blank" class="domain-card d-block text-center no-decoration" >
-                    <i class="fa fa-crop"></i>
-                    <h4 class="mb-1">UI / UX</h4>
-                  </a>
-                </div>
-                <div class="col-6 col-md-4 mb-4">
-                  <a href="https://medium.com/@eqan" target="_blank" class="domain-card d-block text-center no-decoration">
-                    <i class="fa fa-font"></i>
-                    <h4 class="mb-1">Medium</h4>
-                  </a>
-                </div>
-                <div class="col-6 col-md-4 mb-4">
-                  <a href="#freelance-profile-modal" data-toggle="modal" class="domain-card d-block text-center no-decoration">
-                    <i class="fa fa-briefcase"></i>
-                    <h4 class="mb-1">Freelance</h4>
-                  </a>
-                </div>
-                <div class="col-6 col-md-4 mb-4">
-                  <a href="https://www.youtube.com/@eqanio" target="_blank" class="domain-card d-block text-center no-decoration arrow-left">
-                    <i class="fa fa-youtube-play"></i>
-                    <h4 class="mb-1">YouTube</h4>
-                  </a>
-                </div>
+              <h2 class="section-title animation-translate-overline animation-item-1">Services</h2>
+              <div id="services-container">
+                <!-- Services rendered by JS -->
               </div>
             </div>
             <div class="section-footer">
@@ -486,47 +230,15 @@
               </a>
             </div>
           </section>
-          <!-- Section 03[Services] End -->
 
-          <!-- Section 04[Expertise] Start -->
+          <!-- Section 04: Expertise -->
           <section id="section-04" class="section animation">
             <div class="section-body">
-              <h2 class="section-title animation-translate-overline animation-item-1">
-                Expertise
-              </h2>
-              <div class="row animation-translate animation-item-2 mb-5">
-                <div class="col-6 col-md-3 mb-4">
-                  <div class="domain-card">
-                    <i class="fa fa-globe"></i>
-                    <h4 class="mb-1">Web</h4>
-                    <small>5 Years</small>
-                  </div>
-                </div>
-                <div class="col-6 col-md-3 mb-4">
-                  <div class="domain-card">
-                    <i class="fa fa-chain"></i>
-                    <h4 class="mb-3">Blockchain</h4>
-                    <small>2 Years</small>
-                  </div>
-                </div>
-                <div class="col-6 col-md-3 mb-4">
-                  <div class="domain-card">
-                    <i class="fa fa-cloud"></i>
-                    <h4 class="mb-1">Cloud</h4>
-                    <small>1.5 Years</small>
-                  </div>
-                </div>
-                <div class="col-6 col-md-3 mb-4">
-                  <div class="domain-card arrow-left">
-                    <i class="fa fa-magic"></i>
-                    <h4 class="mb-1">Gen AI</h4>
-                    <small>2 Years</small>
-                  </div>
-                </div>
+              <h2 class="section-title animation-translate-overline animation-item-1">Expertise</h2>
+              <div id="expertise-container">
+                <!-- Expertise rendered by JS -->
               </div>
-              <!-- OLD detailed skills hidden -->
-              <div style="display:none">
-              
+              <div style="display:none"></div>
             </div>
             <div class="section-footer animation-translate animation-item-3">
               <a class="section-next goto-section" href="#section-05">
@@ -536,149 +248,13 @@
               </a>
             </div>
           </section>
-          <!-- Section 4[Expertise] END-->
 
-          <!-- Section 5[Projects] Start-->
+          <!-- Section 05: Projects -->
           <section id="section-05" class="section animation">
             <div class="section-body">
-              <h2 class="section-title animation-translate-overline animation-item-1">
-                Projects
-              </h2>
-              <div class="row animation-translate animation-item-2">
-                <div class="col-12 col-lg-10 mx-auto">
-                  <a class="card" href="#modal-project-10" data-toggle="modal">
-                    <img class="card-img-top" src="./Assets/project_10.webp" alt="Netflix" />
-                    <div class="card-body">
-                      <h3 class="card-title">GPU Lab</h3>
-                      <h4 class="card-subtitle">A cloud computing platform aimed to deploy millions of AI models on local GPU servers and return apis for hastle free usage.</h4>
-                      <p class="card-tags specific-card-tags">NEXT.js - OAuth - Redux - React - RESTAPI's - Postgres - SQL ALchemy - Python - Docker - Cloudflared - AWS</p>
-                      <p class="card-tags specific-card-tags">Postman - Web Sockets - Stripe - FAST API - SISH - NVIDIA-SMI - Alembic - Redis - Linux/Shell Scripting</p>
-                    </div>
-                  </a>
-                </div>
-                
-                <div class="col-12 col-lg-10 mx-auto">
-                  <a class="card" href="#modal-project-0" data-toggle="modal">
-                    <img class="card-img-top" src="./Assets/nuces-blocked-add-certificates.webp" alt="Netflix" />
-                    <div class="card-body">
-                      <h3 class="card-title">NUCES BLOCKED</h3>
-                      <h4 class="card-subtitle">A platform aimed to generate and decentralize verified academic portfolios worldwide.</h4>
-                      <p class="card-tags specific-card-tags">NEXT.js - React - Graphql - Postgres - TypeORM - NEST.js - Solidity - Remix - Hardhat</p>
-                      <p class="card-tags specific-card-tags">Postman - Appolo - Python - Selenium - IPFS - EthersProject - Vercel - React.pdf</p>
-                    </div>
-                  </a>
-                </div>
-                
-              <div class="row animation-translate animation-item-2">
-                <div class="col-12 col-md-10" style="width: 60%; margin-left: auto; margin-right: auto;">
-                  <a class="card" href="#modal-project-11" data-toggle="modal">
-                    <img class="card-img-top" src="./Assets/project_11.webp" alt="Netflix" />
-                    <div class="card-body">
-                      <h3 class="card-title">Qanooni Legal Law Suite</h3>
-                      <h4 class="card-subtitle">Qanooni is a legal law suite that is used to generate, review and make global changes to legal documents for the users.</h4>
-                      <p class="card-tags specific-card-tags">NEXT.js - OAuth - Redux - React - RESTAPI's - Postgres - SQL ALchemy - Python - Docker - Azure</p>
-                      <p class="card-tags specific-card-tags">Postman - Web Sockets - FAST API - SISH - Alembic - Redis - Linux/Shell Scripting</p>
-                      <p class="card-tags specific-card-tags">Langchain - OpenAI - Prompt Engineering - MS Word API - RAG</p>
-                    </div>
-                  </a>
-                </div>
-
-                <div class="col-6 col-md-4 mb-4">
-                  <a class="card" href="#modal-project-1" data-toggle="modal">
-                    <img class="card-img-top" src="./Assets/project_1.webp" alt="Netflix" />
-                    <div class="card-body">
-                      <h3 class="card-title">Netflix</h3>
-                      <h4 class="card-subtitle">Video Streaming Application that is inspired by netflix</h4>
-                      <p class="card-tags">XML — C# - Algorithms - Data Structures</p>
-                    </div>
-                  </a>
-                </div>
-                <div class="col-6 col-md-4 mb-4">
-                  <a class="card" href="#modal-project-2" data-toggle="modal">
-                    <img class="card-img-top" src="./Assets/project_2.webp" alt="Awesome" />
-                    <div class="card-body">
-                      <h3 class="card-title">Material Awesome</h3>
-                      <h4 class="card-subtitle">Linux Window manager & Desktop Environment Alternative</h4>
-                      <p class="card-tags">Lua — Process Mangement - Desktop Development</p>
-                    </div>
-                  </a>
-                </div>
-                <div class="col-6 col-md-4 mb-4">
-                  <a class="card" href="#modal-project-3" data-toggle="modal">
-                    <img class="card-img-top" src="./Assets/project_3.webp" alt="Instagram" />
-                    <div class="card-body">
-                      <h3 class="card-title">Instagram Re-Imagened</h3>
-                      <h4 class="card-subtitle">A social media application made from scratch</h4>
-                      <p class="card-tags">XML — C# - T-SQL</p>
-                    </div>
-                  </a>
-                </div>
-              </div>
-              <div class="row animation-translate animation-item-2">
-                <div class="col-6 col-md-4 mb-4">
-                  <a class="card" href="#modal-project-4" data-toggle="modal">
-                    <img class="card-img-top" src="./Assets/project_4.webp" alt="BKrypt" />
-                    <div class="card-body">
-                      <h3 class="card-title">BKrypt</h3>
-                      <h4 class="card-subtitle">Blockchain transaction service</h4>
-                      <p class="card-tags">React — Solidity - HardHat - Node - BlockChain</p>
-                    </div>
-                  </a>
-                </div>
-                <div class="col-6 col-md-4 mb-4">
-                  <a class="card" href="#modal-project-5" data-toggle="modal">
-                    <img class="card-img-top" src="./Assets/project_5.webp" alt="Starvation Analysis" />
-                    <div class="card-body">
-                      <h3 class="card-title">Starvation Analysis in Pakistan</h3>
-                      <h4 class="card-subtitle">A desktop application that performs analysis and predicts starvation
-                        rates in Pakistan</h4>
-                      <p class="card-tags">PYQT5 — Distribution Models - Prediction Models - Regression Models - Data
-                        Science</p>
-                    </div>
-                  </a>
-                </div>
-                <div class="col-6 col-md-4 mb-4">
-                  <a class="card" href="#modal-project-6" data-toggle="modal">
-                    <img class="card-img-top" src="./Assets/project_6.webp" alt="X-axis OS" />
-                    <div class="card-body">
-                      <h3 class="card-title">X-axis OS</h3>
-                      <h4 class="card-subtitle">An OS simulator</h4>
-                      <p class="card-tags">Glade — Shell Scripting - C - Algorithms</p>
-                    </div>
-                  </a>
-                </div>
-              </div>
-              <div class="row animation-translate animation-item-2">
-                <div class="col-6 col-md-4 mb-4">
-                  <a class="card" href="#modal-project-7" data-toggle="modal">
-                    <img class="card-img-top" src="./Assets/project_7.webp" alt="Hangman" />
-                    <div class="card-body">
-                      <h3 class="card-title">Hangman</h3>
-                      <h4 class="card-subtitle">Hangman game made with Bash scripting & GTK Dialog.</h4>
-                      <p class="card-tags">GTKDialog — Shell Scripting</p>
-                    </div>
-                  </a>
-                </div>
-                <div class="col-6 col-md-4 mb-4">
-                  <a class="card" href="#modal-project-8" data-toggle="modal">
-                    <img class="card-img-top" src="./Assets/project_8.webp" alt="IGI Predator" />
-                    <div class="card-body">
-                      <h3 class="card-title">IGI Predator</h3>
-                      <h4 class="card-subtitle">A bot that plays IGI game using Human Detection Model.</h4>
-                      <p class="card-tags">Python — Machine Learning - OpenCV</p>
-                    </div>
-                  </a>
-                </div>
-                <div class="col-6 col-md-4 mb-4">
-                  <a class="card" href="#modal-project-9" data-toggle="modal">
-                    <img class="card-img-top" src="./Assets/project_9.webp" alt="Sneaker Ecommerce" />
-                    <div class="card-body">
-                      <h3 class="card-title">Sneaker Ecommerce</h3>
-                      <h4 class="card-subtitle">An Ecommerce Application</h4>
-                      <p class="card-tags">MERN — MUI</p>
-                    </div>
-                  </a>
-                </div>
+              <h2 class="section-title animation-translate-overline animation-item-1">Projects</h2>
+              <div class="row animation-translate animation-item-2" id="projects-container">
+                <!-- Projects rendered by JS -->
               </div>
             </div>
             <div class="section-footer animation-translate animation-item-3">
@@ -689,91 +265,15 @@
               </a>
             </div>
           </section>
-          <!-- Section 5[Projects] End-->
 
-          <!-- Section 6[Experiences] Start-->
+          <!-- Section 06: Experiences -->
           <section id="section-06" class="section animation">
             <div class="section-body">
-              <h2 class="section-title animation-translate-overline animation-item-1">
-                Experiences
-              </h2>
-              <div id="software-engineering">
-                <div class="timeline timeline-animated">
-                  <div class="timeline-item">
-                    <span class="timeline-date">Sep 2024&nbsp;–&nbsp;April 2025</span>
-                    <h3 class="timeline-title">Qanooni.ai</h3>
-                    <p class="timeline-text">
-                      AI Engineer</br>
-                      → Working in the intelligence team to develop a suite of plugins in Word and Outlook to develop drafts automatically for lawyers based on writings they have written in previous documents in Outlook documents history and Word using Langchain, GPT4-O, BERT, Claude, FAST API, Python, REST API, etc. </br></br>
-
-                      → Developed a working legal law AI Chatbot dynamic enough to control the whole Microsoft Word application, clause-by-clause modifications, and interactive chat interaction to gather essential information from users and then generate a draft.  </br></br>
-                      
-                      → Implemented RAG techniques for data collection on multiple law sites and storing the filtered data in the database to enhance model performance by 60%.  </br></br>
-                      
-                      → Prompt Engineering and embedding for contextual-based data parsing from user chat history, generating drafts relevant to the provided templates used by the user or lawyer-based history sources, keeping intact prompt context with prompt chaining mechanism with an accuracy of 83% in results, and finally developing evals for evaluating these prompt results.  </br></br>
-                      
-                      → Building the draft and review features, such as developing architecture, entities, data modeling, WebSockets for CRUD functions, draft generation using Langchain, etc., to scale to an estimated 1+ million users.  </br></br>
-                      
-                      → Developing front-end UI pages for the draft features using Next.js, React, Redux, etc, and integrating the backend websockets with the frontend. </br>
-                    </p>
-                  </div>
-                  <div class="timeline-item">
-                    <span class="timeline-date">2021&nbsp;–&nbsp;now</span>
-                    <h3 class="timeline-title">Freelancer</h3>
-                    <p class="timeline-text">
-                      Providing Services: </br></br>
-                      → Top vetted freelancer at Toptal. </br></br>
-                      → Level 2 Fiverr with 4.9+ Customer Rating and 200+ projects completed. </br></br>
-                      → Upwork Emerging Talent </br></br>
-                      → Completed over 300+ projects in total. </br></br>
-                      → Provide freelance expertise in Web Dev, Blockchain, DevOps, and Gen AI.
-                    </p>
-                  </div>
-                  <div class="timeline-item">
-                    <span class="timeline-date">July 2023&nbsp;–&nbsp; July 2024</span>
-                    <h3 class="timeline-title">Stable Diffusion</h3>
-                    <p class="timeline-text">
-                      Lead Cloud Engineer</br>
-                      → Led a team to architecture and develop a cloud-based AI framework using Docker, Python, Cloudflare, SQL Alchemy, FAST API, nvidia-smi, Guvicorn, PostgreSQL, MS Azure, Amazon S3, SISH etc, targeting 1M+ daily active users for Text-to-Image/Video/Audio generation.  </br></br>
-
-                      → Utilized various open source projects such as Salt project to deal with various remote execution protocols, minimizing network latency, load balancing certain parts of the project to minimize load times and embedding microservices using docker to create a scalable environment for the product. </br></br>
-
-                      → Led frontend development using React, Typescript, Redux, and NEXT.js while also implementing backend optimizations that reduced 3rd party service costs by 60%. </br></br>
-
-                      → Indepth Operating system and docker + python docker sdk usage for developing automated services to manage the whole system more like a self managing microservice.
-                      Also utilized CI/CD pipelines to automate the whole backend and frontend docker packaging for deployment using github actions. </br></br>
-
-                      → Managed a high-performance computing environment, optimizing resource allocation to reduce daily GPU costs from over $1000. </br>
-                    </p>
-                  </div>
-                  <div class="timeline-item">
-                    <span class="timeline-date">March 2020&nbsp;–&nbsp;April 2023</span>
-                    <h3 class="timeline-title">Microslush</h3>
-                    <p class="timeline-text">
-                      Associate Software Engineer </br></br>
-                      → Developed a Binance‑based NFT marketplace using NEST.JS, Redis, EthersProject, GraphQL, Typescript, and Postgres, and adopting Agile development. </br></br>
-
-                      → Improved api endpoints speed by 200% by following best database optimization practices and endpoints vulnerability testing using Postman. </br></br>
-
-                      → Responsible for building modules related to tokens, collections, orders, activities etc which was the core of the indexer, fetching and filtering data from blockchain
-                      and storing in the database. </br></br>
-
-                      → Developed a screen recording application in C# using FFMpeg, .NET, and various cloud-based services such as Dropbox. Basically, it's a clone of screenrc for the company. </br></br>
-
-                      → Developed C# and .NET desktop applications, including an automated forex bot installer that reduced Windows setup time by 60% and also a screenrecording tool that was made
-                      for the ease of users recording and submitting their issues related to forex charts directly on the .NET website which enhanced user experience by 70% and impacting 1 Million+
-                      daily active users. </br></br>
-
-                      → Implemented automated unit test cases using Robot Framework and Python to test company project sites and functionalities, resulting in a 30-40% reduction in bugs. </br></br>
-
-                      → Created MetaTrader 4 bots in MQL4 for company clients to improve their trading strategies. </br></br>
-                    </p>
-                  </div>
-                </div>
+              <h2 class="section-title animation-translate-overline animation-item-1">Experiences</h2>
+              <div id="experiences-container">
+                <!-- Experiences rendered by JS -->
               </div>
-              </br>
-              </br>
-              </br>
+              <br/><br/><br/>
             </div>
             <div class="section-footer animation-translate animation-item-2">
               <a class="section-next goto-section" href="#section-07">
@@ -783,41 +283,13 @@
               </a>
             </div>
           </section>
-          <!-- Section 6[Experiences] End-->
 
-
-          <!-- Section 7[Honors] Start-->
+          <!-- Section 07: Honors -->
           <section id="section-07" class="section animation">
             <div class="section-body">
-              <h2 class="section-title animation-translate-overline animation-item-1">
-                Honors
-              </h2>
-               <div class="timeline timeline-animated">
-                <div class="timeline-item">
-                  <span class="timeline-date">2023</span>
-                  <h3 class="timeline-title">Prime Minister National Innovation Award Finalist[NUCES BLOCKED]</h3>
-                  <p class="timeline-text">
-                    → My Final Year Project [NUCES BLOCKED] was selected as one of the top 50 finalists from over 20,000 applications nationwide for the Prime Minister National Innovation Award.</br>
-                    → This recognition provided me with comprehensive training in:</br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;• Entrepreneurship</br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;• Startup pitching</br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;• Business management</br>
-                    → The training was conducted over a 2-month period at prestigious institutions like:</br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;• UET Lahore</br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;• NUST Islamabad</br>
-                    → The aim was to equip us to make a significant impact in the education sector in Pakistan.</br>
-                  </p>
-                </div>
-              </div>
-              <div class="timeline timeline-animated">
-                <div class="timeline-item">
-                  <span class="timeline-date">2019</span>
-                  <h3 class="timeline-title">Top 5 in UI/UX in the whole institue</h3>
-                  <p class="timeline-text">
-                    Ranked amongst the top 5 in the UI/UX course in the whole institue.
-                    </br>
-                  </p>
-                </div>
+              <h2 class="section-title animation-translate-overline animation-item-1">Honors</h2>
+              <div id="honors-container">
+                <!-- Honors rendered by JS -->
               </div>
             </div>
             <div class="section-footer animation-translate animation-item-3">
@@ -828,23 +300,13 @@
               </a>
             </div>
           </section>
-          <!-- Section 7[Honors] End-->
 
-          <!-- Section 8[Education] Start-->
+          <!-- Section 08: Education -->
           <section id="section-08" class="section animation">
             <div class="section-body">
-              <h2 class="section-title animation-translate-overline animation-item-1">
-                Education
-              </h2>
-              <div class="timeline timeline-animated">
-                <div class="timeline-item">
-                  <span class="timeline-date">2019&nbsp;–&nbsp;2023</span>
-                  <h3 class="timeline-title">FAST NUCES</h3>
-                  <p class="timeline-text">
-                    BS Computer Science at National University Of Computer
-                    Science & Technology
-                  </p>
-                </div>
+              <h2 class="section-title animation-translate-overline animation-item-1">Education</h2>
+              <div id="education-container">
+                <!-- Education rendered by JS -->
               </div>
             </div>
             <div class="section-footer animation-translate animation-item-2">
@@ -855,138 +317,13 @@
               </a>
             </div>
           </section>
-          <!-- Section 8[Education] End-->
 
-          <!-- Section 9[Testimonials] Start-->
+          <!-- Section 09: Testimonials -->
           <section id="section-09" class="section animation">
             <div class="section-body">
-              <h2 class="section-title animation-translate-overline animation-item-1">
-                Testimonials
-              </h2>
-              <div id="carousel" class="carousel slide animation-translate animation-item-2" data-ride="carousel">
-                <div class="carousel-inner">
-                  <!-- Testimonial 1-->
-                  <div class="carousel-item active" style="min-height: 244px">
-                    <div class="testimonial">
-                      <img src="https://yt3.googleusercontent.com/ytc/AIdro_ny4bUqgO9I3Gpw_djdDHWc1WiesoKxUZ6a3dtYHFD_yNw=s160-c-k-c0x00ffffff-no-rj" class="testimonial-img" alt="Justin Smith" />
-                      <div class="testimonial-body">
-                        <h3 class="testimonial-title">Justin Smith</h3>
-                        <h4 class="testimonial-subtitle">
-                          Content Creator & Youtuber At Mobile Dwellings(340k+ Subscribers) —
-                          <a href="https://www.youtube.com/@MobileDwellings"
-                            target="_blank">https://www.youtube.com/@MobileDwellings</a>
-                        </h4>
-                        <p class="testimonial-text">
-                          I've worked with Eqan to build <a href="https://www.skooliesupport.chat/" target="_blank">Skoolie Support</a>, an AI-powered chatbot for my Subscribers
-                          to guide them regarding nomadic living. Eqan was highly professional and dedicated to the project. He guided me in the Buisness aspects of the system
-                          and helped me to build the system in a way that it is easy to maintain and scale.
-                          I would highly recommend him to anyone looking for a software engineer.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Testimonial 2-->
-                  <div class="carousel-item" style="min-height: 244px">
-                    <div class="testimonial">
-                      <img src="https://cf.geekdo-images.com/U7mUiDEH9PvGaUFqBPNDHA__itemrep/img/i2eswm8CLQMszsRTlxemlO9LwGU=/fit-in/246x300/filters:strip_icc()/pic5177087.jpg" class="testimonial-img" alt="Bernard Rippe" />
-                      <div class="testimonial-body">
-                        <h3 class="testimonial-title">Bernard Rippe</h3>
-                        <h4 class="testimonial-subtitle">
-                            Trading Automation Client
-                        </h4>
-                        <p class="testimonial-text">
-                          Working with Eqan has been a truly rewarding experience. He skillfully transformed my intricate
-                          trading strategy into a fully operational MQL5 EA code. Their unmatched professionalism, dedication,
-                          and passion for problem solving not only met but exceeded my expectations. More than just exceptional
-                          service providers, they've become lifelong friends, always ready to go the extra mile. Choosing them was
-                          one of my best decisions. Highly recommended for anyone wanting reliable and expert help in trading automation! 
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Testimonial 3-->
-                  <div class="carousel-item" style="min-height: 244px">
-                    <div class="testimonial">
-                      <img src="./Assets/testimonial_3.webp" class="testimonial-img" alt="Irfan Ul Haq" />
-                      <div class="testimonial-body">
-                        <h3 class="testimonial-title">Irfan Ul Haq</h3>
-                        <h4 class="testimonial-subtitle">
-                          Assistant Professor At FAST NUCES — <a href="http://cfd.nu.edu.pk/facult/irfan-ul-haq/"
-                            target="_blank">http://cfd.nu.edu.pk/facult/irfan-ul-haq/</a>
-                        </h4>
-                        <p class="testimonial-text">
-                          Persistence, passionate and a vision is what makes a person successful. Eqan Ahmad has shown
-                          signs
-                          of these traits, and is well on his way to help in the advancement of technology. He has
-                          studied
-                          Object Oriented Programming under me, and despite his struggles, He didn't let go and carried
-                          on,
-                          paving the way towards his success. So i can recommend him on my behalf as viable and trust
-                          worthy
-                          in any field in which he considers himself fit.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Testimonial 4-->
-                  <div class="carousel-item" style="min-height: 244px">
-                    <div class="testimonial">
-                      <img src="./Assets/testimonial_4.webp" class="testimonial-img" alt="Harrison" />
-                      <div class="testimonial-body">
-                        <h3 class="testimonial-title">Harrison Warburton</h3>
-                        <h4 class="testimonial-subtitle">
-                          Software Engineer at inconnection —
-                          <a href="https://www.inconnection.com/" target="_blank">https://www.inconnection.com/</a>
-                        </h4>
-                        <p class="testimonial-text">
-                          Eqan gave his all when he approached this project, even under the pressure of dealing
-                          with constraints, he helped me to deliver a functioning piece of software which met every
-                          requirement. Would recommend him to anyone for anything programming related - absolute genius!
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Testimonial 5-->
-                  <div class="carousel-item" style="min-height: 244px">
-                    <div class="testimonial">
-                      <img src="./Assets/Unknown.webp" class="testimonial-img" alt="Zthome" />
-                      <div class="testimonial-body">
-                        <h3 class="testimonial-title">Zthome</h3>
-                        <h4 class="testimonial-subtitle">
-                          Client From Austria —
-                          <a href="https://www.fiverr.com/eqanahmad?up_rollout=true"
-                            target="_blank">https://www.fiverr.com/eqanahmad?up_rollout=true</a>
-                        </h4>
-                        <p class="testimonial-text">
-                          Great work! Even though my instructions were kind of unclear the young programmer
-                          exceeded my expactations! Always asking for a way to improve the program and if there
-                          is something else that he can add. I would recommed him to everyone and I can't wait to
-                          work with him again!
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-                <ol class="carousel-indicators">
-                  <li data-target="#carousel" data-slide-to="0" class="active"></li>
-                  <li data-target="#carousel" data-slide-to="1" class=""></li>
-                  <li data-target="#carousel" data-slide-to="2" class=""></li>
-                  <li data-target="#carousel" data-slide-to="3" class=""></li>
-                  <li data-target="#carousel" data-slide-to="4" class=""></li>
-                </ol>
-                <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Next</span>
-                </a>
+              <h2 class="section-title animation-translate-overline animation-item-1">Testimonials</h2>
+              <div id="testimonials-container">
+                <!-- Testimonials rendered by JS -->
               </div>
             </div>
             <div class="section-footer animation-translate animation-item-3">
@@ -997,35 +334,23 @@
               </a>
             </div>
           </section>
-          <!-- Section 9[Testimonials] End-->
 
-          <!-- Section 10[Contact] Start-->
+          <!-- Section 10: Contact -->
           <section id="section-10" class="section animation">
             <div class="section-body">
-              <h2 class="section-title animation-translate-overline animation-item-1">
-                Contact
-              </h2>
+              <h2 class="section-title animation-translate-overline animation-item-1">Contact</h2>
               <div class="row mb-10 animation-translate animation-item-2">
                 <div class="col-12 col-md-4 mb-4 mb-md-0">
                   <strong class="contact-label d-block mb-2">Stay in touch</strong>
-                  <div class="contact-icons">
-                    <a href="mailto:eqan.ahmad123@gmail.com" class="contact-icon" data-toggle="tooltip" title="eqan.ahmad123@gmail.com"><i class="fa fa-envelope"></i><span>Email</span></a>
-                    <a href="https://meet.eqanahmad.com/" class="contact-icon" data-toggle="tooltip" title="Let's Talk Strategy"><i class="fa fa-phone"></i><span>Strategy Call</span></a>
-                  </div>
+                  <div id="contact-stay"><!-- Rendered by JS --></div>
                 </div>
                 <div class="col-12 col-md-4 mb-4 mb-md-0">
                   <strong class="contact-label d-block mb-2">Social</strong>
-                  <div class="contact-icons">
-                    <a href="https://www.linkedin.com/in/eqanahmad/" class="contact-icon" target="_blank"><i class="fa fa-linkedin"></i><span>LinkedIn</span></a>
-                  </div>
+                  <div id="contact-social"><!-- Rendered by JS --></div>
                 </div>
                 <div class="col-12 col-md-4">
                   <strong class="contact-label d-block mb-2">Support</strong>
-                  <div class="contact-icons">
-                    <a href="https://patreon.com/eqan" class="contact-icon" target="_blank"><i class="fa fa-heart"></i><span>Patreon</span></a>
-                    <a id="bitcoin-text" href="#" class="contact-icon" data-toggle="tooltip" title="Copy Bitcoin address"><i class="fa fa-bitcoin"></i><span>Bitcoin</span><span class="hidden-address">1FkAiAAbEgb69gqrZtSr3Ew7dsnmTaUwen</span></a>
-                    <a id="ethereum-text" href="#" class="contact-icon" data-toggle="tooltip" title="Copy Ethereum address"><i class="fa fa-code"></i><span>Ethereum</span><span class="hidden-address">0x0eb2ee8ab45635cc2aea598f9968a93c550450e9</span></a>
-                  </div>
+                  <div id="contact-support"><!-- Rendered by JS --></div>
                 </div>
               </div>
               <div class="text-center mt-4 animation-translate animation-item-4">
@@ -1038,811 +363,129 @@
               </span>
             </div>
           </section>
-          <!-- Section 10[Contact] End-->
+
         </div>
       </div>
     </div>
   </main>
 
-  <!-- Modals[Projects Details] Start -->
-  <div id="modal-project-11" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" style="display: none"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-fluid">
-    <div class="modal-content">
-      <div class="modal-header">
-        &nbsp;
-        <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
-          <span class="d-none">×</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <article class="article">
-          <div class="article-header">
-            <h2 class="article-title" >Qanooni Legal Law Suite</h2>
-            <h3 class="article-subtitle">Qanooni is a legal law suite that is used to generate, review and make global changes to legal documents for the users.</h3>
-            <p class="article-tags">NEXT.js - OAuth - Redux - React - RESTAPI's - Postgres - SQL ALchemy - Python - Docker - Azure - Postman - Web Sockets - FAST API - SISH - Alembic - Redis - Linux/Shell Scripting - Langchain - OpenAI - Prompt Engineering - MS Word API - RAG</p>
-          </div>
-          <div class="row flex-column-reverse flex-lg-row">
-            <div class="col-12 col-lg-12">
-              <p>
-                → Qanooni Legal Law Suite contains 4 major components:
-                <ul>
-                  <li>Draft - Generate a draft of the legal document in users tone and style</li>
-                  <li>Review - Review the legal document and make necessary amendments</li>
-                  <li>Global Changes - Make global changes to the legal document</li>
-                  <li>QCounsel - Ask a question to the legal document</li>
-                </ul>
-                I have worked on the Draft, Review and Global Changes components for the MVP launch of the product. </br></br>
-                → Developed a working legal law AI Chatbot dynamic enough to control the whole Microsoft Word application, clause-by-clause modifications, and interactive chat interaction to gather essential information from users and then generate a draft. </br></br>
-                → The Generated draft follows the users tone and style and is 100% original based on previous documents shared by the user on email. </br></br>
-              </p>
-            </div>
-            <div class="col-12 col-lg-12">
-              <div class="image-collage" style="display: flex; flex-wrap: wrap;">
-                <a style="flex-basis: 100%">
-                  <img class="img-fluid collage-image" src="./Assets/project_11.webp" alt="Qanooni Legal Law Suite" style="width: 100%; height: auto;"/>
-                </a></br></br>
-                <a style="flex-basis: 50%;">
-                  <img class="img-fluid collage-image" src="./Assets/qanooni_review.webp" alt="Review" style="width: 100%; height: auto;"/>
-                </a></br></br>
-                <a style="flex-basis: 50%;">
-                  <img class="img-fluid collage-image" src="./Assets/qanooni_draft.webp" alt="Draft" style="width: 100%; height: auto;"/>
-                </a>
-                <a style="flex-basis: 50%;">
-                  <img class="img-fluid collage-image" src="./Assets/qanooni_litigation.webp" alt="Litigation" style="width: 100%; height: auto;"/>
-                </a>
-                <a style="flex-basis: 50%;">
-                  <img class="img-fluid collage-image" src="./Assets/qanooni_proposal.webp" alt="Proposal" style="width: 100%; height: auto;"/>
-                </a>
-              </div>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
+  <!-- Dynamic Modals Container -->
+  <div id="modals-container">
+    <!-- Project modals rendered by JS -->
   </div>
-</div>
-
-  <div id="modal-project-10" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" style="display: none"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-fluid">
-      <div class="modal-content">
-        <div class="modal-header">
-          &nbsp;
-          <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
-            <span class="d-none">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <article class="article">
-            <div class="article-header">
-              <h2 class="article-title" >GPU Lab</h2>
-              <h3 class="article-subtitle">A cloud computing platform aimed to deploy millions of AI models on local GPU servers and return apis for hastle free usage.</h3>
-              <p class="article-tags">NEXT.js - OAuth - Redux - React - RESTAPI's - Postgres - SQL ALchemy - Python - Docker - Cloudflared - AWS - Postman - Web Sockets - Stripe - FAST API - SISH - NVIDIA-SMI - Alembic - Redis - Linux/Shell Scripting</p>
-            </div>
-            <div class="row flex-column-reverse flex-lg-row">
-              <div class="col-12 col-lg-12">
-                <p>
-                → Led a team of engineers to develop a cloud computing framework for AI Models deployment
-                  and computation in parrallel using Docker, WebSockets, Stripe Integeration, Shell Scripting,
-                  Python, Postgres, SQLAlchemy, FAST API, and Cloudflare to build a product which is going to be
-                  used by 1 Million+ daily active users for model deployment. Developing frontend interface with
-                  React, Redux, Typescript and NEXT.js.</br>
-                </p>
-                <p>
-                → Responsible for architecture design and development regarding the cloud computing framework for
-                 parrallel computation.</br>
-                </p>
-              </div>
-              <div class="col-12 col-lg-12">
-                <div class="image-collage" style="display: flex; flex-wrap: wrap;">
-                  <a style="flex-basis: 50%">
-                    <img class="img-fluid collage-image" src="./Assets/project_10.webp" alt="GPU Lab" style="width: 100%; height: auto;"/>
-                  </a>
-                  <a style="flex-basis: 50%;">
-                    <img class="img-fluid collage-image" src="./Assets/gpu-lab-server-list.webp" alt="Image 3" style="width: 100%; height: auto;"/>
-                  </a>
-                  <a style="flex-basis: 50%;">
-                    <img class="img-fluid collage-image" src="./Assets/gpu-lab-server.webp" alt="Image 2" style="width: 100%; height: auto;"/>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </div>
+  <div id="profile-modals-container">
+    <!-- Profile modals rendered by JS -->
   </div>
-
-  <div id="modal-project-0" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" style="display: none"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-fluid">
-      <div class="modal-content">
-        <div class="modal-header">
-          &nbsp;
-          <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
-            <span class="d-none">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <article class="article">
-            <div class="article-header">
-              <h2 class="article-title" href="https://nuces-blocked-frontend.vercel.app/nuces-blocked/landing" target="_blank">NUCES BLOCKED</h2>
-              <h3 class="article-subtitle">A platform aimed to generate and decentralize verified academic portfolios worldwide.</h3>
-              <p class="article-tags">NEXT.js - React - Graphql - Postgres - TypeORM - NEST.js - Solidity - Remix - Hardhat - Postman - Appolo - Python - Selenium - IPFS - EthersProject - Vercel - React.pdf</p>
-            </div>
-            <div class="row flex-column-reverse flex-lg-row">
-              <div class="col-12 col-lg-12">
-                <p>
-                →  Developing a decentralized system for distributing and verifying graduate degrees and semester results
-                  using blockchain technology, improving the authenticity of degree distribution by 80%. </br>
-                </p>
-                <p>
-                →  Incorporated a comprehensive profile of each student's academic career, enabling recruiters to easily
-                  assess the qualifications and suitability of potential hires and saving 75% of the time normally spent on verifying candidates' academic credentials. </br>
-                </p>
-                <blockquote>
-                  <h3>Features</h3>
-                  <ul style="list-style-type:none">
-                    <li>✔ Material UI</li>
-                    <li>✔ On just 1 click autogenerate and deploy portfolios as NFTs across the globe.</li>
-                    <li>✔ Companies and relevant parties interested in verified students academic information can easily download with just 1 click for easy filtering.</li>
-                    <li>✔ Teachers, career counsellors and society heads to add students academic contributions independtly.</li>
-                    <li>✔ Intra University + organizations consensus mechanism from authorized validators.</li>
-                    <li>✔ Low bandwidth consumption using GraphQL API.</li>
-                    <li>✔ Backup Students semester results.</li>
-                  </ul>
-                </blockquote>
-              </div>
-              <div class="col-12 col-lg-12">
-                <div class="image-collage" style="display: flex; flex-wrap: wrap;">
-                  <a href="https://nuces-blocked-frontend.vercel.app/nuces-blocked/landing" style="flex-basis: 50%" target="_blank">
-                    <img class="img-fluid collage-image" src="./Assets/nuces-blocked-add-certificates.webp" alt="Netflix" style="width: 100%; height: auto;"/>
-                  </a>
-                  <a href="https://nuces-blocked-frontend.vercel.app/nuces-blocked/landing/" target="_blank" style="flex-basis: 50%;">
-                    <img class="img-fluid collage-image" src="./Assets/nuces-blocked-manage-certificates.webp" alt="Image 2" style="width: 100%; height: auto;"/>
-                  </a>
-                  <a href="https://nuces-blocked-frontend.vercel.app/nuces-blocked/landing/" target="_blank" style="flex-basis: 50%;">
-                    <img class="img-fluid collage-image" src="./Assets/nuces-blocked-proposals.webp" alt="Image 3" style="width: 100%; height: auto;"/>
-                  </a>
-                  <a href="https://nuces-blocked-frontend.vercel.app/nuces-blocked/landing/" target="_blank" style="flex-basis: 50%;">
-                    <img class="img-fluid collage-image" src="./Assets/nuces-blocked-user-profiles.webp" alt="Image 4" style="width: 100%; height: auto;"/>
-                  </a>
-                  <a href="https://nuces-blocked-frontend.vercel.app/nuces-blocked/landing/" target="_blank" style="flex-basis: 50%;">
-                    <img class="img-fluid collage-image" src="./Assets/nuces-blocked-landing.webp" alt="Image 5" style="width: 100%; height: auto;"/>
-                  </a>
-                  <a href="https://nuces-blocked-frontend.vercel.app/nuces-blocked/landing/" target="_blank" style="flex-basis: 50%;">
-                    <img class="img-fluid collage-image" src="./Assets/nuces-blocked-academic-portfolios.webp" alt="Image 6" style="width: 100%; height: auto;"/>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="modal-project-1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" style="display: none"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-fluid">
-      <div class="modal-content">
-        <div class="modal-header">
-          &nbsp;
-          <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
-            <span class="d-none">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <article class="article">
-            <div class="article-header">
-              <h2 class="article-title" href="https://github.com/eqan/Netflix-In-CSharp" target="_blank">Netflix</h2>
-              <h3 class="article-subtitle">Video Streaming Application that is inspired by netflix</h3>
-              <p class="article-tags">XML — C# - Algorithms - Data Structures</p>
-            </div>
-            <div class="row flex-column-reverse flex-lg-row">
-              <div class="col-12 col-lg-6">
-                <p>Utilizing the best of Algorithms, I have created this project on an experimental basis to discover
-                  the mechanism/possibilities of Technologies which somewhat covers the fundamentals of the Online Video
-                  streaming servies such as Youtube &amp; Netflix.</p>
-                <h9>
-                  <b>Note: This Project Is Solely Made For Educational Purposes &amp; Is Entirely Self Made, None Of
-                    This Has RelationShip Of Any Kind With Netflix Or Any Other Video Streaming Service</b>.
-                </h9>
-                <blockquote>
-                  <h3>Features</h3>
-                  <ul style="list-style-type:none">
-                    <li>✔ Metro UI Design</li>
-                    <li>✔ Full Compact Video Player Using AX Movie Player SDK</li>
-                    <li>✔ Using Fisher Yates Algorithm For Recommendation System</li>
-                    <li>✔ Using Hashing Algorithm For Ultra Fast Search Results</li>
-                    <li>✔ Full localized Data Base System</li>
-                    <li>✔ Efficient Usage Of Data Structures &amp; Algorithms</li>
-                  </ul>
-                  <h2>Future Prospects</h2>
-                  <ul>
-                    <li> AES 256 Encryption For Passwords </li>
-                    <li> Code Optimization </li>
-                  </ul>
-                </blockquote>
-              </div>
-              <div class="col-12 col-lg-6">
-                <a href="https://github.com/eqan/Netflix-In-CSharp" target="_blank">
-                  <img class="img-fluid mb-10" src="./Assets/project_1.webp" alt="Netflix" />
-                </a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="modal-project-2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" style="display: none"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-fluid">
-      <div class="modal-content">
-        <div class="modal-header">
-          &nbsp;
-          <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
-            <span class="d-none">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <article class="article">
-            <div class="article-header">
-              <h2 class="article-title">Material Awesome</h2>
-              <h3 class="article-subtitle">Linux Window manager & Desktop Environment Alternative</h3>
-              <p class="article-tags">Lua — Process Mangement - Desktop Development</p>
-            </div>
-            <div class="row flex-column-reverse flex-lg-row">
-              <div class="col-12 col-lg-6">
-                <p>
-                <h5>Original work by PapyElGringo</h5>
-                <h6>This project is being further developed by Eqan Ahmad</h6>
-                <h3>Features</h3>
-                <ul style="list-style-type:none">
-                  <li>✔ Material Design UI</li>
-                  <li>✔ A Full Desktop Replacement</li>
-                  <li>✔ Built-In Native Lua Widgets</li>
-                  <li>✔ Different Layouts</li>
-                  <li>✔ Fully Customizable</li>
-                  <li>✔ User Friendly</li>
-                  <li>✔ 300MB Idle Ram Consumption</li>
-                  <li>✔ Vim Key-Bindings Supported</li>
-                </ul>
-                <h2>Future Prospects</h2>
-                <ul>
-                  <li>Tree Tiling Setup for Awesome</li>
-                </ul>
-                </p>
-              </div>
-              <div class="col-12 col-lg-6">
-                <a href="https://github.com/eqan/material-awesome">
-                  <img class="img-fluid mb-10" src="./Assets/project_2.webp" alt="Awesome">
-                </a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="modal-project-3" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" style="display: none"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-fluid">
-      <div class="modal-content">
-        <div class="modal-header">
-          &nbsp;
-          <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
-            <span class="d-none">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <article class="article">
-            <div class="article-header">
-              <h2 class="article-title">Instagram Re-Imagened</h2>
-              <h3 class="article-subtitle">A social media application made from scratch</h3>
-              <p class="article-tags">XML — C# - T-SQL</p>
-            </div>
-            <div class="row flex-column-reverse flex-lg-row">
-              <div class="col-12 col-lg-6">
-                <p>
-                  A social media platform that utilizes SQL in a decentralized way
-                <h3>Features</h3>
-                <ul style="list-style-type:none">
-                  <li>✔ Flat UI</li>
-                  <li>✔ Themes[Dark/Light]</li>
-                  <li>✔ Localized Database using SQL at the back end</li>
-                  <li>✔ All essential features of a social media app, post, stories, likes, bookmarks etc</li>
-                  <li>✔ Activity Notification</li>
-                  <li>✔ Search Engine</li>
-                  <li>✔ Profile View</li>
-                </ul>
-                <h2>Future Prospects</h2>
-                <ul>
-                  <li> AES 256 Encryption For Passwords </li>
-                  <li> Code Optimization </li>
-                  <li> Chat system </li>
-                  <li> Comment System </li>
-                  <li> Much More </li>
-                </ul>
-                </p>
-              </div>
-              <div class="col-12 col-lg-6">
-                <a href="https://github.com/eqan/Instagram-ReImagened" target="_blank">
-                  <img class="img-fluid mb-10" src="./Assets/project_3.webp" alt="Instagram" />
-                </a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="modal-project-4" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" style="display: none"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-fluid">
-      <div class="modal-content">
-        <div class="modal-header">
-          &nbsp;
-          <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
-            <span class="d-none">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <article class="article">
-            <div class="article-header">
-              <h2 class="article-title">BKrypt</h2>
-              <h3 class="article-subtitle">Blockchain transaction service</h3>
-              <p class="article-tags">React — Solidity - HardHat - Node - BlockChain</p>
-            </div>
-            <div class="row flex-column-reverse flex-lg-row">
-              <div class="col-12 col-lg-6">
-                <p>
-                  A BlockChain Application To Make Transactions Convenient Using React & Solidity.
-                <h3>Features</h3>
-                <ul style="list-style-type:none">
-                  <li>✔ Glass Morphism + Gradient Design using tailwind</li>
-                  <li>✔ Using MetaMask for transactions</li>
-                  <li>✔ Full fledged blockchain application made with solidity</li>
-                  <li>✔ Performance oriented used React for the front end</li>
-                  <li>✔ Smart Contracts seamless integeration using hardhat</li>
-                </ul>
-                </p>
-              </div>
-              <div class="col-12 col-lg-6">
-                <a href="https://github.com/eqan/BKrypt" target="_blank">
-                  <img class="img-fluid mb-10" src="./Assets/project_4.webp" alt="BKrypt" />
-                </a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="modal-project-5" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" style="display: none"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-fluid">
-      <div class="modal-content">
-        <div class="modal-header">
-          &nbsp;
-          <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
-            <span class="d-none">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <article class="article">
-            <div class="article-header">
-              <h2 class="article-title">Starvation Analysis in Pakistan</h2>
-              <h3 class="article-subtitle">A desktop application that performs analysis and predicts starvation rates in
-                Pakistan</h3>
-              <p class="article-tags">PYQT5 — Distribution Models - Prediction Models - Regression Models - Data Science
-              </p>
-            </div>
-            <div class="row flex-column-reverse flex-lg-row">
-              <div class="col-12 col-lg-6">
-                <p>
-                  A desktop application that performs analysis and predicts starvation rates in Pakistan using numerous
-                  distribution techniques, regression models, forcasting models etc
-                <h3>Features</h3>
-                <ul style="list-style-type:none">
-                  <li>✔ Simple UI using PYQT5</li>
-                  <li>✔ Different charts such as histogram, line graph etc to point the trends of data.</li>
-                  <li>✔ Facebooks Prophet for Trend Prediction</li>
-                  <li>✔ Distribution models such as binomial, pisson for different data generation.</li>
-                  <li>✔ Regression models such as linear, polynomial, and multiple regression to predict the accuracy of
-                    relationships between different factors.</li>
-                </ul>
-                </p>
-              </div>
-              <div class="col-12 col-lg-6">
-                <a href="https://github.com/eqan/Starvation-Period-Analysis-And-Forecast" target="_blank">
-                  <img class="img-fluid mb-10" src="./Assets/project_5.webp" alt="Starvation" />
-                </a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="modal-project-6" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" style="display: none"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-fluid">
-      <div class="modal-content">
-        <div class="modal-header">
-          &nbsp;
-          <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
-            <span class="d-none">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <article class="article">
-            <div class="article-header">
-              <h2 class="article-title">X-axis OS</h2>
-              <h3 class="article-subtitle">An OS simulator</h3>
-              <p class="article-tags">Glade — Shell Scripting - C - Algorithms</p>
-            </div>
-            <div class="row flex-column-reverse flex-lg-row">
-              <div class="col-12 col-lg-6">
-                <p>
-                  An OS simulator that utilizes the concepts of multithreading, semaphores etc for process handling.
-                <h3>Features</h3>
-                <ul style="list-style-type:none">
-                  <li>✔ Material UI made with glade.</li>
-                  <li>✔ C used for ultra fast performance.</li>
-                  <li>✔ Semaphores, multithreading and bankers algorithm embedded.</li>
-                  <li>✔ Builtin Custom Shell, virtual drive and ram.</li>
-                  <li>✔ Can launch linux applications and store in its virtual memory.</li>
-                </ul>
-                </p>
-              </div>
-              <div class="col-12 col-lg-6">
-                <a href="https://github.com/eqan/Xaxis-OS" target="_blank">
-                  <img class="img-fluid mb-10" src="./Assets/project_6.webp" alt="Xaxis OS" />
-                </a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="modal-project-7" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" style="display: none"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-fluid">
-      <div class="modal-content">
-        <div class="modal-header">
-          &nbsp;
-          <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
-            <span class="d-none">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <article class="article">
-            <div class="article-header">
-              <h2 class="article-title">Hangman</h2>
-              <h3 class="article-subtitle">Hangman game made with Bash scripting & GTK Dialog.</h3>
-              <p class="article-tags">GTKDialog — Shell Scripting</p>
-            </div>
-            <div class="row flex-column-reverse flex-lg-row">
-              <div class="col-12 col-lg-6">
-                <p>
-                  An interactive hangman game made with bash scripting for the backend and GTKDialog for the frontend.
-                <h3>Features</h3>
-                <ul style="list-style-type:none">
-                  <li>✔ Intutive UI made with GTKDialog.</li>
-                  <li>✔ Native support for linux derivatives.</li>
-                </ul>
-                </p>
-              </div>
-              <div class="col-12 col-lg-6">
-                <a href="https://github.com/eqan/Hangman-In-Shell" target="_blank">
-                  <img class="img-fluid mb-10" src="./Assets/project_7.webp" alt="Hangman" />
-                </a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="modal-project-8" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" style="display: none"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-fluid">
-      <div class="modal-content">
-        <div class="modal-header">
-          &nbsp;
-          <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
-            <span class="d-none">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <article class="article">
-            <div class="article-header">
-              <h2 class="article-title">IGI Predator</h2>
-              <h3 class="article-subtitle">A bot that plays IGI game using Human Detection Model.</h3>
-              <p class="article-tags">Python — Machine Learning - OpenCV</p>
-            </div>
-            <div class="row flex-column-reverse flex-lg-row">
-              <div class="col-12 col-lg-6">
-                <p>
-                  A bot that plays IGI game using Human Detection Model, controlled by
-                <h3>Features</h3>
-                <ul style="list-style-type:none">
-                  <li>✔ Human Detection</li>
-                  <li>✔ Human Kill</li>
-                </ul>
-                <h3>Future Prospects</h2>
-                  <ul>
-                    <li>Integerate More Accurate Mouse Movement To Target</li>
-                    <li>Integerate Deep Learning For More Accurate Human Detection</li>
-                    <li>Player Movement Controls By AI</li>
-                    <li>Teach The Player How To Complete A Mission</li>
-                    <li>Bring Up FrameRates</li>
-                  </ul>
-                  </p>
-              </div>
-              <div class="col-12 col-lg-6">
-                <a href="https://github.com/eqan/Mini-AI-Projects/tree/main/1.%20IGI_Predator" target="_blank">
-                  <img class="img-fluid mb-10" src="./Assets/project_8.webp" alt="IGI Predator" />
-                </a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="modal-project-9" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" style="display: none"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-fluid">
-      <div class="modal-content">
-        <div class="modal-header">
-          &nbsp;
-          <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
-            <span class="d-none">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <article class="article">
-            <div class="article-header">
-              <h2 class="article-title">Sneaker Ecommerce</h2>
-              <h3 class="article-subtitle">An ecommerce website</h3>
-              <p class="article-tags">MERN — MUI</p>
-            </div>
-            <div class="row flex-column-reverse flex-lg-row">
-              <div class="col-12 col-lg-6">
-                <p>
-                  An ecommerce website that performs basic functionalities found in a normal ecomemrce website
-                <h3>Features</h3>
-                <ul style="list-style-type:none">
-                  <li>✔ Material UI design with react</li>
-                  <li>✔ Integeration of credentials validation using Formik and Yup</li>
-                  <li>✔ All necessary features of backend implemented</li>
-                  <li>✔ Private API integeration[Some routes are specifically designated for admin]</li>
-                  <li>✔ Toast integerated for notifications/pop ups</li>
-                  <li>✔ Pagination embedded for loading items in small amounts</li>
-                  <li>✔ Dynamic rendering/routing</li>
-                  <li>✔ Local storage for access token storage and user session retention</li>
-                </ul>
-                </p>
-              </div>
-              <div class="col-12 col-lg-6">
-                <a href="https://github.com/eqan/Sneaker-Ecommerce" target="_blank">
-                  <img class="img-fluid mb-10" src="./Assets/project_9.webp" alt="Sneaker-Ecommerce" />
-                </a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Modals[Projects Details] End -->
-
-  <!-- Modal[Programming Profile] Start -->
-    <div id="programming-profile-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" style="display: none"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-fluid">
-      <div class="modal-content">
-        <div class="modal-header">
-          &nbsp;
-          <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
-            <span class="d-none">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <h2 class="text-center mb-4">Programming Profiles</h2>
-          <div class="row justify-content-center text-center">
-            <div class="col-12 col-sm-6 col-md-4 mb-4">
-              <a href="http://github.com/eqan" target="_blank" class="card shadow-sm h-100">
-                <div class="card-body d-flex flex-column align-items-center">
-                  <i class="fa fa-github fa-3x mb-3"></i>
-                  <h4 class="card-title mb-0">GitHub</h4>
-                </div>
-              </a>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 mb-4">
-              <a href="https://leetcode.com/eqan/" target="_blank" class="card shadow-sm h-100">
-                <div class="card-body d-flex flex-column align-items-center">
-                  <i class="fa fa-code fa-3x mb-3"></i>
-                  <h4 class="card-title mb-0">LeetCode</h4>
-                </div>
-              </a>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 mb-4">
-              <a href="https://www.hackerrank.com/eqanahmad123?hr_r=1" target="_blank" class="card shadow-sm h-100">
-                <div class="card-body d-flex flex-column align-items-center">
-                  <i class="fa fa-terminal fa-3x mb-3"></i>
-                  <h4 class="card-title mb-0">HackerRank</h4>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
- <!-- Modal[Programming Profile] End -->
-
-  <!-- Modal[Freelance Profiles] Start -->
-    <div id="freelance-profile-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" style="display: none"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-fluid">
-      <div class="modal-content">
-        <div class="modal-header">
-          &nbsp;
-          <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
-            <span class="d-none">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <h2 class="text-center mb-4">Freelance Profiles</h2>
-          <div class="row justify-content-center text-center">
-            <div class="col-12 col-sm-6 col-md-4 mb-4">
-              <a href="https://www.fiverr.com/eqanahmad" target="_blank" class="card shadow-sm h-100">
-                <div class="card-body d-flex flex-column align-items-center">
-                  <i class="fa fa-money fa-3x mb-3"></i>
-                  <h4 class="card-title mb-0">Fiverr</h4>
-                </div>
-              </a>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 mb-4">
-              <a href="https://www.upwork.com/freelancers/~0188fb01c513f66907" target="_blank" class="card shadow-sm h-100">
-                <div class="card-body d-flex flex-column align-items-center">
-                  <i class="fa fa-briefcase fa-3x mb-3"></i>
-                  <h4 class="card-title mb-0">Upwork</h4>
-                </div>
-              </a>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 mb-4">
-              <a href="https://www.toptal.com/resume/eqan-ahmad" target="_blank" class="card shadow-sm h-100">
-                <div class="card-body d-flex flex-column align-items-center">
-                  <i class="fa fa-diamond fa-3x mb-3"></i>
-                  <h4 class="card-title mb-0">Toptal</h4>
-                </div>
-              </a>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 mb-4">
-              <a href="http://consult.eqanahmad.com" target="_blank" class="card shadow-sm h-100">
-                <div class="card-body d-flex flex-column align-items-center">
-                  <i class="fa fa-user-md fa-3x mb-3"></i>
-                  <h4 class="card-title mb-0">Consultation</h4>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
- <!-- Modal[Freelance Profiles] End -->
 
   <!-- Themes -->
   <div class="preview-themes">
-    <a class="preview-theme preview-color-yellow-black" title="Select theme" data-toggle="tooltip"
-      data-theme="./CSS/yellow-black.css" data-theme-bg="light"></a>
-    <a class="preview-theme preview-color-black-white" title="Select theme" data-toggle="tooltip"
-      data-theme="./CSS/black-white.css" data-theme-bg="dark"></a>
-    <a class="preview-theme preview-color-pink-black" title="Select theme" data-toggle="tooltip"
-      data-theme="./CSS/pink-black.css" data-theme-bg="light"></a>
-    <a class="preview-theme preview-color-blue-black" title="Select theme" data-toggle="tooltip"
-      data-theme="./CSS/blue-black.css" data-theme-bg="light"></a>
+    <a class="preview-theme preview-color-yellow-black" title="Select theme" data-toggle="tooltip" data-theme="./CSS/yellow-black.css" data-theme-bg="light"></a>
+    <a class="preview-theme preview-color-black-white" title="Select theme" data-toggle="tooltip" data-theme="./CSS/black-white.css" data-theme-bg="dark"></a>
+    <a class="preview-theme preview-color-pink-black" title="Select theme" data-toggle="tooltip" data-theme="./CSS/pink-black.css" data-theme-bg="light"></a>
+    <a class="preview-theme preview-color-blue-black" title="Select theme" data-toggle="tooltip" data-theme="./CSS/blue-black.css" data-theme-bg="light"></a>
   </div>
 </body>
-<!-- Themes End -->
 
-<!-- Necessary JavaScript-->
+<!-- Scripts -->
 <script src="./JS/all.js"></script>
+<script src="./JS/data.js"></script>
+<script src="./JS/components.js"></script>
 
 <script>
   $(function () {
+    // Initialize tooltips
     $('[data-toggle="tooltip"]').tooltip();
-    // Show theme tooltip on load for 5 seconds so users notice theme selector
-    var $initialThemeTip = $('.preview-theme').first();
-    var blinkState = false;
-    var blinkInterval = setInterval(function(){
+    
+    // Theme tooltip blink on load
+    const $initialThemeTip = $('.preview-theme').first();
+    let blinkState = false;
+    let blinkInterval = setInterval(() => {
       blinkState = !blinkState;
       $initialThemeTip.tooltip(blinkState ? 'show' : 'hide');
     }, 600);
-    // stop blinking when user interacts or after 5 seconds
-    function stopBlink(){
-      if(blinkInterval){
+    
+    const stopBlink = () => {
+      if (blinkInterval) {
         clearInterval(blinkInterval);
         blinkInterval = null;
         $initialThemeTip.tooltip('hide');
       }
-    }
+    };
+    
     $('.preview-theme').on('mouseenter focus click', stopBlink);
     setTimeout(stopBlink, 5000);
+    
+    // Theme switching
     $('.preview-theme').click(function () {
-      let link = document.querySelector('#theme');
-      if (link) {
-        var clickedThemeHref = $(this).attr('data-theme');
-        link.href = clickedThemeHref;
+      const $link = $('#theme');
+      if ($link.length) {
+        $link.attr('href', $(this).attr('data-theme'));
       }
 
-      // Update scrollbar colors based on theme bg
-      var bgType = $(this).attr('data-theme-bg');
-      if (bgType === 'dark') {
-        document.documentElement.style.setProperty('--scrollbar-thumb', '#fff');
-        document.documentElement.style.setProperty('--scrollbar-track', 'rgba(255,255,255,0.15)');
-        document.documentElement.style.setProperty('--contact-border', '#fff');
-        document.documentElement.style.setProperty('--contrast-color', '#000');
-      } else {
-        document.documentElement.style.setProperty('--scrollbar-thumb', '#000');
-        document.documentElement.style.setProperty('--scrollbar-track', 'rgba(0,0,0,0.05)');
-        document.documentElement.style.setProperty('--contact-border', '#000');
-        document.documentElement.style.setProperty('--contrast-color', '#fff');
-      }
-
+      // Update CSS variables based on theme
+      const isDark = $(this).attr('data-theme-bg') === 'dark';
+      const root = document.documentElement.style;
+      root.setProperty('--scrollbar-thumb', isDark ? '#fff' : '#000');
+      root.setProperty('--scrollbar-track', isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.05)');
+      root.setProperty('--contact-border', isDark ? '#fff' : '#000');
+      root.setProperty('--contrast-color', isDark ? '#000' : '#fff');
       return false;
     });
   });
-</script>
-<script>
-$(function(){
-  $('.domain-card').each(function(){
-    var $card = $(this);
-    var href = $card.attr('href') || '';
-    var isModal = $card.data('toggle') === 'modal' && href.startsWith('#');
-    if(isModal){
-      var $modal = $(href);
-      if($modal.length){
-        var previewHtml = $modal.find('.modal-body').html() || '';
-        $card.popover({
-          html: true,
-          trigger: 'hover',
-          placement: ($(window).width() < 576) ? 'bottom' : 'auto',
-          container: 'body',
-          content: '<div class="popover-preview">'+ previewHtml +'</div>'
-        });
+
+  // Domain card popovers (disabled on mobile for better UX)
+  $(function(){
+    const isMobile = () => $(window).width() < 768;
+    
+    $('.domain-card').each(function(){
+      const $card = $(this);
+      const href = $card.attr('href') || '';
+      const isModal = $card.data('toggle') === 'modal' && href.startsWith('#');
+      
+      // Skip popovers on mobile - they don't work well with touch
+      if (isMobile()) return;
+      
+      if (isModal) {
+        const $modal = $(href);
+        if ($modal.length) {
+          const previewHtml = $modal.find('.modal-body').html() || '';
+          $card.popover({
+            html: true,
+            trigger: 'hover',
+            placement: 'auto',
+            container: 'body',
+            content: `<div class="popover-preview">${previewHtml}</div>`
+          });
+        }
+      } else if ($card.attr('target') === '_blank') {
+        const label = $card.find('h4').text() || 'Open link';
+        $card.tooltip({ title: label, placement: 'bottom' });
       }
-    } else if ($card.attr('target') === '_blank'){
-      var label = $card.find('h4').text() || 'Open link';
-      $card.tooltip({title: label, placement:'bottom'});
-    }
-  });
-});
-</script>
-<script>
-  document.getElementById("bitcoin-text").addEventListener("click", function() {
-    copyToClipboard(this.querySelector(".hidden-address").innerText);
+    });
   });
 
-  document.getElementById("ethereum-text").addEventListener("click", function() {
-    copyToClipboard(this.querySelector(".hidden-address").innerText);
-  });
-
-  function copyToClipboard(text) {
-    const textarea = document.createElement("textarea");
+  // Clipboard copy for crypto addresses
+  const copyToClipboard = text => {
+    const textarea = document.createElement('textarea');
     textarea.value = text;
     document.body.appendChild(textarea);
     textarea.select();
-    document.execCommand("copy");
+    document.execCommand('copy');
     document.body.removeChild(textarea);
-    alert("Address copied to clipboard");
-  }
+    alert('Address copied to clipboard');
+  };
+
+  document.addEventListener('click', e => {
+    const bitcoin = e.target.closest('#bitcoin-text');
+    const ethereum = e.target.closest('#ethereum-text');
+    if (bitcoin) {
+      const addr = bitcoin.querySelector('.hidden-address');
+      if (addr) copyToClipboard(addr.innerText);
+    }
+    if (ethereum) {
+      const addr = ethereum.querySelector('.hidden-address');
+      if (addr) copyToClipboard(addr.innerText);
+    }
+  });
 </script>
 </html>
