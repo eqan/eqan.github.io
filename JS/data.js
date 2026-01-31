@@ -190,13 +190,13 @@ const PORTFOLIO_DATA = {
       </h9>
       <blockquote>
         <h3>Features</h3>
-        <ul style="list-style-type:none">
-          <li>✔ Metro UI Design</li>
-          <li>✔ Full Compact Video Player Using AX Movie Player SDK</li>
-          <li>✔ Using Fisher Yates Algorithm For Recommendation System</li>
-          <li>✔ Using Hashing Algorithm For Ultra Fast Search Results</li>
-          <li>✔ Full localized Data Base System</li>
-          <li>✔ Efficient Usage Of Data Structures &amp; Algorithms</li>
+        <ul>
+          <li>Metro UI Design</li>
+          <li>Full Compact Video Player Using AX Movie Player SDK</li>
+          <li>Using Fisher Yates Algorithm For Recommendation System</li>
+          <li>Using Hashing Algorithm For Ultra Fast Search Results</li>
+          <li>Full localized Data Base System</li>
+          <li>Efficient Usage Of Data Structures &amp; Algorithms</li>
         </ul>
         <h2>Future Prospects</h2>
         <ul>
@@ -215,15 +215,15 @@ const PORTFOLIO_DATA = {
         <h5>Original work by PapyElGringo</h5>
         <h6>This project is being further developed by Eqan Ahmad</h6>
         <h3>Features</h3>
-        <ul style="list-style-type:none">
-          <li>✔ Material Design UI</li>
-          <li>✔ A Full Desktop Replacement</li>
-          <li>✔ Built-In Native Lua Widgets</li>
-          <li>✔ Different Layouts</li>
-          <li>✔ Fully Customizable</li>
-          <li>✔ User Friendly</li>
-          <li>✔ 300MB Idle Ram Consumption</li>
-          <li>✔ Vim Key-Bindings Supported</li>
+        <ul>
+          <li>Material Design UI</li>
+          <li>A Full Desktop Replacement</li>
+          <li>Built-In Native Lua Widgets</li>
+          <li>Different Layouts</li>
+          <li>Fully Customizable</li>
+          <li>User Friendly</li>
+          <li>300MB Idle Ram Consumption</li>
+          <li>Vim Key-Bindings Supported</li>
         </ul>
         <h2>Future Prospects</h2>
         <ul>
@@ -240,14 +240,14 @@ const PORTFOLIO_DATA = {
       content: `<p>
         A social media platform that utilizes SQL in a decentralized way
         <h3>Features</h3>
-        <ul style="list-style-type:none">
-          <li>✔ Flat UI</li>
-          <li>✔ Themes[Dark/Light]</li>
-          <li>✔ Localized Database using SQL at the back end</li>
-          <li>✔ All essential features of a social media app, post, stories, likes, bookmarks etc</li>
-          <li>✔ Activity Notification</li>
-          <li>✔ Search Engine</li>
-          <li>✔ Profile View</li>
+        <ul>
+          <li>Flat UI</li>
+          <li>Themes[Dark/Light]</li>
+          <li>Localized Database using SQL at the back end</li>
+          <li>All essential features of a social media app, post, stories, likes, bookmarks etc</li>
+          <li>Activity Notification</li>
+          <li>Search Engine</li>
+          <li>Profile View</li>
         </ul>
         <h2>Future Prospects</h2>
         <ul>
@@ -268,12 +268,12 @@ const PORTFOLIO_DATA = {
       content: `<p>
         A BlockChain Application To Make Transactions Convenient Using React & Solidity.
         <h3>Features</h3>
-        <ul style="list-style-type:none">
-          <li>✔ Glass Morphism + Gradient Design using tailwind</li>
-          <li>✔ Using MetaMask for transactions</li>
-          <li>✔ Full fledged blockchain application made with solidity</li>
-          <li>✔ Performance oriented used React for the front end</li>
-          <li>✔ Smart Contracts seamless integeration using hardhat</li>
+        <ul>
+          <li>Glass Morphism + Gradient Design using tailwind</li>
+          <li>Using MetaMask for transactions</li>
+          <li>Full fledged blockchain application made with solidity</li>
+          <li>Performance oriented used React for the front end</li>
+          <li>Smart Contracts seamless integeration using hardhat</li>
         </ul>
       </p>`,
       images: [{ src: './Assets/project_4.webp', alt: 'BKrypt', link: 'https://github.com/eqan/BKrypt' }]
@@ -287,12 +287,12 @@ const PORTFOLIO_DATA = {
         A desktop application that performs analysis and predicts starvation rates in Pakistan using numerous
         distribution techniques, regression models, forcasting models etc
         <h3>Features</h3>
-        <ul style="list-style-type:none">
-          <li>✔ Simple UI using PYQT5</li>
-          <li>✔ Different charts such as histogram, line graph etc to point the trends of data.</li>
-          <li>✔ Facebooks Prophet for Trend Prediction</li>
-          <li>✔ Distribution models such as binomial, pisson for different data generation.</li>
-          <li>✔ Regression models such as linear, polynomial, and multiple regression to predict the accuracy of
+        <ul>
+          <li>Simple UI using PYQT5</li>
+          <li>Different charts such as histogram, line graph etc to point the trends of data.</li>
+          <li>Facebooks Prophet for Trend Prediction</li>
+          <li>Distribution models such as binomial, pisson for different data generation.</li>
+          <li>Regression models such as linear, polynomial, and multiple regression to predict the accuracy of
             relationships between different factors.</li>
         </ul>
       </p>`,
@@ -306,12 +306,12 @@ const PORTFOLIO_DATA = {
       content: `<p>
         An OS simulator that utilizes the concepts of multithreading, semaphores etc for process handling.
         <h3>Features</h3>
-        <ul style="list-style-type:none">
-          <li>✔ Material UI made with glade.</li>
-          <li>✔ C used for ultra fast performance.</li>
-          <li>✔ Semaphores, multithreading and bankers algorithm embedded.</li>
-          <li>✔ Builtin Custom Shell, virtual drive and ram.</li>
-          <li>✔ Can launch linux applications and store in its virtual memory.</li>
+        <ul>
+          <li>Material UI made with glade.</li>
+          <li>C used for ultra fast performance.</li>
+          <li>Semaphores, multithreading and bankers algorithm embedded.</li>
+          <li>Builtin Custom Shell, virtual drive and ram.</li>
+          <li>Can launch linux applications and store in its virtual memory.</li>
         </ul>
       </p>`,
       images: [{ src: './Assets/project_6.webp', alt: 'Xaxis OS', link: 'https://github.com/eqan/Xaxis-OS' }]
@@ -324,9 +324,9 @@ const PORTFOLIO_DATA = {
       content: `<p>
         An interactive hangman game made with bash scripting for the backend and GTKDialog for the frontend.
         <h3>Features</h3>
-        <ul style="list-style-type:none">
-          <li>✔ Intutive UI made with GTKDialog.</li>
-          <li>✔ Native support for linux derivatives.</li>
+        <ul>
+          <li>Intutive UI made with GTKDialog.</li>
+          <li>Native support for linux derivatives.</li>
         </ul>
       </p>`,
       images: [{ src: './Assets/project_7.webp', alt: 'Hangman', link: 'https://github.com/eqan/Hangman-In-Shell' }]
@@ -339,9 +339,9 @@ const PORTFOLIO_DATA = {
       content: `<p>
         A bot that plays IGI game using Human Detection Model, controlled by
         <h3>Features</h3>
-        <ul style="list-style-type:none">
-          <li>✔ Human Detection</li>
-          <li>✔ Human Kill</li>
+        <ul>
+          <li>Human Detection</li>
+          <li>Human Kill</li>
         </ul>
         <h3>Future Prospects</h2>
         <ul>
@@ -362,15 +362,15 @@ const PORTFOLIO_DATA = {
       content: `<p>
         An ecommerce website that performs basic functionalities found in a normal ecomemrce website
         <h3>Features</h3>
-        <ul style="list-style-type:none">
-          <li>✔ Material UI design with react</li>
-          <li>✔ Integeration of credentials validation using Formik and Yup</li>
-          <li>✔ All necessary features of backend implemented</li>
-          <li>✔ Private API integeration[Some routes are specifically designated for admin]</li>
-          <li>✔ Toast integerated for notifications/pop ups</li>
-          <li>✔ Pagination embedded for loading items in small amounts</li>
-          <li>✔ Dynamic rendering/routing</li>
-          <li>✔ Local storage for access token storage and user session retention</li>
+        <ul>
+          <li>Material UI design with react</li>
+          <li>Integeration of credentials validation using Formik and Yup</li>
+          <li>All necessary features of backend implemented</li>
+          <li>Private API integeration[Some routes are specifically designated for admin]</li>
+          <li>Toast integerated for notifications/pop ups</li>
+          <li>Pagination embedded for loading items in small amounts</li>
+          <li>Dynamic rendering/routing</li>
+          <li>Local storage for access token storage and user session retention</li>
         </ul>
       </p>`,
       images: [{ src: './Assets/project_9.webp', alt: 'Sneaker-Ecommerce', link: 'https://github.com/eqan/Sneaker-Ecommerce' }]
