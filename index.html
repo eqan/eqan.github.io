@@ -51,7 +51,7 @@
           --contrast-color: #fff;
       --content-bg: rgba(0, 0, 0, 0.03);
       --content-item-bg: rgba(0, 0, 0, 0.06);
-    }
+        }
 
     /* Reduce section heights for denser layout */
     .section { min-height: auto !important; }
@@ -91,11 +91,15 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
       width: fit-content;
+      margin-top: 2rem;
+    }
+    @media (max-width: 991px) {
+      .hero-badge { margin-top: 0; }
     }
     .hero-badge i { font-size: 0.85rem; }
     .hero-badge-pulse {
-      width: 8px;
-      height: 8px;
+          width: 8px;
+          height: 8px;
       background: #4ade80;
       border-radius: 50%;
       animation: pulse-glow 2s ease-in-out infinite;
@@ -139,8 +143,8 @@
       background: var(--contact-border);
       color: var(--contrast-color);
       padding: 0.1em 0.4em;
-      border-radius: 4px;
-    }
+          border-radius: 4px;
+        }
     
     .hero-stats {
       display: flex;
@@ -148,7 +152,7 @@
       padding: 1.5rem 0;
       border-top: 1px solid rgba(0,0,0,0.1);
       border-bottom: 1px solid rgba(0,0,0,0.1);
-    }
+        }
     .hero-stat {
       text-align: left;
     }
@@ -165,22 +169,22 @@
       opacity: 0.6;
       margin-top: 0.25rem;
       display: block;
-    }
+        }
     
     .hero-cta-group {
-      display: flex;
+          display: flex;
       gap: 1rem;
-      flex-wrap: wrap;
+          flex-wrap: wrap;
       align-items: center;
-    }
+        }
     .hero-cta-primary {
       display: inline-flex;
-      align-items: center;
+          align-items: center;
       gap: 0.75rem;
       padding: 1rem 2rem;
       background: var(--contact-border);
       color: var(--contrast-color);
-      font-size: 0.9rem;
+          font-size: 0.9rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -204,7 +208,7 @@
       padding: 1rem 1.5rem;
       background: transparent;
       border: 2px solid var(--contact-border);
-      color: inherit;
+          color: inherit;
       font-size: 0.9rem;
       font-weight: 700;
       text-transform: uppercase;
@@ -212,13 +216,13 @@
       text-decoration: none;
       border-radius: 50px;
       transition: background 0.25s, color 0.25s;
-    }
+        }
     .hero-cta-secondary:hover {
       background: var(--contact-border);
       color: var(--contrast-color);
       text-decoration: none;
-    }
-    
+        }
+
     /* Hero Visual Side */
     .hero-visual {
       position: relative;
@@ -281,12 +285,12 @@
       left: -5%;
       padding: 0.5rem 0.9rem;
       font-size: 0.7rem;
-    }
+          }
     @keyframes float {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-8px); }
-    }
-    
+        }
+
     /* Rotating Domain Badge */
     .hero-domain-rotator {
       position: relative;
@@ -386,11 +390,11 @@
     .sections-nav-in .sections-nav-toggler-bar:nth-child(4) { opacity: 0; transform: translateY(-8px); }
     .sections-nav-in .sections-nav-toggler-bar:nth-child(2) { transform: rotate(45deg) translateY(2px); width: 22px; }
     .sections-nav-in .sections-nav-toggler-bar:nth-child(3) { transform: rotate(-45deg) translateY(-2px); width: 22px; }
-    
+
     @media (min-width: 1200px) {
       .sections-nav-toggler { display: none; }
-    }
-    
+        }
+
     /* ============ MODERN THEME SELECTOR ============ */
     .preview-themes {
       position: fixed;
@@ -427,7 +431,7 @@
       cursor: pointer;
       transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
       position: relative;
-    }
+         }
     .preview-theme:hover {
       transform: scale(1.2);
       border-color: rgba(255,255,255,0.5);
@@ -435,7 +439,7 @@
     .preview-theme.active {
       border-color: #fff;
       box-shadow: 0 0 0 2px rgba(255,255,255,0.3);
-    }
+         }
     .preview-color-yellow-black { background: linear-gradient(135deg, #ffdb67 50%, #000 50%); }
     .preview-color-black-white { background: linear-gradient(135deg, #000 50%, #fff 50%); }
     .preview-color-pink-black { background: linear-gradient(135deg, #f8a2d5 50%, #000 50%); }
@@ -449,7 +453,7 @@
       0% { transform: translateX(-50%) translateY(-100%); opacity: 0; }
       60% { transform: translateX(-50%) translateY(5px); opacity: 1; }
       100% { transform: translateX(-50%) translateY(0); opacity: 1; }
-    }
+         }
     .preview-themes.attention .preview-theme {
       animation: theme-pop 0.4s ease-out backwards;
     }
@@ -463,7 +467,7 @@
       100% { transform: scale(1); }
     }
     
-    @media (max-width: 575px) {
+         @media (max-width: 575px) {
       .preview-themes { padding: 0.4rem 0.75rem; gap: 0.4rem; }
       .preview-themes::before { display: none; }
       .preview-theme { width: 18px; height: 18px; }
@@ -542,7 +546,7 @@
     }
     .expertise-item .domain-card::before {
       content: '';
-      position: absolute;
+          position: absolute;
       top: 0;
       left: 0;
       right: 0;
@@ -638,8 +642,8 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1.75rem;
-    }
-    
+        }
+
     .project-item {
       display: block;
     }
@@ -718,7 +722,7 @@
       .projects-grid { grid-template-columns: 1fr; gap: 1.25rem; }
       .project-card-content { padding: 1rem; }
       .project-card-title { font-size: 1rem; }
-    }
+        }
 
         /* Hide old detailed skills */
     #section-04 .progress, #section-04 .progress-label, #section-04 .section-subtitle,
@@ -740,7 +744,7 @@
     .domain-card:hover::after { opacity: 1; color: #fff; }
 
     /* Tablet layout */
-    @media (min-width: 768px) and (max-width: 991px) {
+        @media (min-width: 768px) and (max-width: 991px) {
       #section-04 .col-md-3, #section-03 .col-md-4 { max-width: 50% !important; flex: 0 0 50% !important; }
     }
 
@@ -917,8 +921,8 @@
       content: '';
           position: absolute;
       top: 0;
-      left: 50%;
-      transform: translateX(-50%);
+            left: 50%;
+            transform: translateX(-50%);
       width: 120px;
       height: 3px;
       background: linear-gradient(90deg, transparent, var(--contact-border), transparent);
@@ -961,7 +965,7 @@
       .testimonial-quote { left: 50%; transform: translateX(-50%); }
       .testimonial-nav { gap: 1rem; }
       .testimonial-arrow { width: 40px; height: 40px; }
-    }
+        }
     
     /* See More Reviews Link */
     .testimonial-more { text-align: center; margin-top: 2rem; }
@@ -1707,14 +1711,14 @@ $(function(){
             placement: 'auto',
           container: 'body',
             content: `<div class="popover-preview">${previewHtml}</div>`
-          });
-        }
+        });
+      }
       } else if ($card.attr('target') === '_blank') {
         const label = $card.find('h4').text() || 'Open link';
         $card.tooltip({ title: label, placement: 'bottom' });
-      }
-    });
+    }
   });
+});
 
   // Clipboard copy for crypto addresses
   const copyToClipboard = text => {
@@ -1737,7 +1741,7 @@ $(function(){
     if (ethereum) {
       const addr = ethereum.querySelector('.hidden-address');
       if (addr) copyToClipboard(addr.innerText);
-    }
+  }
   });
 </script>
 </html>
