@@ -62,7 +62,7 @@ const PORTFOLIO_DATA = {
       img: './Assets/project_10.webp',
       title: 'GPU Lab',
       subtitle: 'A cloud computing platform aimed to deploy millions of AI models on local GPU servers and return apis for hastle free usage.',
-      tags: ['NEXT.js - OAuth - Redux - React - RESTAPI\'s - Postgres - SQL ALchemy - Python - Docker - Cloudflared - AWS', 'Postman - Web Sockets - Stripe - FAST API - SISH - NVIDIA-SMI - Alembic - Redis - Linux/Shell Scripting'],
+      tags: ['NEXT.js', 'OAuth', 'Redux', 'React', 'REST APIs', 'Postgres', 'SQL Alchemy', 'Python', 'Docker', 'Cloudflared', 'AWS', 'Postman', 'Web Sockets', 'Stripe', 'FAST API', 'SISH', 'NVIDIA-SMI', 'Alembic', 'Redis', 'Linux/Shell'],
       size: 'full'
     },
     {
@@ -70,7 +70,7 @@ const PORTFOLIO_DATA = {
       img: './Assets/nuces-blocked-add-certificates.webp',
       title: 'NUCES BLOCKED',
       subtitle: 'A platform aimed to generate and decentralize verified academic portfolios worldwide.',
-      tags: ['NEXT.js - React - Graphql - Postgres - TypeORM - NEST.js - Solidity - Remix - Hardhat', 'Postman - Appolo - Python - Selenium - IPFS - EthersProject - Vercel - React.pdf'],
+      tags: ['NEXT.js', 'React', 'GraphQL', 'Postgres', 'TypeORM', 'NEST.js', 'Solidity', 'Remix', 'Hardhat', 'Postman', 'Apollo', 'Python', 'Selenium', 'IPFS', 'Ethers.js', 'Vercel', 'React PDF'],
       size: 'full'
     },
     {
@@ -78,17 +78,17 @@ const PORTFOLIO_DATA = {
       img: './Assets/project_11.webp',
       title: 'Qanooni Legal Law Suite',
       subtitle: 'Qanooni is a legal law suite that is used to generate, review and make global changes to legal documents for the users.',
-      tags: ['NEXT.js - OAuth - Redux - React - RESTAPI\'s - Postgres - SQL ALchemy - Python - Docker - Azure', 'Postman - Web Sockets - FAST API - SISH - Alembic - Redis - Linux/Shell Scripting', 'Langchain - OpenAI - Prompt Engineering - MS Word API - RAG'],
+      tags: ['NEXT.js', 'OAuth', 'Redux', 'React', 'REST APIs', 'Postgres', 'SQL Alchemy', 'Python', 'Docker', 'Azure', 'Postman', 'Web Sockets', 'FAST API', 'Alembic', 'Redis', 'Langchain', 'OpenAI', 'Prompt Engineering', 'MS Word API', 'RAG'],
       size: 'medium'
     }
   ],
 
   // Regular projects (smaller cards)
   projects: [
-    { id: 'modal-project-1', img: './Assets/project_1.webp', title: 'Netflix', subtitle: 'Video Streaming Application that is inspired by netflix', tags: 'XML — C# - Algorithms - Data Structures' },
-    { id: 'modal-project-2', img: './Assets/project_2.webp', title: 'Material Awesome', subtitle: 'Linux Window manager & Desktop Environment Alternative', tags: 'Lua — Process Mangement - Desktop Development' },
-    { id: 'modal-project-5', img: './Assets/project_5.webp', title: 'Starvation Analysis in Pakistan', subtitle: 'A desktop application that performs analysis and predicts starvation rates in Pakistan', tags: 'PYQT5 — Distribution Models - Prediction Models - Regression Models - Data Science' },
-    { id: 'modal-project-8', img: './Assets/project_8.webp', title: 'IGI Predator', subtitle: 'A bot that plays IGI game using Human Detection Model.', tags: 'Python — Machine Learning - OpenCV' }
+    { id: 'modal-project-1', img: './Assets/project_1.webp', title: 'Netflix', subtitle: 'Video Streaming Application that is inspired by netflix', tags: ['XML', 'C#', 'Algorithms', 'Data Structures'] },
+    { id: 'modal-project-2', img: './Assets/project_2.webp', title: 'Material Awesome', subtitle: 'Linux Window manager & Desktop Environment Alternative', tags: ['Lua', 'Process Management', 'Desktop Development'] },
+    { id: 'modal-project-5', img: './Assets/project_5.webp', title: 'Starvation Analysis in Pakistan', subtitle: 'A desktop application that performs analysis and predicts starvation rates in Pakistan', tags: ['PYQT5', 'Distribution Models', 'Prediction Models', 'Regression Models', 'Data Science'] },
+    { id: 'modal-project-8', img: './Assets/project_8.webp', title: 'IGI Predator', subtitle: 'A bot that plays IGI game using Human Detection Model.', tags: ['Python', 'Machine Learning', 'OpenCV'] }
   ],
 
   // Project modal details
@@ -96,7 +96,7 @@ const PORTFOLIO_DATA = {
     'modal-project-11': {
       title: 'Qanooni Legal Law Suite',
       subtitle: 'Qanooni is a legal law suite that is used to generate, review and make global changes to legal documents for the users.',
-      tags: 'NEXT.js - OAuth - Redux - React - RESTAPI\'s - Postgres - SQL ALchemy - Python - Docker - Azure - Postman - Web Sockets - FAST API - SISH - Alembic - Redis - Linux/Shell Scripting - Langchain - OpenAI - Prompt Engineering - MS Word API - RAG',
+      tags: ['NEXT.js', 'OAuth', 'Redux', 'React', 'REST APIs', 'Postgres', 'SQL Alchemy', 'Python', 'Docker', 'Azure', 'Postman', 'Web Sockets', 'FAST API', 'Alembic', 'Redis', 'Langchain', 'OpenAI', 'Prompt Engineering', 'MS Word API', 'RAG'],
       content: `
         <blockquote>
           <h3>Core Components</h3>
@@ -125,7 +125,7 @@ const PORTFOLIO_DATA = {
     'modal-project-10': {
       title: 'GPU Lab',
       subtitle: 'A cloud computing platform aimed to deploy millions of AI models on local GPU servers and return apis for hastle free usage.',
-      tags: 'NEXT.js - OAuth - Redux - React - RESTAPI\'s - Postgres - SQL ALchemy - Python - Docker - Cloudflared - AWS - Postman - Web Sockets - Stripe - FAST API - SISH - NVIDIA-SMI - Alembic - Redis - Linux/Shell Scripting',
+      tags: ['NEXT.js', 'OAuth', 'Redux', 'React', 'REST APIs', 'Postgres', 'SQL Alchemy', 'Python', 'Docker', 'Cloudflared', 'AWS', 'Postman', 'Web Sockets', 'Stripe', 'FAST API', 'NVIDIA-SMI', 'Alembic', 'Redis', 'Linux/Shell'],
       content: `
         <blockquote>
           <h3>Key Achievements</h3>
@@ -147,7 +147,7 @@ const PORTFOLIO_DATA = {
     'modal-project-0': {
       title: 'NUCES BLOCKED',
       subtitle: 'A platform aimed to generate and decentralize verified academic portfolios worldwide.',
-      tags: 'NEXT.js - React - Graphql - Postgres - TypeORM - NEST.js - Solidity - Remix - Hardhat - Postman - Appolo - Python - Selenium - IPFS - EthersProject - Vercel - React.pdf',
+      tags: ['NEXT.js', 'React', 'GraphQL', 'Postgres', 'TypeORM', 'NEST.js', 'Solidity', 'Remix', 'Hardhat', 'Postman', 'Apollo', 'Python', 'Selenium', 'IPFS', 'Ethers.js', 'Vercel', 'React PDF'],
       link: 'https://nuces-blocked-frontend.vercel.app/nuces-blocked/landing',
       content: `
         <blockquote>
@@ -179,7 +179,7 @@ const PORTFOLIO_DATA = {
     'modal-project-1': {
       title: 'Netflix',
       subtitle: 'Video Streaming Application that is inspired by netflix',
-      tags: 'XML — C# - Algorithms - Data Structures',
+      tags: ['XML', 'C#', 'Algorithms', 'Data Structures'],
       link: 'https://github.com/eqan/Netflix-In-CSharp',
       content: `<p>Utilizing the best of Algorithms, I have created this project on an experimental basis to discover
         the mechanism/possibilities of Technologies which somewhat covers the fundamentals of the Online Video
@@ -209,7 +209,7 @@ const PORTFOLIO_DATA = {
     'modal-project-2': {
       title: 'Material Awesome',
       subtitle: 'Linux Window manager & Desktop Environment Alternative',
-      tags: 'Lua — Process Mangement - Desktop Development',
+      tags: ['Lua', 'Process Management', 'Desktop Development'],
       link: 'https://github.com/eqan/material-awesome',
       content: `<p>
         <h5>Original work by PapyElGringo</h5>
@@ -235,7 +235,7 @@ const PORTFOLIO_DATA = {
     'modal-project-3': {
       title: 'Instagram Re-Imagened',
       subtitle: 'A social media application made from scratch',
-      tags: 'XML — C# - T-SQL',
+      tags: ['XML', 'C#', 'T-SQL'],
       link: 'https://github.com/eqan/Instagram-ReImagened',
       content: `<p>
         A social media platform that utilizes SQL in a decentralized way
@@ -263,7 +263,7 @@ const PORTFOLIO_DATA = {
     'modal-project-4': {
       title: 'BKrypt',
       subtitle: 'Blockchain transaction service',
-      tags: 'React — Solidity - HardHat - Node - BlockChain',
+      tags: ['React', 'Solidity', 'HardHat', 'Node', 'Blockchain'],
       link: 'https://github.com/eqan/BKrypt',
       content: `<p>
         A BlockChain Application To Make Transactions Convenient Using React & Solidity.
@@ -281,7 +281,7 @@ const PORTFOLIO_DATA = {
     'modal-project-5': {
       title: 'Starvation Analysis in Pakistan',
       subtitle: 'A desktop application that performs analysis and predicts starvation rates in Pakistan',
-      tags: 'PYQT5 — Distribution Models - Prediction Models - Regression Models - Data Science',
+      tags: ['PYQT5', 'Distribution Models', 'Prediction Models', 'Regression Models', 'Data Science'],
       link: 'https://github.com/eqan/Starvation-Period-Analysis-And-Forecast',
       content: `<p>
         A desktop application that performs analysis and predicts starvation rates in Pakistan using numerous
@@ -301,7 +301,7 @@ const PORTFOLIO_DATA = {
     'modal-project-6': {
       title: 'X-axis OS',
       subtitle: 'An OS simulator',
-      tags: 'Glade — Shell Scripting - C - Algorithms',
+      tags: ['Glade', 'Shell Scripting', 'C', 'Algorithms'],
       link: 'https://github.com/eqan/Xaxis-OS',
       content: `<p>
         An OS simulator that utilizes the concepts of multithreading, semaphores etc for process handling.
@@ -319,7 +319,7 @@ const PORTFOLIO_DATA = {
     'modal-project-7': {
       title: 'Hangman',
       subtitle: 'Hangman game made with Bash scripting & GTK Dialog.',
-      tags: 'GTKDialog — Shell Scripting',
+      tags: ['GTKDialog', 'Shell Scripting'],
       link: 'https://github.com/eqan/Hangman-In-Shell',
       content: `<p>
         An interactive hangman game made with bash scripting for the backend and GTKDialog for the frontend.
@@ -334,7 +334,7 @@ const PORTFOLIO_DATA = {
     'modal-project-8': {
       title: 'IGI Predator',
       subtitle: 'A bot that plays IGI game using Human Detection Model.',
-      tags: 'Python — Machine Learning - OpenCV',
+      tags: ['Python', 'Machine Learning', 'OpenCV'],
       link: 'https://github.com/eqan/Mini-AI-Projects/tree/main/1.%20IGI_Predator',
       content: `<p>
         A bot that plays IGI game using Human Detection Model, controlled by
@@ -357,7 +357,7 @@ const PORTFOLIO_DATA = {
     'modal-project-9': {
       title: 'Sneaker Ecommerce',
       subtitle: 'An ecommerce website',
-      tags: 'MERN — MUI',
+      tags: ['MERN', 'MUI'],
       link: 'https://github.com/eqan/Sneaker-Ecommerce',
       content: `<p>
         An ecommerce website that performs basic functionalities found in a normal ecomemrce website

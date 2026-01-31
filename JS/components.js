@@ -107,14 +107,10 @@ const Components = {
    * Format tags string into skill pills for project cards
    */
   formatSkillPills: (tags, maxPills = 6) => {
-    const allTags = Array.isArray(tags) 
-      ? tags.flatMap(t => t.split(' - ').map(s => s.trim()))
-      : tags.split(' - ').map(s => s.trim()).filter(Boolean);
+    if (!Array.isArray(tags)) return '';
     
-    // Remove duplicates and limit
-    const uniqueTags = [...new Set(allTags.map(t => t.replace(/[—–]/g, '').trim()))].filter(Boolean);
-    const displayTags = uniqueTags.slice(0, maxPills);
-    const remaining = uniqueTags.length - maxPills;
+    const displayTags = tags.slice(0, maxPills);
+    const remaining = tags.length - maxPills;
     
     let html = displayTags.map(tag => `<span class="skill-pill">${tag}</span>`).join('');
     if (remaining > 0) {
@@ -159,12 +155,11 @@ const Components = {
   },
 
   /**
-   * Format tags string into styled pill badges
+   * Format tags array into styled pill badges
    */
   formatTags: (tags) => {
-    return tags.split(' - ').map(tag => 
-      `<span class="tech-tag">${tag.trim()}</span>`
-    ).join('');
+    if (!Array.isArray(tags)) return '';
+    return tags.map(tag => `<span class="tech-tag">${tag}</span>`).join('');
   },
 
   projectModal: (id, { title, subtitle, tags, content, images, link }) => {

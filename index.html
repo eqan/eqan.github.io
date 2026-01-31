@@ -405,13 +405,14 @@
       align-items: center;
       gap: 0.5rem;
       padding: 0.5rem 1rem;
-      background: rgba(0,0,0,0.85);
+      background: var(--theme-pill-bg, rgba(0,0,0,0.85));
       backdrop-filter: blur(10px);
       border-radius: 50px;
       z-index: 10000;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
       width: auto;
       height: auto;
+      transition: background-color 0.3s ease;
     }
     .preview-themes::before {
       content: 'Theme';
@@ -419,27 +420,28 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      color: rgba(255,255,255,0.6);
+      color: var(--theme-pill-text, rgba(255,255,255,0.6));
       margin-right: 0.25rem;
+      transition: color 0.3s ease;
     }
     .preview-theme {
       display: block;
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      border: 2px solid rgba(255,255,255,0.2);
+      border: 2px solid var(--theme-swatch-border, rgba(255,255,255,0.2));
       cursor: pointer;
       transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
       position: relative;
-         }
+    }
     .preview-theme:hover {
       transform: scale(1.2);
-      border-color: rgba(255,255,255,0.5);
+      border-color: var(--theme-swatch-hover, rgba(255,255,255,0.5));
     }
     .preview-theme.active {
-      border-color: #fff;
-      box-shadow: 0 0 0 2px rgba(255,255,255,0.3);
-         }
+      border-color: var(--theme-swatch-active, #fff);
+      box-shadow: 0 0 0 2px var(--theme-swatch-glow, rgba(255,255,255,0.3));
+    }
     .preview-color-yellow-black { background: linear-gradient(135deg, #ffdb67 50%, #000 50%); }
     .preview-color-black-white { background: linear-gradient(135deg, #000 50%, #fff 50%); }
     .preview-color-pink-black { background: linear-gradient(135deg, #f8a2d5 50%, #000 50%); }
@@ -1679,6 +1681,12 @@
       root.setProperty('--scrollbar-track', isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.05)');
       root.setProperty('--contact-border', isDark ? '#fff' : '#000');
       root.setProperty('--contrast-color', isDark ? '#000' : '#fff');
+      root.setProperty('--theme-pill-bg', isDark ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.85)');
+      root.setProperty('--theme-pill-text', isDark ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.6)');
+      root.setProperty('--theme-swatch-border', isDark ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.2)');
+      root.setProperty('--theme-swatch-hover', isDark ? 'rgba(0,0,0,0.5)' : 'rgba(255,255,255,0.5)');
+      root.setProperty('--theme-swatch-active', isDark ? '#000' : '#fff');
+      root.setProperty('--theme-swatch-glow', isDark ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.3)');
       
       // Content section theme-adaptive colors (subtle)
       root.setProperty('--content-bg', isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.03)');
