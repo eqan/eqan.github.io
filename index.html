@@ -962,6 +962,36 @@
       .testimonial-nav { gap: 1rem; }
       .testimonial-arrow { width: 40px; height: 40px; }
     }
+    
+    /* See More Reviews Link */
+    .testimonial-more { text-align: center; margin-top: 2rem; }
+    .testimonial-more-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 1.75rem;
+      background: transparent;
+      border: 2px solid var(--contact-border);
+      border-radius: 50px;
+      color: inherit;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.25s, color 0.25s, transform 0.25s;
+    }
+    .testimonial-more-link:hover {
+      background: var(--contact-border);
+      color: var(--contrast-color);
+      transform: translateY(-2px);
+      text-decoration: none;
+    }
+    .testimonial-more-link .fa-star { color: #ffc107; }
+    .testimonial-more-link:hover .fa-star { color: var(--contrast-color); }
+    .testimonial-more-link .fa-external-link { font-size: 0.75rem; opacity: 0.7; }
+    
+    @media (max-width: 575px) {
+      .testimonial-more-link { font-size: 0.8rem; padding: 0.75rem 1.25rem; }
+    }
 
     /* ============ MODERN ABOUT ME ============ */
     .about-container {

@@ -331,6 +331,13 @@ const Components = {
           <i class="fa fa-chevron-right"></i>
         </a>
       </div>
+    </div>
+    <div class="testimonial-more animation-translate animation-item-3">
+      <a href="https://www.fiverr.com/eqanahmad" target="_blank" class="testimonial-more-link">
+        <i class="fa fa-star"></i>
+        <span>See 60+ Reviews on Fiverr</span>
+        <i class="fa fa-external-link"></i>
+      </a>
     </div>`,
 
   // ============ PROFILE MODAL COMPONENT ============
