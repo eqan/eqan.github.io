@@ -415,16 +415,6 @@
       height: auto;
       transition: background-color 0.3s ease;
     }
-    .preview-themes::before {
-      content: 'Theme';
-      font-size: 0.65rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--theme-pill-text, rgba(255,255,255,0.6));
-      margin-right: 0.25rem;
-      transition: color 0.3s ease;
-    }
     .preview-theme {
       display: block;
       width: 20px;
@@ -472,7 +462,6 @@
     
          @media (max-width: 575px) {
       .preview-themes { padding: 0.4rem 0.75rem; gap: 0.4rem; }
-      .preview-themes::before { display: none; }
       .preview-theme { width: 18px; height: 18px; }
     }
     
@@ -1634,10 +1623,10 @@
 
   <!-- Themes -->
   <div class="preview-themes">
-    <a class="preview-theme preview-color-yellow-black" title="Select theme" data-toggle="tooltip" data-theme="./CSS/yellow-black.css" data-theme-bg="light"></a>
-    <a class="preview-theme preview-color-black-white" title="Select theme" data-toggle="tooltip" data-theme="./CSS/black-white.css" data-theme-bg="dark"></a>
-    <a class="preview-theme preview-color-pink-black" title="Select theme" data-toggle="tooltip" data-theme="./CSS/pink-black.css" data-theme-bg="light"></a>
-    <a class="preview-theme preview-color-blue-black" title="Select theme" data-toggle="tooltip" data-theme="./CSS/blue-black.css" data-theme-bg="light"></a>
+    <a class="preview-theme preview-color-yellow-black" data-theme="./CSS/yellow-black.css" data-theme-bg="light"></a>
+    <a class="preview-theme preview-color-black-white" data-theme="./CSS/black-white.css" data-theme-bg="dark"></a>
+    <a class="preview-theme preview-color-pink-black" data-theme="./CSS/pink-black.css" data-theme-bg="light"></a>
+    <a class="preview-theme preview-color-blue-black" data-theme="./CSS/blue-black.css" data-theme-bg="light"></a>
   </div>
 </body>
 
@@ -1648,9 +1637,6 @@
 
 <script>
   $(function () {
-    // Initialize tooltips
-    $('[data-toggle="tooltip"]').tooltip();
-    
     // Theme selector attention animation on load
     const $themesContainer = $('.preview-themes');
     setTimeout(() => {
