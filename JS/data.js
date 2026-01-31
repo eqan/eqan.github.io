@@ -87,13 +87,8 @@ const PORTFOLIO_DATA = {
   projects: [
     { id: 'modal-project-1', img: './Assets/project_1.webp', title: 'Netflix', subtitle: 'Video Streaming Application that is inspired by netflix', tags: 'XML — C# - Algorithms - Data Structures' },
     { id: 'modal-project-2', img: './Assets/project_2.webp', title: 'Material Awesome', subtitle: 'Linux Window manager & Desktop Environment Alternative', tags: 'Lua — Process Mangement - Desktop Development' },
-    { id: 'modal-project-3', img: './Assets/project_3.webp', title: 'Instagram Re-Imagened', subtitle: 'A social media application made from scratch', tags: 'XML — C# - T-SQL' },
-    { id: 'modal-project-4', img: './Assets/project_4.webp', title: 'BKrypt', subtitle: 'Blockchain transaction service', tags: 'React — Solidity - HardHat - Node - BlockChain' },
     { id: 'modal-project-5', img: './Assets/project_5.webp', title: 'Starvation Analysis in Pakistan', subtitle: 'A desktop application that performs analysis and predicts starvation rates in Pakistan', tags: 'PYQT5 — Distribution Models - Prediction Models - Regression Models - Data Science' },
-    { id: 'modal-project-6', img: './Assets/project_6.webp', title: 'X-axis OS', subtitle: 'An OS simulator', tags: 'Glade — Shell Scripting - C - Algorithms' },
-    { id: 'modal-project-7', img: './Assets/project_7.webp', title: 'Hangman', subtitle: 'Hangman game made with Bash scripting & GTK Dialog.', tags: 'GTKDialog — Shell Scripting' },
-    { id: 'modal-project-8', img: './Assets/project_8.webp', title: 'IGI Predator', subtitle: 'A bot that plays IGI game using Human Detection Model.', tags: 'Python — Machine Learning - OpenCV' },
-    { id: 'modal-project-9', img: './Assets/project_9.webp', title: 'Sneaker Ecommerce', subtitle: 'An Ecommerce Application', tags: 'MERN — MUI' }
+    { id: 'modal-project-8', img: './Assets/project_8.webp', title: 'IGI Predator', subtitle: 'A bot that plays IGI game using Human Detection Model.', tags: 'Python — Machine Learning - OpenCV' }
   ],
 
   // Project modal details
@@ -102,18 +97,23 @@ const PORTFOLIO_DATA = {
       title: 'Qanooni Legal Law Suite',
       subtitle: 'Qanooni is a legal law suite that is used to generate, review and make global changes to legal documents for the users.',
       tags: 'NEXT.js - OAuth - Redux - React - RESTAPI\'s - Postgres - SQL ALchemy - Python - Docker - Azure - Postman - Web Sockets - FAST API - SISH - Alembic - Redis - Linux/Shell Scripting - Langchain - OpenAI - Prompt Engineering - MS Word API - RAG',
-      content: `<p>
-        → Qanooni Legal Law Suite contains 4 major components:
+      content: `
+        <blockquote>
+          <h3>Core Components</h3>
+          <ul>
+            <li><strong>Draft</strong> — Generate legal documents in user's tone and style</li>
+            <li><strong>Review</strong> — Review and make necessary amendments</li>
+            <li><strong>Global Changes</strong> — Apply changes across documents</li>
+            <li><strong>QCounsel</strong> — AI-powered legal Q&A</li>
+          </ul>
+        </blockquote>
+        <h3>My Contributions</h3>
         <ul>
-          <li>Draft - Generate a draft of the legal document in users tone and style</li>
-          <li>Review - Review the legal document and make necessary amendments</li>
-          <li>Global Changes - Make global changes to the legal document</li>
-          <li>QCounsel - Ask a question to the legal document</li>
+          <li>Worked on Draft, Review and Global Changes for <strong>MVP launch</strong></li>
+          <li>Built AI Chatbot to control <strong>Microsoft Word</strong> with clause-by-clause modifications</li>
+          <li>Drafts are <strong>100% original</strong> based on user's previous documents and writing style</li>
         </ul>
-        I have worked on the Draft, Review and Global Changes components for the MVP launch of the product. </br></br>
-        → Developed a working legal law AI Chatbot dynamic enough to control the whole Microsoft Word application, clause-by-clause modifications, and interactive chat interaction to gather essential information from users and then generate a draft. </br></br>
-        → The Generated draft follows the users tone and style and is 100% original based on previous documents shared by the user on email. </br></br>
-      </p>`,
+      `,
       images: [
         { src: './Assets/project_11.webp', alt: 'Qanooni Legal Law Suite', basis: '100%' },
         { src: './Assets/qanooni_review.webp', alt: 'Review', basis: '50%' },
@@ -126,17 +126,18 @@ const PORTFOLIO_DATA = {
       title: 'GPU Lab',
       subtitle: 'A cloud computing platform aimed to deploy millions of AI models on local GPU servers and return apis for hastle free usage.',
       tags: 'NEXT.js - OAuth - Redux - React - RESTAPI\'s - Postgres - SQL ALchemy - Python - Docker - Cloudflared - AWS - Postman - Web Sockets - Stripe - FAST API - SISH - NVIDIA-SMI - Alembic - Redis - Linux/Shell Scripting',
-      content: `<p>
-        → Led a team of engineers to develop a cloud computing framework for AI Models deployment
-        and computation in parrallel using Docker, WebSockets, Stripe Integeration, Shell Scripting,
-        Python, Postgres, SQLAlchemy, FAST API, and Cloudflare to build a product which is going to be
-        used by 1 Million+ daily active users for model deployment. Developing frontend interface with
-        React, Redux, Typescript and NEXT.js.</br>
-      </p>
-      <p>
-        → Responsible for architecture design and development regarding the cloud computing framework for
-        parrallel computation.</br>
-      </p>`,
+      content: `
+        <blockquote>
+          <h3>Key Achievements</h3>
+          <ul>
+            <li>Led a team of engineers to develop a <strong>cloud computing framework</strong> for AI Models deployment and parallel computation</li>
+            <li>Built to scale for <strong>1 Million+ daily active users</strong> for model deployment</li>
+            <li>Architected the entire cloud computing framework for <strong>parallel computation</strong></li>
+          </ul>
+        </blockquote>
+        <h3>Technical Stack</h3>
+        <p>Docker, WebSockets, Stripe Integration, Shell Scripting, Python, Postgres, SQLAlchemy, FAST API, and Cloudflare for backend. React, Redux, Typescript and NEXT.js for frontend.</p>
+      `,
       images: [
         { src: './Assets/project_10.webp', alt: 'GPU Lab', basis: '50%' },
         { src: './Assets/gpu-lab-server-list.webp', alt: 'Image 3', basis: '50%' },
@@ -148,26 +149,24 @@ const PORTFOLIO_DATA = {
       subtitle: 'A platform aimed to generate and decentralize verified academic portfolios worldwide.',
       tags: 'NEXT.js - React - Graphql - Postgres - TypeORM - NEST.js - Solidity - Remix - Hardhat - Postman - Appolo - Python - Selenium - IPFS - EthersProject - Vercel - React.pdf',
       link: 'https://nuces-blocked-frontend.vercel.app/nuces-blocked/landing',
-      content: `<p>
-        → Developing a decentralized system for distributing and verifying graduate degrees and semester results
-        using blockchain technology, improving the authenticity of degree distribution by 80%. </br>
-      </p>
-      <p>
-        → Incorporated a comprehensive profile of each student's academic career, enabling recruiters to easily
-        assess the qualifications and suitability of potential hires and saving 75% of the time normally spent on verifying candidates' academic credentials. </br>
-      </p>
-      <blockquote>
-        <h3>Features</h3>
-        <ul style="list-style-type:none">
-          <li>✔ Material UI</li>
-          <li>✔ On just 1 click autogenerate and deploy portfolios as NFTs across the globe.</li>
-          <li>✔ Companies and relevant parties interested in verified students academic information can easily download with just 1 click for easy filtering.</li>
-          <li>✔ Teachers, career counsellors and society heads to add students academic contributions independtly.</li>
-          <li>✔ Intra University + organizations consensus mechanism from authorized validators.</li>
-          <li>✔ Low bandwidth consumption using GraphQL API.</li>
-          <li>✔ Backup Students semester results.</li>
+      content: `
+        <blockquote>
+          <h3>Impact</h3>
+          <ul>
+            <li>Improved authenticity of degree distribution by <strong>80%</strong> using blockchain</li>
+            <li>Saves <strong>75% of time</strong> normally spent verifying academic credentials</li>
+          </ul>
+        </blockquote>
+        <h3>Key Features</h3>
+        <ul>
+          <li><strong>1-Click NFT Portfolios</strong> — Auto-generate and deploy globally</li>
+          <li><strong>Easy Verification</strong> — Companies can download verified info instantly</li>
+          <li><strong>Multi-Role Support</strong> — Teachers, counsellors, society heads can contribute</li>
+          <li><strong>Consensus Mechanism</strong> — Intra-university validation from authorized parties</li>
+          <li><strong>Low Bandwidth</strong> — Optimized with GraphQL API</li>
+          <li><strong>Result Backup</strong> — Secure semester results storage</li>
         </ul>
-      </blockquote>`,
+      `,
       images: [
         { src: './Assets/nuces-blocked-add-certificates.webp', alt: 'Netflix', basis: '50%', link: 'https://nuces-blocked-frontend.vercel.app/nuces-blocked/landing' },
         { src: './Assets/nuces-blocked-manage-certificates.webp', alt: 'Image 2', basis: '50%', link: 'https://nuces-blocked-frontend.vercel.app/nuces-blocked/landing/' },
@@ -378,109 +377,115 @@ const PORTFOLIO_DATA = {
     }
   },
 
-  // Experiences timeline
+  // Experiences timeline - Concise, metric & impact focused
   experiences: [
     {
       date: 'Jul 2025 – Present',
       title: 'SuperQ Quantum',
       role: 'Lead Software Engineer',
-      points: [
-        'Leading the development team on the Super Q and ChatQPU products, a gateway to Quantum computing in the most user-friendly manner.',
-        'Bridging both classical and gate-based quantum computing through NLP (Natural Language Processing)/LLM to solve complex problems.',
-        'Technologies: QuEra, Amazon Braket, IonQ, NVIDIA CUDA Q, Dwave, Gurobi, Python, Quantum Computing.'
-      ]
+      icon: 'fa-bolt',
+      metrics: ['Quantum Computing', 'NLP/LLM Integration'],
+      highlights: [
+        'Leading development of <strong>Super Q</strong> and <strong>ChatQPU</strong> products',
+        'Bridging classical & gate-based quantum computing via NLP/LLM'
+      ],
+      tech: ['QuEra', 'Amazon Braket', 'IonQ', 'NVIDIA CUDA Q', 'Dwave', 'Gurobi']
     },
     {
       date: 'Jul 2025 – Present',
       title: 'Staque',
       role: 'AI Software Engineer',
-      points: [
-        'Akito AI - An AI powered platform for Employers and Job seekers to curate assessments and link appropriate job listings. Integration and collaboration with companies such as Riipen, Advacenrite for more openings and data integration.',
-        'Que BDR - Agentic BDR AI to manage leads all across the platform of the company.',
-        'Que Marketer - Agentic marketing software powered with multimodal capabilities to generate social media content.'
-      ]
+      icon: 'fa-magic',
+      metrics: ['3 AI Products', 'Multi-platform Integration'],
+      highlights: [
+        '<strong>Akito AI</strong> — AI platform for employers & job seekers with Riipen integration',
+        '<strong>Que BDR</strong> — Agentic AI for lead management',
+        '<strong>Que Marketer</strong> — Multimodal AI for social media content'
+      ],
+      tech: ['AI/ML', 'Agentic AI', 'Multimodal']
     },
     {
-      date: 'Sep 2024 – April 2025',
+      date: 'Sep 2024 – Apr 2025',
       title: 'Qanooni.ai',
       role: 'AI Engineer',
-      points: [
-        'Working in the intelligence team to develop a suite of plugins in Word and Outlook to develop drafts automatically for lawyers based on writings they have written in previous documents in Outlook documents history and Word using Langchain, GPT4-O, BERT, Claude, FAST API, Python, REST API, etc.',
-        'Developed a working legal law AI Chatbot dynamic enough to control the whole Microsoft Word application, clause-by-clause modifications, and interactive chat interaction to gather essential information from users and then generate a draft.',
-        'Implemented RAG techniques for data collection on multiple law sites and storing the filtered data in the database to enhance model performance by 60%.',
-        'Prompt Engineering and embedding for contextual-based data parsing from user chat history, generating drafts relevant to the provided templates used by the user or lawyer-based history sources, keeping intact prompt context with prompt chaining mechanism with an accuracy of 83% in results, and finally developing evals for evaluating these prompt results.',
-        'Building the draft and review features, such as developing architecture, entities, data modeling, WebSockets for CRUD functions, draft generation using Langchain, etc., to scale to an estimated 1+ million users.',
-        'Developing front-end UI pages for the draft features using Next.js, React, Redux, etc, and integrating the backend websockets with the frontend.'
-      ]
+      icon: 'fa-gavel',
+      metrics: ['60% model performance boost', '83% prompt accuracy', '1M+ user scale'],
+      highlights: [
+        'Built AI Chatbot controlling <strong>MS Word</strong> for clause-by-clause legal drafting',
+        'Implemented <strong>RAG</strong> for law data collection — <strong>60%</strong> performance boost',
+        'Prompt engineering with <strong>83%</strong> accuracy in draft generation'
+      ],
+      tech: ['Langchain', 'GPT-4', 'Claude', 'FAST API', 'Next.js']
     },
     {
-      date: '2021 – now',
+      date: '2021 – Present',
       title: 'Freelancer',
-      role: 'Providing Services:',
-      points: [
-        'Top vetted freelancer at Toptal.',
-        'Level 2 Fiverr with 4.9+ Customer Rating and 200+ projects completed.',
-        'Upwork Emerging Talent',
-        'Completed over 300+ projects in total.',
-        'Provide freelance expertise in Web Dev, Blockchain, DevOps, and Gen AI.'
-      ]
+      role: 'Top Vetted Engineer',
+      icon: 'fa-briefcase',
+      metrics: ['300+ projects', '4.9★ rating', 'Top vetted @ Toptal'],
+      highlights: [
+        '<strong>Toptal</strong> — Top vetted freelancer',
+        '<strong>Fiverr</strong> — Level 2 seller, 200+ projects',
+        '<strong>Upwork</strong> — Emerging Talent badge'
+      ],
+      tech: ['Web Dev', 'Blockchain', 'DevOps', 'Gen AI']
     },
     {
-      date: 'July 2023 – July 2024',
+      date: 'Jul 2023 – Jul 2024',
       title: 'Stable Diffusion',
       role: 'Lead Cloud Engineer',
-      points: [
-        'Led a team to architecture and develop a cloud-based AI framework using Docker, Python, Cloudflare, SQL Alchemy, FAST API, nvidia-smi, Guvicorn, PostgreSQL, MS Azure, Amazon S3, SISH etc, targeting 1M+ daily active users for Text-to-Image/Video/Audio generation.',
-        'Utilized various open source projects such as Salt project to deal with various remote execution protocols, minimizing network latency, load balancing certain parts of the project to minimize load times and embedding microservices using docker to create a scalable environment for the product.',
-        'Led frontend development using React, Typescript, Redux, and NEXT.js while also implementing backend optimizations that reduced 3rd party service costs by 60%.',
-        'Indepth Operating system and docker + python docker sdk usage for developing automated services to manage the whole system more like a self managing microservice. Also utilized CI/CD pipelines to automate the whole backend and frontend docker packaging for deployment using github actions.',
-        'Managed a high-performance computing environment, optimizing resource allocation to reduce daily GPU costs from over $1000.'
-      ]
+      icon: 'fa-cloud',
+      metrics: ['1M+ DAU target', '60% cost reduction', '$1000+ GPU savings/day'],
+      highlights: [
+        'Architected cloud AI framework for <strong>1M+ daily users</strong>',
+        'Reduced 3rd party costs by <strong>60%</strong>',
+        'Optimized GPU allocation saving <strong>$1000+/day</strong>'
+      ],
+      tech: ['Docker', 'FAST API', 'PostgreSQL', 'Azure', 'AWS S3']
     },
     {
-      date: 'March 2020 – April 2023',
+      date: 'Mar 2020 – Apr 2023',
       title: 'Microslush',
       role: 'Associate Software Engineer',
-      points: [
-        'Developed a Binance‑based NFT marketplace using NEST.JS, Redis, EthersProject, GraphQL, Typescript, and Postgres, and adopting Agile development.',
-        'Improved api endpoints speed by 200% by following best database optimization practices and endpoints vulnerability testing using Postman.',
-        'Responsible for building modules related to tokens, collections, orders, activities etc which was the core of the indexer, fetching and filtering data from blockchain and storing in the database.',
-        'Developed a screen recording application in C# using FFMpeg, .NET, and various cloud-based services such as Dropbox. Basically, it\'s a clone of screenrc for the company.',
-        'Developed C# and .NET desktop applications, including an automated forex bot installer that reduced Windows setup time by 60% and also a screenrecording tool that was made for the ease of users recording and submitting their issues related to forex charts directly on the .NET website which enhanced user experience by 70% and impacting 1 Million+ daily active users.',
-        'Implemented automated unit test cases using Robot Framework and Python to test company project sites and functionalities, resulting in a 30-40% reduction in bugs.',
-        'Created MetaTrader 4 bots in MQL4 for company clients to improve their trading strategies.'
-      ]
+      icon: 'fa-code',
+      metrics: ['200% API speedup', '70% UX improvement', '1M+ users impacted'],
+      highlights: [
+        'Built <strong>Binance NFT marketplace</strong> — improved API speed by <strong>200%</strong>',
+        'Desktop apps impacting <strong>1M+ users</strong> with <strong>70%</strong> UX improvement',
+        'Reduced bugs by <strong>30-40%</strong> with automated testing'
+      ],
+      tech: ['NEST.js', 'GraphQL', 'C#/.NET', 'Solidity', 'MQL4']
     }
   ],
 
-  // Honors
+  // Honors - Concise format
   honors: [
     {
       date: '2023',
-      title: 'Prime Minister National Innovation Award Finalist[NUCES BLOCKED]',
-      content: `→ My Final Year Project [NUCES BLOCKED] was selected as one of the top 50 finalists from over 20,000 applications nationwide for the Prime Minister National Innovation Award.</br>
-        → This recognition provided me with comprehensive training in:</br>
-        &nbsp;&nbsp;&nbsp;&nbsp;• Entrepreneurship</br>
-        &nbsp;&nbsp;&nbsp;&nbsp;• Startup pitching</br>
-        &nbsp;&nbsp;&nbsp;&nbsp;• Business management</br>
-        → The training was conducted over a 2-month period at prestigious institutions like:</br>
-        &nbsp;&nbsp;&nbsp;&nbsp;• UET Lahore</br>
-        &nbsp;&nbsp;&nbsp;&nbsp;• NUST Islamabad</br>
-        → The aim was to equip us to make a significant impact in the education sector in Pakistan.</br>`
+      title: 'PM National Innovation Award Finalist',
+      icon: 'fa-trophy',
+      metric: 'Top 50 / 20,000',
+      description: 'NUCES BLOCKED project selected from 20,000+ applications nationwide',
+      details: ['2-month entrepreneurship training at UET Lahore & NUST Islamabad']
     },
     {
       date: '2019',
-      title: 'Top 5 in UI/UX in the whole institue',
-      content: 'Ranked amongst the top 5 in the UI/UX course in the whole institue.</br>'
+      title: 'Top 5 UI/UX Designer',
+      icon: 'fa-paint-brush',
+      metric: 'Top 5',
+      description: 'Ranked among top 5 in UI/UX course across the entire institute'
     }
   ],
 
-  // Education
+  // Education - Modern format
   education: [
     {
       date: '2019 – 2023',
       title: 'FAST NUCES',
-      content: 'BS Computer Science at National University Of Computer Science & Technology'
+      icon: 'fa-graduation-cap',
+      degree: 'BS Computer Science',
+      institution: 'National University of Computer & Emerging Sciences',
+      location: 'Pakistan'
     }
   ],
 

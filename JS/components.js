@@ -70,25 +70,25 @@ const Components = {
 
   // ============ SERVICE/DOMAIN CARD COMPONENT ============
   
-  serviceCard: ({ href, icon, label, target, modal, arrowLeft }) => `
-    <div class="col-6 col-md-4 mb-4">
+  serviceCard: ({ href, icon, label, target, modal }) => `
+    <div class="service-item">
       <a href="${href}" ${modal ? 'data-toggle="modal"' : ''} 
          ${target ? `target="${target}"` : ''} 
-         class="domain-card d-block text-center no-decoration ${arrowLeft ? 'arrow-left' : ''}">
+         class="service-card">
         <i class="fa ${icon}"></i>
-        <h4 class="mb-1">${label}</h4>
+        <h4>${label}</h4>
       </a>
     </div>`,
 
   servicesSection: (services) => `
-    <div class="row animation-translate animation-item-2 mb-5">
+    <div class="services-grid animation-translate animation-item-2 mb-5">
       ${services.map(Components.serviceCard).join('')}
     </div>`,
 
   // ============ EXPERTISE CARD COMPONENT ============
   
   expertiseCard: ({ icon, label, duration, arrowLeft }) => `
-    <div class="col-6 col-md-3 mb-4">
+    <div class="expertise-item">
       <div class="domain-card ${arrowLeft ? 'arrow-left' : ''}">
         <i class="fa ${icon}"></i>
         <h4 class="mb-1">${label}</h4>
@@ -97,88 +97,106 @@ const Components = {
     </div>`,
 
   expertiseSection: (items) => `
-    <div class="row animation-translate animation-item-2 mb-5">
+    <div class="expertise-grid animation-translate animation-item-2 mb-5">
       ${items.map(Components.expertiseCard).join('')}
     </div>`,
 
   // ============ PROJECT CARD COMPONENT ============
   
-  projectCard: ({ id, img, title, subtitle, tags }, size = 'small') => {
-    const tagsHtml = Array.isArray(tags) 
-      ? tags.map(t => `<p class="card-tags specific-card-tags">${t}</p>`).join('')
-      : `<p class="card-tags">${tags}</p>`;
+  /**
+   * Format tags string into skill pills for project cards
+   */
+  formatSkillPills: (tags, maxPills = 6) => {
+    const allTags = Array.isArray(tags) 
+      ? tags.flatMap(t => t.split(' - ').map(s => s.trim()))
+      : tags.split(' - ').map(s => s.trim()).filter(Boolean);
     
-    const colClass = size === 'full' ? 'col-12 col-lg-10 mx-auto' 
-                   : size === 'medium' ? 'col-12 col-md-10" style="width: 60%; margin-left: auto; margin-right: auto;'
-                   : 'col-6 col-md-4 mb-4';
+    // Remove duplicates and limit
+    const uniqueTags = [...new Set(allTags.map(t => t.replace(/[—–]/g, '').trim()))].filter(Boolean);
+    const displayTags = uniqueTags.slice(0, maxPills);
+    const remaining = uniqueTags.length - maxPills;
     
-    return `
-      <div class="${colClass}">
-        <a class="card" href="#${id}" data-toggle="modal">
-          <img class="card-img-top" src="${img}" alt="${title}" />
-          <div class="card-body">
-            <h3 class="card-title">${title}</h3>
-            <h4 class="card-subtitle">${subtitle}</h4>
-            ${tagsHtml}
-          </div>
-        </a>
-      </div>`;
+    let html = displayTags.map(tag => `<span class="skill-pill">${tag}</span>`).join('');
+    if (remaining > 0) {
+      html += `<span class="skill-pill skill-more">+${remaining}</span>`;
+    }
+    return html;
   },
 
-  featuredProjectCard: (project) => Components.projectCard(project, project.size),
+  projectCard: ({ id, img, title, subtitle, tags }) => {
+    const skillPillsHtml = Components.formatSkillPills(tags, 5);
+    
+    return `
+      <article class="project-item">
+        <a class="project-card" href="#${id}" data-toggle="modal">
+          <figure class="project-card-img">
+            <img src="${img}" alt="${title}" loading="lazy" />
+          </figure>
+          <div class="project-card-content">
+            <h3 class="project-card-title">${title}</h3>
+            <p class="project-card-desc">${subtitle}</p>
+            <div class="project-card-tags">${skillPillsHtml}</div>
+          </div>
+        </a>
+      </article>`;
+  },
 
   projectsGrid: (featured, regular) => `
-    ${featured.map(Components.featuredProjectCard).join('')}
-    <div class="row animation-translate animation-item-2">
-      ${regular.slice(0, 3).map(p => Components.projectCard(p)).join('')}
-    </div>
-    <div class="row animation-translate animation-item-2">
-      ${regular.slice(3, 6).map(p => Components.projectCard(p)).join('')}
-    </div>
-    <div class="row animation-translate animation-item-2">
-      ${regular.slice(6, 9).map(p => Components.projectCard(p)).join('')}
+    <div class="projects-grid animation-translate animation-item-2">
+      ${featured.map(Components.projectCard).join('')}
+      ${regular.map(Components.projectCard).join('')}
     </div>`,
 
   // ============ PROJECT MODAL COMPONENT ============
   
   projectModalImage: ({ src, alt, basis, link }) => {
-    const style = basis ? `style="flex-basis: ${basis};"` : '';
-    const imgHtml = `<img class="img-fluid ${basis ? 'collage-image' : 'mb-10'}" src="${src}" alt="${alt}" ${basis ? 'style="width: 100%; height: auto;"' : ''}/>`;
+    const basisStyle = basis ? `flex: 0 0 calc(${basis} - 0.5rem); max-width: calc(${basis} - 0.5rem);` : '';
+    const imgHtml = `<img class="img-fluid project-modal-img" src="${src}" alt="${alt}" loading="lazy"/>`;
     
     return link 
-      ? `<a href="${link}" ${basis ? style : ''} target="_blank">${imgHtml}</a>${basis ? '</br></br>' : ''}`
-      : `<a ${style}>${imgHtml}</a>${basis ? '</br></br>' : ''}`;
+      ? `<a href="${link}" class="project-img-wrapper" style="${basisStyle}" target="_blank">${imgHtml}</a>`
+      : `<div class="project-img-wrapper" style="${basisStyle}">${imgHtml}</div>`;
+  },
+
+  /**
+   * Format tags string into styled pill badges
+   */
+  formatTags: (tags) => {
+    return tags.split(' - ').map(tag => 
+      `<span class="tech-tag">${tag.trim()}</span>`
+    ).join('');
   },
 
   projectModal: (id, { title, subtitle, tags, content, images, link }) => {
     const hasCollage = images.length > 1 || images.some(img => img.basis);
+    const formattedTags = Components.formatTags(tags);
     
     return `
-    <div id="${id}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" style="display: none" aria-hidden="true">
+    <div id="${id}" class="modal fade project-modal" tabindex="-1" role="dialog" aria-labelledby="modal" style="display: none" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-fluid">
         <div class="modal-content">
           <div class="modal-header">
-            &nbsp;
             <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
               <span class="d-none">×</span>
             </button>
           </div>
           <div class="modal-body">
-            <article class="article">
-              <div class="article-header">
-                <h2 class="article-title" ${link ? `href="${link}" target="_blank"` : ''}>${title}</h2>
-                <h3 class="article-subtitle">${subtitle}</h3>
-                <p class="article-tags">${tags}</p>
+            <article class="article project-article">
+              <header class="project-header">
+                ${link 
+                  ? `<a href="${link}" target="_blank" class="project-title-link"><h2 class="project-modal-title">${title} <i class="fa fa-external-link"></i></h2></a>`
+                  : `<h2 class="project-modal-title">${title}</h2>`
+                }
+                <p class="project-modal-subtitle">${subtitle}</p>
+                <div class="tech-tags-container">${formattedTags}</div>
+              </header>
+              
+              <div class="project-gallery ${hasCollage ? 'gallery-collage' : 'gallery-single'}">
+                ${images.map(Components.projectModalImage).join('')}
               </div>
-              <div class="row flex-column-reverse flex-lg-row">
-                <div class="col-12 col-lg-${hasCollage ? '12' : '6'}">
-                  ${content}
-                </div>
-                <div class="col-12 col-lg-${hasCollage ? '12' : '6'}">
-                  ${hasCollage ? '<div class="image-collage" style="display: flex; flex-wrap: wrap;">' : ''}
-                  ${images.map(Components.projectModalImage).join('')}
-                  ${hasCollage ? '</div>' : ''}
-                </div>
+              
+              <div class="project-content">
+                ${content}
               </div>
             </article>
           </div>
@@ -190,90 +208,151 @@ const Components = {
   allProjectModals: (modals) => 
     Object.entries(modals).map(([id, data]) => Components.projectModal(id, data)).join('\n'),
 
-  // ============ TIMELINE COMPONENT ============
+  // ============ EXPERIENCE CARD COMPONENT (Modern) ============
   
-  timelineItem: ({ date, title, role, points, content }) => {
-    const bodyHtml = points 
-      ? `${role}</br>${points.map(p => `→ ${p} </br></br>`).join('')}`
-      : content;
+  experienceCard: ({ date, title, role, icon, metrics, highlights, tech }, index) => {
+    const metricsHtml = metrics 
+      ? `<div class="exp-metrics">${metrics.map(m => `<span class="exp-metric">${m}</span>`).join('')}</div>`
+      : '';
+    
+    const highlightsHtml = highlights 
+      ? `<ul class="exp-highlights">${highlights.map(h => `<li>${h}</li>`).join('')}</ul>`
+      : '';
+    
+    const techHtml = tech 
+      ? `<div class="exp-tech">${tech.slice(0, 5).map(t => `<span class="tech-pill-sm">${t}</span>`).join('')}${tech.length > 5 ? `<span class="tech-pill-sm tech-more">+${tech.length - 5}</span>` : ''}</div>`
+      : '';
+    
+    const animClass = `animation-translate animation-item-${Math.min(index + 2, 5)}`;
     
     return `
-      <div class="timeline-item">
-        <span class="timeline-date">${date}</span>
-        <h3 class="timeline-title">${title}</h3>
-        <p class="timeline-text">${bodyHtml}</p>
+      <div class="exp-card info-card ${animClass}">
+        <div class="exp-header">
+          <div class="exp-icon"><i class="fa ${icon || 'fa-briefcase'}"></i></div>
+          <div class="exp-info">
+            <span class="exp-date">${date}</span>
+            <h3 class="exp-title">${title}</h3>
+            <span class="exp-role">${role}</span>
+          </div>
+        </div>
+        ${metricsHtml}
+        ${highlightsHtml}
+        ${techHtml}
       </div>`;
   },
 
-  timeline: (items) => `
-    <div class="timeline timeline-animated">
-      ${items.map(Components.timelineItem).join('')}
+  experienceTimeline: (items) => `
+    <div class="exp-timeline timeline-animated">
+      ${items.map((item, i) => Components.experienceCard(item, i)).join('')}
     </div>`,
 
-  // ============ TESTIMONIAL COMPONENT ============
+  // ============ HONOR CARD COMPONENT ============
+  
+  honorCard: ({ date, title, icon, metric, description, details }, index) => {
+    const detailsHtml = details 
+      ? `<ul class="honor-details">${details.map(d => `<li>${d}</li>`).join('')}</ul>`
+      : '';
+    
+    const animClass = `animation-translate animation-item-${Math.min(index + 2, 5)}`;
+    
+    return `
+      <div class="honor-card info-card ${animClass}">
+        <div class="honor-icon"><i class="fa ${icon || 'fa-trophy'}"></i></div>
+        <div class="honor-content">
+          <span class="honor-date">${date}</span>
+          <h3 class="honor-title">${title}</h3>
+          ${metric ? `<span class="honor-metric">${metric}</span>` : ''}
+          <p class="honor-desc">${description}</p>
+          ${detailsHtml}
+        </div>
+      </div>`;
+  },
+
+  honorsSection: (items) => `
+    <div class="honors-grid timeline-animated">
+      ${items.map((item, i) => Components.honorCard(item, i)).join('')}
+    </div>`,
+
+  // ============ EDUCATION CARD COMPONENT ============
+  
+  educationCard: ({ date, title, icon, degree, institution, location }, index) => {
+    const animClass = `animation-translate animation-item-${Math.min(index + 2, 5)}`;
+    return `
+      <div class="edu-card info-card ${animClass}">
+        <div class="edu-icon"><i class="fa ${icon || 'fa-graduation-cap'}"></i></div>
+        <div class="edu-content">
+          <span class="edu-date">${date}</span>
+          <h3 class="edu-title">${title}</h3>
+          <span class="edu-degree">${degree}</span>
+          <p class="edu-desc">${institution}${location ? ` • ${location}` : ''}</p>
+        </div>
+      </div>`;
+  },
+
+  educationSection: (items) => `
+    <div class="edu-grid timeline-animated">
+      ${items.map((item, i) => Components.educationCard(item, i)).join('')}
+    </div>`,
+
+  // ============ TESTIMONIAL COMPONENT (Modern) ============
   
   testimonialItem: ({ img, name, role, link, text }, index) => `
-    <div class="carousel-item ${index === 0 ? 'active' : ''}" style="min-height: 244px">
-      <div class="testimonial">
-        <img src="${img}" class="testimonial-img" alt="${name}" />
-        <div class="testimonial-body">
-          <h3 class="testimonial-title">${name}</h3>
-          <h4 class="testimonial-subtitle">
-            ${role} ${link ? `— <a href="${link}" target="_blank">${link}</a>` : ''}
-          </h4>
-          <p class="testimonial-text">${text}</p>
+    <div class="carousel-item ${index === 0 ? 'active' : ''}">
+      <div class="testimonial-card">
+        <div class="testimonial-quote"><i class="fa fa-quote-left"></i></div>
+        <p class="testimonial-text">${text}</p>
+        <div class="testimonial-author">
+          <img src="${img}" class="testimonial-avatar" alt="${name}" />
+          <div class="testimonial-info">
+            <h4 class="testimonial-name">${name}</h4>
+            <p class="testimonial-role">${role}</p>
+            ${link ? `<a href="${link}" target="_blank" class="testimonial-link"><i class="fa fa-external-link"></i> View Profile</a>` : ''}
+          </div>
         </div>
       </div>
     </div>`,
 
   testimonialIndicator: (_, index) => 
-    `<li data-target="#carousel" data-slide-to="${index}" class="${index === 0 ? 'active' : ''}"></li>`,
+    `<li data-target="#carousel" data-slide-to="${index}" class="${index === 0 ? 'active' : ''}" aria-label="Slide ${index + 1}"></li>`,
 
   testimonialCarousel: (testimonials) => `
-    <div id="carousel" class="carousel slide animation-translate animation-item-2" data-ride="carousel">
+    <div id="carousel" class="carousel slide testimonial-carousel animation-translate animation-item-2" data-ride="carousel" data-interval="6000">
       <div class="carousel-inner">
         ${testimonials.map(Components.testimonialItem).join('')}
       </div>
-      <ol class="carousel-indicators">
-        ${testimonials.map(Components.testimonialIndicator).join('')}
-      </ol>
-      <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
+      <div class="testimonial-nav">
+        <a class="testimonial-arrow testimonial-prev" href="#carousel" role="button" data-slide="prev" aria-label="Previous">
+          <i class="fa fa-chevron-left"></i>
+        </a>
+        <ol class="carousel-indicators testimonial-dots">
+          ${testimonials.map(Components.testimonialIndicator).join('')}
+        </ol>
+        <a class="testimonial-arrow testimonial-next" href="#carousel" role="button" data-slide="next" aria-label="Next">
+          <i class="fa fa-chevron-right"></i>
+        </a>
+      </div>
     </div>`,
 
   // ============ PROFILE MODAL COMPONENT ============
   
   profileCard: ({ href, icon, label }) => `
-    <div class="col-12 col-sm-6 col-md-4 mb-4">
-      <a href="${href}" target="_blank" class="card shadow-sm h-100">
-        <div class="card-body d-flex flex-column align-items-center">
-          <i class="fa ${icon} fa-3x mb-3"></i>
-          <h4 class="card-title mb-0">${label}</h4>
-        </div>
-      </a>
-    </div>`,
+    <a href="${href}" target="_blank" class="profile-link-card">
+      <div class="profile-link-icon"><i class="fa ${icon}"></i></div>
+      <span class="profile-link-label">${label}</span>
+      <i class="fa fa-external-link profile-link-arrow"></i>
+    </a>`,
 
   profileModal: (id, title, profiles) => `
     <div id="${id}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" style="display: none" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-fluid">
-        <div class="modal-content">
-          <div class="modal-header">
-            &nbsp;
-            <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
-              <span class="d-none">×</span>
-            </button>
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content profile-modal-content">
+          <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close"></button>
+          <div class="profile-modal-header">
+            <h2 class="profile-modal-title">${title}</h2>
+            <p class="profile-modal-subtitle">Click to visit my profiles</p>
           </div>
-          <div class="modal-body">
-            <h2 class="text-center mb-4">${title}</h2>
-            <div class="row justify-content-center text-center">
-              ${profiles.map(Components.profileCard).join('')}
-            </div>
+          <div class="profile-modal-body">
+            ${profiles.map(Components.profileCard).join('')}
           </div>
         </div>
       </div>
@@ -328,22 +407,22 @@ const Components = {
       projectsContainer.innerHTML = this.projectsGrid(data.featuredProjects, data.projects);
     }
 
-    // Render experiences
+    // Render experiences (modern cards)
     const experiencesContainer = document.getElementById('experiences-container');
     if (experiencesContainer) {
-      experiencesContainer.innerHTML = this.timeline(data.experiences);
+      experiencesContainer.innerHTML = this.experienceTimeline(data.experiences);
     }
 
-    // Render honors
+    // Render honors (modern cards)
     const honorsContainer = document.getElementById('honors-container');
     if (honorsContainer) {
-      honorsContainer.innerHTML = data.honors.map(h => this.timeline([h])).join('');
+      honorsContainer.innerHTML = this.honorsSection(data.honors);
     }
 
-    // Render education
+    // Render education (modern cards)
     const educationContainer = document.getElementById('education-container');
     if (educationContainer) {
-      educationContainer.innerHTML = this.timeline(data.education);
+      educationContainer.innerHTML = this.educationSection(data.education);
     }
 
     // Render testimonials
