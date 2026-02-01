@@ -6,36 +6,43 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta content="width=device-width, initial-scale=1" name="viewport" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,800&display=swap" rel="stylesheet">
+  <!-- Preload critical assets -->
+  <link rel="preload" href="./Assets/avatar.webp" as="image" type="image/webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
   <link href="./CSS/yellow-black.css" id="theme" rel="stylesheet" />
-  <!-- Preload all themes for smooth switching -->
-  <link rel="preload" href="./CSS/yellow-black.css" as="style" />
-  <link rel="preload" href="./CSS/black-white.css" as="style" />
-  <link rel="preload" href="./CSS/pink-black.css" as="style" />
-  <link rel="preload" href="./CSS/blue-black.css" as="style" />
-  <link rel="icon" type="image.webp" href="./Assets/logo.webp" />
-  <link rel="stylesheet" href="./Font-Awesome/css/font-awesome.min.css" />
+  <link rel="icon" type="image/webp" href="./Assets/logo.webp" />
+  <link rel="stylesheet" href="./Font-Awesome/css/font-awesome.min.css" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="./Font-Awesome/css/font-awesome.min.css" /></noscript>
   <link href="./CSS/preview.css" rel="stylesheet" />
+  <!-- Preload other themes in background for smooth switching -->
+  <link rel="prefetch" href="./CSS/black-white.css" as="style" />
+  <link rel="prefetch" href="./CSS/pink-black.css" as="style" />
+  <link rel="prefetch" href="./CSS/blue-black.css" as="style" />
   <title>Eqan Ahmad | Portfolio</title>
   <meta name="title" property="og:title" content="Eqan Ahmad | Portfolio" />
   <meta name="description" content="Engineering Portfolio to get you started on working with me" />
   <meta property="og:type" content="Website" />
   <meta name="image" property="og:image" content="https://live.staticflickr.com/65535/51822943239_b4c2530f31_z.webp" />
   <meta name="author" content="Eqan Ahmad" />
-  <!-- Microsoft Clarity -->
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "hbem75z47m");
-</script>
-  <!-- Google Analytics -->
+  <!-- Analytics - deferred to not block rendering -->
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-9CXBW91L24');
+    // Load analytics after page load for better performance
+    window.addEventListener('load', function() {
+      // Microsoft Clarity
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "hbem75z47m");
+      
+      // Google Analytics
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-9CXBW91L24');
+    });
   </script>
   <style>
     /* Card Tags Responsive */
@@ -1477,7 +1484,7 @@
                   <div class="hero-avatar-wrapper">
                     <div class="hero-avatar-ring"></div>
                     <div class="hero-avatar-ring hero-avatar-ring-2"></div>
-                    <img src="./Assets/avatar.webp" class="hero-avatar" alt="Eqan Ahmad" />
+                    <img src="./Assets/avatar.webp" class="hero-avatar" alt="Eqan Ahmad" fetchpriority="high" decoding="async" />
                     
                     <!-- Floating Domain Badge -->
                     <div class="hero-float-badge hero-float-domain">
@@ -1774,9 +1781,9 @@
 </body>
 
 <!-- Scripts -->
-<script src="./JS/all.js"></script>
-<script src="./JS/data.js"></script>
-<script src="./JS/components.js"></script>
+<script src="./JS/all.js" defer></script>
+<script src="./JS/data.js" defer></script>
+<script src="./JS/components.js" defer></script>
 
 <script>
   $(function () {
