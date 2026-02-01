@@ -8,6 +8,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,800&display=swap" rel="stylesheet">
   <link href="./CSS/yellow-black.css" id="theme" rel="stylesheet" />
+  <!-- Preload all themes for smooth switching -->
+  <link rel="preload" href="./CSS/yellow-black.css" as="style" />
+  <link rel="preload" href="./CSS/black-white.css" as="style" />
+  <link rel="preload" href="./CSS/pink-black.css" as="style" />
+  <link rel="preload" href="./CSS/blue-black.css" as="style" />
   <link rel="icon" type="image.webp" href="./Assets/logo.webp" />
   <link rel="stylesheet" href="./Font-Awesome/css/font-awesome.min.css" />
   <link href="./CSS/preview.css" rel="stylesheet" />
@@ -42,6 +47,23 @@
     .hidden-address { display: none; }
     .programming-card { background-color: rgba(0, 0, 0, 0.35); color: #fff; }
     .programming-card i { color: #fff; }
+
+    /* Theme Transition Overlay */
+    .theme-transition-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: inherit;
+      z-index: 99999;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.15s ease-out;
+    }
+    .theme-transition-overlay.active {
+      opacity: 1;
+    }
 
     /* CSS Variables */
         :root {
@@ -1621,6 +1643,9 @@
     <!-- Profile modals rendered by JS -->
                 </div>
 
+  <!-- Theme Transition Overlay -->
+  <div class="theme-transition-overlay"></div>
+
   <!-- Themes -->
   <div class="preview-themes">
     <a class="preview-theme preview-color-yellow-black" data-theme="./CSS/yellow-black.css" data-theme-bg="light"></a>
@@ -1651,36 +1676,56 @@
       }
     });
     
-    // Theme switching
+    // Theme switching with smooth transition
     $('.preview-theme').click(function () {
+      const $this = $(this);
       const $link = $('#theme');
-      if ($link.length) {
-        $link.attr('href', $(this).attr('data-theme'));
-      }
+      const $overlay = $('.theme-transition-overlay');
+      const newTheme = $this.attr('data-theme');
       
-      // Update active state
-      $('.preview-theme').removeClass('active');
-      $(this).addClass('active');
+      // Skip if same theme
+      if ($link.attr('href') === newTheme) return false;
+      
+      // Show overlay (fade to current background)
+      $overlay.css('background', getComputedStyle(document.body).backgroundColor);
+      $overlay.addClass('active');
+      
+      // After fade in, swap theme
+      setTimeout(() => {
+        if ($link.length) {
+          $link.attr('href', newTheme);
+        }
+        
+        // Update active state
+        $('.preview-theme').removeClass('active');
+        $this.addClass('active');
 
-      // Update CSS variables based on theme
-      const isDark = $(this).attr('data-theme-bg') === 'dark';
-      const root = document.documentElement.style;
-      root.setProperty('--scrollbar-thumb', isDark ? '#fff' : '#000');
-      root.setProperty('--scrollbar-track', isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.05)');
-      root.setProperty('--contact-border', isDark ? '#fff' : '#000');
-      root.setProperty('--contrast-color', isDark ? '#000' : '#fff');
-      root.setProperty('--theme-pill-bg', isDark ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.85)');
-      root.setProperty('--theme-pill-text', isDark ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.6)');
-      root.setProperty('--theme-swatch-border', isDark ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.2)');
-      root.setProperty('--theme-swatch-hover', isDark ? 'rgba(0,0,0,0.5)' : 'rgba(255,255,255,0.5)');
-      root.setProperty('--theme-swatch-active', isDark ? '#000' : '#fff');
-      root.setProperty('--theme-swatch-glow', isDark ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.3)');
+        // Update CSS variables based on theme
+        const isDark = $this.attr('data-theme-bg') === 'dark';
+        const root = document.documentElement.style;
+        root.setProperty('--scrollbar-thumb', isDark ? '#fff' : '#000');
+        root.setProperty('--scrollbar-track', isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.05)');
+        root.setProperty('--contact-border', isDark ? '#fff' : '#000');
+        root.setProperty('--contrast-color', isDark ? '#000' : '#fff');
+        root.setProperty('--theme-pill-bg', isDark ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.85)');
+        root.setProperty('--theme-pill-text', isDark ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.6)');
+        root.setProperty('--theme-swatch-border', isDark ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.2)');
+        root.setProperty('--theme-swatch-hover', isDark ? 'rgba(0,0,0,0.5)' : 'rgba(255,255,255,0.5)');
+        root.setProperty('--theme-swatch-active', isDark ? '#000' : '#fff');
+        root.setProperty('--theme-swatch-glow', isDark ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.3)');
+        
+        // Content section theme-adaptive colors (subtle)
+        root.setProperty('--content-bg', isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.03)');
+        root.setProperty('--content-item-bg', isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)');
+        root.setProperty('--content-item-hover', isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.05)');
+        root.setProperty('--content-blockquote-bg', isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.025)');
+        
+        // Fade out overlay after theme loads
+        setTimeout(() => {
+          $overlay.removeClass('active');
+        }, 100);
+      }, 150);
       
-      // Content section theme-adaptive colors (subtle)
-      root.setProperty('--content-bg', isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.03)');
-      root.setProperty('--content-item-bg', isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)');
-      root.setProperty('--content-item-hover', isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.05)');
-      root.setProperty('--content-blockquote-bg', isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.025)');
       return false;
     });
   });
