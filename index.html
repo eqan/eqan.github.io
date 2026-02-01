@@ -73,6 +73,9 @@
           --contrast-color: #fff;
       --content-bg: rgba(0, 0, 0, 0.03);
       --content-item-bg: rgba(0, 0, 0, 0.06);
+      --nav-hover-bg: rgba(0, 0, 0, 0.05);
+      --nav-active-bg: rgba(0, 0, 0, 0.08);
+      --nav-border-color: rgba(0, 0, 0, 0.1);
         }
 
     /* Reduce section heights for denser layout */
@@ -106,7 +109,7 @@
       gap: 0.5rem;
       padding: 0.5rem 1rem;
       background: var(--contact-border);
-      color: var(--contrast-color);
+      color: var(--contrast-color) !important;
       border-radius: 50px;
       font-size: 0.75rem;
       font-weight: 700;
@@ -114,6 +117,15 @@
       letter-spacing: 0.5px;
       width: fit-content;
       margin-top: 2rem;
+      text-decoration: none !important;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .hero-badge:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      color: var(--contrast-color) !important;
+      text-decoration: none !important;
     }
     @media (max-width: 991px) {
       .hero-badge { margin-top: 0; }
@@ -378,6 +390,112 @@
       .hero-cta-primary, .hero-cta-secondary { width: 100%; justify-content: center; padding: 0.75rem 1.25rem; font-size: 0.8rem; }
     }
     
+    /* ============ MODERN NAVIGATION SIDEBAR ============ */
+    .sections-nav-item {
+      position: relative;
+      margin-bottom: 0.25rem;
+    }
+    .sections-nav-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      text-decoration: none !important;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .sections-nav-link::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%) scaleY(0);
+      width: 3px;
+      height: 60%;
+      background: currentColor;
+      border-radius: 0 3px 3px 0;
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .sections-nav-link:hover::before,
+    .sections-nav-link.active::before {
+      transform: translateY(-50%) scaleY(1);
+    }
+    .sections-nav-link:hover {
+      background: var(--nav-hover-bg, rgba(0,0,0,0.05));
+    }
+    .sections-nav-link.active {
+      background: var(--nav-active-bg, rgba(0,0,0,0.08));
+    }
+    .sections-nav-counter {
+      font-size: 0.8rem;
+      opacity: 0.4;
+      font-weight: 500;
+      min-width: 1.5rem;
+      transition: opacity 0.25s;
+    }
+    .sections-nav-link:hover .sections-nav-counter,
+    .sections-nav-link.active .sections-nav-counter {
+      opacity: 0.7;
+    }
+    .sections-nav-icon {
+      font-size: 1.1rem;
+      opacity: 0.6;
+      transition: all 0.25s;
+      width: 1.5rem;
+      text-align: center;
+    }
+    .sections-nav-link:hover .sections-nav-icon,
+    .sections-nav-link.active .sections-nav-icon {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+    .sections-nav-label {
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    /* CTA buttons in nav */
+    .sections-nav-info {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--nav-border-color, rgba(0,0,0,0.1));
+    }
+    .sections-nav-info .contact-icons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .sections-nav-info .contact-icon {
+      padding: 0.6rem 1rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: 2px solid var(--contact-border);
+      background: transparent;
+      transition: all 0.25s;
+    }
+    .sections-nav-info .contact-icon:hover {
+      background: var(--contact-border);
+      color: var(--contrast-color);
+      transform: translateY(-2px);
+    }
+    
+    /* Mobile nav overflow fix */
+    @media (max-width: 1199px) {
+      .sections-nav-container {
+        max-height: 100vh;
+        overflow-y: auto;
+        padding-bottom: 2rem;
+      }
+      .sections-nav {
+        padding-bottom: 2rem !important;
+      }
+    }
+
     /* ============ MODERN MOBILE MENU ============ */
     .sections-nav-toggler {
       width: 48px;
@@ -1313,10 +1431,10 @@
               <div class="hero-container">
                 <!-- Left: Content -->
                 <div class="hero-content animation-translate animation-item-1">
-                  <div class="hero-badge">
+                  <a class="hero-badge" href="https://meet.eqanahmad.com/" target="_blank">
                     <span class="hero-badge-pulse"></span>
                     <span>Available for MVPs</span>
-                  </div>
+                  </a>
                   
                   <h1 class="hero-headline">
                     I Build MVPs That
@@ -1719,6 +1837,9 @@
         root.setProperty('--content-item-bg', isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)');
         root.setProperty('--content-item-hover', isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.05)');
         root.setProperty('--content-blockquote-bg', isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.025)');
+        root.setProperty('--nav-hover-bg', isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.05)');
+        root.setProperty('--nav-active-bg', isDark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.08)');
+        root.setProperty('--nav-border-color', isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.1)');
         
         // Fade out overlay after theme loads
         setTimeout(() => {

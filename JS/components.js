@@ -50,11 +50,12 @@ const Components = {
 
   // ============ NAVIGATION COMPONENT ============
   
-  navItem: ({ id, num, label }, isFirst = false) => `
+  navItem: ({ id, num, label, icon }, isFirst = false) => `
     <li class="sections-nav-item">
       <a href="#${id}" class="nav-link sections-nav-link goto-section ${isFirst ? 'active' : ''}">
         <span class="sections-nav-counter">${num}</span>
-        ${label}
+        <i class="fa ${icon} sections-nav-icon"></i>
+        <span class="sections-nav-label">${label}</span>
       </a>
     </li>`,
 

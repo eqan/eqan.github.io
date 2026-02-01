@@ -25,16 +25,16 @@ const PORTFOLIO_DATA = {
 
   // Navigation sections
   navSections: [
-    { id: 'section-01', num: '01', label: 'Top' },
-    { id: 'section-02', num: '02', label: 'About me' },
-    { id: 'section-03', num: '03', label: 'Services' },
-    { id: 'section-04', num: '04', label: 'Expertise' },
-    { id: 'section-05', num: '05', label: 'Projects' },
-    { id: 'section-06', num: '06', label: 'Experiences' },
-    { id: 'section-07', num: '07', label: 'Honors' },
-    { id: 'section-08', num: '08', label: 'Education' },
-    { id: 'section-09', num: '09', label: 'Testimonials' },
-    { id: 'section-10', num: '10', label: 'Contact' }
+    { id: 'section-01', num: '01', label: 'Top', icon: 'fa-rocket' },
+    { id: 'section-02', num: '02', label: 'About me', icon: 'fa-user' },
+    { id: 'section-03', num: '03', label: 'Services', icon: 'fa-cogs' },
+    { id: 'section-04', num: '04', label: 'Expertise', icon: 'fa-diamond' },
+    { id: 'section-05', num: '05', label: 'Projects', icon: 'fa-folder-open' },
+    { id: 'section-06', num: '06', label: 'Experiences', icon: 'fa-briefcase' },
+    { id: 'section-07', num: '07', label: 'Honors', icon: 'fa-trophy' },
+    { id: 'section-08', num: '08', label: 'Education', icon: 'fa-graduation-cap' },
+    { id: 'section-09', num: '09', label: 'Testimonials', icon: 'fa-comments' },
+    { id: 'section-10', num: '10', label: 'Contact', icon: 'fa-envelope' }
   ],
 
   // Services
