@@ -58,6 +58,30 @@ const PORTFOLIO_DATA = {
   // Featured projects (large cards)
   featuredProjects: [
     {
+      id: 'modal-project-super',
+      img: './Assets/Super-Hero.webp',
+      title: 'Super™',
+      subtitle: 'The ChatGPT of Quantum Computing — a revolutionary AI that bridges natural language problem descriptions, quantum and supercomputing technologies, and commercialized solutions.',
+      tags: ['NEXT.js', 'React', 'Python', 'Gurobi', 'QuEra', 'Amazon Braket', 'IonQ', 'NVIDIA CUDA-Q', 'Dwave', 'NLP', 'LLM', 'Quantum Computing', 'REST APIs', 'WebSockets'],
+      size: 'full'
+    },
+    {
+      id: 'modal-project-chatqlm',
+      img: './Assets/Chatqlm-Hero.webp',
+      title: 'ChatQLM',
+      subtitle: 'The world\'s first consumer app powered by quantum and supercomputing. Solve complex decisions in natural language — CES 2026 World Premiere.',
+      tags: ['React Native', 'Python', 'Quantum Computing', 'NLP', 'Gurobi', 'Optimization', 'Mobile App', 'Super™ Platform', 'REST APIs'],
+      size: 'full'
+    },
+    {
+      id: 'modal-project-akito',
+      img: './Assets/Akito-Talent.webp',
+      title: 'Akito AI',
+      subtitle: 'An AI-powered talent pipeline management platform for employers and job seekers with AI assessment generation, candidate management, and Riipen integration.',
+      tags: ['NEXT.js', 'React', 'Node.js', 'OpenAI', 'REST APIs', 'Postgres', 'AI/ML', 'OAuth', 'Riipen', 'Web Crawling', 'Prompt Engineering'],
+      size: 'full'
+    },
+    {
       id: 'modal-project-10',
       img: './Assets/project_10.webp',
       title: 'GPU Lab',
@@ -93,6 +117,102 @@ const PORTFOLIO_DATA = {
 
   // Project modal details
   projectModals: {
+    'modal-project-super': {
+      title: 'Super™',
+      subtitle: 'The ChatGPT of Quantum Computing — a revolutionary AI that bridges natural language problem descriptions, quantum and supercomputing technologies, and commercialized solutions.',
+      tags: ['NEXT.js', 'React', 'Python', 'Gurobi', 'QuEra', 'Amazon Braket', 'IonQ', 'NVIDIA CUDA-Q', 'Dwave', 'NLP', 'LLM', 'Quantum Computing', 'REST APIs', 'WebSockets'],
+      content: `
+        <blockquote>
+          <h3>Key Highlights</h3>
+          <ul>
+            <li>Revolutionary AI bridging <strong>natural language</strong> and <strong>quantum/supercomputing</strong></li>
+            <li>Supports multiple quantum backends — <strong>QuEra, IonQ, Amazon Braket, Dwave, NVIDIA CUDA-Q</strong></li>
+            <li>Production-ready optimization code generation with <strong>Gurobi</strong></li>
+          </ul>
+        </blockquote>
+        <h3>Core Features</h3>
+        <ul>
+          <li><strong>Super Notebooks</strong> — Interactive problem-solving environment with chat-driven AI</li>
+          <li><strong>PQC Analysis</strong> — Post-Quantum Cryptography analysis tools</li>
+          <li><strong>Optimization Results Dashboard</strong> — Rich visualizations with actionable insights</li>
+          <li><strong>Code Generation</strong> — AI generates production-ready Gurobi/Python optimization code</li>
+          <li><strong>Problem Enhancement</strong> — Iterative AI-driven problem refinement</li>
+          <li><strong>Example Problems</strong> — Factory Floor Optimization, Logistics, Carbon Emissions and more</li>
+        </ul>
+      `,
+      images: [
+        { src: './Assets/Super-Hero.webp', alt: 'Super Hero', basis: '100%' },
+        { src: './Assets/Super-Home.webp', alt: 'Super Home', basis: '50%' },
+        { src: './Assets/Super-Viz.webp', alt: 'Optimization Dashboard', basis: '50%' },
+        { src: './Assets/Super-Code.webp', alt: 'Super Code Generation', basis: '100%' }
+      ]
+    },
+    'modal-project-chatqlm': {
+      title: 'ChatQLM',
+      subtitle: 'The world\'s first consumer app powered by quantum and supercomputing. Solve complex decisions in natural language — CES 2026 World Premiere.',
+      tags: ['React Native', 'Python', 'Quantum Computing', 'NLP', 'Gurobi', 'Optimization', 'Mobile App', 'Super™ Platform', 'REST APIs'],
+      content: `
+        <blockquote>
+          <h3>Key Highlights</h3>
+          <ul>
+            <li><strong>CES 2026 World Premiere</strong> — First mobile quantum computing app</li>
+            <li>Powered by the <strong>Super™ Platform</strong></li>
+            <li>Publicly traded — <strong>CSE: QBTQ</strong> | <strong>OTC: QBTQF</strong> | <strong>FSE: 25X</strong></li>
+          </ul>
+        </blockquote>
+        <h3>Core Features</h3>
+        <ul>
+          <li><strong>Quick Start Templates</strong> — Budget Allocation, Machine Scheduling, Portfolio Optimization, Grover's Search, Shor's Factorization</li>
+          <li><strong>Natural Language Input</strong> — Describe optimization problems in plain English</li>
+          <li><strong>Optimization Results</strong> — Rich visualizations with slot staffing, surge analysis, and more</li>
+          <li><strong>Quantum Circuits</strong> — Build & execute quantum experiments directly</li>
+          <li><strong>Impact Tracking</strong> — Track total problems solved, quantum runs, and success rates</li>
+          <li><strong>General Chat</strong> — AI-powered conversational interface for problem solving</li>
+        </ul>
+      `,
+      images: [
+        { src: './Assets/Chatqlm-Hero.webp', alt: 'ChatQLM Hero', basis: '100%' },
+        { src: './Assets/Chatqlm-Main.webp', alt: 'ChatQLM Home', basis: '50%' },
+        { src: './Assets/Chatqlm-Problem-Set.webp', alt: 'ChatQLM Problem Set', basis: '50%' },
+        { src: './Assets/Chatqlm-budget-problem.webp', alt: 'Budget Allocation', basis: '50%' },
+        { src: './Assets/Chatqlm-Viz.webp', alt: 'Optimization Results', basis: '50%' }
+      ]
+    },
+    'modal-project-akito': {
+      title: 'Akito AI',
+      subtitle: 'An AI-powered talent pipeline management platform for employers and job seekers with AI assessment generation, candidate management, and Riipen integration.',
+      tags: ['NEXT.js', 'React', 'Node.js', 'OpenAI', 'REST APIs', 'Postgres', 'AI/ML', 'OAuth', 'Riipen', 'Web Crawling', 'Prompt Engineering'],
+      content: `
+        <blockquote>
+          <h3>Key Highlights</h3>
+          <ul>
+            <li>AI-powered platform connecting <strong>employers</strong> and <strong>job seekers</strong></li>
+            <li>Automated <strong>assessment generation</strong> with AI — MCQs, multi-select, short/long answers</li>
+            <li>Integrated with <strong>Riipen</strong> for work-integrated learning</li>
+          </ul>
+        </blockquote>
+        <h3>Employer Features</h3>
+        <ul>
+          <li><strong>Talent Pipeline Management</strong> — Create job listings, manage candidates, track assessment links</li>
+          <li><strong>AI Assessment Creation</strong> — Generate comprehensive assessments via chat with split view canvas</li>
+          <li><strong>Analytics & Recommendations</strong> — Data-driven insights for hiring decisions</li>
+          <li><strong>API Keys & Data Sources</strong> — Enterprise-grade integration capabilities</li>
+          <li><strong>Web Crawler</strong> — Automated talent sourcing from the web</li>
+        </ul>
+        <h3>Job Seeker Features</h3>
+        <ul>
+          <li><strong>Available Jobs</strong> — Browse and apply to positions across organizations</li>
+          <li><strong>Jobs Applied</strong> — Track application status</li>
+          <li><strong>Recommendations</strong> — AI-powered job matching</li>
+        </ul>
+      `,
+      images: [
+        { src: './Assets/Akito-Talent.webp', alt: 'Talent Pipeline Management', basis: '100%' },
+        { src: './Assets/Akito-Chat.webp', alt: 'AI Assessment Generation', basis: '50%' },
+        { src: './Assets/Akito-Assessment.webp', alt: 'Assessment View', basis: '50%' },
+        { src: './Assets/Akito-job-seeker.webp', alt: 'Job Seeker Dashboard', basis: '100%' }
+      ]
+    },
     'modal-project-11': {
       title: 'Qanooni Legal Law Suite',
       subtitle: 'Qanooni is a legal law suite that is used to generate, review and make global changes to legal documents for the users.',
