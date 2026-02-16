@@ -200,6 +200,17 @@ $(function () {
 
     playThemeAnimation(newTheme);
 
+    /* Update custom cursor theme */
+    var cursorThemeMap = {
+      './CSS/yellow-black.css': 'yellow',
+      './CSS/black-white.css': 'black',
+      './CSS/pink-black.css': 'pink',
+      './CSS/blue-black.css': 'blue'
+    };
+    if (window.setCursorTheme && cursorThemeMap[newTheme]) {
+      window.setCursorTheme(cursorThemeMap[newTheme]);
+    }
+
     $overlay.css('background', getComputedStyle(document.body).backgroundColor);
     $overlay.addClass('active');
 
