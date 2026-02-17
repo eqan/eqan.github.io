@@ -305,3 +305,30 @@ document.addEventListener('click', function(e) {
     if (addr2) copyToClipboard(addr2.innerText);
   }
 });
+
+/* Avatar dialog */
+$(function() {
+  var $dialog = $('#avatar-dialog');
+  var $close = $('#avatar-dialog-close');
+  var $trigger = $('#hero-avatar-trigger');
+
+  $trigger.on('click', function() {
+    $dialog.addClass('active');
+  });
+
+  $close.on('click', function() {
+    $dialog.removeClass('active');
+  });
+
+  $dialog.on('click', function(e) {
+    if (e.target === this) {
+      $dialog.removeClass('active');
+    }
+  });
+
+  $(document).on('keydown', function(e) {
+    if (e.key === 'Escape' && $dialog.hasClass('active')) {
+      $dialog.removeClass('active');
+    }
+  });
+});
