@@ -1,0 +1,375 @@
+/* ============ HOLIDAY ANIMATIONS ============ */
+
+/* Overlay container */
+.holiday-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100001;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 1.2s ease-out;
+}
+.holiday-overlay.fade-out {
+  opacity: 0;
+}
+
+/* Greeting banner */
+.holiday-banner {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-30px);
+  padding: 10px 26px;
+  border-radius: 40px;
+  font-family: Montserrat, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+  opacity: 0;
+  z-index: 2;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  animation: holiday-banner-in 0.6s 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.holiday-banner-icon {
+  margin-right: 4px;
+}
+@keyframes holiday-banner-in {
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* Per-holiday banner colors */
+.holiday-christmas .holiday-banner { background: #c41e3a; color: #fff; }
+.holiday-easter .holiday-banner { background: #7c3aed; color: #fff; }
+.holiday-eid .holiday-banner { background: #b8860b; color: #fff; }
+.holiday-halloween .holiday-banner { background: #ff6600; color: #1a1a2e; }
+.holiday-diwali .holiday-banner { background: #e65100; color: #fff; }
+.holiday-newyear .holiday-banner { background: #4f46e5; color: #fff; }
+.holiday-valentine .holiday-banner { background: #db2777; color: #fff; }
+/* ============ CHRISTMAS — SNOWFLAKES ============ */
+.holiday-snowflake {
+  position: absolute;
+  top: -12px;
+  background: #fff;
+  border-radius: 50%;
+  opacity: 0;
+  box-shadow: 0 0 6px 1px rgba(255,255,255,0.5);
+  animation: snowflake-fall linear forwards;
+}
+@keyframes snowflake-fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  8% { opacity: 0.8; }
+  100% { transform: translateY(105vh) rotate(360deg); opacity: 0.15; }
+}
+
+/* ============ EASTER — EGGS ============ */
+.holiday-egg {
+  position: absolute;
+  top: -20px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  opacity: 0;
+  animation: egg-fall ease-in forwards;
+}
+.holiday-egg::after {
+  content: '';
+  position: absolute;
+  top: 35%;
+  left: 15%;
+  right: 15%;
+  height: 2px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 1px;
+  box-shadow: 0 5px 0 rgba(255,255,255,0.3), 0 10px 0 rgba(255,255,255,0.2);
+}
+@keyframes egg-fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  6% { opacity: 0.85; }
+  85% { opacity: 0.7; }
+  100% { transform: translateY(105vh) rotate(180deg); opacity: 0; }
+}
+
+/* ============ EID — CRESCENT, STARS, LANTERNS ============ */
+.holiday-crescent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  box-shadow: 14px -10px 0 2px #FFD700;
+  opacity: 0;
+  animation: crescent-appear 3.5s 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform: translate(-50%, -50%) scale(0.5);
+}
+@keyframes crescent-appear {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+  25% { opacity: 0.9; transform: translate(-50%, -50%) scale(1); }
+  80% { opacity: 0.9; }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.05); }
+}
+
+.holiday-eid-star {
+  position: absolute;
+  background: #FFD700;
+  border-radius: 50%;
+  opacity: 0;
+  box-shadow: 0 0 6px 2px rgba(255,215,0,0.35);
+  animation: eid-star-twinkle 2.5s ease-in-out forwards;
+}
+@keyframes eid-star-twinkle {
+  0% { opacity: 0; transform: scale(0); }
+  20% { opacity: 1; transform: scale(1.2); }
+  50% { opacity: 0.7; transform: scale(0.9); }
+  75% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.5); }
+}
+
+.holiday-lantern {
+  position: absolute;
+  bottom: -30px;
+  width: 14px;
+  height: 22px;
+  background: linear-gradient(to bottom, #FFD700 0%, #FF8C00 50%, #D2691E 100%);
+  border-radius: 6px 6px 3px 3px;
+  opacity: 0;
+  box-shadow: 0 0 12px 4px rgba(255,165,0,0.3);
+  animation: lantern-float ease-out forwards;
+}
+.holiday-lantern::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 2px;
+  background: #DAA520;
+}
+.holiday-lantern::after {
+  content: '';
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 6px;
+  background: rgba(255,255,200,0.8);
+  border-radius: 50%;
+  box-shadow: 0 0 4px 2px rgba(255,200,50,0.5);
+}
+@keyframes lantern-float {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 0.85; }
+  50% { transform: translateY(-55vh) translateX(15px); }
+  80% { opacity: 0.7; }
+  100% { transform: translateY(-110vh) translateX(-10px); opacity: 0; }
+}
+
+/* ============ HALLOWEEN — BATS & PUMPKINS ============ */
+.holiday-bat {
+  position: absolute;
+  left: -40px;
+  opacity: 0;
+  animation: bat-fly linear forwards;
+}
+.holiday-bat::after {
+  content: '\1F987';
+  display: block;
+}
+@keyframes bat-fly {
+  0% { transform: translateX(0) translateY(0); opacity: 0; }
+  5% { opacity: 0.85; }
+  50% { transform: translateX(55vw) translateY(-30px); opacity: 0.9; }
+  100% { transform: translateX(110vw) translateY(15px); opacity: 0; }
+}
+
+.holiday-pumpkin {
+  position: absolute;
+  bottom: -40px;
+  opacity: 0;
+  animation: pumpkin-rise 3.5s ease-out forwards;
+}
+.holiday-pumpkin::after {
+  content: '\1F383';
+  display: block;
+}
+@keyframes pumpkin-rise {
+  0% { transform: translateY(0) scale(0.5); opacity: 0; }
+  20% { opacity: 0.9; transform: translateY(-20px) scale(1); }
+  60% { opacity: 0.85; transform: translateY(-25px) scale(1.05); }
+  100% { opacity: 0; transform: translateY(-15px) scale(0.95); }
+}
+
+/* ============ DIWALI — SPARKLE BURST ============ */
+.holiday-diwali-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,165,0,0.35), transparent 70%);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  animation: diwali-glow 4s 0.3s ease forwards;
+}
+@keyframes diwali-glow {
+  0% { opacity: 0; width: 40px; height: 40px; }
+  25% { opacity: 1; width: 200px; height: 200px; }
+  70% { opacity: 0.6; }
+  100% { opacity: 0; width: 350px; height: 350px; }
+}
+
+.holiday-sparkle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  opacity: 0;
+  animation: sparkle-burst ease-out forwards;
+}
+@keyframes sparkle-burst {
+  0% { transform: translate(-50%, -50%) rotate(var(--angle)) translateY(0); opacity: 0; }
+  12% { opacity: 1; }
+  40% { opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-42vh); opacity: 0; }
+}
+
+/* ============ NEW YEAR — CONFETTI ============ */
+.holiday-confetti {
+  position: absolute;
+  top: -15px;
+  opacity: 0;
+  border-radius: 2px;
+  animation: confetti-fall linear forwards;
+}
+@keyframes confetti-fall {
+  0% { transform: translateY(0) rotate(0deg) scaleX(1); opacity: 0; }
+  5% { opacity: 0.9; }
+  25% { transform: translateY(25vh) rotate(180deg) scaleX(0.5); }
+  50% { transform: translateY(50vh) rotate(360deg) scaleX(1); opacity: 0.8; }
+  75% { transform: translateY(75vh) rotate(540deg) scaleX(0.3); }
+  100% { transform: translateY(105vh) rotate(720deg) scaleX(0.8); opacity: 0; }
+}
+
+/* ============ VALENTINE — HEARTS ============ */
+.holiday-heart {
+  position: absolute;
+  bottom: -25px;
+  opacity: 0;
+  animation: heart-rise cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.holiday-heart::after {
+  content: '\2764';
+  display: block;
+}
+@keyframes heart-rise {
+  0% { transform: translateY(0) translateX(0) scale(0.5); opacity: 0; }
+  10% { opacity: 0.8; transform: translateY(-8vh) translateX(5px) scale(1); }
+  30% { transform: translateY(-28vh) translateX(-12px) scale(1.05); }
+  60% { transform: translateY(-58vh) translateX(8px) scale(0.95); opacity: 0.7; }
+  100% { transform: translateY(-110vh) translateX(-5px) scale(0.8); opacity: 0; }
+}
+
+/* ============ RAMADAN — NIGHT SKY, CRESCENT, STARS, FANOUS ============ */
+.holiday-ramadan .holiday-banner { background: #1a1a4e; color: #FFD700; }
+
+.holiday-ramadan-night {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 20%, rgba(30,30,80,0.35) 0%, transparent 70%);
+  opacity: 0;
+  animation: ramadan-night-wash 5s ease forwards;
+}
+@keyframes ramadan-night-wash {
+  0% { opacity: 0; }
+  15% { opacity: 1; }
+  80% { opacity: 0.8; }
+  100% { opacity: 0; }
+}
+
+.holiday-ramadan-crescent {
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 10px -7px 0 2px #FFD700;
+  opacity: 0;
+  transform: translateX(-50%);
+  animation: ramadan-crescent-in 4.5s 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes ramadan-crescent-in {
+  0% { opacity: 0; transform: translateX(-50%) scale(0.4); }
+  20% { opacity: 0.95; transform: translateX(-50%) scale(1); }
+  75% { opacity: 0.9; }
+  100% { opacity: 0; transform: translateX(-50%) scale(1.02); }
+}
+
+.holiday-ramadan-star {
+  position: absolute;
+  background: #FFD700;
+  border-radius: 50%;
+  opacity: 0;
+  box-shadow: 0 0 4px 1px rgba(255,215,0,0.3);
+  animation: ramadan-star-glow ease-in-out forwards;
+}
+@keyframes ramadan-star-glow {
+  0% { opacity: 0; transform: scale(0); }
+  25% { opacity: 0.9; transform: scale(1.3); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+  75% { opacity: 0.85; transform: scale(1.1); }
+  100% { opacity: 0; transform: scale(0.4); }
+}
+
+/* Fanous (Ramadan lantern) — hanging from top */
+.holiday-fanous {
+  position: absolute;
+  top: -60px;
+  width: 20px;
+  height: 34px;
+  opacity: 0;
+  animation: fanous-descend 4s ease-out forwards;
+}
+.holiday-fanous::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 14px;
+  background: linear-gradient(to bottom, rgba(255,215,0,0.2), #DAA520);
+}
+.holiday-fanous::after {
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 26px;
+  background: linear-gradient(to bottom, #FFD700 0%, #FF8C00 40%, #CD853F 100%);
+  border-radius: 5px 5px 50% 50%;
+  box-shadow: 0 0 14px 5px rgba(255,165,0,0.25), inset 0 -6px 10px rgba(255,200,50,0.35);
+}
+@keyframes fanous-descend {
+  0% { transform: translateY(0) scale(var(--s, 1)); opacity: 0; }
+  15% { opacity: 0.9; }
+  25% { transform: translateY(80px) scale(var(--s, 1)); }
+  35% { transform: translateY(70px) scale(var(--s, 1)); }
+  50% { transform: translateY(75px) scale(var(--s, 1)); opacity: 0.85; }
+  80% { opacity: 0.7; }
+  100% { transform: translateY(75px) scale(var(--s, 1)); opacity: 0; }
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 480px) {
+  .holiday-banner { font-size: 0.75rem; padding: 8px 18px; top: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .holiday-overlay { display: none !important; }
+}
