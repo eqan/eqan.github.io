@@ -1,7 +1,8 @@
 /* ============ HOLIDAY ANIMATIONS ============
- * Uses the free Nager.Date API (https://date.nager.at) — no API key required.
- * Queries US, SA, IN, GB to cover Christian, Islamic, Hindu, and other holidays.
- * Fixed-date holidays (Halloween, Valentine's) are detected locally.
+ * Nager.Date API (https://date.nager.at) for Easter/Good Friday (date varies yearly).
+ * Kuwaiti Algorithm converts Gregorian → Hijri to detect Ramadan & Eid (works for any year).
+ * Astronomical new moon calculation detects Diwali (Kartik Amavasya, Oct–Nov).
+ * Fixed-date holidays: Christmas Dec 20-26, Halloween, Valentine's, New Year.
  * Plays a one-time celebration animation on page load if today is a holiday.
  */
 (function() {
@@ -13,6 +14,7 @@
     String(today.getDate()).padStart(2, '0');
   var month = today.getMonth() + 1;
   var day = today.getDate();
+  var year = today.getFullYear();
 
   var HOLIDAYS = {
     christmas:  { banner: 'Merry Christmas!',         icon: '\uD83C\uDF84' },
@@ -25,28 +27,77 @@
     ramadan:    { banner: 'Ramadan Mubarak!',          icon: '\u262A\uFE0F' }
   };
 
-  /* ---- Fixed-date holidays ---- */
-  function getFixedHoliday() {
-    if (month === 12 && day === 25) return 'christmas';
-    if (month === 12 && day === 24) return 'christmas';
+  /* ---- Kuwaiti Algorithm: Gregorian → Hijri conversion ---- */
+  function toHijri(gY, gM, gD) {
+    var a = Math.floor((14 - gM) / 12);
+    var y = gY + 4800 - a;
+    var m = gM + 12 * a - 3;
+    var jd = gD + Math.floor((153 * m + 2) / 5) + 365 * y +
+             Math.floor(y / 4) - Math.floor(y / 100) + Math.floor(y / 400) - 32045;
+    var l = jd - 1948440 + 10632;
+    var n = Math.floor((l - 1) / 10631);
+    l = l - 10631 * n + 354;
+    var j = Math.floor((10985 - l) / 5316) * Math.floor((50 * l) / 17719) +
+            Math.floor(l / 5670) * Math.floor((43 * l) / 15238);
+    l = l - Math.floor((30 - j) / 15) * Math.floor((17719 * j) / 50) -
+        Math.floor(j / 16) * Math.floor((15238 * j) / 43) + 29;
+    var hM = Math.floor((24 * l) / 709);
+    var hD = l - Math.floor((709 * hM) / 24);
+    var hY = 30 * n + j - 30;
+    return { year: hY, month: hM, day: hD };
+  }
+
+  /* ---- Astronomical new moon calculation for Diwali ---- */
+  function isDiwaliToday(gY, gM, gD) {
+    var KNOWN_NEW_MOON = Date.UTC(2000, 0, 6, 18, 14, 0);
+    var SYNODIC_MONTH = 29.530588853;
+    var todayUtc = Date.UTC(gY, gM - 1, gD);
+    var daysSince = (todayUtc - KNOWN_NEW_MOON) / 86400000;
+    var lunation = Math.round(daysSince / SYNODIC_MONTH);
+
+    for (var i = lunation - 1; i <= lunation + 1; i++) {
+      var nmMs = KNOWN_NEW_MOON + i * SYNODIC_MONTH * 86400000;
+      var nm = new Date(nmMs);
+      var nmM = nm.getUTCMonth();
+      var nmD = nm.getUTCDate();
+      if ((nmM === 9 && nmD >= 12) || (nmM === 10 && nmD <= 16)) {
+        var diff = Math.abs((todayUtc - Date.UTC(nm.getUTCFullYear(), nmM, nmD)) / 86400000);
+        if (diff <= 1) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  /* ---- Check all known holidays ---- */
+  function getKnownHoliday() {
+    /* Fixed-date Gregorian holidays */
+    if (month === 12 && day >= 20 && day <= 26) return 'christmas';
     if (month === 10 && day === 31) return 'halloween';
     if (month === 2  && day === 14) return 'valentine';
     if (month === 1  && day === 1)  return 'newyear';
     if (month === 12 && day === 31) return 'newyear';
+
+    /* Islamic calendar (Kuwaiti Algorithm) */
+    var hijri = toHijri(year, month, day);
+
+    if (hijri.month === 9) return 'ramadan';
+    if (hijri.month === 10 && hijri.day <= 3) return 'eid';
+    if (hijri.month === 12 && hijri.day >= 10 && hijri.day <= 12) return 'eid';
+
+    /* Diwali — new moon (Amavasya) of Kartik, Oct–Nov */
+    if ((month === 10 || month === 11) && isDiwaliToday(year, month, day)) {
+      return 'diwali';
+    }
+
     return null;
   }
 
-  /* ---- Map API holiday name → animation type ---- */
+  /* ---- Map API holiday name → animation type (for Easter only) ---- */
   function detectType(name) {
     var n = name.toLowerCase();
-    if (n.indexOf('christmas') !== -1 || n.indexOf('xmas') !== -1) return 'christmas';
     if (n.indexOf('easter') !== -1 || n.indexOf('good friday') !== -1) return 'easter';
-    if (n.indexOf('ramadan') !== -1) return 'ramadan';
-    if (n.indexOf('eid') !== -1) return 'eid';
-    if (n.indexOf('diwali') !== -1 || n.indexOf('deepavali') !== -1) return 'diwali';
-    if (n.indexOf('new year') !== -1 || n.indexOf("new year's") !== -1) return 'newyear';
-    if (n.indexOf('valentine') !== -1) return 'valentine';
-    if (n.indexOf('halloween') !== -1) return 'halloween';
     return null;
   }
 
@@ -238,21 +289,15 @@
 
     if (builders[type]) builders[type](overlay);
 
-    setTimeout(function() {
-      overlay.classList.add('fade-out');
-    }, 4500);
-    setTimeout(function() {
-      if (overlay.parentNode) overlay.remove();
-    }, 5800);
+    setTimeout(function() { overlay.classList.add('fade-out'); }, 4500);
+    setTimeout(function() { if (overlay.parentNode) overlay.remove(); }, 5800);
   }
 
-  /* ---- Fetch from Nager.Date API ---- */
-  function fetchAndCheck() {
-    var year = today.getFullYear();
-    var countries = ['US', 'SA', 'IN', 'GB'];
-    var fetches = countries.map(function(cc) {
+  /* ---- Fetch from Nager.Date API (Easter only — date varies yearly) ---- */
+  function fetchEaster() {
+    var fetches = ['US', 'GB'].map(function(cc) {
       return fetch('https://date.nager.at/api/v3/PublicHolidays/' + year + '/' + cc)
-        .then(function(r) { return r.ok ? r.json() : []; })
+        .then(function(r) { return r.status === 200 ? r.json() : []; })
         .catch(function() { return []; });
     });
 
@@ -261,7 +306,6 @@
       for (var i = 0; i < results.length; i++) all = all.concat(results[i]);
 
       var todayList = all.filter(function(h) { return h.date === todayStr; });
-
       for (var j = 0; j < todayList.length; j++) {
         var t = detectType(todayList[j].name);
         if (t) { play(t); return; }
@@ -271,9 +315,9 @@
 
   /* ---- Entry point — runs once after full page load ---- */
   function run() {
-    var fixed = getFixedHoliday();
-    if (fixed) { play(fixed); return; }
-    fetchAndCheck();
+    var known = getKnownHoliday();
+    if (known) { play(known); return; }
+    fetchEaster();
   }
 
   if (document.readyState === 'complete') {
