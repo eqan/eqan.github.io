@@ -501,28 +501,18 @@ const PORTFOLIO_DATA = {
   experiences: [
     {
       date: 'Jul 2025 – Present',
-      title: 'SuperQ Quantum',
+      title: 'Staque',
       role: 'Lead Software Engineer',
-      icon: 'fa-bolt',
-      metrics: ['Quantum Computing', 'NLP/LLM Integration'],
+      icon: 'fa-magic',
+      metrics: ['Quantum Computing', 'NLP/LLM Integration', '3 AI Products', 'Multi-platform Integration'],
       highlights: [
         'Leading development of <strong>Super Q</strong> and <strong>ChatQPU</strong> products',
-        'Bridging classical & gate-based quantum computing via NLP/LLM'
-      ],
-      tech: ['QuEra', 'Amazon Braket', 'IonQ', 'NVIDIA CUDA Q', 'Dwave', 'Gurobi']
-    },
-    {
-      date: 'Jul 2025 – Present',
-      title: 'Staque',
-      role: 'AI Software Engineer',
-      icon: 'fa-magic',
-      metrics: ['3 AI Products', 'Multi-platform Integration'],
-      highlights: [
+        'Bridging classical & gate-based quantum computing via NLP/LLM',
         '<strong>Akito AI</strong> — AI platform for employers & job seekers with Riipen integration',
         '<strong>Que BDR</strong> — Agentic AI for lead management',
         '<strong>Que Marketer</strong> — Multimodal AI for social media content'
       ],
-      tech: ['AI/ML', 'Agentic AI', 'Multimodal']
+      tech: ['QuEra', 'Amazon Braket', 'IonQ', 'NVIDIA CUDA Q', 'Dwave', 'Gurobi', 'AI/ML', 'Agentic AI', 'Multimodal']
     },
     {
       date: 'Sep 2024 – Apr 2025',
