@@ -500,7 +500,7 @@ const PORTFOLIO_DATA = {
   // Experiences timeline - Concise, metric & impact focused
   experiences: [
     {
-      date: 'Jul 2025 – Present',
+      date: 'Jul 2025 – April 2026',
       title: 'Staque',
       role: 'Lead Software Engineer',
       icon: 'fa-magic',
