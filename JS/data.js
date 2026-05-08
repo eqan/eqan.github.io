@@ -58,27 +58,12 @@ const PORTFOLIO_DATA = {
   // Featured projects (large cards)
   featuredProjects: [
     {
-      id: 'modal-project-super',
-      img: './Assets/Super-Hero.webp',
-      title: 'Super™',
-      subtitle: 'The ChatGPT of Quantum Computing — a revolutionary AI that bridges natural language problem descriptions, quantum and supercomputing technologies, and commercialized solutions.',
-      tags: ['NEXT.js', 'React', 'Python', 'Gurobi', 'QuEra', 'Amazon Braket', 'IonQ', 'NVIDIA CUDA-Q', 'Dwave', 'NLP', 'LLM', 'Quantum Computing', 'REST APIs', 'WebSockets'],
-      size: 'full'
-    },
-    {
       id: 'modal-project-chatqlm',
       img: './Assets/Chatqlm-Hero.webp',
       title: 'ChatQLM',
       subtitle: 'The world\'s first consumer app powered by quantum and supercomputing. Solve complex decisions in natural language — CES 2026 World Premiere.',
       tags: ['React Native', 'Python', 'Quantum Computing', 'NLP', 'Gurobi', 'Optimization', 'Mobile App', 'Super™ Platform', 'REST APIs'],
-      size: 'full'
-    },
-    {
-      id: 'modal-project-akito',
-      img: './Assets/Akito-Talent.webp',
-      title: 'Akito AI',
-      subtitle: 'An AI-powered talent pipeline management platform for employers and job seekers with AI assessment generation, candidate management, and Riipen integration.',
-      tags: ['NEXT.js', 'React', 'Node.js', 'OpenAI', 'REST APIs', 'Postgres', 'AI/ML', 'OAuth', 'Riipen', 'Web Crawling', 'Prompt Engineering'],
+      priority: 1,
       size: 'full'
     },
     {
@@ -87,14 +72,7 @@ const PORTFOLIO_DATA = {
       title: 'GPU Lab',
       subtitle: 'A cloud computing platform aimed to deploy millions of AI models on local GPU servers and return apis for hastle free usage.',
       tags: ['NEXT.js', 'OAuth', 'Redux', 'React', 'REST APIs', 'Postgres', 'SQL Alchemy', 'Python', 'Docker', 'Cloudflared', 'AWS', 'Postman', 'Web Sockets', 'Stripe', 'FAST API', 'SISH', 'NVIDIA-SMI', 'Alembic', 'Redis', 'Linux/Shell'],
-      size: 'full'
-    },
-    {
-      id: 'modal-project-0',
-      img: './Assets/nuces-blocked-add-certificates.webp',
-      title: 'NUCES BLOCKED',
-      subtitle: 'A platform aimed to generate and decentralize verified academic portfolios worldwide.',
-      tags: ['NEXT.js', 'React', 'GraphQL', 'Postgres', 'TypeORM', 'NEST.js', 'Solidity', 'Remix', 'Hardhat', 'Postman', 'Apollo', 'Python', 'Selenium', 'IPFS', 'Ethers.js', 'Vercel', 'React PDF'],
+      priority: 1,
       size: 'full'
     },
     {
@@ -103,16 +81,44 @@ const PORTFOLIO_DATA = {
       title: 'Qanooni Legal Law Suite',
       subtitle: 'Qanooni is a legal law suite that is used to generate, review and make global changes to legal documents for the users.',
       tags: ['NEXT.js', 'OAuth', 'Redux', 'React', 'REST APIs', 'Postgres', 'SQL Alchemy', 'Python', 'Docker', 'Azure', 'Postman', 'Web Sockets', 'FAST API', 'Alembic', 'Redis', 'Langchain', 'OpenAI', 'Prompt Engineering', 'MS Word API', 'RAG'],
+      priority: 1,
       size: 'medium'
+    },
+    {
+      id: 'modal-project-0',
+      img: './Assets/nuces-blocked-add-certificates.webp',
+      title: 'NUCES BLOCKED',
+      subtitle: 'A platform aimed to generate and decentralize verified academic portfolios worldwide.',
+      tags: ['NEXT.js', 'React', 'GraphQL', 'Postgres', 'TypeORM', 'NEST.js', 'Solidity', 'Remix', 'Hardhat', 'Postman', 'Apollo', 'Python', 'Selenium', 'IPFS', 'Ethers.js', 'Vercel', 'React PDF'],
+      priority: 1,
+      size: 'full'
+    },
+    {
+      id: 'modal-project-super',
+      img: './Assets/Super-Hero.webp',
+      title: 'Super™',
+      subtitle: 'The ChatGPT of Quantum Computing — a revolutionary AI that bridges natural language problem descriptions, quantum and supercomputing technologies, and commercialized solutions.',
+      tags: ['NEXT.js', 'React', 'Python', 'Gurobi', 'QuEra', 'Amazon Braket', 'IonQ', 'NVIDIA CUDA-Q', 'Dwave', 'NLP', 'LLM', 'Quantum Computing', 'REST APIs', 'WebSockets'],
+      priority: 2,
+      size: 'full'
+    },
+    {
+      id: 'modal-project-akito',
+      img: './Assets/Akito-Talent.webp',
+      title: 'Akito AI',
+      subtitle: 'An AI-powered talent pipeline management platform for employers and job seekers with AI assessment generation, candidate management, and Riipen integration.',
+      tags: ['NEXT.js', 'React', 'Node.js', 'OpenAI', 'REST APIs', 'Postgres', 'AI/ML', 'OAuth', 'Riipen', 'Web Crawling', 'Prompt Engineering'],
+      priority: 2,
+      size: 'full'
     }
   ],
 
   // Regular projects (smaller cards)
   projects: [
-    { id: 'modal-project-1', img: './Assets/project_1.webp', title: 'Netflix', subtitle: 'Video Streaming Application that is inspired by netflix', tags: ['XML', 'C#', 'Algorithms', 'Data Structures'] },
-    { id: 'modal-project-2', img: './Assets/project_2.webp', title: 'Material Awesome', subtitle: 'Linux Window manager & Desktop Environment Alternative', tags: ['Lua', 'Process Management', 'Desktop Development'] },
-    { id: 'modal-project-5', img: './Assets/project_5.webp', title: 'Starvation Analysis in Pakistan', subtitle: 'A desktop application that performs analysis and predicts starvation rates in Pakistan', tags: ['PYQT5', 'Distribution Models', 'Prediction Models', 'Regression Models', 'Data Science'] },
-    { id: 'modal-project-8', img: './Assets/project_8.webp', title: 'IGI Predator', subtitle: 'A bot that plays IGI game using Human Detection Model.', tags: ['Python', 'Machine Learning', 'OpenCV'] }
+    { id: 'modal-project-2', img: './Assets/project_2.webp', title: 'Material Awesome', subtitle: 'Linux Window manager & Desktop Environment Alternative', tags: ['Lua', 'Process Management', 'Desktop Development'], priority: 2 },
+    { id: 'modal-project-1', img: './Assets/project_1.webp', title: 'Netflix', subtitle: 'Video Streaming Application that is inspired by netflix', tags: ['XML', 'C#', 'Algorithms', 'Data Structures'], priority: 3 },
+    { id: 'modal-project-5', img: './Assets/project_5.webp', title: 'Starvation Analysis in Pakistan', subtitle: 'A desktop application that performs analysis and predicts starvation rates in Pakistan', tags: ['PYQT5', 'Distribution Models', 'Prediction Models', 'Regression Models', 'Data Science'], priority: 3 },
+    { id: 'modal-project-8', img: './Assets/project_8.webp', title: 'IGI Predator', subtitle: 'A bot that plays IGI game using Human Detection Model.', tags: ['Python', 'Machine Learning', 'OpenCV'], priority: 3 }
   ],
 
   // Project modal details
