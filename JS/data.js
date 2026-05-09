@@ -68,7 +68,7 @@ const PORTFOLIO_DATA = {
       featured: true,
       category: 'Quantum',
       year: 2026,
-      status: 'CES 2026',
+      status: 'Live',
       metrics: ['World Premiere', 'Quantum AI', 'Mobile First']
     },
     {
@@ -96,6 +96,7 @@ const PORTFOLIO_DATA = {
       featured: true,
       category: 'AI',
       year: 2025,
+      status: 'Live',
       metrics: ['83% prompt accuracy', '60% perf boost', 'MS Word AI']
     },
     {
@@ -145,10 +146,10 @@ const PORTFOLIO_DATA = {
   // Regular projects (smaller cards)
   projects: [
     { id: 'modal-project-2', img: './Assets/project_2.webp', title: 'Material Awesome', subtitle: 'Linux Window manager & Desktop Environment Alternative', tags: ['Lua', 'Process Management', 'Desktop Development'], priority: 2, category: 'Tools', year: 2021, status: 'Open Source' },
-    { id: 'modal-project-1', img: './Assets/project_1.webp', title: 'Netflix', subtitle: 'Video Streaming Application that is inspired by netflix', tags: ['XML', 'C#', 'Algorithms', 'Data Structures'], priority: 3, category: 'Desktop Apps', year: 2020 },
-    { id: 'modal-project-3', img: './Assets/project_3.webp', title: 'Instagram Re-Imagened', subtitle: 'A social media application made from scratch', tags: ['XML', 'C#', 'T-SQL'], priority: 3, category: 'Desktop Apps', year: 2021 },
-    { id: 'modal-project-5', img: './Assets/project_5.webp', title: 'Starvation Analysis in Pakistan', subtitle: 'A desktop application that performs analysis and predicts starvation rates in Pakistan', tags: ['PYQT5', 'Distribution Models', 'Prediction Models', 'Regression Models', 'Data Science'], priority: 3, category: 'AI', year: 2021 },
-    { id: 'modal-project-8', img: './Assets/project_8.webp', title: 'IGI Predator', subtitle: 'A bot that plays IGI game using Human Detection Model.', tags: ['Python', 'Machine Learning', 'OpenCV'], priority: 3, category: 'AI', year: 2021 }
+    { id: 'modal-project-1', img: './Assets/project_1.webp', title: 'Netflix', subtitle: 'Video Streaming Application that is inspired by netflix', tags: ['XML', 'C#', 'Algorithms', 'Data Structures'], priority: 3, category: 'Desktop Apps', year: 2020, status: 'Open Source' },
+    { id: 'modal-project-3', img: './Assets/project_3.webp', title: 'Instagram Re-Imagened', subtitle: 'A social media application made from scratch', tags: ['XML', 'C#', 'T-SQL'], priority: 3, category: 'Desktop Apps', year: 2021, status: 'Open Source' },
+    { id: 'modal-project-5', img: './Assets/project_5.webp', title: 'Starvation Analysis in Pakistan', subtitle: 'A desktop application that performs analysis and predicts starvation rates in Pakistan', tags: ['PYQT5', 'Distribution Models', 'Prediction Models', 'Regression Models', 'Data Science'], priority: 3, category: 'AI', year: 2021, status: 'Open Source' },
+    { id: 'modal-project-8', img: './Assets/project_8.webp', title: 'IGI Predator', subtitle: 'A bot that plays IGI game using Human Detection Model.', tags: ['Python', 'Machine Learning', 'OpenCV'], priority: 3, category: 'AI', year: 2021, status: 'Open Source' }
   ],
 
   // Project modal details
