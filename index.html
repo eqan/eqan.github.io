@@ -426,6 +426,23 @@
     <a class="preview-theme preview-color-pink-black" data-theme="./CSS/pink-black.css" data-theme-bg="light"></a>
     <a class="preview-theme preview-color-blue-black" data-theme="./CSS/blue-black.css" data-theme-bg="light"></a>
   </div>
+
+  <!-- Page Search -->
+  <div class="site-search" role="search">
+    <button class="site-search-toggle" id="site-search-toggle" type="button" aria-expanded="false" aria-controls="site-search-panel" aria-label="Search this page">
+      <i class="fa fa-search" aria-hidden="true"></i>
+      <span>Search</span>
+    </button>
+    <div class="site-search-panel" id="site-search-panel" aria-hidden="true">
+      <label class="site-search-label" for="site-search-input">Search this page</label>
+      <div class="site-search-input-wrap">
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <input id="site-search-input" type="search" placeholder="Search resume, projects, cloud..." autocomplete="off" />
+      </div>
+      <div class="site-search-summary" id="site-search-summary">Type to search across the portfolio.</div>
+      <div class="site-search-results" id="site-search-results"></div>
+    </div>
+  </div>
 </body>
 
 <!-- Scripts -->
@@ -434,5 +451,6 @@
 <script src="./JS/components.js"></script>
 <script src="./JS/cursor.js"></script>
 <script src="./JS/theme-switcher.js"></script>
+<script src="./JS/search.js"></script>
 <script src="./JS/holidays.js"></script>
 </html>
