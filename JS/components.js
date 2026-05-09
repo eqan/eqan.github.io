@@ -120,29 +120,106 @@ const Components = {
     return html;
   },
 
-  projectCard: ({ id, img, title, subtitle, tags }) => {
-    const skillPillsHtml = Components.formatSkillPills(tags, 5);
-    
+  projectCard: ({ id, img, title, subtitle, tags, priority, size, featured, category, year, status, metrics }) => {
+    const skillPillsHtml = Components.formatSkillPills(tags, featured ? 6 : 4);
+
+    const metricsHtml = Array.isArray(metrics) && metrics.length
+      ? `<div class="project-metrics">${metrics.map(m => `<span class="project-metric">${m}</span>`).join('')}</div>`
+      : '';
+
+    const statusHtml = status
+      ? `<span class="project-badge project-badge--status">${status}</span>`
+      : '';
+
+    const featuredHtml = featured
+      ? `<span class="project-badge project-badge--featured"><i class="fa fa-star"></i> Featured</span>`
+      : '';
+
+    const badgesHtml = (featured || status)
+      ? `<div class="project-badges">${featuredHtml}${statusHtml}</div>`
+      : '';
+
+    const metaHtml = (category || year)
+      ? `<div class="project-card-meta">
+          ${category ? `<span class="project-category">${category}</span>` : ''}
+          ${year ? `<span class="project-year">${year}</span>` : ''}
+        </div>`
+      : '';
+
+    const cardClass = Components.cls(
+      'project-card',
+      featured && 'project-card--featured',
+      size === 'full' && 'project-card--full',
+      size === 'medium' && 'project-card--medium'
+    );
+
     return `
-      <article class="project-item">
-        <a class="project-card" href="#${id}" data-toggle="modal">
+      <article class="project-item"
+               data-id="${id}"
+               data-category="${category || 'Other'}"
+               data-priority="${priority || 99}"
+               data-size="${size || 'small'}"
+               data-year="${year || 0}"
+               data-featured="${featured ? 'true' : 'false'}">
+        <a class="${cardClass}" href="#${id}" data-toggle="modal">
           <figure class="project-card-img">
             <img src="${img}" alt="${title}" loading="lazy" />
+            ${badgesHtml}
           </figure>
           <div class="project-card-content">
+            ${metaHtml}
             <h3 class="project-card-title">${title}</h3>
             <p class="project-card-desc">${subtitle}</p>
+            ${metricsHtml}
             <div class="project-card-tags">${skillPillsHtml}</div>
           </div>
         </a>
       </article>`;
   },
 
-  projectsGrid: (featured, regular) => `
-    <div class="projects-grid animation-translate animation-item-2">
-      ${featured.map(Components.projectCard).join('')}
-      ${regular.map(Components.projectCard).join('')}
-    </div>`,
+  projectsControls: (allProjects) => {
+    const counts = allProjects.reduce((acc, p) => {
+      const cat = p.category || 'Other';
+      acc[cat] = (acc[cat] || 0) + 1;
+      return acc;
+    }, {});
+    const orderedCats = ['Quantum', 'AI', 'Cloud', 'Blockchain', 'Desktop', 'Web', 'Tools', 'Other']
+      .filter(c => counts[c]);
+
+    const chips = [{ key: 'all', label: 'All', count: allProjects.length }]
+      .concat(orderedCats.map(c => ({ key: c, label: c, count: counts[c] })));
+
+    const filterHtml = chips.map((c, i) => `
+      <button class="projects-filter ${i === 0 ? 'is-active' : ''}" data-filter="${c.key}" type="button">
+        <span>${c.label}</span>
+        <span class="projects-filter-count">${c.count}</span>
+      </button>
+    `).join('');
+
+    return `
+      <div class="projects-controls animation-translate animation-item-2">
+        <div class="projects-filters" role="tablist" aria-label="Filter projects by category">
+          ${filterHtml}
+        </div>
+        <div class="projects-sort" role="group" aria-label="Sort projects">
+          <span class="projects-sort-label">Sort</span>
+          <button class="projects-sort-btn is-active" data-sort="featured" type="button">Featured</button>
+          <button class="projects-sort-btn" data-sort="recent" type="button">Recent</button>
+        </div>
+      </div>`;
+  },
+
+  projectsGrid: (featured, regular) => {
+    const all = [...featured, ...regular];
+    return `
+      ${Components.projectsControls(all)}
+      <div class="projects-bento animation-translate animation-item-3">
+        ${all.map(Components.projectCard).join('')}
+      </div>
+      <div class="projects-empty" hidden>
+        <p>No projects match this filter yet.</p>
+      </div>`;
+  },
 
   // ============ PROJECT MODAL COMPONENT ============
   
@@ -166,33 +243,47 @@ const Components = {
   projectModal: (id, { title, subtitle, tags, content, images, link }) => {
     const hasCollage = images.length > 1 || images.some(img => img.basis);
     const formattedTags = Components.formatTags(tags);
-    
+    const linkHtml = link
+      ? `<a href="${link}" target="_blank" class="project-modal-visit"><i class="fa fa-external-link"></i><span>Visit project</span></a>`
+      : '';
+    const titleHtml = link
+      ? `<a href="${link}" target="_blank" class="project-title-link"><h2 class="project-modal-title">${title} <i class="fa fa-external-link"></i></h2></a>`
+      : `<h2 class="project-modal-title">${title}</h2>`;
+
     return `
-    <div id="${id}" class="modal fade project-modal" tabindex="-1" role="dialog" aria-labelledby="modal" style="display: none" aria-hidden="true">
+    <div id="${id}" class="modal fade project-modal" tabindex="-1" role="dialog" aria-labelledby="${id}-label" style="display: none" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-fluid">
         <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
-              <span class="d-none">×</span>
-            </button>
+          <div class="project-modal-topbar">
+            <div class="project-modal-topbar-info">
+              <span class="project-modal-eyebrow">Project</span>
+              <span class="project-modal-topbar-title">${title}</span>
+            </div>
+            <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <article class="article project-article">
-              <header class="project-header">
-                ${link 
-                  ? `<a href="${link}" target="_blank" class="project-title-link"><h2 class="project-modal-title">${title} <i class="fa fa-external-link"></i></h2></a>`
-                  : `<h2 class="project-modal-title">${title}</h2>`
-                }
-                <p class="project-modal-subtitle">${subtitle}</p>
-                <div class="tech-tags-container">${formattedTags}</div>
+            <article class="project-article">
+              <header class="project-modal-hero">
+                <span class="project-modal-eyebrow project-modal-eyebrow--inline">Project Case Study</span>
+                ${titleHtml}
+                <p class="project-modal-subtitle" id="${id}-label">${subtitle}</p>
+                <div class="project-modal-meta-row">
+                  <div class="tech-tags-container">${formattedTags}</div>
+                  ${linkHtml}
+                </div>
               </header>
-              
-              <div class="project-gallery ${hasCollage ? 'gallery-collage' : 'gallery-single'}">
-                ${images.map(Components.projectModalImage).join('')}
-              </div>
-              
-              <div class="project-content">
-                ${content}
+
+              <div class="project-modal-grid">
+                <aside class="project-modal-gallery-col">
+                  <div class="project-gallery ${hasCollage ? 'gallery-collage' : 'gallery-single'}">
+                    ${images.map(Components.projectModalImage).join('')}
+                  </div>
+                </aside>
+                <section class="project-modal-content-col">
+                  <div class="project-content">
+                    ${content}
+                  </div>
+                </section>
               </div>
             </article>
           </div>

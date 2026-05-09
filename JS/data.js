@@ -64,7 +64,12 @@ const PORTFOLIO_DATA = {
       subtitle: 'The world\'s first consumer app powered by quantum and supercomputing. Solve complex decisions in natural language — CES 2026 World Premiere.',
       tags: ['React Native', 'Python', 'Quantum Computing', 'NLP', 'Gurobi', 'Optimization', 'Mobile App', 'Super™ Platform', 'REST APIs'],
       priority: 1,
-      size: 'full'
+      size: 'full',
+      featured: true,
+      category: 'Quantum',
+      year: 2026,
+      status: 'CES 2026',
+      metrics: ['World Premiere', 'Quantum AI', 'Mobile First']
     },
     {
       id: 'modal-project-10',
@@ -73,7 +78,12 @@ const PORTFOLIO_DATA = {
       subtitle: 'A cloud computing platform aimed to deploy millions of AI models on local GPU servers and return apis for hastle free usage.',
       tags: ['NEXT.js', 'OAuth', 'Redux', 'React', 'REST APIs', 'Postgres', 'SQL Alchemy', 'Python', 'Docker', 'Cloudflared', 'AWS', 'Postman', 'Web Sockets', 'Stripe', 'FAST API', 'SISH', 'NVIDIA-SMI', 'Alembic', 'Redis', 'Linux/Shell'],
       priority: 1,
-      size: 'full'
+      size: 'full',
+      featured: true,
+      category: 'Cloud',
+      year: 2024,
+      status: 'Live',
+      metrics: ['1M+ DAU', '60% cost cut', '$1k+/day saved']
     },
     {
       id: 'modal-project-11',
@@ -82,7 +92,11 @@ const PORTFOLIO_DATA = {
       subtitle: 'Qanooni is a legal law suite that is used to generate, review and make global changes to legal documents for the users.',
       tags: ['NEXT.js', 'OAuth', 'Redux', 'React', 'REST APIs', 'Postgres', 'SQL Alchemy', 'Python', 'Docker', 'Azure', 'Postman', 'Web Sockets', 'FAST API', 'Alembic', 'Redis', 'Langchain', 'OpenAI', 'Prompt Engineering', 'MS Word API', 'RAG'],
       priority: 1,
-      size: 'medium'
+      size: 'full',
+      featured: true,
+      category: 'AI',
+      year: 2025,
+      metrics: ['83% prompt accuracy', '60% perf boost', 'MS Word AI']
     },
     {
       id: 'modal-project-0',
@@ -91,7 +105,12 @@ const PORTFOLIO_DATA = {
       subtitle: 'A platform aimed to generate and decentralize verified academic portfolios worldwide.',
       tags: ['NEXT.js', 'React', 'GraphQL', 'Postgres', 'TypeORM', 'NEST.js', 'Solidity', 'Remix', 'Hardhat', 'Postman', 'Apollo', 'Python', 'Selenium', 'IPFS', 'Ethers.js', 'Vercel', 'React PDF'],
       priority: 1,
-      size: 'full'
+      size: 'full',
+      featured: true,
+      category: 'Blockchain',
+      year: 2023,
+      status: 'Award Winner',
+      metrics: ['Top 50 / 20K', '80% authenticity', 'PM Innovation']
     },
     {
       id: 'modal-project-super',
@@ -100,7 +119,12 @@ const PORTFOLIO_DATA = {
       subtitle: 'The ChatGPT of Quantum Computing — a revolutionary AI that bridges natural language problem descriptions, quantum and supercomputing technologies, and commercialized solutions.',
       tags: ['NEXT.js', 'React', 'Python', 'Gurobi', 'QuEra', 'Amazon Braket', 'IonQ', 'NVIDIA CUDA-Q', 'Dwave', 'NLP', 'LLM', 'Quantum Computing', 'REST APIs', 'WebSockets'],
       priority: 2,
-      size: 'full'
+      size: 'full',
+      featured: true,
+      category: 'Quantum',
+      year: 2026,
+      status: 'Live',
+      metrics: ['Multi-Quantum Backend', 'NLP → Code', '5+ Providers']
     },
     {
       id: 'modal-project-akito',
@@ -109,16 +133,21 @@ const PORTFOLIO_DATA = {
       subtitle: 'An AI-powered talent pipeline management platform for employers and job seekers with AI assessment generation, candidate management, and Riipen integration.',
       tags: ['NEXT.js', 'React', 'Node.js', 'OpenAI', 'REST APIs', 'Postgres', 'AI/ML', 'OAuth', 'Riipen', 'Web Crawling', 'Prompt Engineering'],
       priority: 2,
-      size: 'full'
+      size: 'full',
+      featured: true,
+      category: 'AI',
+      year: 2025,
+      status: 'Live',
+      metrics: ['Riipen Integrated', 'AI Assessments', 'Web Crawler']
     }
   ],
 
   // Regular projects (smaller cards)
   projects: [
-    { id: 'modal-project-2', img: './Assets/project_2.webp', title: 'Material Awesome', subtitle: 'Linux Window manager & Desktop Environment Alternative', tags: ['Lua', 'Process Management', 'Desktop Development'], priority: 2 },
-    { id: 'modal-project-1', img: './Assets/project_1.webp', title: 'Netflix', subtitle: 'Video Streaming Application that is inspired by netflix', tags: ['XML', 'C#', 'Algorithms', 'Data Structures'], priority: 3 },
-    { id: 'modal-project-5', img: './Assets/project_5.webp', title: 'Starvation Analysis in Pakistan', subtitle: 'A desktop application that performs analysis and predicts starvation rates in Pakistan', tags: ['PYQT5', 'Distribution Models', 'Prediction Models', 'Regression Models', 'Data Science'], priority: 3 },
-    { id: 'modal-project-8', img: './Assets/project_8.webp', title: 'IGI Predator', subtitle: 'A bot that plays IGI game using Human Detection Model.', tags: ['Python', 'Machine Learning', 'OpenCV'], priority: 3 }
+    { id: 'modal-project-2', img: './Assets/project_2.webp', title: 'Material Awesome', subtitle: 'Linux Window manager & Desktop Environment Alternative', tags: ['Lua', 'Process Management', 'Desktop Development'], priority: 2, category: 'Tools', year: 2021, status: 'Open Source' },
+    { id: 'modal-project-1', img: './Assets/project_1.webp', title: 'Netflix', subtitle: 'Video Streaming Application that is inspired by netflix', tags: ['XML', 'C#', 'Algorithms', 'Data Structures'], priority: 3, category: 'Desktop', year: 2020 },
+    { id: 'modal-project-5', img: './Assets/project_5.webp', title: 'Starvation Analysis in Pakistan', subtitle: 'A desktop application that performs analysis and predicts starvation rates in Pakistan', tags: ['PYQT5', 'Distribution Models', 'Prediction Models', 'Regression Models', 'Data Science'], priority: 3, category: 'AI', year: 2021 },
+    { id: 'modal-project-8', img: './Assets/project_8.webp', title: 'IGI Predator', subtitle: 'A bot that plays IGI game using Human Detection Model.', tags: ['Python', 'Machine Learning', 'OpenCV'], priority: 3, category: 'AI', year: 2021 }
   ],
 
   // Project modal details
