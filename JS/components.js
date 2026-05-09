@@ -183,7 +183,7 @@ const Components = {
       acc[cat] = (acc[cat] || 0) + 1;
       return acc;
     }, {});
-    const orderedCats = ['Quantum', 'AI', 'Cloud', 'Blockchain', 'Desktop', 'Web', 'Tools', 'Other']
+    const orderedCats = ['Quantum', 'AI', 'Cloud', 'Blockchain', 'Desktop Apps', 'Web', 'Tools', 'Other']
       .filter(c => counts[c]);
 
     const chips = [{ key: 'all', label: 'All', count: allProjects.length }]
