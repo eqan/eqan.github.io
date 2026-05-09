@@ -1290,6 +1290,12 @@ body.modal-open .site-search {
   transform: translateY(-12px);
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
+body.modal-open .preview-themes {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(-12px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
 
 /* ============ ENHANCED PROJECT MODALS ============ */
 .project-modal .modal-content {
