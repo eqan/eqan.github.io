@@ -48,11 +48,11 @@ const PORTFOLIO_DATA = {
 
   // Expertise areas
   expertise: [
-    { icon: 'fa-globe', label: 'Web', duration: '5 Years' },
-    { icon: 'fa-chain', label: 'Blockchain', duration: '2 Years' },
-    { icon: 'fa-cloud', label: 'Cloud', duration: '1.5 Years' },
-    { icon: 'fa-magic', label: 'Gen AI', duration: '2 Years' },
-    { icon: 'fa-bolt', label: 'Quantum', duration: '1 Year', arrowLeft: true }
+    { icon: 'fa-code', label: 'Full Stack', duration: '5+ Years' },
+    { icon: 'fa-magic', label: 'GenAI / LLMs', duration: '2+ Years' },
+    { icon: 'fa-cloud', label: 'Cloud & DevOps', duration: '2+ Years' },
+    { icon: 'fa-bolt', label: 'Quantum', duration: '1+ Year' },
+    { icon: 'fa-chain', label: 'Web3', duration: '2+ Years', arrowLeft: true }
   ],
 
   // Featured projects (large cards)
@@ -61,43 +61,43 @@ const PORTFOLIO_DATA = {
       id: 'modal-project-chatqlm',
       img: './Assets/Chatqlm-Hero.webp',
       title: 'ChatQLM',
-      subtitle: 'The world\'s first consumer app powered by quantum and supercomputing. Solve complex decisions in natural language — CES 2026 World Premiere.',
-      tags: ['React Native', 'Python', 'Quantum Computing', 'NLP', 'Gurobi', 'Optimization', 'Mobile App', 'Super™ Platform', 'REST APIs'],
+      subtitle: 'CES 2026 World Premiere consumer quantum/supercomputing app that turns natural-language optimization problems into executable quantum workflows.',
+      tags: ['React Native', 'Python', 'Quantum Computing', 'NLP', 'Gurobi', 'Amazon Braket', 'IonQ', 'QuEra', 'D-Wave', 'REST APIs'],
       priority: 1,
       size: 'full',
       featured: true,
       category: 'Quantum',
       year: 2026,
-      status: 'Live',
-      metrics: ['World Premiere', 'Quantum AI', 'Mobile First']
+      status: 'CES 2026',
+      metrics: ['World Premiere', 'Quantum AI', 'CSE: QBTQ']
     },
     {
       id: 'modal-project-10',
       img: './Assets/project_10.webp',
       title: 'GPU Lab',
-      subtitle: 'A cloud computing platform aimed to deploy millions of AI models on local GPU servers and return apis for hastle free usage.',
-      tags: ['NEXT.js', 'OAuth', 'Redux', 'React', 'REST APIs', 'Postgres', 'SQL Alchemy', 'Python', 'Docker', 'Cloudflared', 'AWS', 'Postman', 'Web Sockets', 'Stripe', 'FAST API', 'SISH', 'NVIDIA-SMI', 'Alembic', 'Redis', 'Linux/Shell'],
+      subtitle: 'Custom GPU cluster platform for deploying LLM and diffusion workloads on in-house infrastructure while cutting third-party cloud costs.',
+      tags: ['NEXT.js', 'React', 'Redux', 'Python', 'FAST API', 'Postgres', 'Docker', 'WebSockets', 'Stripe', 'Cloudflare', 'AWS', 'Linux/Shell'],
       priority: 1,
       size: 'full',
       featured: true,
       category: 'Cloud',
       year: 2024,
       status: 'Live',
-      metrics: ['1M+ DAU', '60% cost cut', '$1k+/day saved']
+      metrics: ['400K+ MAU', '60% cost cut', '$1M+ revenue']
     },
     {
       id: 'modal-project-11',
       img: './Assets/project_11.webp',
       title: 'Qanooni Legal Law Suite',
-      subtitle: 'Qanooni is a legal law suite that is used to generate, review and make global changes to legal documents for the users.',
-      tags: ['NEXT.js', 'OAuth', 'Redux', 'React', 'REST APIs', 'Postgres', 'SQL Alchemy', 'Python', 'Docker', 'Azure', 'Postman', 'Web Sockets', 'FAST API', 'Alembic', 'Redis', 'Langchain', 'OpenAI', 'Prompt Engineering', 'MS Word API', 'RAG'],
+      subtitle: 'Full-stack AI legal drafting suite for Draft, Review, and Global Changes workflows powered by RAG and Microsoft Word automation.',
+      tags: ['NEXT.js', 'React', 'FAST API', 'PostgreSQL', 'Python', 'LangChain', 'LangSmith', 'Pinecone', 'WebSockets', 'MS Word API', 'RAG', 'LLM Guardrails'],
       priority: 1,
       size: 'full',
       featured: true,
       category: 'AI',
       year: 2025,
       status: 'Live',
-      metrics: ['83% prompt accuracy', '60% perf boost', 'MS Word AI']
+      metrics: ['58% workload cut', '$2M pre-seed', '83% accuracy']
     },
     {
       id: 'modal-project-0',
@@ -146,6 +146,7 @@ const PORTFOLIO_DATA = {
   // Regular projects (smaller cards)
   projects: [
     { id: 'modal-project-2', img: './Assets/project_2.webp', title: 'Material Awesome', subtitle: 'Linux Window manager & Desktop Environment Alternative', tags: ['Lua', 'Process Management', 'Desktop Development'], priority: 2, category: 'Tools', year: 2021, status: 'Open Source' },
+    { id: 'modal-project-6', img: './Assets/project_6.webp', title: 'X-axis OS', subtitle: 'An OS simulator built with C, semaphores, multithreading, and Bankers algorithm', tags: ['C', 'Glade', 'Shell Scripting', 'Algorithms'], priority: 3, category: 'Tools', year: 2021, status: 'Open Source' },
     { id: 'modal-project-1', img: './Assets/project_1.webp', title: 'Netflix', subtitle: 'Video Streaming Application that is inspired by netflix', tags: ['XML', 'C#', 'Algorithms', 'Data Structures'], priority: 3, category: 'Desktop Apps', year: 2020, status: 'Open Source' },
     { id: 'modal-project-3', img: './Assets/project_3.webp', title: 'Instagram Re-Imagened', subtitle: 'A social media application made from scratch', tags: ['XML', 'C#', 'T-SQL'], priority: 3, category: 'Desktop Apps', year: 2021, status: 'Open Source' },
     { id: 'modal-project-5', img: './Assets/project_5.webp', title: 'Starvation Analysis in Pakistan', subtitle: 'A desktop application that performs analysis and predicts starvation rates in Pakistan', tags: ['PYQT5', 'Distribution Models', 'Prediction Models', 'Regression Models', 'Data Science'], priority: 3, category: 'AI', year: 2021, status: 'Open Source' },
@@ -162,19 +163,18 @@ const PORTFOLIO_DATA = {
         <blockquote>
           <h3>Key Highlights</h3>
           <ul>
-            <li>Revolutionary AI bridging <strong>natural language</strong> and <strong>quantum/supercomputing</strong></li>
-            <li>Supports multiple quantum backends — <strong>QuEra, IonQ, Amazon Braket, Dwave, NVIDIA CUDA-Q</strong></li>
-            <li>Production-ready optimization code generation with <strong>Gurobi</strong></li>
+            <li>Architected a consumer-facing quantum/supercomputing product suite connected to <strong>CSE: QBTQ</strong></li>
+            <li>Integrated quantum backends including <strong>IonQ, QuEra, Amazon Braket, D-Wave, NVIDIA CUDA-Q, and Quanfluence</strong></li>
+            <li>Built AI orchestration that translates natural language into executable <strong>Python optimization code</strong></li>
           </ul>
         </blockquote>
         <h3>Core Features</h3>
         <ul>
-          <li><strong>Super Notebooks</strong> — Interactive problem-solving environment with chat-driven AI</li>
-          <li><strong>PQC Analysis</strong> — Post-Quantum Cryptography analysis tools</li>
-          <li><strong>Optimization Results Dashboard</strong> — Rich visualizations with actionable insights</li>
-          <li><strong>Code Generation</strong> — AI generates production-ready Gurobi/Python optimization code</li>
-          <li><strong>Problem Enhancement</strong> — Iterative AI-driven problem refinement</li>
-          <li><strong>Example Problems</strong> — Factory Floor Optimization, Logistics, Carbon Emissions and more</li>
+          <li><strong>Natural-language optimization</strong> — transforms business constraints into solver-ready workflows</li>
+          <li><strong>Amazon Braket execution</strong> — provider APIs for execution, monitoring, and results retrieval</li>
+          <li><strong>Optimization dashboards</strong> — visualizes results for high-stakes planning problems</li>
+          <li><strong>Code generation</strong> — generates production-ready Gurobi/Python optimization code</li>
+          <li><strong>Deep-tech UX</strong> — makes quantum and supercomputing accessible through familiar product interfaces</li>
         </ul>
       `,
       images: [
@@ -225,7 +225,7 @@ const PORTFOLIO_DATA = {
           <ul>
             <li>AI-powered platform connecting <strong>employers</strong> and <strong>job seekers</strong></li>
             <li>Automated <strong>assessment generation</strong> with AI — MCQs, multi-select, short/long answers</li>
-            <li>Integrated with <strong>Riipen</strong> for work-integrated learning</li>
+            <li>Built with <strong>Next.js, React, Python/FastAPI, Supabase/Postgres</strong> and Riipen integration</li>
           </ul>
         </blockquote>
         <h3>Employer Features</h3>
@@ -252,11 +252,11 @@ const PORTFOLIO_DATA = {
     },
     'modal-project-11': {
       title: 'Qanooni Legal Law Suite',
-      subtitle: 'Qanooni is a legal law suite that is used to generate, review and make global changes to legal documents for the users.',
-      tags: ['NEXT.js', 'OAuth', 'Redux', 'React', 'REST APIs', 'Postgres', 'SQL Alchemy', 'Python', 'Docker', 'Azure', 'Postman', 'Web Sockets', 'FAST API', 'Alembic', 'Redis', 'Langchain', 'OpenAI', 'Prompt Engineering', 'MS Word API', 'RAG'],
+      subtitle: 'AI legal drafting suite for Draft, Review, and Global Changes workflows using RAG, LLM guardrails, and Microsoft Word automation.',
+      tags: ['NEXT.js', 'React', 'FAST API', 'PostgreSQL', 'Python', 'LangChain', 'LangSmith', 'Pinecone', 'WebSockets', 'MS Word API', 'RAG', 'LLM Guardrails'],
       content: `
         <blockquote>
-          <h3>Core Components</h3>
+          <h3>Impact</h3>
           <ul>
             <li><strong>Draft</strong> — Generate legal documents in user's tone and style</li>
             <li><strong>Review</strong> — Review and make necessary amendments</li>
@@ -264,11 +264,11 @@ const PORTFOLIO_DATA = {
             <li><strong>QCounsel</strong> — AI-powered legal Q&A</li>
           </ul>
         </blockquote>
-        <h3>My Contributions</h3>
+        <h3>Core Components</h3>
         <ul>
-          <li>Worked on Draft, Review and Global Changes for <strong>MVP launch</strong></li>
-          <li>Built AI Chatbot to control <strong>Microsoft Word</strong> with clause-by-clause modifications</li>
-          <li>Drafts are <strong>100% original</strong> based on user's previous documents and writing style</li>
+          <li><strong>Draft, Review, Global Changes</strong> — full-stack legal drafting workflows in Next.js, FastAPI, and PostgreSQL</li>
+          <li><strong>Advanced RAG</strong> — LangChain, LangSmith, semantic chunking, Pinecone vector DB, and LLM guardrails</li>
+          <li><strong>Microsoft Word AI</strong> — WebSocket-powered chatbot for clause-by-clause modifications</li>
         </ul>
       `,
       images: [
@@ -288,8 +288,9 @@ const PORTFOLIO_DATA = {
           <h3>Key Achievements</h3>
           <ul>
             <li>Led a team of engineers to develop a <strong>cloud computing framework</strong> for AI Models deployment and parallel computation</li>
-            <li>Built to scale for <strong>1 Million+ daily active users</strong> for model deployment</li>
             <li>Architected the entire cloud computing framework for <strong>parallel computation</strong></li>
+            <li>Reduced third-party cloud costs by <strong>60%</strong></li>
+            <li>Scaled Models Lab to <strong>400,000+ MAU</strong> and <strong>$1M+ annual revenue</strong></li>
           </ul>
         </blockquote>
         <h3>Technical Stack</h3>
@@ -310,18 +311,18 @@ const PORTFOLIO_DATA = {
         <blockquote>
           <h3>Impact</h3>
           <ul>
-            <li>Improved authenticity of degree distribution by <strong>80%</strong> using blockchain</li>
-            <li>Saves <strong>75% of time</strong> normally spent verifying academic credentials</li>
+            <li><strong>Prime Minister National Innovation Award Finalist</strong> selected from 20,000+ applications</li>
+            <li>Improved authenticity of degree distribution by <strong>80%</strong> using full-stack Web3 architecture</li>
+            <li>Saved <strong>75%</strong> of verification time through 1-click NFT portfolios and consensus mechanisms</li>
           </ul>
         </blockquote>
         <h3>Key Features</h3>
         <ul>
           <li><strong>1-Click NFT Portfolios</strong> — Auto-generate and deploy globally</li>
           <li><strong>Easy Verification</strong> — Companies can download verified info instantly</li>
-          <li><strong>Multi-Role Support</strong> — Teachers, counsellors, society heads can contribute</li>
+          <li><strong>Entrepreneurship Training</strong> — pitched at NUST Islamabad after KICS training at UET Lahore</li>
           <li><strong>Consensus Mechanism</strong> — Intra-university validation from authorized parties</li>
-          <li><strong>Low Bandwidth</strong> — Optimized with GraphQL API</li>
-          <li><strong>Result Backup</strong> — Secure semester results storage</li>
+          <li><strong>Web3 Stack</strong> — React, Nest, Jest, Typescript, Solidity, Ethers.js, IPFS, and GraphQL</li>
         </ul>
       `,
       images: [
@@ -335,32 +336,26 @@ const PORTFOLIO_DATA = {
     },
     'modal-project-1': {
       title: 'Netflix',
-      subtitle: 'Video Streaming Application that is inspired by netflix',
+      subtitle: 'A C#/.NET desktop video streaming application inspired by Netflix.',
       tags: ['XML', 'C#', 'Algorithms', 'Data Structures'],
       link: 'https://github.com/eqan/Netflix-In-CSharp',
-      content: `<p>Utilizing the best of Algorithms, I have created this project on an experimental basis to discover
-        the mechanism/possibilities of Technologies which somewhat covers the fundamentals of the Online Video
-        streaming servies such as Youtube &amp; Netflix.</p>
-      <h9>
-        <b>Note: This Project Is Solely Made For Educational Purposes &amp; Is Entirely Self Made, None Of
-          This Has RelationShip Of Any Kind With Netflix Or Any Other Video Streaming Service</b>.
-      </h9>
+      content: `
       <blockquote>
         <h3>Features</h3>
         <ul>
-          <li>Metro UI Design</li>
-          <li>Full Compact Video Player Using AX Movie Player SDK</li>
-          <li>Using Fisher Yates Algorithm For Recommendation System</li>
-          <li>Using Hashing Algorithm For Ultra Fast Search Results</li>
-          <li>Full localized Data Base System</li>
-          <li>Efficient Usage Of Data Structures &amp; Algorithms</li>
+          <li>Built a Netflix-inspired desktop streaming application using <strong>C#</strong> and <strong>XML</strong></li>
+          <li>Implemented a custom AX Movie Player experience for compact video playback</li>
+          <li>Used the <strong>Fisher-Yates algorithm</strong> for recommendations based on collected user interactions</li>
+          <li>Applied hashing algorithms for fast local search across video data</li>
+          <li>Mastered usage of data structures such as doubly linkedlist for video navigation, Queue for watched history etc.
         </ul>
-        <h2>Future Prospects</h2>
-        <ul>
-          <li> AES 256 Encryption For Passwords </li>
-          <li> Code Optimization </li>
-        </ul>
-      </blockquote>`,
+      </blockquote>
+      <h3>Learning Focus</h3>
+      <ul>
+        <li>Data structures, algorithmic recommendations, and desktop UI patterns</li>
+      </ul>
+      <h2>Note</h2>
+      <p>This project was built for educational purposes and has no relationship with Netflix or any other video streaming service.</p>`,
       images: [{ src: './Assets/project_1.webp', alt: 'Netflix', link: 'https://github.com/eqan/Netflix-In-CSharp' }]
     },
     'modal-project-2': {
@@ -368,53 +363,38 @@ const PORTFOLIO_DATA = {
       subtitle: 'Linux Window manager & Desktop Environment Alternative',
       tags: ['Lua', 'Process Management', 'Desktop Development'],
       link: 'https://github.com/eqan/material-awesome',
-      content: `<p>
-        <h5>Original work by PapyElGringo</h5>
-        <h6>This project is being further developed by Eqan Ahmad</h6>
-        <h3>Features</h3>
+      content: `
+      <blockquote>
+        <h3>Systems Engineering</h3>
         <ul>
-          <li>Material Design UI</li>
-          <li>A Full Desktop Replacement</li>
-          <li>Built-In Native Lua Widgets</li>
-          <li>Different Layouts</li>
-          <li>Fully Customizable</li>
-          <li>User Friendly</li>
-          <li>300MB Idle Ram Consumption</li>
-          <li>Vim Key-Bindings Supported</li>
+          <li>Maintained a lightweight Linux window manager replacement built with <strong>Lua</strong></li>
+          <li>Kept idle memory usage under approximately <strong>300MB</strong></li>
+          <li>Supported native widgets, layouts, customization, and Vim-style key bindings</li>
         </ul>
-        <h2>Future Prospects</h2>
-        <ul>
-          <li>Tree Tiling Setup for Awesome</li>
-        </ul>
-      </p>`,
+      </blockquote>`,
       images: [{ src: './Assets/project_2.webp', alt: 'Awesome', link: 'https://github.com/eqan/material-awesome' }]
     },
     'modal-project-3': {
       title: 'Instagram Re-Imagened',
-      subtitle: 'A social media application made from scratch',
+      subtitle: 'A C# desktop Instagram clone with localized T-SQL backend and custom flat UI.',
       tags: ['XML', 'C#', 'T-SQL'],
       link: 'https://github.com/eqan/Instagram-ReImagened',
-      content: `<p>
-        A social media platform that utilizes SQL in a decentralized way
+      content: `
+        <blockquote>
+          <h3>Desktop App Showcase</h3>
+          <ul>
+            <li>Built a fully functional Instagram clone with <strong>C#</strong>, <strong>XML</strong>, and <strong>T-SQL</strong></li>
+            <li>Implemented core social media functionality including posts, stories, activity tracking, profiles, profile following, and bio data</li>
+            <li>Designed custom flat UI patterns with dark/light theme support</li>
+          </ul>
+        </blockquote>
         <h3>Features</h3>
         <ul>
-          <li>Flat UI</li>
-          <li>Themes[Dark/Light]</li>
-          <li>Localized Database using SQL at the back end</li>
-          <li>All essential features of a social media app, post, stories, likes, bookmarks etc</li>
-          <li>Activity Notification</li>
-          <li>Search Engine</li>
-          <li>Profile View</li>
+          <li>Localized SQL backend for desktop data persistence</li>
+          <li>Activity notifications, search, and profile views</li>
+          <li>Posts, stories, likes, bookmarks, and other social interactions</li>
         </ul>
-        <h2>Future Prospects</h2>
-        <ul>
-          <li> AES 256 Encryption For Passwords </li>
-          <li> Code Optimization </li>
-          <li> Chat system </li>
-          <li> Comment System </li>
-          <li> Much More </li>
-        </ul>
-      </p>`,
+      `,
       images: [{ src: './Assets/project_3.webp', alt: 'Instagram', link: 'https://github.com/eqan/Instagram-ReImagened' }]
     },
     'modal-project-4': {
@@ -438,21 +418,24 @@ const PORTFOLIO_DATA = {
     'modal-project-5': {
       title: 'Starvation Analysis in Pakistan',
       subtitle: 'A desktop application that performs analysis and predicts starvation rates in Pakistan',
-      tags: ['PYQT5', 'Distribution Models', 'Prediction Models', 'Regression Models', 'Data Science'],
+      tags: ['PyQt5', 'Prophet', 'Distribution Models', 'Regression Models', 'Data Science'],
       link: 'https://github.com/eqan/Starvation-Period-Analysis-And-Forecast',
-      content: `<p>
-        A desktop application that performs analysis and predicts starvation rates in Pakistan using numerous
-        distribution techniques, regression models, forcasting models etc
-        <h3>Features</h3>
+      content: `
+        <blockquote>
+          <h3>Classical AI & Data Science</h3>
+          <ul>
+            <li>Built a <strong>PyQt5</strong> desktop application for analyzing and forecasting starvation trends in Pakistan</li>
+            <li>Used Prophet, distribution models, and regression models for trend prediction</li>
+          </ul>
+        </blockquote>
+        <h3>Modeling Features</h3>
         <ul>
-          <li>Simple UI using PYQT5</li>
-          <li>Different charts such as histogram, line graph etc to point the trends of data.</li>
-          <li>Facebooks Prophet for Trend Prediction</li>
-          <li>Distribution models such as binomial, pisson for different data generation.</li>
-          <li>Regression models such as linear, polynomial, and multiple regression to predict the accuracy of
-            relationships between different factors.</li>
+          <li>Histogram and line chart views for exploring data trends</li>
+          <li>Prophet forecasting for trend prediction</li>
+          <li>Linear, polynomial, and multiple regression models</li>
+          <li>Binomial and Poisson distribution-based data generation experiments</li>
         </ul>
-      </p>`,
+      `,
       images: [{ src: './Assets/project_5.webp', alt: 'Starvation', link: 'https://github.com/eqan/Starvation-Period-Analysis-And-Forecast' }]
     },
     'modal-project-6': {
@@ -460,17 +443,21 @@ const PORTFOLIO_DATA = {
       subtitle: 'An OS simulator',
       tags: ['Glade', 'Shell Scripting', 'C', 'Algorithms'],
       link: 'https://github.com/eqan/Xaxis-OS',
-      content: `<p>
-        An OS simulator that utilizes the concepts of multithreading, semaphores etc for process handling.
+      content: `
+        <blockquote>
+          <h3>Systems Engineering</h3>
+          <ul>
+            <li>Built an OS simulator in <strong>C</strong> using multithreading, semaphores, and Banker's algorithm</li>
+            <li>Created a custom shell, virtual drive, and virtual memory simulation</li>
+          </ul>
+        </blockquote>
         <h3>Features</h3>
         <ul>
-          <li>Material UI made with glade.</li>
-          <li>C used for ultra fast performance.</li>
-          <li>Semaphores, multithreading and bankers algorithm embedded.</li>
-          <li>Builtin Custom Shell, virtual drive and ram.</li>
-          <li>Can launch linux applications and store in its virtual memory.</li>
+          <li>Glade-based desktop interface</li>
+          <li>Process handling concepts with synchronization primitives</li>
+          <li>Linux application launching and virtual memory storage concepts</li>
         </ul>
-      </p>`,
+      `,
       images: [{ src: './Assets/project_6.webp', alt: 'Xaxis OS', link: 'https://github.com/eqan/Xaxis-OS' }]
     },
     'modal-project-7': {
@@ -493,22 +480,20 @@ const PORTFOLIO_DATA = {
       subtitle: 'A bot that plays IGI game using Human Detection Model.',
       tags: ['Python', 'Machine Learning', 'OpenCV'],
       link: 'https://github.com/eqan/Mini-AI-Projects/tree/main/1.%20IGI_Predator',
-      content: `<p>
-        A bot that plays IGI game using Human Detection Model, controlled by
+      content: `
+        <blockquote>
+          <h3>Classical AI & Computer Vision</h3>
+          <ul>
+            <li>Built a Python/OpenCV game automation bot using human detection in the IGI game environment</li>
+            <li>Used computer vision to identify and target players in real time</li>
+          </ul>
+        </blockquote>
         <h3>Features</h3>
         <ul>
-          <li>Human Detection</li>
-          <li>Human Kill</li>
+          <li>Human detection pipeline with OpenCV</li>
+          <li>Targeting and action automation for gameplay experiments</li>
         </ul>
-        <h3>Future Prospects</h2>
-        <ul>
-          <li>Integerate More Accurate Mouse Movement To Target</li>
-          <li>Integerate Deep Learning For More Accurate Human Detection</li>
-          <li>Player Movement Controls By AI</li>
-          <li>Teach The Player How To Complete A Mission</li>
-          <li>Bring Up FrameRates</li>
-        </ul>
-      </p>`,
+      `,
       images: [{ src: './Assets/project_8.webp', alt: 'IGI Predator', link: 'https://github.com/eqan/Mini-AI-Projects/tree/main/1.%20IGI_Predator' }]
     },
     'modal-project-9': {
@@ -537,101 +522,138 @@ const PORTFOLIO_DATA = {
   // Experiences timeline - Concise, metric & impact focused
   experiences: [
     {
-      date: 'Jul 2025 – April 2026',
+      date: 'Jul 2025 – Apr 2026',
       title: 'Staque',
-      role: 'Lead Software Engineer',
+      role: 'Lead Full Stack Engineer',
       icon: 'fa-magic',
-      metrics: ['Quantum Computing', 'NLP/LLM Integration', '3 AI Products', 'Multi-platform Integration'],
+      metrics: ['CES 2026 World Premiere', 'Quantum AI', 'Amazon Braket APIs'],
       highlights: [
-        'Leading development of <strong>Super Q</strong> and <strong>ChatQPU</strong> products',
-        'Bridging classical & gate-based quantum computing via NLP/LLM',
-        '<strong>Akito AI</strong> — AI platform for employers & job seekers with Riipen integration',
-        '<strong>Que BDR</strong> — Agentic AI for lead management',
-        '<strong>Que Marketer</strong> — Multimodal AI for social media content'
+        'Architected <strong>Super™</strong> and <strong>ChatQLM</strong>, consumer apps powered by quantum/supercomputing',
+        'Built React frontends end-to-end across Staque/Super products',
+        'Developed AI orchestration bridging natural language with IonQ, QuEra, Amazon Braket, D-Wave, NVIDIA CUDA-Q, and Quanfluence',
+        'Built <strong>Akito AI</strong> with Next.js, React, Python/FastAPI, Supabase/Postgres, split-view React canvas, and web crawling'
       ],
-      tech: ['QuEra', 'Amazon Braket', 'IonQ', 'NVIDIA CUDA Q', 'Dwave', 'Gurobi', 'AI/ML', 'Agentic AI', 'Multimodal']
+      tech: ['React', 'Next.js', 'Python', 'FastAPI', 'Amazon Braket', 'IonQ', 'QuEra', 'D-Wave', 'CUDA-Q', 'Gurobi', 'Agentic Workflows']
     },
     {
       date: 'Sep 2024 – Apr 2025',
-      title: 'Qanooni.ai',
-      role: 'AI Engineer',
+      title: 'Qanooni AI',
+      role: 'Full Stack AI Engineer',
       icon: 'fa-gavel',
-      metrics: ['60% model performance boost', '83% prompt accuracy', '1M+ user scale'],
+      metrics: ['58% workload reduction', '$2M pre-seed', '83% accuracy'],
       highlights: [
-        'Built AI Chatbot controlling <strong>MS Word</strong> for clause-by-clause legal drafting',
-        'Implemented <strong>RAG</strong> for law data collection — <strong>60%</strong> performance boost',
-        'Prompt engineering with <strong>83%</strong> accuracy in draft generation'
+        'Engineered Draft, Review, and Global Changes modules for MVP launch using Next.js, FastAPI, and PostgreSQL',
+        'Implemented advanced RAG with LangChain, LangSmith, semantic chunking, Pinecone, and LLM guardrails',
+        'Developed a dynamic AI chatbot controlling Microsoft Word API via WebSockets for clause-by-clause drafting'
       ],
-      tech: ['Langchain', 'GPT-4', 'Claude', 'FAST API', 'Next.js']
+      tech: ['Next.js', 'FastAPI', 'PostgreSQL', 'LangChain', 'LangSmith', 'Pinecone', 'WebSockets', 'MS Word API', 'RAG']
     },
     {
-      date: '2021 – Present',
-      title: 'Freelancer',
-      role: 'Top Vetted Engineer',
-      icon: 'fa-briefcase',
-      metrics: ['300+ projects', '4.9★ rating', 'Top vetted @ Toptal'],
+      date: 'Feb 2024 – Present',
+      title: 'AlphaSights',
+      role: 'Software Consultant',
+      icon: 'fa-comments',
+      metrics: ['20+ engagements', 'Fortune 500', 'AI / Quantum / Cloud'],
       highlights: [
-        '<strong>Toptal</strong> — Top vetted freelancer',
-        '<strong>Fiverr</strong> — Level 2 seller, 200+ projects',
-        '<strong>Upwork</strong> — Emerging Talent badge'
+        'Advise Fortune 500 companies on platform scaling strategy across 20+ engagements',
+        'Evaluate AI/ML, GPU cloud, quantum simulation, and Web3 stacks for clients such as Guidepoint',
+        'Recommend architectures by weighing scaling, cost, and complexity tradeoffs'
       ],
-      tech: ['Web Dev', 'Blockchain', 'DevOps', 'Gen AI']
+      tech: ['AI/ML', 'Quantum Computing', 'Cloud Infrastructure', 'Blockchain', 'Platform Scaling']
     },
     {
-      date: 'Jul 2023 – Jul 2024',
-      title: 'Stable Diffusion',
-      role: 'Lead Cloud Engineer',
+      date: 'Jun 2023 – Jul 2024',
+      title: 'Models Lab / GPU Lab',
+      role: 'Lead Full Stack Cloud Engineer',
       icon: 'fa-cloud',
-      metrics: ['1M+ DAU target', '60% cost reduction', '$1000+ GPU savings/day'],
+      metrics: ['400K+ MAU', '$1M+ revenue', '60% cost reduction'],
       highlights: [
-        'Architected cloud AI framework for <strong>1M+ daily users</strong>',
-        'Reduced 3rd party costs by <strong>60%</strong>',
-        'Optimized GPU allocation saving <strong>$1000+/day</strong>'
+        'Led full-stack engineering team to architect <strong>GPU Lab</strong> for in-house LLM deployments',
+        'Scaled Models Lab to <strong>400,000+ MAU</strong> and <strong>$1M+ revenue earned within 1 year</strong>',
+        'Developed multimodal diffusion pipelines using SDXL and LangChain with React/Redux frontends'
       ],
-      tech: ['Docker', 'FAST API', 'PostgreSQL', 'Azure', 'AWS S3']
+      tech: ['Docker', 'FastAPI', 'PostgreSQL', 'React', 'Redux', 'WebSockets', 'Stripe', 'Cloudflare', 'AWS']
     },
     {
-      date: 'Mar 2020 – Apr 2023',
+      date: 'Sep 2022 – Present',
+      title: 'Freelance',
+      role: 'Forward Deployed Full Stack Engineer',
+      icon: 'fa-briefcase',
+      metrics: ['160+ Forex projects', '4.8+ rating', '2.5 week AI build'],
+      highlights: [
+        'Used AI-assisted delivery with Copilot and Cursor to ship <strong>Skoolie Support</strong> in 2.5 weeks',
+        'Boosted YouTube views and referral revenue by <strong>30%</strong>',
+        'Completed 160+ Forex automation projects using MQL4/5 and Pine Script with 70+ reviews'
+      ],
+      tech: ['Next.js', 'FastAPI', 'AI Chatbots', 'MQL4/5', 'Pine Script', 'Cursor', 'Copilot']
+    },
+    {
+      date: 'Jan 2022 – Apr 2023',
       title: 'Microslush',
       role: 'Associate Software Engineer',
       icon: 'fa-code',
-      metrics: ['200% API speedup', '70% UX improvement', '1M+ users impacted'],
+      metrics: ['4K+ DAU', '200% speedup', '1M+ desktop users'],
       highlights: [
-        'Built <strong>Binance NFT marketplace</strong> — improved API speed by <strong>200%</strong>',
-        'Desktop apps impacting <strong>1M+ users</strong> with <strong>70%</strong> UX improvement',
-        'Reduced bugs by <strong>30-40%</strong> with automated testing'
+        'Applied Agile SDLC to develop a Binance-based NFT marketplace Indexer API using Nest.js and GraphQL',
+        'Improved backend speed by <strong>200%</strong> using PostgreSQL indexing, GraphQL, and Redis caching',
+        'Scaled .NET desktop solutions to <strong>1M+ MAU</strong> while preserving core business workflows'
       ],
-      tech: ['NEST.js', 'GraphQL', 'C#/.NET', 'Solidity', 'MQL4']
+      tech: ['Nest.js', 'GraphQL', 'PostgreSQL', 'Redis', 'C#/.NET', 'Agile SDLC']
     }
   ],
 
   // Honors - Concise format
   honors: [
     {
-      date: '2023',
-      title: 'PM National Innovation Award Finalist',
-      icon: 'fa-trophy',
-      metric: 'Top 50 / 20,000',
-      description: 'NUCES BLOCKED project selected from 20,000+ applications nationwide',
-      details: ['2-month entrepreneurship training at UET Lahore & NUST Islamabad']
+      date: '2026',
+      title: 'CES 2026 World Premiere',
+      icon: 'fa-bolt',
+      metric: '$5M Round',
+      description: 'Super™ and ChatQLM selected as consumer apps powered by quantum/supercomputing',
+      details: ['Built at Staque across Super and ChatQLM product lines']
     },
     {
-      date: '2019',
-      title: 'Top 5 UI/UX Designer',
-      icon: 'fa-paint-brush',
-      metric: 'Top 5',
-      description: 'Ranked among top 5 in UI/UX course across the entire institute'
+      date: '2023',
+      title: 'Prime Minister National Innovation Award Finalist',
+      icon: 'fa-trophy',
+      metric: 'Top 50 / 20,000',
+      description: 'NUCES BLOCKED selected from 20,000+ applications nationwide and honored at the Prime Minister\'s House, Pakistan',
+      details: ['Pitched at NUST Islamabad after KICS entrepreneurship training at UET Lahore']
+    },
+    {
+      date: '2025',
+      title: 'Qanooni AI Pre-seed Contribution',
+      icon: 'fa-rocket',
+      metric: '$2M Round',
+      description: 'Shipped MVP modules that reduced attorney manual workload by 58%',
+      details: ['Draft, Review, Global Changes, RAG, and Microsoft Word AI workflows']
     }
   ],
 
   // Education - Modern format
   education: [
     {
-      date: '2019 – 2023',
+      date: 'Aug 2019 – Jun 2023',
       title: 'FAST NUCES',
       icon: 'fa-graduation-cap',
-      degree: 'BS Computer Science',
+      degree: 'Bachelors in Computer Science',
       institution: 'National University of Computer & Emerging Sciences',
+      location: 'Pakistan'
+    },
+    {
+      date: 'May 2024 – Jun 2024',
+      title: 'LUMS',
+      icon: 'fa-university',
+      degree: 'Executive Short Course, Entrepreneurship',
+      institution: 'Lahore University of Management Sciences',
+      location: 'Pakistan'
+    },
+    {
+      date: '2022 – 2023',
+      title: 'UET Lahore',
+      icon: 'fa-lightbulb-o',
+      degree: 'KICS Training, Entrepreneurship & Business Admin.',
+      institution: 'University of Engineering and Technology',
       location: 'Pakistan'
     }
   ],
