@@ -39,12 +39,12 @@
     return escapedText;
   }
 
-  function findSectionForElement(element) {
-    var modalId = element.id || element.closest('[id]')?.id;
-    var modalTrigger = modalId ? document.querySelector('main a[href="#' + modalId + '"]') : null;
-    var section = modalTrigger?.closest('.section') || element.closest('.section');
-
-    return section?.id || '';
+  function findParentSectionForModal(modal) {
+    var modalId = modal.id;
+    if (!modalId) return '';
+    var trigger = document.querySelector('main a[href="#' + modalId + '"][data-toggle="modal"]');
+    var section = trigger ? trigger.closest('.section') : null;
+    return section ? section.id : '';
   }
 
   function buildIndex() {
@@ -55,14 +55,22 @@
       var isModal = entry.classList.contains('modal');
       var title = normalize(entry.querySelector('.section-title, .hero-headline, .project-modal-title, .profile-modal-title')?.textContent);
       var text = normalize(entry.innerText);
-      var targetId = isNav ? 'section-10' : findSectionForElement(entry);
+
+      var targetId;
+      if (isNav) {
+        targetId = 'section-10';
+      } else if (isModal) {
+        targetId = findParentSectionForModal(entry) || entry.id;
+      } else {
+        targetId = entry.id;
+      }
 
       if (!title) {
         title = isNav ? 'Contact Links' : (isModal ? 'Project Details' : 'Top');
       }
 
       return {
-        id: targetId || entry.id,
+        id: targetId,
         title: title,
         text: text,
         haystack: (title + ' ' + text).toLowerCase()
