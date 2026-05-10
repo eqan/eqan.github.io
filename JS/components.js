@@ -210,7 +210,10 @@ const Components = {
   },
 
   projectsGrid: (featured, regular) => {
-    const all = [...featured, ...regular];
+    const all = [
+      ...featured.map(project => ({ ...project, featured: true })),
+      ...regular.map(project => ({ ...project, featured: false }))
+    ];
     return `
       ${Components.projectsControls(all)}
       <div class="projects-bento animation-translate animation-item-3">
