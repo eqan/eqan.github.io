@@ -18,15 +18,6 @@
     Array.prototype.forEach.call(document.querySelectorAll(selector), callback);
   }
 
-  function scrollStop(callback) {
-    if (typeof callback !== 'function') return;
-    var timer;
-    window.addEventListener('scroll', function () {
-      window.clearTimeout(timer);
-      timer = setTimeout(callback, 66);
-    }, false);
-  }
-
   ready(function () {
     function smoothScrollTo(target) {
       var top = target.getBoundingClientRect().top + window.scrollY;
@@ -85,33 +76,52 @@
   ready(function () {
     var sections = Array.prototype.slice.call(document.querySelectorAll('.section'));
     if (!sections.length) return;
+    var navLinks = [];
 
-    var offsetRatio = window.innerWidth >= 1024 ? 1.2 : 0.85;
-    var viewportBottom = window.innerHeight * offsetRatio;
+    function getNavLinks() {
+      navLinks = Array.prototype.slice.call(document.querySelectorAll('.sections-nav-link[href^="#"]'));
+      return navLinks;
+    }
 
     function reveal(el) {
       if (el) el.classList.add('interaction-in');
     }
 
-    var initial;
-    sections.forEach(function (section) {
-      var top = Math.abs(section.getBoundingClientRect().top);
-      var bestTop = initial ? Math.abs(initial.getBoundingClientRect().top) : Infinity;
-      if (top < bestTop) initial = section;
-    });
-    reveal(initial);
-
-    scrollStop(function () {
-      var best;
-      sections.forEach(function (section) {
-        var rect = section.getBoundingClientRect();
-        var topVisible = rect.top >= 0 && rect.top <= viewportBottom &&
-          (!best || rect.top < Math.abs(best.getBoundingClientRect().top));
-        var bottomVisible = rect.bottom >= 0 &&
-          (!best || rect.bottom < best.getBoundingClientRect().bottom);
-        if (topVisible || bottomVisible) best = section;
+    function setActive(section) {
+      if (!section || !section.id) return;
+      if (!navLinks.length) getNavLinks();
+      navLinks.forEach(function (link) {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + section.id);
       });
-      reveal(best);
-    });
+    }
+
+    reveal(sections[0]);
+    setActive(sections[0]);
+
+    if ('IntersectionObserver' in window) {
+      var visibleSections = {};
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            visibleSections[entry.target.id] = entry.target;
+            reveal(entry.target);
+          } else if (entry.target.id) {
+            delete visibleSections[entry.target.id];
+          }
+        });
+
+        var active = sections.find(function (section) {
+          return visibleSections[section.id];
+        });
+        if (active) setActive(active);
+      }, { rootMargin: '0px 0px -20% 0px', threshold: 0.08 });
+
+      sections.forEach(function (section) {
+        observer.observe(section);
+      });
+    } else {
+      sections.forEach(reveal);
+    }
   });
 })();

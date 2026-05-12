@@ -44,18 +44,27 @@
   };
 
   window.addEventListener('load', function () {
-    idle(function () {
+    var loadFonts = function () {
+      if (loadFonts.done) return;
+      loadFonts.done = true;
       loadStyle('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap');
       loadStyle('./Font-Awesome/css/font-awesome.min.css');
-    }, 1200);
+    };
 
-    idle(function () {
-      (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", "hbem75z47m");
-    }, 5000);
+    setTimeout(loadFonts, 6000);
+    ['pointerdown', 'keydown', 'touchstart'].forEach(function (eventName) {
+      window.addEventListener(eventName, loadFonts, { once: true, passive: true });
+    });
+
+    if (location.hostname === 'eqanahmad.com' || location.hostname === 'www.eqanahmad.com') {
+      idle(function () {
+        (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "hbem75z47m");
+      }, 5000);
+    }
   });
 
   if (window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {

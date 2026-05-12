@@ -352,6 +352,52 @@
 }
 
 /* ============ MODERN NAVIGATION SIDEBAR ============ */
+.sections-nav-container {
+  position: fixed;
+  z-index: 1030;
+  width: 100%;
+  left: 0;
+  transform: translate(calc(100% + 60px));
+  transition: transform 0.35s ease;
+}
+@media (min-width: 768px) {
+  .sections-nav-container {
+    width: 20rem;
+    right: 0;
+    left: auto;
+  }
+}
+@media (min-width: 1200px) {
+  .sections-nav-container {
+    display: block;
+    top: 5rem;
+    left: calc(75% + 30px);
+    right: auto;
+    width: calc(25% - 60px);
+    transform: none;
+    transition: none;
+  }
+}
+@media (min-width: 1740px) {
+  .sections-nav-container {
+    left: calc((100% - 1680px) / 2 + 1290px);
+    width: 360px;
+  }
+}
+.sections-nav-in .sections-nav-container {
+  display: block;
+  transform: translate(15px);
+}
+@media (min-width: 1200px) {
+  .sections-nav-in .sections-nav-container {
+    transform: none;
+  }
+}
+.sections-nav {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
 .sections-nav-item {
   position: relative;
   margin-bottom: 0.25rem;

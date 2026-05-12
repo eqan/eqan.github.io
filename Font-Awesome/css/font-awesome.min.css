@@ -12,6 +12,7 @@
     url("../fonts/fontawesome-webfont.ttf?v=5.15.3") format("truetype"),
     url("../fonts/fontawesome-webfont.svg?v=5.15.3#fontawesomeregular")
       format("svg");
+  font-display: swap;
   font-weight: normal;
   font-style: normal;
 }
