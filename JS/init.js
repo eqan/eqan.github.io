@@ -1,12 +1,22 @@
 /*!
- * Site init logic extracted from the legacy all.js bundle.
+ * Site init logic.
  * Owns: section anchor scrolling, side-nav toggle, carousel equal-height,
  *       and the `interaction-in` reveal toggle that drives scroll animations.
- *
- * Requires: jQuery (loaded before this script).
  */
-(function ($) {
+(function () {
   'use strict';
+
+  function ready(callback) {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', callback, { once: true });
+    } else {
+      callback();
+    }
+  }
+
+  function each(selector, callback) {
+    Array.prototype.forEach.call(document.querySelectorAll(selector), callback);
+  }
 
   function scrollStop(callback) {
     if (typeof callback !== 'function') return;
@@ -17,79 +27,91 @@
     }, false);
   }
 
-  $(function () {
-    function smoothScrollTo($target) {
-      window.scrollTo({ top: $target.offset().top, behavior: 'smooth' });
+  ready(function () {
+    function smoothScrollTo(target) {
+      var top = target.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top: top, behavior: 'smooth' });
     }
 
-    $('.goto-section').on('click', function () {
-      var $target = $($(this).attr('href'));
-      if (!$target.length) return false;
+    each('.goto-section', function (link) {
+      link.addEventListener('click', function (event) {
+        var href = link.getAttribute('href');
+        var target = href ? document.querySelector(href) : null;
+        if (!target) return;
 
-      if (window.matchMedia('(min-width: 1200px)').matches) {
-        smoothScrollTo($target);
-      } else {
-        setTimeout(function () { smoothScrollTo($target); }, 350);
-      }
-      return false;
+        event.preventDefault();
+        if (window.matchMedia('(min-width: 1200px)').matches) {
+          smoothScrollTo(target);
+        } else {
+          setTimeout(function () { smoothScrollTo(target); }, 350);
+        }
+      });
     });
 
-    $('.sections-nav-link').on('click', function () {
-      $('body').removeClass('sections-nav-in');
+    each('.sections-nav-link', function (link) {
+      link.addEventListener('click', function () {
+        document.body.classList.remove('sections-nav-in');
+      });
     });
 
-    $('.sections-nav-toggler').on('click', function () {
-      $('body').toggleClass('sections-nav-in');
+    each('.sections-nav-toggler', function (button) {
+      button.addEventListener('click', function () {
+        document.body.classList.toggle('sections-nav-in');
+      });
     });
   });
 
-  $(function () {
+  ready(function () {
     function equalizeCarousels() {
-      $('.carousel').each(function () {
-        var $items = $(this).find('.carousel-item');
-        $items.css('min-height', 0);
+      each('.carousel', function (carousel) {
+        var items = carousel.querySelectorAll('.carousel-item');
+        Array.prototype.forEach.call(items, function (item) {
+          item.style.minHeight = '0';
+        });
         var max = 0;
-        $items.each(function () {
-          var h = $(this).height();
+        Array.prototype.forEach.call(items, function (item) {
+          var h = item.getBoundingClientRect().height;
           if (h > max) max = h;
         });
-        $items.css('min-height', max);
+        Array.prototype.forEach.call(items, function (item) {
+          item.style.minHeight = max + 'px';
+        });
       });
     }
     equalizeCarousels();
     window.addEventListener('resize', equalizeCarousels);
   });
 
-  $(function () {
-    var $sections = $('.section');
-    if (!$sections.length) return;
+  ready(function () {
+    var sections = Array.prototype.slice.call(document.querySelectorAll('.section'));
+    if (!sections.length) return;
 
     var offsetRatio = window.innerWidth >= 1024 ? 1.2 : 0.85;
-    var viewportBottom = $(window).height() * offsetRatio;
+    var viewportBottom = window.innerHeight * offsetRatio;
 
     function reveal(el) {
-      if (el) $(el).addClass('interaction-in');
+      if (el) el.classList.add('interaction-in');
     }
 
     var initial;
-    $sections.each(function () {
-      var top = Math.abs(this.getBoundingClientRect().top);
+    sections.forEach(function (section) {
+      var top = Math.abs(section.getBoundingClientRect().top);
       var bestTop = initial ? Math.abs(initial.getBoundingClientRect().top) : Infinity;
-      if (top < bestTop) initial = this;
+      if (top < bestTop) initial = section;
     });
     reveal(initial);
 
     scrollStop(function () {
       var best;
-      $sections.each(function () {
-        var rect = this.getBoundingClientRect();
+      sections.forEach(function (section) {
+        var rect = section.getBoundingClientRect();
         var topVisible = rect.top >= 0 && rect.top <= viewportBottom &&
           (!best || rect.top < Math.abs(best.getBoundingClientRect().top));
         var bottomVisible = rect.bottom >= 0 &&
           (!best || rect.bottom < best.getBoundingClientRect().bottom);
-        if (topVisible || bottomVisible) best = this;
+        if (topVisible || bottomVisible) best = section;
       });
       reveal(best);
     });
   });
-})(window.jQuery);
+})();

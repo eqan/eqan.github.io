@@ -37,7 +37,7 @@ const Components = {
   contactIcon: ({ href, icon, label, tooltip, target, id, hiddenAddress }) => `
     <a ${id ? `id="${id}"` : ''} href="${href}" class="contact-icon" 
        ${target ? `target="${target}"` : ''} 
-       ${tooltip ? `data-toggle="tooltip" title="${tooltip}"` : ''}>
+       ${tooltip ? `data-bs-toggle="tooltip" title="${tooltip}"` : ''}>
       <i class="fa ${icon}"></i>
       <span>${label}</span>
       ${hiddenAddress ? `<span class="hidden-address">${hiddenAddress}</span>` : ''}
@@ -73,7 +73,7 @@ const Components = {
   
   serviceCard: ({ href, icon, label, target, modal }) => `
     <div class="service-item">
-      <a href="${href}" ${modal ? 'data-toggle="modal"' : ''} 
+      <a href="${href}" ${modal ? 'data-bs-toggle="modal"' : ''} 
          ${target ? `target="${target}"` : ''} 
          class="service-card">
         <i class="fa ${icon}"></i>
@@ -161,7 +161,7 @@ const Components = {
                data-size="${size || 'small'}"
                data-year="${year || 0}"
                data-featured="${featured ? 'true' : 'false'}">
-        <a class="${cardClass}" href="#${id}" data-toggle="modal">
+        <a class="${cardClass}" href="#${id}" data-bs-toggle="modal">
           <figure class="project-card-img">
             <img src="${img}" alt="${title}" loading="lazy" />
             ${badgesHtml}
@@ -262,7 +262,7 @@ const Components = {
               <span class="project-modal-eyebrow">Project</span>
               <span class="project-modal-topbar-title">${title}</span>
             </div>
-            <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="modal-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <article class="project-article">
@@ -403,23 +403,23 @@ const Components = {
     </div>`,
 
   testimonialIndicator: (_, index) => 
-    `<li data-target="#carousel" data-slide-to="${index}" class="${index === 0 ? 'active' : ''}" aria-label="Slide ${index + 1}"></li>`,
+    `<button type="button" data-bs-target="#carousel" data-bs-slide-to="${index}" class="${index === 0 ? 'active' : ''}" aria-label="Slide ${index + 1}"></button>`,
 
   testimonialCarousel: (testimonials) => `
-    <div id="carousel" class="carousel slide testimonial-carousel animation-translate animation-item-2" data-ride="carousel" data-interval="6000">
+    <div id="carousel" class="carousel slide testimonial-carousel animation-translate animation-item-2" data-bs-ride="carousel" data-bs-interval="6000">
       <div class="carousel-inner">
         ${testimonials.map(Components.testimonialItem).join('')}
       </div>
       <div class="testimonial-nav">
-        <a class="testimonial-arrow testimonial-prev" href="#carousel" role="button" data-slide="prev" aria-label="Previous">
+        <button class="testimonial-arrow testimonial-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev" aria-label="Previous">
           <i class="fa fa-chevron-left"></i>
-        </a>
+        </button>
         <ol class="carousel-indicators testimonial-dots">
           ${testimonials.map(Components.testimonialIndicator).join('')}
         </ol>
-        <a class="testimonial-arrow testimonial-next" href="#carousel" role="button" data-slide="next" aria-label="Next">
+        <button class="testimonial-arrow testimonial-next" type="button" data-bs-target="#carousel" data-bs-slide="next" aria-label="Next">
           <i class="fa fa-chevron-right"></i>
-        </a>
+        </button>
       </div>
     </div>
     <div class="testimonial-more animation-translate animation-item-3">
@@ -443,13 +443,21 @@ const Components = {
     <div id="${id}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" style="display: none" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content profile-modal-content">
-          <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close"></button>
-          <div class="profile-modal-header">
-            <h2 class="profile-modal-title">${title}</h2>
-            <p class="profile-modal-subtitle">Click to visit my profiles</p>
+          <div class="profile-modal-topbar">
+            <div class="project-modal-topbar-info">
+              <span class="project-modal-eyebrow">Profiles</span>
+              <span class="project-modal-topbar-title">${title}</span>
+            </div>
+            <button type="button" class="modal-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="profile-modal-body">
-            ${profiles.map(Components.profileCard).join('')}
+          <div class="profile-modal-inner">
+            <div class="profile-modal-header">
+              <h2 class="profile-modal-title">${title}</h2>
+              <p class="profile-modal-subtitle">Click to visit my profiles</p>
+            </div>
+            <div class="profile-modal-body">
+              ${profiles.map(Components.profileCard).join('')}
+            </div>
           </div>
         </div>
       </div>

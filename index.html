@@ -30,27 +30,19 @@
   <meta property="og:type" content="Website" />
   <meta name="image" property="og:image" content="https://live.staticflickr.com/65535/51822943239_b4c2530f31_z.webp" />
   <meta name="author" content="Eqan Ahmad" />
-  <!-- Analytics - deferred to not block rendering -->
+  <!-- Microsoft Clarity - deferred to not block rendering -->
   <script>
-    // Load analytics after page load for better performance
     window.addEventListener('load', function() {
-      // Microsoft Clarity
-    (function(c,l,a,r,i,t,y){
+      (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "hbem75z47m");
-      
-      // Google Analytics
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-9CXBW91L24');
+      })(window, document, "clarity", "script", "hbem75z47m");
     });
   </script>
 </head>
 
-<body class="with-header position-relative" data-spy="scroll" data-target="#sections-nav" data-offset="80">
+<body class="with-header position-relative" data-bs-spy="scroll" data-bs-target="#sections-nav" data-bs-offset="80">
   <!-- Side Bar -->
   <header class="header">
     <div class="container-fluid-limited d-flex align-items-center justify-content-between">
@@ -445,10 +437,8 @@
   </div>
 </body>
 
-<!-- Vendor libraries (jQuery + Popper required by Bootstrap; Bootstrap 4.4.1 components) -->
-<script src="./JS/lib/jquery.min.js"></script>
-<script src="./JS/lib/popper.min.js"></script>
-<script src="./JS/lib/bootstrap.min.js"></script>
+<!-- Bootstrap 5 bundle includes Popper and does not require jQuery -->
+<script src="./JS/lib/bootstrap.bundle.min.js"></script>
 
 <!-- Site scripts -->
 <script src="./JS/init.js"></script>

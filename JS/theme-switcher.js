@@ -176,98 +176,109 @@ function playThemeAnimation(themeFile) {
   }, 4200);
 }
 
+function ready(callback) {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', callback, { once: true });
+  } else {
+    callback();
+  }
+}
+
 /* Theme selector initialization and switching */
-$(function () {
-  var $themesContainer = $('.preview-themes');
+ready(function () {
+  var themesContainer = document.querySelector('.preview-themes');
+  var themeLink = document.getElementById('theme');
+  var overlay = document.querySelector('.theme-transition-overlay');
+  var themeButtons = Array.prototype.slice.call(document.querySelectorAll('.preview-theme'));
+
   setTimeout(function() {
-    $themesContainer.addClass('attention');
+    if (themesContainer) themesContainer.classList.add('attention');
   }, 500);
 
-  $('.preview-theme').each(function() {
-    var currentTheme = $('#theme').attr('href');
-    if ($(this).attr('data-theme') === currentTheme) {
-      $(this).addClass('active');
+  themeButtons.forEach(function(button) {
+    var currentTheme = themeLink ? themeLink.getAttribute('href') : '';
+    if (button.getAttribute('data-theme') === currentTheme) {
+      button.classList.add('active');
     }
   });
 
-  $('.preview-theme').click(function () {
-    var $this = $(this);
-    var $link = $('#theme');
-    var $overlay = $('.theme-transition-overlay');
-    var newTheme = $this.attr('data-theme');
+  themeButtons.forEach(function(button) {
+    button.addEventListener('click', function (event) {
+      event.preventDefault();
+      var newTheme = button.getAttribute('data-theme');
 
-    if ($link.attr('href') === newTheme) return false;
+      if (!themeLink || themeLink.getAttribute('href') === newTheme) return;
 
-    playThemeAnimation(newTheme);
+      playThemeAnimation(newTheme);
 
-    /* Update custom cursor theme */
-    var cursorThemeMap = {
-      './CSS/yellow-black.css': 'yellow',
-      './CSS/black-white.css': 'black',
-      './CSS/pink-black.css': 'pink',
-      './CSS/blue-black.css': 'blue'
-    };
-    if (window.setCursorTheme && cursorThemeMap[newTheme]) {
-      window.setCursorTheme(cursorThemeMap[newTheme]);
-    }
-
-    $overlay.css('background', getComputedStyle(document.body).backgroundColor);
-    $overlay.addClass('active');
-
-    setTimeout(function() {
-      if ($link.length) {
-        $link.attr('href', newTheme);
+      /* Update custom cursor theme */
+      var cursorThemeMap = {
+        './CSS/yellow-black.css': 'yellow',
+        './CSS/black-white.css': 'black',
+        './CSS/pink-black.css': 'pink',
+        './CSS/blue-black.css': 'blue'
+      };
+      if (window.setCursorTheme && cursorThemeMap[newTheme]) {
+        window.setCursorTheme(cursorThemeMap[newTheme]);
       }
 
-      $('.preview-theme').removeClass('active');
-      $this.addClass('active');
-
-      var isDark = $this.attr('data-theme-bg') === 'dark';
-      var root = document.documentElement.style;
-      root.setProperty('--scrollbar-thumb', isDark ? '#fff' : '#000');
-      root.setProperty('--scrollbar-track', isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.05)');
-      root.setProperty('--contact-border', isDark ? '#fff' : '#000');
-      root.setProperty('--contrast-color', isDark ? '#000' : '#fff');
-      root.setProperty('--theme-pill-bg', isDark ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.85)');
-      root.setProperty('--theme-pill-text', isDark ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.6)');
-      root.setProperty('--theme-swatch-border', isDark ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.2)');
-      root.setProperty('--theme-swatch-hover', isDark ? 'rgba(0,0,0,0.5)' : 'rgba(255,255,255,0.5)');
-      root.setProperty('--theme-swatch-active', isDark ? '#000' : '#fff');
-      root.setProperty('--theme-swatch-glow', isDark ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.3)');
-
-      root.setProperty('--content-bg', isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.03)');
-      root.setProperty('--content-item-bg', isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)');
-      root.setProperty('--content-item-hover', isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.05)');
-      root.setProperty('--content-blockquote-bg', isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.025)');
-      root.setProperty('--nav-hover-bg', isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.05)');
-      root.setProperty('--nav-active-bg', isDark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.08)');
-      root.setProperty('--nav-border-color', isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.1)');
+      if (overlay) {
+        overlay.style.background = getComputedStyle(document.body).backgroundColor;
+        overlay.classList.add('active');
+      }
 
       setTimeout(function() {
-        $overlay.removeClass('active');
-      }, 100);
-    }, 150);
+        themeLink.setAttribute('href', newTheme);
 
-    return false;
+        themeButtons.forEach(function(item) {
+          item.classList.remove('active');
+        });
+        button.classList.add('active');
+
+        var isDark = button.getAttribute('data-theme-bg') === 'dark';
+        var root = document.documentElement.style;
+        root.setProperty('--scrollbar-thumb', isDark ? '#fff' : '#000');
+        root.setProperty('--scrollbar-track', isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.05)');
+        root.setProperty('--contact-border', isDark ? '#fff' : '#000');
+        root.setProperty('--contrast-color', isDark ? '#000' : '#fff');
+        root.setProperty('--theme-pill-bg', isDark ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.85)');
+        root.setProperty('--theme-pill-text', isDark ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.6)');
+        root.setProperty('--theme-swatch-border', isDark ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.2)');
+        root.setProperty('--theme-swatch-hover', isDark ? 'rgba(0,0,0,0.5)' : 'rgba(255,255,255,0.5)');
+        root.setProperty('--theme-swatch-active', isDark ? '#000' : '#fff');
+        root.setProperty('--theme-swatch-glow', isDark ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.3)');
+
+        root.setProperty('--content-bg', isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.03)');
+        root.setProperty('--content-item-bg', isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)');
+        root.setProperty('--content-item-hover', isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.05)');
+        root.setProperty('--content-blockquote-bg', isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.025)');
+        root.setProperty('--nav-hover-bg', isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.05)');
+        root.setProperty('--nav-active-bg', isDark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.08)');
+        root.setProperty('--nav-border-color', isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.1)');
+
+        setTimeout(function() {
+          if (overlay) overlay.classList.remove('active');
+        }, 100);
+      }, 150);
+    });
   });
 });
 
 /* Domain card popovers (disabled on mobile for better UX) */
-$(function() {
-  var isMobile = function() { return $(window).width() < 768; };
+ready(function() {
+  var isMobile = function() { return window.innerWidth < 768; };
+  if (isMobile() || !window.bootstrap) return;
 
-  $('.domain-card').each(function() {
-    var $card = $(this);
-    var href = $card.attr('href') || '';
-    var isModal = $card.data('toggle') === 'modal' && href.startsWith('#');
-
-    if (isMobile()) return;
+  Array.prototype.forEach.call(document.querySelectorAll('.domain-card'), function(card) {
+    var href = card.getAttribute('href') || '';
+    var isModal = card.getAttribute('data-bs-toggle') === 'modal' && href.indexOf('#') === 0;
 
     if (isModal) {
-      var $modal = $(href);
-      if ($modal.length) {
-        var previewHtml = $modal.find('.modal-body').html() || '';
-        $card.popover({
+      var modal = document.querySelector(href);
+      if (modal) {
+        var body = modal.querySelector('.modal-body');
+        var previewHtml = body ? body.innerHTML : '';
+        new bootstrap.Popover(card, {
           html: true,
           trigger: 'hover',
           placement: 'auto',
@@ -275,9 +286,10 @@ $(function() {
           content: '<div class="popover-preview">' + previewHtml + '</div>'
         });
       }
-    } else if ($card.attr('target') === '_blank') {
-      var label = $card.find('h4').text() || 'Open link';
-      $card.tooltip({ title: label, placement: 'bottom' });
+    } else if (card.getAttribute('target') === '_blank') {
+      var title = card.querySelector('h4');
+      var label = title ? title.textContent : 'Open link';
+      new bootstrap.Tooltip(card, { title: label, placement: 'bottom' });
     }
   });
 });
@@ -307,28 +319,29 @@ document.addEventListener('click', function(e) {
 });
 
 /* Avatar dialog */
-$(function() {
-  var $dialog = $('#avatar-dialog');
-  var $close = $('#avatar-dialog-close');
-  var $trigger = $('#hero-avatar-trigger');
+ready(function() {
+  var dialog = document.getElementById('avatar-dialog');
+  var close = document.getElementById('avatar-dialog-close');
+  var trigger = document.getElementById('hero-avatar-trigger');
+  if (!dialog || !close || !trigger) return;
 
-  $trigger.on('click', function() {
-    $dialog.addClass('active');
+  trigger.addEventListener('click', function() {
+    dialog.classList.add('active');
   });
 
-  $close.on('click', function() {
-    $dialog.removeClass('active');
+  close.addEventListener('click', function() {
+    dialog.classList.remove('active');
   });
 
-  $dialog.on('click', function(e) {
-    if (e.target === this) {
-      $dialog.removeClass('active');
+  dialog.addEventListener('click', function(e) {
+    if (e.target === dialog) {
+      dialog.classList.remove('active');
     }
   });
 
-  $(document).on('keydown', function(e) {
-    if (e.key === 'Escape' && $dialog.hasClass('active')) {
-      $dialog.removeClass('active');
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && dialog.classList.contains('active')) {
+      dialog.classList.remove('active');
     }
   });
 });

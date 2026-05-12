@@ -44,7 +44,7 @@
   var HOVER_SELECTORS = [
     'a', 'button', '.btn', '[role="button"]', '.preview-theme',
     '.card', '.domain-card', '.modal-close', '.section-next',
-    '[data-toggle]', '.contact-cta', '.hero-cta', '.hero-secondary-cta',
+    '[data-bs-toggle]', '.contact-cta', '.hero-cta', '.hero-secondary-cta',
     'input[type="submit"]', '.popover', '.close'
   ].join(',');
 

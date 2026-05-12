@@ -44,7 +44,7 @@
   function findModalTrigger(modal) {
     var modalId = modal.id;
     if (!modalId) return null;
-    return document.querySelector('main a[href="#' + modalId + '"][data-toggle="modal"]');
+    return document.querySelector('main a[href="#' + modalId + '"][data-bs-toggle="modal"]');
   }
 
   function findParentSectionForModal(modal) {
