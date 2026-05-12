@@ -392,7 +392,7 @@ const Components = {
         <div class="testimonial-quote"><i class="fa fa-quote-left"></i></div>
         <p class="testimonial-text">${text}</p>
         <div class="testimonial-author">
-          <img src="${img}" class="testimonial-avatar" alt="${name}" />
+          <img src="${img}" class="testimonial-avatar" alt="${name}" loading="lazy" decoding="async" />
           <div class="testimonial-info">
             <h4 class="testimonial-name">${name}</h4>
             <p class="testimonial-role">${role}</p>

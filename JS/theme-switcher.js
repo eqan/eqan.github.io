@@ -184,6 +184,23 @@ function ready(callback) {
   }
 }
 
+function preloadThemeStyle(href) {
+  if (!href || href === './CSS/yellow-black.css') return;
+  if (document.querySelector('link[data-theme-preload][href="' + href + '"]')) return;
+  var link = document.createElement('link');
+  link.rel = 'preload';
+  link.as = 'style';
+  link.dataset.themePreload = 'true';
+  link.href = href;
+  document.head.appendChild(link);
+}
+
+function loadThemeAnimationCss() {
+  if (window.SiteLazyLoader) {
+    window.SiteLazyLoader.loadStyle('./CSS/theme-animations.css');
+  }
+}
+
 /* Theme selector initialization and switching */
 ready(function () {
   var themesContainer = document.querySelector('.preview-themes');
@@ -203,12 +220,21 @@ ready(function () {
   });
 
   themeButtons.forEach(function(button) {
+    button.addEventListener('mouseenter', function () {
+      preloadThemeStyle(button.getAttribute('data-theme'));
+    });
+    button.addEventListener('focus', function () {
+      preloadThemeStyle(button.getAttribute('data-theme'));
+    });
+
     button.addEventListener('click', function (event) {
       event.preventDefault();
       var newTheme = button.getAttribute('data-theme');
 
       if (!themeLink || themeLink.getAttribute('href') === newTheme) return;
 
+      preloadThemeStyle(newTheme);
+      loadThemeAnimationCss();
       playThemeAnimation(newTheme);
 
       /* Update custom cursor theme */
