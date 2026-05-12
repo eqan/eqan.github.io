@@ -44,18 +44,6 @@
   };
 
   window.addEventListener('load', function () {
-    var loadFonts = function () {
-      if (loadFonts.done) return;
-      loadFonts.done = true;
-      loadStyle('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap');
-      loadStyle('./Font-Awesome/css/font-awesome.min.css');
-    };
-
-    setTimeout(loadFonts, 6000);
-    ['pointerdown', 'keydown', 'touchstart'].forEach(function (eventName) {
-      window.addEventListener(eventName, loadFonts, { once: true, passive: true });
-    });
-
     if (location.hostname === 'eqanahmad.com' || location.hostname === 'www.eqanahmad.com') {
       idle(function () {
         (function(c,l,a,r,i,t,y){
