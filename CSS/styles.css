@@ -696,6 +696,51 @@
   color: var(--contact-border);
 }
 
+/* Themed sun-corona overlay for search-jump targets.
+   Injected directly into <body>, positioned exactly over the target.
+   Only the outward box-shadow is visible — the overlay's own box is
+   fully transparent — so the effect reads as a soft halo around the
+   element, never as a hard outline. Only `opacity` animates. */
+.search-glow-overlay {
+  position: absolute;
+  pointer-events: none;
+  z-index: 9990;
+  background: transparent;
+  border-radius: 14px;
+  opacity: 0;
+  box-shadow:
+    0 0 14px 1px color-mix(in srgb, var(--contact-border) 35%, transparent),
+    0 0 36px 6px color-mix(in srgb, var(--contact-border) 22%, transparent),
+    0 0 80px 18px color-mix(in srgb, var(--contact-border) 10%, transparent);
+  animation: searchGlowFade 1.2s ease-out forwards;
+  will-change: opacity;
+}
+
+.search-glow-overlay--ambient {
+  border-radius: 0;
+  box-shadow: none;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, var(--contact-border) 10%, transparent) 0%,
+    color-mix(in srgb, var(--contact-border) 3%, transparent) 35%,
+    transparent 70%
+  );
+}
+
+@keyframes searchGlowFade {
+  0%   { opacity: 0; }
+  25%  { opacity: 0.9; }
+  100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .search-glow-overlay {
+    animation: none;
+    opacity: 0.8;
+    transition: opacity 0.2s linear;
+  }
+}
+
 @media (max-width: 575px) {
   .site-search {
     top: 0.95rem;
