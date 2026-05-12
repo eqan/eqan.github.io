@@ -45,6 +45,11 @@
 
   window.addEventListener('load', function () {
     idle(function () {
+      loadStyle('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap');
+      loadStyle('./Font-Awesome/css/font-awesome.min.css');
+    }, 1200);
+
+    idle(function () {
       (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;

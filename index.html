@@ -6,16 +6,11 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta content="width=device-width, initial-scale=1" name="viewport" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <!-- Preload critical assets -->
-  <link rel="preload" href="./Assets/avatar.webp" as="image" type="image/webp" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+  <!-- Preload the correctly-sized hero image for faster LCP -->
+  <link rel="preload" href="./Assets/avatar-320.webp" as="image" type="image/webp" imagesrcset="./Assets/avatar-160.webp 160w, ./Assets/avatar-240.webp 240w, ./Assets/avatar-320.webp 320w" imagesizes="(max-width: 575px) 130px, (max-width: 991px) 180px, 320px" />
   <link href="./CSS/theme-base.css" rel="stylesheet" />
   <link href="./CSS/yellow-black.css" id="theme" rel="stylesheet" />
   <link rel="icon" type="image/webp" href="./Assets/logo.webp" />
-  <link rel="stylesheet" href="./Font-Awesome/css/font-awesome.min.css" media="print" onload="this.media='all'" />
-  <noscript><link rel="stylesheet" href="./Font-Awesome/css/font-awesome.min.css" /></noscript>
   <link href="./CSS/preview.css" rel="stylesheet" />
   <link href="./CSS/styles.css" rel="stylesheet" />
   <title>Eqan Ahmad | Portfolio</title>
@@ -100,7 +95,17 @@
                   <div class="hero-avatar-wrapper">
                     <div class="hero-avatar-ring"></div>
                     <div class="hero-avatar-ring hero-avatar-ring-2"></div>
-                    <img src="./Assets/avatar.webp" class="hero-avatar" alt="Eqan Ahmad" fetchpriority="high" decoding="async" id="hero-avatar-trigger" style="cursor:pointer" />
+                    <img src="./Assets/avatar-320.webp"
+                         srcset="./Assets/avatar-160.webp 160w, ./Assets/avatar-240.webp 240w, ./Assets/avatar-320.webp 320w"
+                         sizes="(max-width: 575px) 130px, (max-width: 991px) 180px, 320px"
+                         width="320"
+                         height="320"
+                         class="hero-avatar"
+                         alt="Eqan Ahmad"
+                         fetchpriority="high"
+                         decoding="async"
+                         id="hero-avatar-trigger"
+                         style="cursor:pointer" />
                     
                     <!-- Floating Domain Badge -->
                     <div class="hero-float-badge hero-float-domain">
@@ -388,7 +393,7 @@
   <div class="avatar-dialog-overlay" id="avatar-dialog">
     <div class="avatar-dialog">
       <button class="avatar-dialog-close" id="avatar-dialog-close" aria-label="Close">&times;</button>
-      <img src="./Assets/avatar.webp" class="avatar-dialog-img" alt="Eqan Ahmad" />
+      <img src="./Assets/avatar.webp" class="avatar-dialog-img" alt="Eqan Ahmad" loading="lazy" decoding="async" />
     </div>
   </div>
 

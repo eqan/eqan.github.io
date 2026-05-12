@@ -7,6 +7,7 @@
 .hidden-address { display: none; }
 .programming-card { background-color: rgba(0, 0, 0, 0.35); color: #fff; }
 .programming-card i { color: #fff; }
+.fa { display: inline-block; min-width: 1em; text-align: center; }
 
 /* Theme Transition Overlay */
 .theme-transition-overlay {
