@@ -2010,7 +2010,11 @@ body.modal-open .preview-themes {
 }
 .about-mission em {
   font-style: normal;
-  background: linear-gradient(120deg, var(--contact-border) 0%, var(--contact-border) 100%);
+  background: linear-gradient(
+    120deg,
+    color-mix(in srgb, var(--contact-border) 60%, transparent) 0%,
+    color-mix(in srgb, var(--contact-border) 60%, transparent) 100%
+  );
   background-repeat: no-repeat;
   background-size: 100% 0.3em;
   background-position: 0 88%;
