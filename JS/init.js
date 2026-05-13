@@ -18,31 +18,37 @@
     Array.prototype.forEach.call(document.querySelectorAll(selector), callback);
   }
 
+  var suppressNavObserverUntil = 0;
+
   ready(function () {
     function smoothScrollTo(target) {
       var top = target.getBoundingClientRect().top + window.scrollY;
       window.scrollTo({ top: top, behavior: 'smooth' });
     }
 
-    each('.goto-section', function (link) {
-      link.addEventListener('click', function (event) {
-        var href = link.getAttribute('href');
-        var target = href ? document.querySelector(href) : null;
-        if (!target) return;
+    document.addEventListener('click', function (event) {
+      var link = event.target.closest('.goto-section');
+      if (!link) return;
 
-        event.preventDefault();
-        if (window.matchMedia('(min-width: 1200px)').matches) {
-          smoothScrollTo(target);
-        } else {
-          setTimeout(function () { smoothScrollTo(target); }, 350);
-        }
-      });
-    });
+      var href = link.getAttribute('href');
+      var target = href ? document.querySelector(href) : null;
+      if (!target) return;
 
-    each('.sections-nav-link', function (link) {
-      link.addEventListener('click', function () {
+      event.preventDefault();
+
+      if (link.classList.contains('sections-nav-link')) {
+        each('.sections-nav-link', function (navLink) {
+          navLink.classList.toggle('active', navLink === link);
+        });
+        suppressNavObserverUntil = Date.now() + 700;
         document.body.classList.remove('sections-nav-in');
-      });
+      }
+
+      if (window.matchMedia('(min-width: 1200px)').matches) {
+        smoothScrollTo(target);
+      } else {
+        setTimeout(function () { smoothScrollTo(target); }, 220);
+      }
     });
 
     each('.sections-nav-toggler', function (button) {
@@ -114,7 +120,7 @@
         var active = sections.find(function (section) {
           return visibleSections[section.id];
         });
-        if (active) setActive(active);
+        if (active && Date.now() > suppressNavObserverUntil) setActive(active);
       }, { rootMargin: '0px 0px -20% 0px', threshold: 0.08 });
 
       sections.forEach(function (section) {
