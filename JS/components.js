@@ -78,6 +78,7 @@ const Components = {
          class="service-card">
         <i class="fa ${icon}"></i>
         <h4>${label}</h4>
+        <span class="card-arrow" aria-hidden="true"></span>
       </a>
     </div>`,
 
@@ -165,6 +166,7 @@ const Components = {
           <figure class="project-card-img">
             <img src="${img}" alt="${title}" loading="lazy" />
             ${badgesHtml}
+            <span class="card-arrow" aria-hidden="true"></span>
           </figure>
           <div class="project-card-content">
             ${metaHtml}

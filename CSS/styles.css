@@ -1309,6 +1309,109 @@ html { scrollbar-width: thin; scrollbar-color: var(--scrollbar-thumb) var(--scro
   .project-card:hover .project-card-img img { transform: none; }
 }
 
+/* ============ NAVIGABLE CARD INDICATOR ============ */
+/* A small themed "go" badge that signals "this card opens something".
+   The disc tracks --contact-border and the arrow glyph tracks --contrast-color,
+   so the badge adapts to every theme automatically. */
+.card-arrow {
+  position: absolute;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--contact-border);
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.92;
+  transform: scale(0.94);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.25s ease,
+              box-shadow 0.3s ease;
+}
+
+/* The arrow glyph: a contrast-coloured layer masked to an arrow SVG.
+   The SVG fill colour is arbitrary — mask only uses alpha, so the live
+   colour comes from background. */
+.card-arrow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--contrast-color);
+  -webkit-mask: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='7' y1='17' x2='17' y2='7'/%3E%3Cpolyline points='7 7 17 7 17 17'/%3E%3C/svg%3E") center/18px 18px no-repeat;
+          mask: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='7' y1='17' x2='17' y2='7'/%3E%3Cpolyline points='7 7 17 7 17 17'/%3E%3C/svg%3E") center/18px 18px no-repeat;
+}
+
+/* Placement per card variant */
+.project-card-img { position: relative; }
+.project-card-img .card-arrow { bottom: 14px; right: 14px; }
+.service-card .card-arrow { top: 14px; right: 14px; }
+
+/* Hover: lift, scale, and "shoot" the badge in the arrow direction */
+.project-card:hover .card-arrow,
+.project-card:focus-visible .card-arrow,
+.service-card:hover .card-arrow,
+.service-card:focus-visible .card-arrow {
+  opacity: 1;
+  transform: scale(1.08) translate(2px, -2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+}
+
+/* Featured cards have larger hero images — give the badge a bit more presence */
+.project-card--featured .card-arrow {
+  width: 44px;
+  height: 44px;
+}
+.project-card--featured .card-arrow::before {
+  -webkit-mask-size: 21px 21px;
+          mask-size: 21px 21px;
+}
+
+/* On small screens, keep the badge tidy */
+@media (max-width: 575px) {
+  .card-arrow { width: 32px; height: 32px; }
+  .card-arrow::before {
+    -webkit-mask-size: 14px 14px;
+            mask-size: 14px 14px;
+  }
+  .project-card-img .card-arrow { bottom: 10px; right: 10px; }
+  .service-card .card-arrow { top: 12px; right: 12px; }
+}
+
+/* Upgrade existing profile-link-card arrow to match the new badge vocabulary */
+.profile-link-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid var(--contact-border);
+  font-size: 0.7rem !important;
+  opacity: 0.55;
+  flex-shrink: 0;
+  transition: background-color 0.25s ease, color 0.25s ease,
+              border-color 0.25s ease, opacity 0.25s ease,
+              transform 0.25s ease;
+}
+.profile-link-card:hover .profile-link-arrow {
+  background: var(--contrast-color);
+  color: var(--contact-border);
+  border-color: var(--contrast-color);
+  opacity: 1;
+  transform: translateX(4px) rotate(-8deg);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .card-arrow,
+  .profile-link-arrow { transition: none; }
+  .project-card:hover .card-arrow,
+  .service-card:hover .card-arrow,
+  .profile-link-card:hover .profile-link-arrow {
+    transform: none;
+  }
+}
+
 /* Hide old detailed skills */
 #section-04 .progress, #section-04 .progress-label, #section-04 .section-subtitle,
 #section-04 .timeline, #section-04 .month-counter, #section-04 .year-counter,
