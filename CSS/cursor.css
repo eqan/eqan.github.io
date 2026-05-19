@@ -1,4 +1,13 @@
-/* ============ CUSTOM CURSOR ============ */
+/* ============ CUSTOM CURSOR ============
+   Design: square "block" dot + dashed-ring follower.
+   - Square dot ties into the bento-grid / engineer aesthetic.
+   - Dashed ring echoes the dashed circle around the hero avatar.
+   - No particle trail and no mix-blend-mode — keeps the cursor from
+     looking like a generic AI-template build.
+   - Position is set by JS on .cursor-dot / .cursor-ring (outer).
+     Visual transforms (rotate/scale/size) live on inner elements
+     so CSS transitions never fight the per-frame transform writes.
+   =========================================================== */
 
 /* Hide default cursor on non-touch devices */
 @media (pointer: fine) {
@@ -7,248 +16,173 @@
   }
 }
 
-/* CSS Variables for cursor theming */
+/* Defaults — overridden by the theme variants below */
 :root {
-  --cursor-dot-color: #000;
-  --cursor-ring-color: rgba(0, 0, 0, 0.35);
-  --cursor-dot-hover: #000;
-  --cursor-ring-hover: rgba(0, 0, 0, 0.12);
-  --cursor-trail-color: rgba(0, 0, 0, 0.06);
-  --cursor-glow: transparent;
+  --cursor-color: #000;
+  --cursor-ring-color: rgba(0, 0, 0, 0.45);
+  --cursor-hover-fill: rgba(0, 0, 0, 0.08);
 }
 
-/* Main dot - precise pointer */
-.cursor-dot {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 6px;
-  height: 6px;
-  background: var(--cursor-dot-color);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 999999;
-  transform: translate(-50%, -50%);
-  transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-              height 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-              background 0.4s ease,
-              opacity 0.3s ease;
-  will-change: transform;
-  mix-blend-mode: exclusion;
-}
-
-/* Outer ring - trailing follow */
+/* ---------- Positioning containers (controlled by JS) ---------- */
+.cursor-dot,
 .cursor-ring {
   position: fixed;
   top: 0;
   left: 0;
-  width: 36px;
-  height: 36px;
-  border: 1.5px solid var(--cursor-ring-color);
-  border-radius: 50%;
   pointer-events: none;
   z-index: 999998;
-  transform: translate(-50%, -50%);
-  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-              height 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-              border-color 0.4s ease,
-              background 0.4s ease,
-              opacity 0.3s ease,
-              border-width 0.3s ease;
   will-change: transform;
 }
 
-/* Subtle glow behind ring */
-.cursor-ring::after {
-  content: '';
+.cursor-dot { z-index: 999999; }
+
+/* ---------- The square "block" dot ---------- */
+.cursor-dot-glyph {
+  display: block;
+  width: 7px;
+  height: 7px;
+  margin: -3.5px 0 0 -3.5px;       /* centre on the JS-positioned origin */
+  background: var(--cursor-color);
+  border-radius: 0;                /* SQUARE, not a circle */
+  transform: rotate(0deg) scale(1);
+  transform-origin: center;
+  transition:
+    transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+    width 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.3s ease,
+    opacity 0.2s ease;
+}
+
+/* ---------- The dashed follower ring ---------- */
+.cursor-ring-glyph {
+  display: block;
+  width: 38px;
+  height: 38px;
+  margin: -19px 0 0 -19px;
+  border-radius: 50%;
+  background: transparent;
+  position: relative;
+  transition:
+    width 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    margin 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    border-radius 0.3s ease,
+    background-color 0.3s ease,
+    opacity 0.2s ease;
+}
+
+.cursor-ring-glyph::before {
+  content: "";
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--cursor-glow);
-  filter: blur(8px);
+  inset: 0;
+  border: 1.5px dashed var(--cursor-ring-color);
+  border-radius: inherit;
+  animation: cursor-ring-orbit 9s linear infinite;
+  transition: border-color 0.3s ease, border-radius 0.3s ease,
+              border-style 0s 0.05s, border-width 0.3s ease;
+}
+
+@keyframes cursor-ring-orbit {
+  to { transform: rotate(360deg); }
+}
+
+/* ============ HOVER: ring snaps to a solid soft-square frame ============ */
+.cursor-hover .cursor-ring-glyph {
+  width: 44px;
+  height: 44px;
+  margin: -22px 0 0 -22px;
+  background: var(--cursor-hover-fill);
+  border-radius: 10px;             /* echoes the card corner radius */
+}
+
+.cursor-hover .cursor-ring-glyph::before {
+  border-style: solid;
+  border-width: 1.5px;
+  border-color: var(--cursor-color);
+  animation-duration: 4.5s;
+}
+
+.cursor-hover .cursor-dot-glyph {
+  transform: rotate(0deg) scale(0.55);
+}
+
+/* ============ TEXT: morph the ring into a clean I-beam ============ */
+.cursor-text .cursor-ring-glyph {
+  width: 2px;
+  height: 26px;
+  margin: -13px 0 0 -1px;
+  border-radius: 1px;
+  background: var(--cursor-color);
+  opacity: 0.7;
+}
+
+.cursor-text .cursor-ring-glyph::before {
   opacity: 0;
-  transition: opacity 0.4s ease;
+  animation: none;
 }
 
-/* Trail particles */
-.cursor-trail {
-  position: fixed;
-  width: 4px;
-  height: 4px;
-  background: var(--cursor-trail-color);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 999997;
-  transform: translate(-50%, -50%);
-  will-change: transform, opacity;
-}
-
-/* ============ HOVER STATES ============ */
-
-/* Interactive elements - ring expands and fills */
-.cursor-hover .cursor-ring {
-  width: 56px;
-  height: 56px;
-  border-width: 2px;
-  border-color: var(--cursor-dot-hover);
-  background: var(--cursor-ring-hover);
-}
-
-.cursor-hover .cursor-ring::after {
-  opacity: 0.5;
-}
-
-.cursor-hover .cursor-dot {
-  width: 4px;
-  height: 4px;
-  background: var(--cursor-dot-hover);
-}
-
-/* Text hover - morph to I-beam shape */
-.cursor-text .cursor-ring {
-  width: 3px;
-  height: 28px;
-  border-radius: 2px;
-  border-color: var(--cursor-dot-color);
-  background: var(--cursor-dot-color);
-  opacity: 0.5;
-}
-
-.cursor-text .cursor-dot {
+.cursor-text .cursor-dot-glyph {
   opacity: 0;
 }
 
-/* Click/press effect */
-.cursor-click .cursor-ring {
+/* ============ CLICK: dot pivots 45° into a diamond ============ */
+.cursor-click .cursor-dot-glyph {
+  transform: rotate(45deg) scale(1.55);
+}
+
+.cursor-click .cursor-ring-glyph {
   width: 28px;
   height: 28px;
-  border-width: 2.5px;
+  margin: -14px 0 0 -14px;
 }
 
-.cursor-click .cursor-dot {
-  width: 10px;
-  height: 10px;
+.cursor-click .cursor-ring-glyph::before {
+  border-style: solid;
+  border-color: var(--cursor-color);
+  animation-duration: 2.8s;
 }
 
-/* Hidden state (when mouse leaves viewport) */
+/* Hidden state (mouse out of viewport) */
 .cursor-hidden .cursor-dot,
-.cursor-hidden .cursor-ring {
-  opacity: 0;
-}
+.cursor-hidden .cursor-ring { opacity: 0; }
 
 /* ============ THEME VARIANTS ============ */
 
-/* Yellow theme - warm golden cursor */
-.cursor-theme-yellow .cursor-dot {
-  background: #d4a017;
-}
-.cursor-theme-yellow .cursor-ring {
-  border-color: rgba(212, 160, 23, 0.4);
-}
-.cursor-theme-yellow .cursor-ring::after {
-  background: rgba(255, 219, 103, 0.15);
-}
-.cursor-theme-yellow .cursor-trail {
-  background: rgba(255, 219, 103, 0.12);
-}
-.cursor-theme-yellow.cursor-hover .cursor-ring {
-  border-color: #d4a017;
-  background: rgba(255, 219, 103, 0.1);
-}
-.cursor-theme-yellow.cursor-hover .cursor-dot {
-  background: #b8860b;
+/* Yellow theme — black blocks on the yellow background */
+.cursor-theme-yellow {
+  --cursor-color: #000;
+  --cursor-ring-color: rgba(0, 0, 0, 0.45);
+  --cursor-hover-fill: rgba(0, 0, 0, 0.07);
 }
 
-/* Black/dark theme - silver/white cursor */
-.cursor-theme-black .cursor-dot {
-  background: #e0e0e0;
-  mix-blend-mode: normal;
-}
-.cursor-theme-black .cursor-ring {
-  border-color: rgba(255, 255, 255, 0.4);
-}
-.cursor-theme-black .cursor-ring::after {
-  background: rgba(255, 255, 255, 0.08);
-}
-.cursor-theme-black .cursor-trail {
-  background: rgba(255, 255, 255, 0.1);
-}
-.cursor-theme-black.cursor-hover .cursor-ring {
-  border-color: rgba(255, 255, 255, 0.7);
-  background: rgba(255, 255, 255, 0.08);
-}
-.cursor-theme-black.cursor-hover .cursor-dot {
-  background: #fff;
-}
-.cursor-theme-black .cursor-text .cursor-ring,
-.cursor-theme-black.cursor-text .cursor-ring {
-  border-color: #e0e0e0;
-  background: #e0e0e0;
+/* Black theme — white blocks for contrast on dark background */
+.cursor-theme-black {
+  --cursor-color: #fff;
+  --cursor-ring-color: rgba(255, 255, 255, 0.55);
+  --cursor-hover-fill: rgba(255, 255, 255, 0.08);
 }
 
-/* Pink theme - rose cursor */
-.cursor-theme-pink .cursor-dot {
-  background: #e91e8e;
-}
-.cursor-theme-pink .cursor-ring {
-  border-color: rgba(233, 30, 142, 0.35);
-}
-.cursor-theme-pink .cursor-ring::after {
-  background: rgba(248, 162, 213, 0.15);
-}
-.cursor-theme-pink .cursor-trail {
-  background: rgba(255, 105, 180, 0.1);
-}
-.cursor-theme-pink.cursor-hover .cursor-ring {
-  border-color: #e91e8e;
-  background: rgba(248, 162, 213, 0.1);
-}
-.cursor-theme-pink.cursor-hover .cursor-dot {
-  background: #d4177f;
+/* Pink theme */
+.cursor-theme-pink {
+  --cursor-color: #d4177f;
+  --cursor-ring-color: rgba(233, 30, 142, 0.55);
+  --cursor-hover-fill: rgba(248, 162, 213, 0.12);
 }
 
-/* Blue theme - cool blue cursor */
-.cursor-theme-blue .cursor-dot {
-  background: #5b8def;
-}
-.cursor-theme-blue .cursor-ring {
-  border-color: rgba(91, 141, 239, 0.35);
-}
-.cursor-theme-blue .cursor-ring::after {
-  background: rgba(159, 187, 255, 0.15);
-}
-.cursor-theme-blue .cursor-trail {
-  background: rgba(159, 187, 255, 0.1);
-}
-.cursor-theme-blue.cursor-hover .cursor-ring {
-  border-color: #5b8def;
-  background: rgba(159, 187, 255, 0.1);
-}
-.cursor-theme-blue.cursor-hover .cursor-dot {
-  background: #4a7de0;
-}
-
-/* ============ MAGNETIC PULL EFFECT ============ */
-
-.cursor-magnetic .cursor-ring {
-  width: 48px;
-  height: 48px;
-  border-color: var(--cursor-dot-hover);
-  border-width: 2px;
-  background: var(--cursor-ring-hover);
+/* Blue theme */
+.cursor-theme-blue {
+  --cursor-color: #3f6ad0;
+  --cursor-ring-color: rgba(91, 141, 239, 0.55);
+  --cursor-hover-fill: rgba(159, 187, 255, 0.12);
 }
 
 /* ============ RESPONSIVE ============ */
 
-/* Disable custom cursor on touch devices */
+/* Disable on touch devices */
 @media (pointer: coarse), (hover: none) {
   .cursor-dot,
-  .cursor-ring,
-  .cursor-trail {
+  .cursor-ring {
     display: none !important;
   }
   *, *::before, *::after {
@@ -258,11 +192,12 @@
 
 /* Reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
-  .cursor-dot,
-  .cursor-ring {
-    transition: none !important;
+  .cursor-dot-glyph,
+  .cursor-ring-glyph {
+    transition: opacity 0.2s ease, background-color 0.2s ease,
+                border-color 0.2s ease !important;
   }
-  .cursor-trail {
-    display: none !important;
+  .cursor-ring-glyph::before {
+    animation: none !important;
   }
 }
