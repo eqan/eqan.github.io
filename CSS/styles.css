@@ -1,12 +1,5 @@
-/* Card Tags Responsive */
-@media (min-width: 992px) { .specific-card-tags { margin-left: 20%; } }
-@media (min-width: 700px) and (max-width: 991px) { .specific-card-tags { margin-left: 5%; } }
-
 /* Custom SVG and Utilities */
-.custom-svg { width: 24px; height: 24px; }
 .hidden-address { display: none; }
-.programming-card { background-color: rgba(0, 0, 0, 0.35); color: #fff; }
-.programming-card i { color: #fff; }
 .fa { display: inline-block; min-width: 1em; text-align: center; }
 
 /* Theme Transition Overlay */
@@ -33,7 +26,9 @@
   --contact-border: #000;
   --contrast-color: #fff;
   --content-bg: rgba(0, 0, 0, 0.03);
-  --content-item-bg: rgba(0, 0, 0, 0.06);
+  --content-item-bg: rgba(0, 0, 0, 0.02);
+  --content-item-hover: rgba(0, 0, 0, 0.05);
+  --content-blockquote-bg: rgba(0, 0, 0, 0.025);
   --nav-hover-bg: rgba(0, 0, 0, 0.05);
   --nav-active-bg: rgba(0, 0, 0, 0.08);
   --nav-border-color: rgba(0, 0, 0, 0.1);
@@ -810,8 +805,7 @@
 
 /* Tighter grids */
 .services-grid, .expertise-grid { margin-bottom: 0 !important; }
-.projects-grid { gap: 1.25rem; }
-.exp-grid, .honors-grid, .edu-grid { gap: 1rem; }
+.honors-grid, .edu-grid { gap: 1rem; }
 
 /* Reduce margins on content sections */
 #section-03 .section-body,
@@ -858,9 +852,6 @@ html { scrollbar-width: thin; scrollbar-color: var(--scrollbar-thumb) var(--scro
   .contact-hero-title { font-size: 1.4rem; }
   .contact-cta { padding: 0.85rem 1.5rem; font-size: 0.95rem; }
 }
-
-/* No decoration utility */
-.no-decoration, .no-decoration:hover, .no-decoration:focus { text-decoration: none !important; }
 
 /* Expertise Grid */
 .expertise-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5rem; }
@@ -1412,11 +1403,6 @@ html { scrollbar-width: thin; scrollbar-color: var(--scrollbar-thumb) var(--scro
   }
 }
 
-/* Hide old detailed skills */
-#section-04 .progress, #section-04 .progress-label, #section-04 .section-subtitle,
-#section-04 .timeline, #section-04 .month-counter, #section-04 .year-counter,
-#section-04 .y-counter, #section-04 .m-counter { display: none !important; }
-
 /* Skill Pills */
 .skill-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: flex-start; }
 .skill-pill { display: inline-block; font-size: 0.65rem; padding: 0.25rem 0.5rem; background: var(--contact-border); color: var(--contrast-color); border-radius: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; white-space: nowrap; }
@@ -1424,25 +1410,6 @@ html { scrollbar-width: thin; scrollbar-color: var(--scrollbar-thumb) var(--scro
 
 @media (max-width: 767px) {
   .skill-pill { font-size: 0.6rem; padding: 0.2rem 0.4rem; }
-}
-
-/* Click-hint chevron (desktop only - hidden on mobile) */
-.domain-card { position: relative; }
-.domain-card::after { content: '\203A'; position: absolute; right: 16px; bottom: 12px; font-size: 32px; line-height: 1; color: var(--contact-border); opacity: 0; transition: opacity .25s, color .25s; }
-.domain-card:hover::after { opacity: 1; color: #fff; }
-
-/* Tablet layout */
-@media (min-width: 768px) and (max-width: 991px) {
-  #section-04 .col-md-3, #section-03 .col-md-4 { max-width: 50% !important; flex: 0 0 50% !important; }
-}
-
-/* Arrow left variant */
-.domain-card.arrow-left::after { content: '\2039'; left: 16px; right: auto; }
-
-/* Mobile: hide chevron arrows completely - they don't work well on touch */
-@media (max-width: 575px) {
-  .domain-card::after { display: none; }
-  .domain-card.arrow-left::after { display: none; }
 }
 
 /* Popover styles */
@@ -1461,13 +1428,6 @@ html { scrollbar-width: thin; scrollbar-color: var(--scrollbar-thumb) var(--scro
 .popover-preview i { font-size: 1.75rem; }
 .popover-preview h2 { font-size: 1.25rem; line-height: 1.3; margin-bottom: .75rem; }
 
-/* Modal cards */
-.modal-body .card { background: transparent; border: 2px solid var(--contact-border); border-radius: 12px; text-align: center; transition: background-color .25s, color .25s; }
-.modal-body .card:hover { background: var(--contact-border); color: var(--contrast-color); }
-.modal-body .card:hover *, .modal-body .card:hover i { color: var(--contrast-color); }
-.modal-body .card i { font-size: 3rem; margin-bottom: .75rem; }
-@media (min-width: 768px) { .modal-body .card i { font-size: 2.2rem; } }
-
 /* Modern Modal Close Button */
 .modal-close { position: relative; width: 40px; height: 40px; border: 2px solid var(--contact-border); border-radius: 50%; background: transparent; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: background-color 0.2s, transform 0.2s; flex-shrink: 0; padding: 0; }
 .modal-close:hover { background: var(--contact-border); transform: rotate(90deg); }
@@ -1475,8 +1435,6 @@ html { scrollbar-width: thin; scrollbar-color: var(--scrollbar-thumb) var(--scro
 .modal-close::before { transform: rotate(45deg); }
 .modal-close::after { transform: rotate(-45deg); }
 .modal-close:hover::before, .modal-close:hover::after { background: var(--contrast-color); }
-.modal-close .d-none { display: none !important; }
-.modal-header { position: relative; border: none; padding: 0; min-height: 0; }
 
 /* Hide site search while a modal is open so it doesn't overlap the close button */
 body.modal-open .site-search {
@@ -1716,13 +1674,6 @@ body.modal-open .preview-themes {
 }
 
 /* Project Content - Theme Adaptive (subtle backgrounds) */
-:root {
-  --content-bg: rgba(0, 0, 0, 0.03);
-  --content-item-bg: rgba(0, 0, 0, 0.02);
-  --content-item-hover: rgba(0, 0, 0, 0.05);
-  --content-blockquote-bg: rgba(0, 0, 0, 0.025);
-}
-
 .project-content {
   max-width: none;
   margin: 0;
@@ -1848,17 +1799,6 @@ body.modal-open .preview-themes {
   font-weight: 800;
   background: linear-gradient(180deg, transparent 65%, var(--content-item-bg) 65%);
   padding: 0 0.15em;
-}
-
-/* Feature cards within content */
-.feature-highlight {
-  display: inline-block;
-  background: var(--contact-border);
-  color: var(--contrast-color);
-  padding: 0.2rem 0.6rem;
-  border-radius: 4px;
-  font-weight: 600;
-  font-size: 0.9em;
 }
 
 /* ============ UNIFIED CARD STYLES (Experiences, Honors, Education) ============ */
