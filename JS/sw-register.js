@@ -31,6 +31,36 @@
     });
   }
 
+  function fetchDeployedCacheName() {
+    return fetch('./cache-version.json', {
+      cache: 'no-store',
+      credentials: 'same-origin'
+    }).then(function (response) {
+      if (!response.ok) return '';
+      return response.json();
+    }).then(function (data) {
+      return data && data.cacheName ? data.cacheName : '';
+    }).catch(function () {
+      return '';
+    });
+  }
+
+  function refreshWorkerIfNeeded(registration) {
+    if (!window.caches || !registration) return;
+
+    fetchDeployedCacheName().then(function (deployedCacheName) {
+      if (!deployedCacheName) return;
+
+      return caches.keys().then(function (cacheNames) {
+        if (cacheNames.indexOf(deployedCacheName) !== -1) return;
+
+        /* A new cache name means a new service-worker.js should be deployed too.
+           update() asks the browser to fetch it now instead of waiting. */
+        return registration.update();
+      });
+    });
+  }
+
   window.PortfolioCacheAsset = cacheAsset;
 
   document.addEventListener('load', function (event) {
@@ -38,7 +68,11 @@
   }, true);
 
   window.addEventListener('load', function () {
-    navigator.serviceWorker.register('./service-worker.js').catch(function () {
+    navigator.serviceWorker.register('./service-worker.js').then(function (registration) {
+      return navigator.serviceWorker.ready.then(function () {
+        refreshWorkerIfNeeded(registration);
+      });
+    }).catch(function () {
       /* Cache is an enhancement; the site should keep working if registration fails. */
     });
   });
