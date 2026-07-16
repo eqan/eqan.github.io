@@ -1647,6 +1647,7 @@ body.modal-open .preview-themes {
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   background: var(--content-bg);
   display: block;
+  position: relative;
 }
 .project-img-wrapper:hover {
   transform: translateY(-3px);
@@ -1660,6 +1661,30 @@ body.modal-open .preview-themes {
 }
 .gallery-single .project-img-wrapper { max-width: 100%; flex: 0 0 100%; }
 .gallery-collage .project-img-wrapper { flex: 0 0 calc(50% - 0.325rem); max-width: calc(50% - 0.325rem); }
+
+/* Image loading indicator */
+.img-loading-host { position: relative; }
+.img-loading-indicator {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 1;
+  background: color-mix(in srgb, var(--modal-surface, #fff) 92%, var(--contact-border) 8%);
+}
+.img-loading-indicator i {
+  font-size: 1.35rem;
+  opacity: 0.65;
+}
+.img-loading-host.is-loading .img-loading-indicator { opacity: 1; }
+.img-loading-host.is-loading img {
+  opacity: 0.35;
+  filter: blur(2px);
+  transform: scale(1.01);
+}
 
 /* Inside the narrower gallery column on desktop, force full-width images */
 @media (min-width: 992px) {
