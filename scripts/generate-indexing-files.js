@@ -6,6 +6,7 @@ const ROOT = path.resolve(__dirname, '..');
 const DATA_FILE = path.join(ROOT, 'JS', 'data.js');
 const SITEMAP_FILE = path.join(ROOT, 'sitemap.xml');
 const LLMS_FILE = path.join(ROOT, 'llms.txt');
+const LLMS_MARKDOWN_FILE = path.join(ROOT, 'llms.md');
 
 const SITE = {
   name: 'Eqan Ahmad',
@@ -173,9 +174,11 @@ function generateSitemap() {
 
 function main() {
   const data = loadPortfolioData();
-  fs.writeFileSync(LLMS_FILE, generateLlms(data), 'utf8');
+  const llmsContent = generateLlms(data);
+  fs.writeFileSync(LLMS_FILE, llmsContent, 'utf8');
+  fs.writeFileSync(LLMS_MARKDOWN_FILE, llmsContent, 'utf8');
   fs.writeFileSync(SITEMAP_FILE, generateSitemap(), 'utf8');
-  console.log('Generated llms.txt and sitemap.xml from JS/data.js');
+  console.log('Generated llms.txt, llms.md, and sitemap.xml from JS/data.js');
 }
 
 main();
