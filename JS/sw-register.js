@@ -2,6 +2,8 @@
   'use strict';
 
   if (!('serviceWorker' in navigator)) return;
+  var hasControllerAtBoot = !!navigator.serviceWorker.controller;
+  var hasReloadedForUpdate = false;
 
   function isSameOrigin(url) {
     try {
@@ -61,7 +63,16 @@
     });
   }
 
+  function reloadWhenNewWorkerTakesControl() {
+    navigator.serviceWorker.addEventListener('controllerchange', function () {
+      if (!hasControllerAtBoot || hasReloadedForUpdate) return;
+      hasReloadedForUpdate = true;
+      window.location.reload();
+    });
+  }
+
   window.PortfolioCacheAsset = cacheAsset;
+  reloadWhenNewWorkerTakesControl();
 
   document.addEventListener('load', function (event) {
     cacheAsset(assetUrl(event.target));
@@ -69,6 +80,9 @@
 
   window.addEventListener('load', function () {
     navigator.serviceWorker.register('./service-worker.js').then(function (registration) {
+      registration.update().catch(function () {
+        /* Best effort only. If update checks fail, keep the current worker. */
+      });
       return navigator.serviceWorker.ready.then(function () {
         refreshWorkerIfNeeded(registration);
       });

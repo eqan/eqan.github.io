@@ -4,7 +4,7 @@
 (function () {
   'use strict';
 
-  var CACHE_VERSION = 'portfolio-static-v7';
+  var CACHE_VERSION = 'portfolio-static-v8';
   var CORE_ASSETS = [
     './',
     './index.html',
