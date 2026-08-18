@@ -58,6 +58,19 @@ const PORTFOLIO_DATA = {
   // Featured projects (large cards)
   featuredProjects: [
     {
+      id: 'modal-project-dispatch',
+      img: './Assets/fleetdispatcher.webp',
+      title: 'Dispatch Mission Control',
+      subtitle: 'Senior-grade logistics dispatch platform with Redis-first state, event-driven optimization, Kubernetes deployment, and real-time SSE updates.',
+      tags: ['Bun', 'TypeScript', 'React', 'Express', 'Redis', 'MongoDB', 'Zod', 'Kubernetes', 'Helm', 'Grafana', 'Prometheus', 'Loki', 'SSE'],
+      priority: 1,
+      size: 'full',
+      category: 'Cloud',
+      year: 2026,
+      status: 'Public',
+      metrics: ['Redis-first', 'Helm + kind', 'SSE + Grafana']
+    },
+    {
       id: 'modal-project-chatqlm',
       img: './Assets/Chatqlm-Hero.webp',
       title: 'ChatQLM',
@@ -149,6 +162,39 @@ const PORTFOLIO_DATA = {
 
   // Project modal details
   projectModals: {
+    'modal-project-dispatch': {
+      title: 'Dispatch Mission Control',
+      subtitle: 'A full-stack logistics dispatch platform built as a Bun monorepo with atomic Redis workflows, asynchronous optimization, and production-style Kubernetes observability.',
+      tags: ['Bun Monorepo', 'React', 'Express', 'TypeScript', 'Redis Lua', 'Redis Streams', 'MongoDB', 'Zod', 'SSE', 'Kubernetes', 'Helm', 'Grafana', 'Prometheus', 'Loki', 'pytest'],
+      content: `
+        <blockquote>
+          <h3>Key Highlights</h3>
+          <ul>
+            <li>Built a <strong>senior-grade dispatch platform</strong> with shared Zod schemas for end-to-end type safety across the React SPA, Express API, and worker services</li>
+            <li>Architected a <strong>Redis-first control plane</strong> using Lua scripts for atomic mutations, Redis Streams for optimization jobs, and SSE fan-out across API replicas</li>
+            <li>Shipped a <strong>production-style platform workflow</strong> with kind, Helm, ingress-nginx, HPA, NetworkPolicies, pytest infra smoke tests, and Grafana/Prometheus/Loki monitoring</li>
+          </ul>
+        </blockquote>
+        <h3>Platform Capabilities</h3>
+        <ul>
+          <li><strong>Real-time dispatch board</strong> — optimistic frontend updates keep assignments, orders, and vehicle state responsive for operators</li>
+          <li><strong>Asynchronous optimization pipeline</strong> — optimize requests queue through Redis Streams, execute in a worker, then replay results back to clients over SSE</li>
+          <li><strong>Hot + durable storage split</strong> — Redis handles low-latency operational state while MongoDB stores saved snapshots and boot hydration</li>
+          <li><strong>Type-safe monorepo contracts</strong> — shared schemas remove drift between frontend, backend, and infrastructure-facing integrations</li>
+        </ul>
+        <h3>Operations & Reliability</h3>
+        <ul>
+          <li><strong>One-command bootstrap</strong> — provisions cluster dependencies, monitoring, TLS, deployments, and ingress smoke checks from a single control script</li>
+          <li><strong>Probe-aware resilience</strong> — readiness depends on Redis/Mongo health while liveness stays dependency-free to avoid restart loops during transient outages</li>
+          <li><strong>Built-in observability</strong> — pre-provisioned Grafana dashboards surface route heatmaps, 4xx/5xx trends, dependency latency, pod health, and API logs</li>
+          <li><strong>Deployment flexibility</strong> — Kubernetes is the primary path, with Docker Compose retained as a fallback for no-cluster demos</li>
+        </ul>
+      `,
+      images: [
+        { src: './Assets/fleetdispatcher.webp', alt: 'Dispatch Mission Control logistics dispatch interface', basis: '50%' },
+        { src: './Assets/fleetdispatcher-grafana-dashboard.webp', alt: 'Dispatch Mission Control Grafana observability dashboard', basis: '50%' }
+      ]
+    },
     'modal-project-super': {
       title: 'Super™',
       subtitle: 'The ChatGPT of Quantum Computing — a revolutionary AI that bridges natural language problem descriptions, quantum and supercomputing technologies, and commercialized solutions.',
@@ -157,18 +203,23 @@ const PORTFOLIO_DATA = {
         <blockquote>
           <h3>Key Highlights</h3>
           <ul>
-            <li>Architected a consumer-facing quantum/supercomputing product suite connected to <strong>CSE: QBTQ</strong></li>
-            <li>Integrated quantum backends including <strong>IonQ, QuEra, Amazon Braket, D-Wave, NVIDIA CUDA-Q, and Quanfluence</strong></li>
-            <li>Built AI orchestration that translates natural language into executable <strong>Python optimization code</strong></li>
+            <li>Architected <strong>CES 2026 World Premiere</strong> product surfaces for a consumer quantum/supercomputing platform connected to <strong>CSE: QBTQ</strong></li>
+            <li>Built React/Tailwind product interfaces, Node.js service flows, and Python orchestration that bridged natural language requests with real quantum providers</li>
+            <li>Integrated backends including <strong>IonQ, QuEra, Amazon Braket, D-Wave, NVIDIA CUDA-Q, and Quanfluence</strong> for execution, monitoring, and result retrieval</li>
           </ul>
         </blockquote>
-        <h3>Core Features</h3>
+        <h3>Product & Experience</h3>
         <ul>
           <li><strong>Natural-language optimization</strong> — transforms business constraints into solver-ready workflows</li>
-          <li><strong>Amazon Braket execution</strong> — provider APIs for execution, monitoring, and results retrieval</li>
-          <li><strong>Optimization dashboards</strong> — visualizes results for high-stakes planning problems</li>
-          <li><strong>Code generation</strong> — generates production-ready Gurobi/Python optimization code</li>
-          <li><strong>Deep-tech UX</strong> — makes quantum and supercomputing accessible through familiar product interfaces</li>
+          <li><strong>Code generation</strong> — converts prompts into executable optimization logic and Python/Gurobi-style workflows</li>
+          <li><strong>Optimization dashboards</strong> — visualizes outcomes for planning and high-stakes decision support</li>
+          <li><strong>Deep-tech UX</strong> — makes advanced quantum and supercomputing concepts approachable through familiar consumer-style interfaces</li>
+        </ul>
+        <h3>Platform Depth</h3>
+        <ul>
+          <li><strong>Provider orchestration</strong> — handles execution routing, job monitoring, and retrieval across multiple quantum backends</li>
+          <li><strong>Internal admin surfaces</strong> — dashboards for regional user stats, solved problems, password resets, DB lookup, and partner-facing operational visibility</li>
+          <li><strong>Reliability & security</strong> — informed by AI-assisted security testing across backend and PWA surfaces, covering auth, billing, prompt-injection, CSP, CORS, and logging posture</li>
         </ul>
       `,
       images: [
@@ -187,8 +238,8 @@ const PORTFOLIO_DATA = {
           <h3>Key Highlights</h3>
           <ul>
             <li><strong>CES 2026 World Premiere</strong> — First mobile quantum computing app</li>
-            <li>Powered by the <strong>Super™ Platform</strong></li>
-            <li>Publicly traded — <strong>CSE: QBTQ</strong> | <strong>OTC: QBTQF</strong> | <strong>FSE: 25X</strong></li>
+            <li>Powered by the <strong>Super™ Platform</strong> and launched as part of the broader Staque quantum product suite</li>
+            <li>Served an estimated <strong>2,000 users</strong> and routed approximately <strong>4,000 quantum jobs</strong> through queued provider workflows</li>
           </ul>
         </blockquote>
         <h3>Core Features</h3>
@@ -199,6 +250,12 @@ const PORTFOLIO_DATA = {
           <li><strong>Quantum Circuits</strong> — Build & execute quantum experiments directly</li>
           <li><strong>Impact Tracking</strong> — Track total problems solved, quantum runs, and success rates</li>
           <li><strong>General Chat</strong> — AI-powered conversational interface for problem solving</li>
+        </ul>
+        <h3>Execution Pipeline</h3>
+        <ul>
+          <li><strong>Queued quantum processing</strong> — AWS SQS-backed orchestration pushed thousands of jobs through provider execution paths without blocking the user experience</li>
+          <li><strong>Amazon Braket integration</strong> — provider APIs handled execution, monitoring, and results retrieval for real quantum workloads</li>
+          <li><strong>Operational visibility</strong> — internal admin tooling exposed product metrics, problem counts, regional usage, and CloudWatch-linked observability for the team</li>
         </ul>
       `,
       images: [
@@ -217,16 +274,17 @@ const PORTFOLIO_DATA = {
         <blockquote>
           <h3>Key Highlights</h3>
           <ul>
-            <li>AI-powered platform connecting <strong>employers</strong> and <strong>job seekers</strong></li>
-            <li>Automated <strong>assessment generation</strong> with AI — MCQs, multi-select, short/long answers</li>
-            <li>Built with <strong>Next.js, React, Python/FastAPI, Supabase/Postgres</strong> and Riipen integration</li>
+            <li>Built as an <strong>AI-native talent pipeline</strong> connecting employers and job seekers through assessments, candidate workflows, and recommendations</li>
+            <li>Used <strong>AI-assisted engineering</strong> and direct model APIs to move from architecture to production quickly without sacrificing testability</li>
+            <li>Shipped with <strong>Next.js, React, Tailwind, Python/FastAPI, Supabase/Postgres, Supabase Auth/RLS</strong>, and Riipen integration</li>
           </ul>
         </blockquote>
         <h3>Employer Features</h3>
         <ul>
           <li><strong>Talent Pipeline Management</strong> — Create job listings, manage candidates, track assessment links</li>
-          <li><strong>AI Assessment Creation</strong> — Generate comprehensive assessments via chat with split view canvas</li>
-          <li><strong>Analytics & Recommendations</strong> — Data-driven insights for hiring decisions</li>
+          <li><strong>AI Assessment Creation</strong> — Generate MCQs, multi-select, and long-form assessments inside a split-view React canvas</li>
+          <li><strong>Workspace controls</strong> — Role-aware access and guarded data boundaries through Supabase Auth and row-level security</li>
+          <li><strong>Regression-aware delivery</strong> — Backend validation and output checks reduced the risk of broken LLM-driven assessments</li>
           <li><strong>API Keys & Data Sources</strong> — Enterprise-grade integration capabilities</li>
           <li><strong>Web Crawler</strong> — Automated talent sourcing from the web</li>
         </ul>
@@ -252,17 +310,23 @@ const PORTFOLIO_DATA = {
         <blockquote>
           <h3>Impact</h3>
           <ul>
-            <li><strong>Draft</strong> — Generate legal documents in user's tone and style</li>
-            <li><strong>Review</strong> — Review and make necessary amendments</li>
-            <li><strong>Global Changes</strong> — Apply changes across documents</li>
-            <li><strong>QCounsel</strong> — AI-powered legal Q&A</li>
+            <li>Reduced attorney manual workload by <strong>58%</strong> based on internal admin tracking while supporting approximately <strong>4,000 MAU</strong></li>
+            <li>Contributed to a <strong>$2M pre-seed</strong> stage product by shipping core Draft, Review, and Global Changes workflows</li>
+            <li>Enabled <strong>100% original drafts</strong> in the user's writing style with reported output accuracy around <strong>83%</strong></li>
           </ul>
         </blockquote>
         <h3>Core Components</h3>
         <ul>
-          <li><strong>Draft, Review, Global Changes</strong> — full-stack legal drafting workflows in Next.js, FastAPI, and PostgreSQL</li>
-          <li><strong>Advanced RAG</strong> — LangChain, LangSmith, semantic chunking, Pinecone vector DB, and LLM guardrails</li>
-          <li><strong>Microsoft Word AI</strong> — WebSocket-powered chatbot for clause-by-clause modifications</li>
+          <li><strong>Draft, Review, Global Changes</strong> — full-stack legal drafting workflows in a monorepo with shared backend services across product surfaces</li>
+          <li><strong>Typed AI contracts</strong> — OpenAPI-backed request/response schemas reduced frontend-backend drift across AI-heavy flows</li>
+          <li><strong>Microsoft Word AI</strong> — WebSocket-powered chatbot for clause-by-clause modifications and structured legal drafting</li>
+        </ul>
+        <h3>RAG & Evaluation Stack</h3>
+        <ul>
+          <li><strong>Advanced retrieval</strong> — LangChain, LangGraph, LangSmith, semantic chunking, Pinecone, and prompt version management</li>
+          <li><strong>Ingestion workflows</strong> — processed hundreds of PDFs and email content items daily, plus weekly law-site and repository ingestion</li>
+          <li><strong>Guardrails & quality checks</strong> — lawyer feedback loops, regex validation, semantic checks, JSON output constraints, and secondary-model review reduced hallucinations before release</li>
+          <li><strong>Feature-flagged rollout</strong> — incomplete surfaces stayed hidden until backend behavior, UI states, and regression checks were release-ready</li>
         </ul>
       `,
       images: [
@@ -281,14 +345,24 @@ const PORTFOLIO_DATA = {
         <blockquote>
           <h3>Key Achievements</h3>
           <ul>
-            <li>Led a team of engineers to develop a <strong>cloud computing framework</strong> for AI Models deployment and parallel computation</li>
-            <li>Architected the entire cloud computing framework for <strong>parallel computation</strong></li>
+            <li>Owned <strong>GPU Lab end-to-end</strong> as the technical reference for a customer-facing GPU cloud service for local LLM and diffusion deployment</li>
+            <li>Designed a distributed control plane across an estimated <strong>100 GPU servers</strong> and <strong>400 deployed models</strong></li>
             <li>Reduced third-party cloud costs by <strong>60%</strong></li>
-            <li>Scaled Models Lab to <strong>400,000+ MAU</strong> and <strong>$1M+ annual revenue</strong></li>
+            <li>Helped Models Lab support <strong>400,000+ MAU</strong>, approximately <strong>5,000 RPS</strong>, and <strong>$1M+ revenue within 1 year</strong></li>
           </ul>
         </blockquote>
-        <h3>Technical Stack</h3>
-        <p>Docker, WebSockets, Stripe Integration, Shell Scripting, Python, Postgres, SQLAlchemy, FAST API, and Cloudflare for backend. React, Redux, Typescript and NEXT.js for frontend.</p>
+        <h3>Platform Architecture</h3>
+        <ul>
+          <li><strong>Docker-first product control layer</strong> — standardized model deployment, health checks, and lifecycle control on in-house GPUs</li>
+          <li><strong>Two-backend design</strong> — per-server services handled deployments and self-healing, while a central backend owned users, payments, telemetry, orchestration, retries, queue failures, and concurrency</li>
+          <li><strong>Production payments</strong> — Stripe-backed purchase flows, reconciliation hooks, and customer checkout states tied infrastructure usage to revenue operations</li>
+        </ul>
+        <h3>Infra & Operations</h3>
+        <ul>
+          <li><strong>Bare-metal constraints</strong> — handled CUDA driver crashes, GPU overload, CPU/RAM pressure, NAS failover, Docker incidents, and server recovery workflows</li>
+          <li><strong>Edge routing</strong> — Cloudflare tunnels, reverse proxies, DNS, SSL/TLS routing, and gpulab.ai domain setup connected the fleet to customers</li>
+          <li><strong>Operational leadership</strong> — wrote deployment runbooks, debugged production incidents, reviewed teammate code, and turned recurring failures into preventive follow-up work</li>
+        </ul>
       `,
       images: [
         { src: './Assets/project_10.webp', alt: 'GPU Lab', basis: '50%' },
@@ -306,17 +380,22 @@ const PORTFOLIO_DATA = {
           <h3>Impact</h3>
           <ul>
             <li><strong>Prime Minister National Innovation Award Finalist</strong> selected from 20,000+ applications</li>
-            <li>Improved authenticity of degree distribution by <strong>80%</strong> using full-stack Web3 architecture</li>
-            <li>Saved <strong>75%</strong> of verification time through 1-click NFT portfolios and consensus mechanisms</li>
+            <li>Improved authenticity of degree distribution by <strong>80%</strong> using a full-stack Web3 verification architecture</li>
+            <li>Saved <strong>75%</strong> of verification time through 1-click NFT portfolios and intra-university consensus mechanisms</li>
           </ul>
         </blockquote>
-        <h3>Key Features</h3>
+        <h3>Product Scope</h3>
         <ul>
-          <li><strong>1-Click NFT Portfolios</strong> — Auto-generate and deploy globally</li>
-          <li><strong>Easy Verification</strong> — Companies can download verified info instantly</li>
-          <li><strong>Entrepreneurship Training</strong> — pitched at NUST Islamabad after KICS training at UET Lahore</li>
-          <li><strong>Consensus Mechanism</strong> — Intra-university validation from authorized parties</li>
-          <li><strong>Web3 Stack</strong> — React, Nest, Jest, Typescript, Solidity, Ethers.js, IPFS, and GraphQL</li>
+          <li><strong>Founder-led build</strong> — led the product as founder and full-stack engineer from concept through shipping</li>
+          <li><strong>1-Click NFT Portfolios</strong> — auto-generate academic portfolios and push them into verifiable Web3-backed records</li>
+          <li><strong>Easy Verification</strong> — companies can download and validate candidate credentials quickly without back-and-forth manual checks</li>
+          <li><strong>Consensus Mechanism</strong> — intra-university approval flow for trusted issuance and verification</li>
+          <li><strong>Web3 Stack</strong> — React, Nest.js, TypeORM, TypeScript, Solidity, Ethers.js, IPFS, GraphQL, and React PDF</li>
+        </ul>
+        <h3>Commercial & Delivery Context</h3>
+        <ul>
+          <li><strong>National recognition</strong> — pitched at NUST Islamabad after KICS entrepreneurship training at UET Lahore</li>
+          <li><strong>Institutional constraints</strong> — built and pitched the system despite slow public-sector integration cycles and hard stakeholder feedback loops</li>
         </ul>
       `,
       images: [
@@ -335,18 +414,18 @@ const PORTFOLIO_DATA = {
       link: 'https://github.com/eqan/Netflix-In-CSharp',
       content: `
       <blockquote>
-        <h3>Features</h3>
+        <h3>Desktop Product Build</h3>
         <ul>
-          <li>Built a Netflix-inspired desktop streaming application using <strong>C#</strong> and <strong>XML</strong></li>
-          <li>Implemented a custom AX Movie Player experience for compact video playback</li>
-          <li>Used the <strong>Fisher-Yates algorithm</strong> for recommendations based on collected user interactions</li>
-          <li>Applied hashing algorithms for fast local search across video data</li>
-          <li>Mastered usage of data structures such as doubly linkedlist for video navigation, Queue for watched history etc.
+          <li>Built a Metro-style <strong>C# desktop streaming client</strong> with localized signup, login, profile selection, watch history, preferences, and genre-organized local media catalogs</li>
+          <li>Implemented a custom <strong>AX Movie Player</strong> playback experience for compact in-app video streaming</li>
+          <li>Used the <strong>Fisher-Yates algorithm</strong> to generate shuffled recommendations from collected user interactions</li>
+          <li>Applied hashing with collision handling for fast local search across media data</li>
+          <li>Used linked lists, queues, and stacks for navigation history, playback flow, and efficient local state management</li>
         </ul>
       </blockquote>
-      <h3>Learning Focus</h3>
+      <h3>Why It Mattered</h3>
       <ul>
-        <li>Data structures, algorithmic recommendations, and desktop UI patterns</li>
+        <li>Built strong foundations in desktop UI architecture, recommendation logic, and practical data-structure usage inside a real product surface</li>
       </ul>
       <h2>Note</h2>
       <p>This project was built for educational purposes and has no relationship with Netflix or any other video streaming service.</p>`,
@@ -361,11 +440,17 @@ const PORTFOLIO_DATA = {
       <blockquote>
         <h3>Systems Engineering</h3>
         <ul>
-          <li>Maintained a lightweight Linux window manager replacement built with <strong>Lua</strong></li>
-          <li>Kept idle memory usage under approximately <strong>300MB</strong></li>
-          <li>Supported native widgets, layouts, customization, and Vim-style key bindings</li>
+          <li>Extended an AwesomeWM configuration into a near-desktop Linux environment using <strong>Lua</strong> and native widget composition</li>
+          <li>Kept idle memory usage under approximately <strong>300MB</strong> while preserving a rich daily-driver experience</li>
+          <li>Balanced performance and usability through tiled layouts, panels, Rofi menus, and Vim-style keyboard shortcuts</li>
         </ul>
-      </blockquote>`,
+      </blockquote>
+      <h3>Platform Features</h3>
+      <ul>
+        <li><strong>Native widgets</strong> — wifi, weather, volume, brightness, battery, and workflow utilities without heavy external desktop shells</li>
+        <li><strong>Lightweight stack</strong> — replaced heavier third-party utilities with Picom, policykit, clipboard, and lockscreen modules</li>
+        <li><strong>Theme consistency</strong> — coordinated GTK/Qt styling so the environment felt cohesive rather than pieced together</li>
+      </ul>`,
       images: [{ src: './Assets/project_2.webp', alt: 'Awesome', link: 'https://github.com/eqan/material-awesome' }]
     },
     'modal-project-3': {
@@ -377,16 +462,16 @@ const PORTFOLIO_DATA = {
         <blockquote>
           <h3>Desktop App Showcase</h3>
           <ul>
-            <li>Built a fully functional Instagram clone with <strong>C#</strong>, <strong>XML</strong>, and <strong>T-SQL</strong></li>
-            <li>Implemented core social media functionality including posts, stories, activity tracking, profiles, profile following, and bio data</li>
-            <li>Designed custom flat UI patterns with dark/light theme support</li>
+            <li>Shipped an Instagram-style <strong>WinForms client</strong> on SQL Server LocalDB with a purpose-built ER-modeled schema</li>
+            <li>Implemented posts, stories, likes, bookmarks, search, profiles, following flows, and activity notifications</li>
+            <li>Designed a custom flat UI with dark/light themes and desktop-native interaction patterns</li>
           </ul>
         </blockquote>
-        <h3>Features</h3>
+        <h3>Backend Design</h3>
         <ul>
-          <li>Localized SQL backend for desktop data persistence</li>
-          <li>Activity notifications, search, and profile views</li>
-          <li>Posts, stories, likes, bookmarks, and other social interactions</li>
+          <li><strong>T-SQL stored procedures</strong> — used routines like <strong>Check_UserName</strong> and <strong>Check_Password</strong> for auth workflows</li>
+          <li><strong>Dynamic per-user tables</strong> — provisioned post, story, like, and bookmark data at signup for localized desktop persistence experiments</li>
+          <li><strong>SQL-first product thinking</strong> — strengthened schema design and backend modeling instincts later reused in production .NET systems</li>
         </ul>
       `,
       images: [{ src: './Assets/project_3.webp', alt: 'Instagram', link: 'https://github.com/eqan/Instagram-ReImagened' }]
@@ -418,16 +503,17 @@ const PORTFOLIO_DATA = {
         <blockquote>
           <h3>Classical AI & Data Science</h3>
           <ul>
-            <li>Built a <strong>PyQt5</strong> desktop application for analyzing and forecasting starvation trends in Pakistan</li>
-            <li>Used Prophet, distribution models, and regression models for trend prediction</li>
+            <li>Built a <strong>PyQt5</strong> desktop analytics application around WFP Pakistan food-price data plus custom macroeconomic datasets</li>
+            <li>Surfaced <strong>five starvation-correlation views</strong> across consumption/production, trade, unemployment, inflation, and poverty</li>
+            <li>Used Prophet and multiple regression approaches for forecasting and comparative policy analysis</li>
           </ul>
         </blockquote>
         <h3>Modeling Features</h3>
         <ul>
-          <li>Histogram and line chart views for exploring data trends</li>
-          <li>Prophet forecasting for trend prediction</li>
-          <li>Linear, polynomial, and multiple regression models</li>
-          <li>Binomial and Poisson distribution-based data generation experiments</li>
+          <li><strong>Embedded Matplotlib canvases</strong> — histogram and line-chart views for interactive trend exploration</li>
+          <li><strong>Forecasting workflows</strong> — linear, polynomial, and multivariate regression using inflation, GDP, population, poverty, and unemployment predictors</li>
+          <li><strong>Editable CSV ingestion</strong> — added Ctrl+S persistence for iterative scenario analysis</li>
+          <li><strong>Experimental modeling</strong> — distribution-based analysis using classical statistical approaches alongside forecasting</li>
         </ul>
       `,
       images: [{ src: './Assets/project_5.webp', alt: 'Starvation', link: 'https://github.com/eqan/Starvation-Period-Analysis-And-Forecast' }]
@@ -441,15 +527,16 @@ const PORTFOLIO_DATA = {
         <blockquote>
           <h3>Systems Engineering</h3>
           <ul>
-            <li>Built an OS simulator in <strong>C</strong> using multithreading, semaphores, and Banker's algorithm</li>
-            <li>Created a custom shell, virtual drive, and virtual memory simulation</li>
+            <li>Built a <strong>C/GTK OS simulator</strong> with pthread-based multithreading, synchronization primitives, and process-management concepts</li>
+            <li>Implemented a memory-aware process manager that queued workloads under virtual RAM caps</li>
+            <li>Combined systems coursework ideas with a graphical shell-driven product surface instead of a console-only demo</li>
           </ul>
         </blockquote>
         <h3>Features</h3>
         <ul>
-          <li>Glade-based desktop interface</li>
-          <li>Process handling concepts with synchronization primitives</li>
-          <li>Linux application launching and virtual memory storage concepts</li>
+          <li><strong>Process orchestration</strong> — mutex and condition-variable synchronization plus fork-based process spawning</li>
+          <li><strong>Virtual environment tools</strong> — custom root shell, virtual drive, RAM specs, and live <strong>memusage</strong>-style process tracking</li>
+          <li><strong>Linux integration concepts</strong> — simulated app launching and virtual-memory behavior through a Glade-based interface</li>
         </ul>
       `,
       images: [{ src: './Assets/project_6.webp', alt: 'Xaxis OS', link: 'https://github.com/eqan/Xaxis-OS' }]
@@ -478,14 +565,16 @@ const PORTFOLIO_DATA = {
         <blockquote>
           <h3>Classical AI & Computer Vision</h3>
           <ul>
-            <li>Built a Python/OpenCV game automation bot using human detection in the IGI game environment</li>
-            <li>Used computer vision to identify and target players in real time</li>
+            <li>Engineered real-time game automation using <strong>OpenCV HOG + SVM people detection</strong>, MSS screen capture, and non-max suppression</li>
+            <li>Classified in-game enemies from live frames with sub-second feedback loops</li>
+            <li>Turned detection events into direct keyboard and mouse actions for a full CV-to-input control pipeline</li>
           </ul>
         </blockquote>
         <h3>Features</h3>
         <ul>
-          <li>Human detection pipeline with OpenCV</li>
-          <li>Targeting and action automation for gameplay experiments</li>
+          <li><strong>Hotkey-gated runtime</strong> — gameplay automation only activated inside a controlled loop for testing</li>
+          <li><strong>PyDirectInput actions</strong> — automated targeting and combat responses after successful detections</li>
+          <li><strong>Reusable architecture</strong> — laid groundwork for future deep-learning detectors and mission-navigation extensions</li>
         </ul>
       `,
       images: [{ src: './Assets/project_8.webp', alt: 'IGI Predator', link: 'https://github.com/eqan/Mini-AI-Projects/tree/main/1.%20IGI_Predator' }]

@@ -28,6 +28,15 @@ const Components = {
   attr: (name, value) => value ? `${name}="${value}"` : '',
 
   /**
+   * Escape user-facing strings for safe HTML attribute insertion
+   */
+  escapeAttr: (value) => String(value || '')
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;'),
+
+  /**
    * Conditionally add class
    */
   cls: (...classes) => classes.filter(Boolean).join(' '),
@@ -230,11 +239,28 @@ const Components = {
   
   projectModalImage: ({ src, alt, basis, link }) => {
     const basisStyle = basis ? `flex: 0 0 calc(${basis} - 0.5rem); max-width: calc(${basis} - 0.5rem);` : '';
-    const imgHtml = `<img class="img-fluid project-modal-img" src="${src}" alt="${alt}" loading="lazy"/>`;
-    
-    return link 
-      ? `<a href="${link}" class="project-img-wrapper" style="${basisStyle}" target="_blank">${imgHtml}</a>`
-      : `<div class="project-img-wrapper" style="${basisStyle}">${imgHtml}</div>`;
+    const imageAlt = alt || 'Project image';
+    const imgHtml = `<img class="img-fluid project-modal-img" src="${src}" alt="${imageAlt}" loading="lazy"/>`;
+    const expandLabel = `Expand image: ${imageAlt}`;
+    const projectLinkHtml = link
+      ? `<a href="${link}" class="project-img-link" target="_blank" rel="noopener noreferrer"><i class="fa fa-external-link"></i><span>Visit project</span></a>`
+      : '';
+
+    return `
+      <div class="project-img-wrapper" style="${basisStyle}">
+        <button
+          type="button"
+          class="project-img-trigger"
+          data-image-src="${Components.escapeAttr(src)}"
+          data-image-alt="${Components.escapeAttr(imageAlt)}"
+          aria-label="${Components.escapeAttr(expandLabel)}">
+          ${imgHtml}
+          <span class="project-img-expand" aria-hidden="true">
+            <i class="fa fa-search-plus"></i>
+          </span>
+        </button>
+        ${projectLinkHtml}
+      </div>`;
   },
 
   /**
@@ -299,6 +325,15 @@ const Components = {
 
   allProjectModals: (modals) => 
     Object.entries(modals).map(([id, data]) => Components.projectModal(id, data)).join('\n'),
+
+  projectImageDialog: () => `
+    <div class="project-image-dialog-overlay" id="project-image-dialog" aria-hidden="true">
+      <div class="project-image-dialog" role="dialog" aria-modal="true" aria-labelledby="project-image-dialog-caption">
+        <button class="project-image-dialog-close" id="project-image-dialog-close" type="button" aria-label="Close image preview">&times;</button>
+        <img src="" class="project-image-dialog-img" id="project-image-dialog-img" alt="" loading="lazy" decoding="async" />
+        <p class="project-image-dialog-caption" id="project-image-dialog-caption"></p>
+      </div>
+    </div>`,
 
   // ============ EXPERIENCE CARD COMPONENT (Modern) ============
   
@@ -557,7 +592,7 @@ const Components = {
     // Render project modals
     const modalsContainer = document.getElementById('modals-container');
     if (modalsContainer) {
-      modalsContainer.innerHTML = this.allProjectModals(data.projectModals);
+      modalsContainer.innerHTML = this.allProjectModals(data.projectModals) + this.projectImageDialog();
     }
 
     // Render profile modals

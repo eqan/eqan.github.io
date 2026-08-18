@@ -4,7 +4,7 @@
 (function () {
   'use strict';
 
-  var CACHE_VERSION = 'portfolio-static-v4';
+  var CACHE_VERSION = 'portfolio-static-v7';
   var CORE_ASSETS = [
     './',
     './index.html',
@@ -19,6 +19,7 @@
     './JS/lazy-loader.js',
     './JS/data.js',
     './JS/components.js',
+    './JS/project-image-dialog.js',
     './JS/theme-switcher.js',
     './JS/holiday-loader.js',
     './JS/sw-register.js',

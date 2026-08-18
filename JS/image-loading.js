@@ -1,5 +1,5 @@
 (() => {
-  const HOST_SELECTOR = '.project-img-wrapper, .project-card-img, .avatar-dialog';
+  const HOST_SELECTOR = '.project-img-wrapper, .project-card-img, .avatar-dialog, .project-image-dialog';
 
   function ensureIndicator(host) {
     if (!host) return null;
