@@ -22,13 +22,30 @@
       return overlay.classList.contains('active');
     }
 
+    function isGenericCaption(text) {
+      return !text || /^image\s+\d+$/i.test(String(text).trim());
+    }
+
+    function captionFromSrc(src) {
+      if (!src) return 'Project image preview';
+
+      var filename = src.split('/').pop() || '';
+      var stem = filename.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ').trim();
+      if (!stem) return 'Project image preview';
+
+      return stem.replace(/\b\w/g, function (char) {
+        return char.toUpperCase();
+      });
+    }
+
     function openDialog(src, alt, trigger) {
       if (!src) return;
+      var resolvedCaption = isGenericCaption(alt) ? captionFromSrc(src) : alt;
 
       previousFocus = trigger || document.activeElement;
       image.src = src;
-      image.alt = alt || 'Project image preview';
-      caption.textContent = alt || 'Project image preview';
+      image.alt = resolvedCaption || 'Project image preview';
+      caption.textContent = resolvedCaption || 'Project image preview';
 
       overlay.classList.add('active');
       overlay.setAttribute('aria-hidden', 'false');

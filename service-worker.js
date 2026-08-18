@@ -4,7 +4,7 @@
 (function () {
   'use strict';
 
-  var CACHE_VERSION = 'portfolio-static-v10';
+  var CACHE_VERSION = 'portfolio-static-v13';
   var CORE_ASSETS = [
     './',
     './index.html',
@@ -32,6 +32,7 @@
   ];
 
   var STATIC_FILE_RE = /\.(css|js|woff2?|ttf|webp|png|jpe?g|gif|svg)$/i;
+  var VERSION_SENSITIVE_FILE_RE = /\.(css|js)$/i;
 
   function isSameOrigin(url) {
     return url.origin === self.location.origin;
@@ -39,6 +40,10 @@
 
   function isStaticAsset(url) {
     return url.pathname.indexOf('/Assets/') !== -1 || STATIC_FILE_RE.test(url.pathname);
+  }
+
+  function isVersionSensitiveAsset(url) {
+    return VERSION_SENSITIVE_FILE_RE.test(url.pathname);
   }
 
   function cacheStatic(request) {
@@ -52,6 +57,19 @@
           }
           return response;
         });
+      });
+    });
+  }
+
+  function networkFirstStatic(request) {
+    return caches.open(CACHE_VERSION).then(function (cache) {
+      return fetch(request, { cache: 'no-store' }).then(function (response) {
+        if (response && response.ok) {
+          cache.put(request, response.clone());
+        }
+        return response;
+      }).catch(function () {
+        return cache.match(request);
       });
     });
   }
@@ -70,7 +88,7 @@
   function networkFirstDocument(request, preloadResponsePromise) {
     return caches.open(CACHE_VERSION).then(function (cache) {
       var responsePromise = preloadResponsePromise.then(function (preloadResponse) {
-        return preloadResponse || fetch(request);
+        return preloadResponse || fetch(request, { cache: 'no-store' });
       });
 
       return responsePromise.then(function (response) {
@@ -88,7 +106,8 @@
 
   function cacheCoreAssets(cache) {
     return Promise.all(CORE_ASSETS.map(function (asset) {
-      return cache.add(asset).catch(function () {
+      var request = new Request(asset, { cache: 'reload' });
+      return cache.add(request).catch(function () {
         /* Some generated media may not exist in local/dev checkouts.
            Keep the service worker install resilient. */
       });
@@ -136,7 +155,11 @@
     }
 
     if (isStaticAsset(url)) {
-      event.respondWith(cacheStatic(event.request));
+      event.respondWith(
+        isVersionSensitiveAsset(url)
+          ? networkFirstStatic(event.request)
+          : cacheStatic(event.request)
+      );
     }
   });
 

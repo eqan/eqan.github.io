@@ -79,7 +79,7 @@
   }, true);
 
   window.addEventListener('load', function () {
-    navigator.serviceWorker.register('./service-worker.js').then(function (registration) {
+    navigator.serviceWorker.register('./service-worker.js', { updateViaCache: 'none' }).then(function (registration) {
       registration.update().catch(function () {
         /* Best effort only. If update checks fail, keep the current worker. */
       });
