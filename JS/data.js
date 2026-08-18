@@ -191,8 +191,8 @@ const PORTFOLIO_DATA = {
         </ul>
       `,
       images: [
-        { src: './Assets/fleetdispatcher.webp', alt: 'Dispatch Mission Control logistics dispatch interface', basis: '50%' },
-        { src: './Assets/fleetdispatcher-grafana-dashboard.webp', alt: 'Dispatch Mission Control Grafana observability dashboard', basis: '50%' }
+        { src: './Assets/fleetdispatcher.webp', alt: 'Fleetdispatcher', basis: '50%' },
+        { src: './Assets/fleetdispatcher-grafana-dashboard.webp', alt: 'Fleetdispatcher Grafana Dashboard', basis: '50%' }
       ]
     },
     'modal-project-super': {
@@ -225,8 +225,8 @@ const PORTFOLIO_DATA = {
       images: [
         { src: './Assets/Super-Hero.webp', alt: 'Super Hero', basis: '100%' },
         { src: './Assets/Super-Home.webp', alt: 'Super Home', basis: '50%' },
-        { src: './Assets/Super-Viz.webp', alt: 'Optimization Dashboard', basis: '50%' },
-        { src: './Assets/Super-Code.webp', alt: 'Super Code Generation', basis: '100%' }
+        { src: './Assets/Super-Viz.webp', alt: 'Super Viz', basis: '50%' },
+        { src: './Assets/Super-Code.webp', alt: 'Super Code', basis: '100%' }
       ]
     },
     'modal-project-chatqlm': {
@@ -259,11 +259,11 @@ const PORTFOLIO_DATA = {
         </ul>
       `,
       images: [
-        { src: './Assets/Chatqlm-Hero.webp', alt: 'ChatQLM Hero', basis: '100%' },
-        { src: './Assets/Chatqlm-Main.webp', alt: 'ChatQLM Home', basis: '50%' },
+        { src: './Assets/Chatqlm-Hero.webp', alt: 'Chatqlm Hero', basis: '100%' },
+        { src: './Assets/Chatqlm-Main.webp', alt: 'Chatqlm Main', basis: '50%' },
         { src: './Assets/Chatqlm-Problem-Set.webp', alt: 'ChatQLM Problem Set', basis: '50%' },
-        { src: './Assets/Chatqlm-budget-problem.webp', alt: 'Budget Allocation', basis: '50%' },
-        { src: './Assets/Chatqlm-Viz.webp', alt: 'Optimization Results', basis: '50%' }
+        { src: './Assets/Chatqlm-budget-problem.webp', alt: 'Chatqlm Budget Problem', basis: '50%' },
+        { src: './Assets/Chatqlm-Viz.webp', alt: 'Chatqlm Viz', basis: '50%' }
       ]
     },
     'modal-project-akito': {
@@ -296,10 +296,10 @@ const PORTFOLIO_DATA = {
         </ul>
       `,
       images: [
-        { src: './Assets/Akito-Talent.webp', alt: 'Talent Pipeline Management', basis: '100%' },
-        { src: './Assets/Akito-Chat.webp', alt: 'AI Assessment Generation', basis: '50%' },
-        { src: './Assets/Akito-Assessment.webp', alt: 'Assessment View', basis: '50%' },
-        { src: './Assets/Akito-job-seeker.webp', alt: 'Job Seeker Dashboard', basis: '100%' }
+        { src: './Assets/Akito-Talent.webp', alt: 'Akito Talent', basis: '100%' },
+        { src: './Assets/Akito-Chat.webp', alt: 'Akito Chat', basis: '50%' },
+        { src: './Assets/Akito-Assessment.webp', alt: 'Akito Assessment', basis: '50%' },
+        { src: './Assets/Akito-job-seeker.webp', alt: 'Akito Job Seeker', basis: '100%' }
       ]
     },
     'modal-project-11': {
@@ -330,11 +330,11 @@ const PORTFOLIO_DATA = {
         </ul>
       `,
       images: [
-        { src: './Assets/Qanooni-Home-Page.webp', alt: 'Qanooni Legal Law Suite', basis: '100%' },
-        { src: './Assets/qanooni_review.webp', alt: 'Review', basis: '50%' },
-        { src: './Assets/qanooni_draft.webp', alt: 'Draft', basis: '50%' },
-        { src: './Assets/qanooni_litigation.webp', alt: 'Litigation', basis: '50%' },
-        { src: './Assets/qanooni_proposal.webp', alt: 'Proposal', basis: '50%' }
+        { src: './Assets/Qanooni-Home-Page.webp', alt: 'Qanooni Home Page', basis: '100%' },
+        { src: './Assets/qanooni_review.webp', alt: 'Qanooni Review', basis: '50%' },
+        { src: './Assets/qanooni_draft.webp', alt: 'Qanooni Draft', basis: '50%' },
+        { src: './Assets/qanooni_litigation.webp', alt: 'Qanooni Litigation', basis: '50%' },
+        { src: './Assets/qanooni_proposal.webp', alt: 'Qanooni Proposal', basis: '50%' }
       ]
     },
     'modal-project-10': {
@@ -365,9 +365,9 @@ const PORTFOLIO_DATA = {
         </ul>
       `,
       images: [
-        { src: './Assets/GPU-Lab-Home-Page.webp', alt: 'GPU Lab', basis: '50%' },
-        { src: './Assets/gpu-lab-server-list.webp', alt: 'Image 3', basis: '50%' },
-        { src: './Assets/gpu-lab-server.webp', alt: 'Image 2', basis: '50%' }
+        { src: './Assets/GPU-Lab-Home-Page.webp', alt: 'GPU Lab Home Page', basis: '50%' },
+        { src: './Assets/gpu-lab-server-list.webp', alt: 'Gpu Lab Server List', basis: '50%' },
+        { src: './Assets/gpu-lab-server.webp', alt: 'Gpu Lab Server', basis: '50%' }
       ]
     },
     'modal-project-0': {
@@ -399,12 +399,12 @@ const PORTFOLIO_DATA = {
         </ul>
       `,
       images: [
-        { src: './Assets/nuces-blocked-add-certificates.webp', alt: 'Netflix', basis: '50%', link: 'https://nuces-blocked-frontend.vercel.app/nuces-blocked/landing' },
-        { src: './Assets/nuces-blocked-manage-certificates.webp', alt: 'Image 2', basis: '50%', link: 'https://nuces-blocked-frontend.vercel.app/nuces-blocked/landing/' },
-        { src: './Assets/nuces-blocked-proposals.webp', alt: 'Image 3', basis: '50%', link: 'https://nuces-blocked-frontend.vercel.app/nuces-blocked/landing/' },
-        { src: './Assets/nuces-blocked-user-profiles.webp', alt: 'Image 4', basis: '50%', link: 'https://nuces-blocked-frontend.vercel.app/nuces-blocked/landing/' },
-        { src: './Assets/nuces-blocked-landing.webp', alt: 'Image 5', basis: '50%', link: 'https://nuces-blocked-frontend.vercel.app/nuces-blocked/landing/' },
-        { src: './Assets/nuces-blocked-academic-portfolios.webp', alt: 'Image 6', basis: '50%', link: 'https://nuces-blocked-frontend.vercel.app/nuces-blocked/landing/' }
+        { src: './Assets/nuces-blocked-add-certificates.webp', alt: 'Nuces Blocked Add Certificates', basis: '50%', link: 'https://nuces-blocked-frontend.vercel.app/nuces-blocked/landing' },
+        { src: './Assets/nuces-blocked-manage-certificates.webp', alt: 'Nuces Blocked Manage Certificates', basis: '50%', link: 'https://nuces-blocked-frontend.vercel.app/nuces-blocked/landing/' },
+        { src: './Assets/nuces-blocked-proposals.webp', alt: 'Nuces Blocked Proposals', basis: '50%', link: 'https://nuces-blocked-frontend.vercel.app/nuces-blocked/landing/' },
+        { src: './Assets/nuces-blocked-user-profiles.webp', alt: 'Nuces Blocked User Profiles', basis: '50%', link: 'https://nuces-blocked-frontend.vercel.app/nuces-blocked/landing/' },
+        { src: './Assets/nuces-blocked-landing.webp', alt: 'Nuces Blocked Landing', basis: '50%', link: 'https://nuces-blocked-frontend.vercel.app/nuces-blocked/landing/' },
+        { src: './Assets/nuces-blocked-academic-portfolios.webp', alt: 'Nuces Blocked Academic Portfolios', basis: '50%', link: 'https://nuces-blocked-frontend.vercel.app/nuces-blocked/landing/' }
       ]
     },
     'modal-project-1': {
@@ -451,7 +451,7 @@ const PORTFOLIO_DATA = {
         <li><strong>Lightweight stack</strong> — replaced heavier third-party utilities with Picom, policykit, clipboard, and lockscreen modules</li>
         <li><strong>Theme consistency</strong> — coordinated GTK/Qt styling so the environment felt cohesive rather than pieced together</li>
       </ul>`,
-      images: [{ src: './Assets/Material-Awesome.webp', alt: 'Awesome', link: 'https://github.com/eqan/material-awesome' }]
+      images: [{ src: './Assets/Material-Awesome.webp', alt: 'Material Awesome', link: 'https://github.com/eqan/material-awesome' }]
     },
     'modal-project-3': {
       title: 'Instagram Re-Imagened',
@@ -516,7 +516,7 @@ const PORTFOLIO_DATA = {
           <li><strong>Experimental modeling</strong> — distribution-based analysis using classical statistical approaches alongside forecasting</li>
         </ul>
       `,
-      images: [{ src: './Assets/Starvation-Predictor.webp', alt: 'Starvation', link: 'https://github.com/eqan/Starvation-Period-Analysis-And-Forecast' }]
+      images: [{ src: './Assets/Starvation-Predictor.webp', alt: 'Starvation Predictor', link: 'https://github.com/eqan/Starvation-Period-Analysis-And-Forecast' }]
     },
     'modal-project-6': {
       title: 'X-axis OS',
@@ -539,7 +539,7 @@ const PORTFOLIO_DATA = {
           <li><strong>Linux integration concepts</strong> — simulated app launching and virtual-memory behavior through a Glade-based interface</li>
         </ul>
       `,
-      images: [{ src: './Assets/OS-Simulator.webp', alt: 'Xaxis OS', link: 'https://github.com/eqan/Xaxis-OS' }]
+      images: [{ src: './Assets/OS-Simulator.webp', alt: 'OS Simulator', link: 'https://github.com/eqan/Xaxis-OS' }]
     },
     'modal-project-7': {
       title: 'Hangman',
@@ -598,7 +598,7 @@ const PORTFOLIO_DATA = {
           <li>Local storage for access token storage and user session retention</li>
         </ul>
       </p>`,
-      images: [{ src: './Assets/Ecommerce-Store.webp', alt: 'Sneaker-Ecommerce', link: 'https://github.com/eqan/Sneaker-Ecommerce' }]
+      images: [{ src: './Assets/Ecommerce-Store.webp', alt: 'Ecommerce Store', link: 'https://github.com/eqan/Sneaker-Ecommerce' }]
     }
   },
 
