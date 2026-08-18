@@ -85,7 +85,7 @@ const PORTFOLIO_DATA = {
     },
     {
       id: 'modal-project-10',
-      img: './Assets/project_10.webp',
+      img: './Assets/GPU-Lab-Home-Page.webp',
       title: 'GPU Lab',
       subtitle: 'Custom GPU cluster platform for deploying LLM and diffusion workloads on in-house infrastructure while cutting third-party cloud costs.',
       tags: ['NEXT.js', 'React', 'Redux', 'Python', 'FAST API', 'Postgres', 'Docker', 'WebSockets', 'Stripe', 'Cloudflare', 'AWS', 'Linux/Shell'],
@@ -98,7 +98,7 @@ const PORTFOLIO_DATA = {
     },
     {
       id: 'modal-project-11',
-      img: './Assets/project_11.webp',
+      img: './Assets/Qanooni-Home-Page.webp',
       title: 'Qanooni Legal Law Suite',
       subtitle: 'Full-stack AI legal drafting suite for Draft, Review, and Global Changes workflows powered by RAG and Microsoft Word automation.',
       tags: ['NEXT.js', 'React', 'FAST API', 'PostgreSQL', 'Python', 'LangChain', 'LangSmith', 'Pinecone', 'WebSockets', 'MS Word API', 'RAG', 'LLM Guardrails'],
@@ -152,12 +152,12 @@ const PORTFOLIO_DATA = {
 
   // Regular projects (smaller cards)
   projects: [
-    { id: 'modal-project-2', img: './Assets/project_2.webp', title: 'Material Awesome', subtitle: 'Linux Window manager & Desktop Environment Alternative', tags: ['Lua', 'Process Management', 'Desktop Development'], priority: 2, category: 'Tools', year: 2021, status: 'Open Source' },
-    { id: 'modal-project-6', img: './Assets/project_6.webp', title: 'X-axis OS', subtitle: 'An OS simulator built with C, semaphores, multithreading, and Bankers algorithm', tags: ['C', 'Glade', 'Shell Scripting', 'Algorithms'], priority: 3, category: 'Tools', year: 2021, status: 'Open Source' },
-    { id: 'modal-project-1', img: './Assets/project_1.webp', title: 'Netflix', subtitle: 'Video Streaming Application that is inspired by netflix', tags: ['XML', 'C#', 'Algorithms', 'Data Structures'], priority: 3, category: 'Desktop Apps', year: 2020, status: 'Open Source' },
-    { id: 'modal-project-3', img: './Assets/project_3.webp', title: 'Instagram Re-Imagened', subtitle: 'A social media application made from scratch', tags: ['XML', 'C#', 'T-SQL'], priority: 3, category: 'Desktop Apps', year: 2021, status: 'Open Source' },
-    { id: 'modal-project-5', img: './Assets/project_5.webp', title: 'Starvation Analysis in Pakistan', subtitle: 'A desktop application that performs analysis and predicts starvation rates in Pakistan', tags: ['PYQT5', 'Distribution Models', 'Prediction Models', 'Regression Models', 'Data Science'], priority: 3, category: 'AI', year: 2021, status: 'Open Source' },
-    { id: 'modal-project-8', img: './Assets/project_8.webp', title: 'IGI Predator', subtitle: 'A bot that plays IGI game using Human Detection Model.', tags: ['Python', 'Machine Learning', 'OpenCV'], priority: 3, category: 'AI', year: 2021, status: 'Open Source' }
+    { id: 'modal-project-2', img: './Assets/Material-Awesome.webp', title: 'Material Awesome', subtitle: 'Linux Window manager & Desktop Environment Alternative', tags: ['Lua', 'Process Management', 'Desktop Development'], priority: 2, category: 'Tools', year: 2021, status: 'Open Source' },
+    { id: 'modal-project-6', img: './Assets/OS-Simulator.webp', title: 'X-axis OS', subtitle: 'An OS simulator built with C, semaphores, multithreading, and Bankers algorithm', tags: ['C', 'Glade', 'Shell Scripting', 'Algorithms'], priority: 3, category: 'Tools', year: 2021, status: 'Open Source' },
+    { id: 'modal-project-1', img: './Assets/Netflix.webp', title: 'Netflix', subtitle: 'Video Streaming Application that is inspired by netflix', tags: ['XML', 'C#', 'Algorithms', 'Data Structures'], priority: 3, category: 'Desktop Apps', year: 2020, status: 'Open Source' },
+    { id: 'modal-project-3', img: './Assets/Instagram.webp', title: 'Instagram Re-Imagened', subtitle: 'A social media application made from scratch', tags: ['XML', 'C#', 'T-SQL'], priority: 3, category: 'Desktop Apps', year: 2021, status: 'Open Source' },
+    { id: 'modal-project-5', img: './Assets/Starvation-Predictor.webp', title: 'Starvation Analysis in Pakistan', subtitle: 'A desktop application that performs analysis and predicts starvation rates in Pakistan', tags: ['PYQT5', 'Distribution Models', 'Prediction Models', 'Regression Models', 'Data Science'], priority: 3, category: 'AI', year: 2021, status: 'Open Source' },
+    { id: 'modal-project-8', img: './Assets/IGI-Predator.webp', title: 'IGI Predator', subtitle: 'A bot that plays IGI game using Human Detection Model.', tags: ['Python', 'Machine Learning', 'OpenCV'], priority: 3, category: 'AI', year: 2021, status: 'Open Source' }
   ],
 
   // Project modal details
@@ -330,7 +330,7 @@ const PORTFOLIO_DATA = {
         </ul>
       `,
       images: [
-        { src: './Assets/project_11.webp', alt: 'Qanooni Legal Law Suite', basis: '100%' },
+        { src: './Assets/Qanooni-Home-Page.webp', alt: 'Qanooni Legal Law Suite', basis: '100%' },
         { src: './Assets/qanooni_review.webp', alt: 'Review', basis: '50%' },
         { src: './Assets/qanooni_draft.webp', alt: 'Draft', basis: '50%' },
         { src: './Assets/qanooni_litigation.webp', alt: 'Litigation', basis: '50%' },
@@ -365,7 +365,7 @@ const PORTFOLIO_DATA = {
         </ul>
       `,
       images: [
-        { src: './Assets/project_10.webp', alt: 'GPU Lab', basis: '50%' },
+        { src: './Assets/GPU-Lab-Home-Page.webp', alt: 'GPU Lab', basis: '50%' },
         { src: './Assets/gpu-lab-server-list.webp', alt: 'Image 3', basis: '50%' },
         { src: './Assets/gpu-lab-server.webp', alt: 'Image 2', basis: '50%' }
       ]
@@ -429,7 +429,7 @@ const PORTFOLIO_DATA = {
       </ul>
       <h2>Note</h2>
       <p>This project was built for educational purposes and has no relationship with Netflix or any other video streaming service.</p>`,
-      images: [{ src: './Assets/project_1.webp', alt: 'Netflix', link: 'https://github.com/eqan/Netflix-In-CSharp' }]
+      images: [{ src: './Assets/Netflix.webp', alt: 'Netflix', link: 'https://github.com/eqan/Netflix-In-CSharp' }]
     },
     'modal-project-2': {
       title: 'Material Awesome',
@@ -451,7 +451,7 @@ const PORTFOLIO_DATA = {
         <li><strong>Lightweight stack</strong> — replaced heavier third-party utilities with Picom, policykit, clipboard, and lockscreen modules</li>
         <li><strong>Theme consistency</strong> — coordinated GTK/Qt styling so the environment felt cohesive rather than pieced together</li>
       </ul>`,
-      images: [{ src: './Assets/project_2.webp', alt: 'Awesome', link: 'https://github.com/eqan/material-awesome' }]
+      images: [{ src: './Assets/Material-Awesome.webp', alt: 'Awesome', link: 'https://github.com/eqan/material-awesome' }]
     },
     'modal-project-3': {
       title: 'Instagram Re-Imagened',
@@ -474,7 +474,7 @@ const PORTFOLIO_DATA = {
           <li><strong>SQL-first product thinking</strong> — strengthened schema design and backend modeling instincts later reused in production .NET systems</li>
         </ul>
       `,
-      images: [{ src: './Assets/project_3.webp', alt: 'Instagram', link: 'https://github.com/eqan/Instagram-ReImagened' }]
+      images: [{ src: './Assets/Instagram.webp', alt: 'Instagram', link: 'https://github.com/eqan/Instagram-ReImagened' }]
     },
     'modal-project-4': {
       title: 'BKrypt',
@@ -492,7 +492,7 @@ const PORTFOLIO_DATA = {
           <li>Smart Contracts seamless integeration using hardhat</li>
         </ul>
       </p>`,
-      images: [{ src: './Assets/project_4.webp', alt: 'BKrypt', link: 'https://github.com/eqan/BKrypt' }]
+      images: [{ src: './Assets/BKrypt.webp', alt: 'BKrypt', link: 'https://github.com/eqan/BKrypt' }]
     },
     'modal-project-5': {
       title: 'Starvation Analysis in Pakistan',
@@ -516,7 +516,7 @@ const PORTFOLIO_DATA = {
           <li><strong>Experimental modeling</strong> — distribution-based analysis using classical statistical approaches alongside forecasting</li>
         </ul>
       `,
-      images: [{ src: './Assets/project_5.webp', alt: 'Starvation', link: 'https://github.com/eqan/Starvation-Period-Analysis-And-Forecast' }]
+      images: [{ src: './Assets/Starvation-Predictor.webp', alt: 'Starvation', link: 'https://github.com/eqan/Starvation-Period-Analysis-And-Forecast' }]
     },
     'modal-project-6': {
       title: 'X-axis OS',
@@ -539,7 +539,7 @@ const PORTFOLIO_DATA = {
           <li><strong>Linux integration concepts</strong> — simulated app launching and virtual-memory behavior through a Glade-based interface</li>
         </ul>
       `,
-      images: [{ src: './Assets/project_6.webp', alt: 'Xaxis OS', link: 'https://github.com/eqan/Xaxis-OS' }]
+      images: [{ src: './Assets/OS-Simulator.webp', alt: 'Xaxis OS', link: 'https://github.com/eqan/Xaxis-OS' }]
     },
     'modal-project-7': {
       title: 'Hangman',
@@ -554,7 +554,7 @@ const PORTFOLIO_DATA = {
           <li>Native support for linux derivatives.</li>
         </ul>
       </p>`,
-      images: [{ src: './Assets/project_7.webp', alt: 'Hangman', link: 'https://github.com/eqan/Hangman-In-Shell' }]
+      images: [{ src: './Assets/Hangman.webp', alt: 'Hangman', link: 'https://github.com/eqan/Hangman-In-Shell' }]
     },
     'modal-project-8': {
       title: 'IGI Predator',
@@ -577,7 +577,7 @@ const PORTFOLIO_DATA = {
           <li><strong>Reusable architecture</strong> — laid groundwork for future deep-learning detectors and mission-navigation extensions</li>
         </ul>
       `,
-      images: [{ src: './Assets/project_8.webp', alt: 'IGI Predator', link: 'https://github.com/eqan/Mini-AI-Projects/tree/main/1.%20IGI_Predator' }]
+      images: [{ src: './Assets/IGI-Predator.webp', alt: 'IGI Predator', link: 'https://github.com/eqan/Mini-AI-Projects/tree/main/1.%20IGI_Predator' }]
     },
     'modal-project-9': {
       title: 'Sneaker Ecommerce',
@@ -598,7 +598,7 @@ const PORTFOLIO_DATA = {
           <li>Local storage for access token storage and user session retention</li>
         </ul>
       </p>`,
-      images: [{ src: './Assets/project_9.webp', alt: 'Sneaker-Ecommerce', link: 'https://github.com/eqan/Sneaker-Ecommerce' }]
+      images: [{ src: './Assets/Ecommerce-Store.webp', alt: 'Sneaker-Ecommerce', link: 'https://github.com/eqan/Sneaker-Ecommerce' }]
     }
   },
 
