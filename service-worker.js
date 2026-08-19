@@ -3,7 +3,34 @@
    network-first for documents so content updates are not hidden by cache. */
 (function () {
   'use strict';
-  var CACHE_VERSION = 'portfolio-static-v17';
+  var CACHE_PREFIX = 'portfolio-static';
+  var cacheNamePromise = null;
+
+  function getCacheName(force) {
+    if (cacheNamePromise && !force) return cacheNamePromise;
+
+    // Bypass HTTP cache so a fresh deploy can't get pinned to stale JSON.
+    cacheNamePromise = fetch('./cache-version.json', { cache: 'no-store' })
+      .then(function (response) {
+        if (!response.ok) throw new Error('cache-version.json not ok');
+        return response.json();
+      })
+      .then(function (data) {
+        var name = data && data.cacheName ? String(data.cacheName) : '';
+        return name.trim() || CACHE_PREFIX;
+      })
+      .catch(function () {
+        return CACHE_PREFIX;
+      });
+
+    return cacheNamePromise;
+  }
+
+  function openCache(force) {
+    return getCacheName(force).then(function (name) {
+      return caches.open(name);
+    });
+  }
   var CORE_ASSETS = [
     './',
     './index.html',
@@ -46,7 +73,7 @@
   }
 
   function cacheStatic(request) {
-    return caches.open(CACHE_VERSION).then(function (cache) {
+    return openCache(false).then(function (cache) {
       return cache.match(request).then(function (cached) {
         if (cached) return cached;
 
@@ -61,7 +88,7 @@
   }
 
   function networkFirstStatic(request) {
-    return caches.open(CACHE_VERSION).then(function (cache) {
+    return openCache(false).then(function (cache) {
       return fetch(request, { cache: 'no-store' }).then(function (response) {
         if (response && response.ok) {
           cache.put(request, response.clone());
@@ -85,7 +112,7 @@
   }
 
   function networkFirstDocument(request, preloadResponsePromise) {
-    return caches.open(CACHE_VERSION).then(function (cache) {
+    return openCache(false).then(function (cache) {
       var responsePromise = preloadResponsePromise.then(function (preloadResponse) {
         return preloadResponse || fetch(request, { cache: 'no-store' });
       });
@@ -115,7 +142,7 @@
 
   self.addEventListener('install', function (event) {
     event.waitUntil(
-      caches.open(CACHE_VERSION).then(function (cache) {
+      openCache(true).then(function (cache) {
         return cacheCoreAssets(cache);
       }).then(function () {
         return self.skipWaiting();
@@ -125,20 +152,28 @@
 
   self.addEventListener('activate', function (event) {
     event.waitUntil(
-      Promise.resolve().then(function () {
-        return self.registration.navigationPreload
-          ? self.registration.navigationPreload.enable()
-          : undefined;
-      }).then(function () {
-        return caches.keys();
-      }).then(function (keys) {
-        return Promise.all(keys.map(function (key) {
-          if (key !== CACHE_VERSION) return caches.delete(key);
-          return Promise.resolve();
-        }));
-      }).then(function () {
-        return self.clients.claim();
-      })
+      Promise.resolve()
+        .then(function () {
+          return self.registration.navigationPreload
+            ? self.registration.navigationPreload.enable()
+            : undefined;
+        })
+        .then(function () {
+          return getCacheName(true);
+        })
+        .then(function (activeCacheName) {
+          return caches.keys().then(function (keys) {
+            return Promise.all(keys.map(function (key) {
+              var isOurs = key === CACHE_PREFIX || key.indexOf(CACHE_PREFIX + '-') === 0;
+              if (!isOurs) return Promise.resolve();
+              if (key !== activeCacheName) return caches.delete(key);
+              return Promise.resolve();
+            }));
+          });
+        })
+        .then(function () {
+          return self.clients.claim();
+        })
     );
   });
 
