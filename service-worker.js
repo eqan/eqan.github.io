@@ -3,8 +3,7 @@
    network-first for documents so content updates are not hidden by cache. */
 (function () {
   'use strict';
-
-  var CACHE_VERSION = 'portfolio-static-v13';
+  var CACHE_VERSION = 'portfolio-static-v17';
   var CORE_ASSETS = [
     './',
     './index.html',

@@ -166,6 +166,7 @@ const PORTFOLIO_DATA = {
       title: 'Dispatch Mission Control',
       subtitle: 'A full-stack logistics dispatch platform built as a Bun monorepo with atomic Redis workflows, asynchronous optimization, and production-style Kubernetes observability.',
       tags: ['Bun Monorepo', 'React', 'Express', 'TypeScript', 'Redis Lua', 'Redis Streams', 'MongoDB', 'Zod', 'SSE', 'Kubernetes', 'Helm', 'Grafana', 'Prometheus', 'Loki', 'pytest'],
+      link: 'https://github.com/eqan/Scalable-Fleet-Dispatcher',
       content: `
         <blockquote>
           <h3>Key Highlights</h3>
@@ -199,6 +200,7 @@ const PORTFOLIO_DATA = {
       title: 'Super™',
       subtitle: 'The ChatGPT of Quantum Computing — a revolutionary AI that bridges natural language problem descriptions, quantum and supercomputing technologies, and commercialized solutions.',
       tags: ['NEXT.js', 'React', 'Python', 'Gurobi', 'QuEra', 'Amazon Braket', 'IonQ', 'NVIDIA CUDA-Q', 'Dwave', 'NLP', 'LLM', 'Quantum Computing', 'REST APIs', 'WebSockets'],
+      link: 'https://superq.co/',
       content: `
         <blockquote>
           <h3>Key Highlights</h3>
@@ -233,6 +235,7 @@ const PORTFOLIO_DATA = {
       title: 'ChatQLM',
       subtitle: 'The world\'s first consumer app powered by quantum and supercomputing. Solve complex decisions in natural language — CES 2026 World Premiere.',
       tags: ['React Native', 'Python', 'Quantum Computing', 'NLP', 'Gurobi', 'Optimization', 'Mobile App', 'Super™ Platform', 'REST APIs'],
+      link: 'https://chatqlm.com/',
       content: `
         <blockquote>
           <h3>Key Highlights</h3>
@@ -270,6 +273,7 @@ const PORTFOLIO_DATA = {
       title: 'Akito AI',
       subtitle: 'An AI-powered talent pipeline management platform for employers and job seekers with AI assessment generation, candidate management, and Riipen integration.',
       tags: ['NEXT.js', 'React', 'Node.js', 'OpenAI', 'REST APIs', 'Postgres', 'AI/ML', 'OAuth', 'Riipen', 'Web Crawling', 'Prompt Engineering'],
+      link: 'https://akito.ai/',
       content: `
         <blockquote>
           <h3>Key Highlights</h3>
@@ -306,6 +310,7 @@ const PORTFOLIO_DATA = {
       title: 'Qanooni Legal Law Suite',
       subtitle: 'AI legal drafting suite for Draft, Review, and Global Changes workflows using RAG, LLM guardrails, and Microsoft Word automation.',
       tags: ['NEXT.js', 'React', 'FAST API', 'PostgreSQL', 'Python', 'LangChain', 'LangSmith', 'Pinecone', 'WebSockets', 'MS Word API', 'RAG', 'LLM Guardrails'],
+      link: 'https://qanooni.ai/',
       content: `
         <blockquote>
           <h3>Impact</h3>
@@ -341,6 +346,7 @@ const PORTFOLIO_DATA = {
       title: 'GPU Lab',
       subtitle: 'A cloud computing platform aimed to deploy millions of AI models on local GPU servers and return apis for hastle free usage.',
       tags: ['NEXT.js', 'OAuth', 'Redux', 'React', 'REST APIs', 'Postgres', 'SQL Alchemy', 'Python', 'Docker', 'Cloudflared', 'AWS', 'Postman', 'Web Sockets', 'Stripe', 'FAST API', 'NVIDIA-SMI', 'Alembic', 'Redis', 'Linux/Shell'],
+      link: 'https://gpulab.ai/',
       content: `
         <blockquote>
           <h3>Key Achievements</h3>

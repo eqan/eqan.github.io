@@ -242,9 +242,6 @@ const Components = {
     const imageAlt = alt || 'Project image';
     const imgHtml = `<img class="img-fluid project-modal-img" src="${src}" alt="${imageAlt}" loading="lazy"/>`;
     const expandLabel = `Expand image: ${imageAlt}`;
-    const projectLinkHtml = link
-      ? `<a href="${link}" class="project-img-link" target="_blank" rel="noopener noreferrer"><i class="fa fa-external-link"></i><span>Visit project</span></a>`
-      : '';
 
     return `
       <div class="project-img-wrapper" style="${basisStyle}">
@@ -259,7 +256,6 @@ const Components = {
             <i class="fa fa-search-plus"></i>
           </span>
         </button>
-        ${projectLinkHtml}
       </div>`;
   },
 
