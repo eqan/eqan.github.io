@@ -1636,26 +1636,53 @@ body.modal-open .preview-themes {
 
 /* Project Gallery */
 .project-gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.65rem;
+  display: grid;
+  gap: 0.9rem;
   margin: 0;
 }
-.project-img-wrapper {
-  border-radius: 12px;
-  overflow: hidden;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  background: var(--content-bg);
-  display: block;
+.project-gallery-viewport {
   position: relative;
 }
-.project-img-wrapper:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+.project-gallery-slides {
+  position: relative;
+  min-height: 320px;
+  aspect-ratio: 16 / 10;
+  border-radius: 18px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--content-bg) 85%, black 15%);
+  border: 1px solid color-mix(in srgb, var(--contact-border) 20%, transparent);
+}
+.project-img-wrapper {
+  position: relative;
+  display: none;
+  width: 100%;
+  height: 100%;
+  background: var(--content-bg);
+  align-items: stretch;
+  justify-content: stretch;
+}
+.project-gallery-slide.is-active {
+  display: flex;
+}
+.project-gallery-frame {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.18), transparent 38%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.18));
 }
 .project-img-trigger {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
+  height: 100%;
   padding: 0;
   border: 0;
   background: transparent;
@@ -1669,9 +1696,23 @@ body.modal-open .preview-themes {
 }
 .project-modal-img {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
-  border-radius: 12px;
+  object-fit: contain;
+  border-radius: 18px;
+}
+.project-gallery-image-label {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  padding: 0.38rem 0.72rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.72);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  z-index: 2;
 }
 .project-img-expand {
   position: absolute;
@@ -1711,8 +1752,101 @@ body.modal-open .preview-themes {
   transform: scale(1.06);
   box-shadow: 0 12px 26px rgba(0, 0, 0, 0.28);
 }
-.gallery-single .project-img-wrapper { max-width: 100%; flex: 0 0 100%; }
-.gallery-collage .project-img-wrapper { flex: 0 0 calc(50% - 0.325rem); max-width: calc(50% - 0.325rem); }
+.project-gallery-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.project-gallery-nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-width: 122px;
+  padding: 0.8rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--contact-border) 22%, transparent);
+  border-radius: 999px;
+  background: var(--content-bg);
+  color: inherit;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+.project-gallery-nav:hover,
+.project-gallery-nav:focus-visible {
+  background: var(--contact-border);
+  color: var(--contrast-color);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+  text-decoration: none;
+}
+.project-gallery-status {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+.project-gallery-counter,
+.project-gallery-countdown {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.78;
+}
+.project-gallery-timer {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--contact-border) 12%, transparent);
+}
+.project-gallery-timer-bar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--contact-border), color-mix(in srgb, var(--contact-border) 40%, white 60%));
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.1s linear;
+}
+.project-gallery-thumbs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+  gap: 0.55rem;
+}
+.project-gallery-thumb {
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--content-bg);
+  aspect-ratio: 4 / 3;
+  opacity: 0.72;
+  transform: translateY(0);
+  transition: opacity 0.2s ease, transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.project-gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.project-gallery-thumb:hover,
+.project-gallery-thumb:focus-visible,
+.project-gallery-thumb.is-active {
+  opacity: 1;
+  border-color: var(--contact-border);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+.gallery-single .project-gallery-slides {
+  min-height: 280px;
+}
 
 /* Image loading indicator */
 .img-loading-host { position: relative; }
@@ -1739,15 +1873,31 @@ body.modal-open .preview-themes {
 }
 
 /* Inside the narrower gallery column on desktop, force full-width images */
-@media (min-width: 992px) {
-  .project-modal-gallery-col .project-gallery { flex-direction: column; }
-  .project-modal-gallery-col .project-img-wrapper {
-    flex: 0 0 100% !important;
-    max-width: 100% !important;
-  }
-}
 @media (max-width: 575px) {
-  .gallery-collage .project-img-wrapper { flex: 0 0 100%; max-width: 100%; }
+  .project-gallery-slides {
+    min-height: 240px;
+  }
+  .project-gallery-controls {
+    flex-wrap: wrap;
+  }
+  .project-gallery-nav {
+    flex: 1 1 calc(50% - 0.375rem);
+    min-width: 0;
+    padding: 0.72rem 0.85rem;
+    font-size: 0.72rem;
+  }
+  .project-gallery-status {
+    order: 3;
+    flex-basis: 100%;
+  }
+  .project-gallery-thumbs {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .project-gallery-image-label {
+    left: 0.75rem;
+    bottom: 0.75rem;
+    font-size: 0.68rem;
+  }
   .project-img-expand {
     width: 36px;
     height: 36px;

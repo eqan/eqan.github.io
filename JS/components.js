@@ -237,25 +237,93 @@ const Components = {
 
   // ============ PROJECT MODAL COMPONENT ============
   
-  projectModalImage: ({ src, alt, basis, link }) => {
-    const basisStyle = basis ? `flex: 0 0 calc(${basis} - 0.5rem); max-width: calc(${basis} - 0.5rem);` : '';
+  projectModalImage: ({ src, alt }, index, total) => {
     const imageAlt = alt || 'Project image';
     const imgHtml = `<img class="img-fluid project-modal-img" src="${src}" alt="${imageAlt}" loading="lazy"/>`;
     const expandLabel = `Expand image: ${imageAlt}`;
 
     return `
-      <div class="project-img-wrapper" style="${basisStyle}">
+      <div
+        class="project-img-wrapper project-gallery-slide${index === 0 ? ' is-active' : ''}"
+        data-gallery-slide
+        data-slide-index="${index}"
+        aria-hidden="${index === 0 ? 'false' : 'true'}">
         <button
           type="button"
-          class="project-img-trigger"
+          class="project-img-trigger project-gallery-frame"
           data-image-src="${Components.escapeAttr(src)}"
           data-image-alt="${Components.escapeAttr(imageAlt)}"
+          tabindex="${index === 0 ? '0' : '-1'}"
           aria-label="${Components.escapeAttr(expandLabel)}">
           ${imgHtml}
           <span class="project-img-expand" aria-hidden="true">
             <i class="fa fa-search-plus"></i>
           </span>
         </button>
+        <span class="project-gallery-image-label">${index + 1} / ${total}</span>
+      </div>`;
+  },
+
+  projectModalThumb: ({ src, alt }, index) => {
+    const imageAlt = alt || `Project image ${index + 1}`;
+
+    return `
+      <button
+        type="button"
+        class="project-gallery-thumb${index === 0 ? ' is-active' : ''}"
+        data-gallery-thumb
+        data-slide-target="${index}"
+        aria-label="Show ${Components.escapeAttr(imageAlt)}"
+        aria-pressed="${index === 0 ? 'true' : 'false'}">
+        <img src="${src}" alt="${Components.escapeAttr(imageAlt)} thumbnail" loading="lazy" />
+      </button>`;
+  },
+
+  projectModalGallery: (id, images) => {
+    const total = images.length;
+    const hasMultiple = total > 1;
+    const autoplaySeconds = 5;
+    const slidesHtml = images.map((image, index) => Components.projectModalImage(image, index, total)).join('');
+    const thumbsHtml = hasMultiple
+      ? `
+        <div class="project-gallery-thumbs" role="group" aria-label="Project gallery thumbnails">
+          ${images.map((image, index) => Components.projectModalThumb(image, index)).join('')}
+        </div>`
+      : '';
+
+    const controlsHtml = hasMultiple
+      ? `
+        <div class="project-gallery-controls">
+          <button type="button" class="project-gallery-nav" data-gallery-prev aria-label="Previous project image">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            <span>Previous</span>
+          </button>
+          <div class="project-gallery-status" aria-live="polite">
+            <span class="project-gallery-counter" data-gallery-counter>1 / ${total}</span>
+            <div class="project-gallery-timer" aria-hidden="true">
+              <span class="project-gallery-timer-bar" data-gallery-progress></span>
+            </div>
+            <span class="project-gallery-countdown"><span data-gallery-countdown>${autoplaySeconds}</span>s auto-next</span>
+          </div>
+          <button type="button" class="project-gallery-nav" data-gallery-next aria-label="Next project image">
+            <span>Next</span>
+            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          </button>
+        </div>`
+      : '';
+
+    return `
+      <div
+        class="project-gallery ${hasMultiple ? 'gallery-slider' : 'gallery-single'}"
+        data-gallery-root
+        data-gallery-autoplay="${autoplaySeconds}">
+        <div class="project-gallery-viewport">
+          <div class="project-gallery-slides">
+            ${slidesHtml}
+          </div>
+        </div>
+        ${controlsHtml}
+        ${thumbsHtml}
       </div>`;
   },
 
@@ -268,7 +336,6 @@ const Components = {
   },
 
   projectModal: (id, { title, subtitle, tags, content, images, link }) => {
-    const hasCollage = images.length > 1 || images.some(img => img.basis);
     const formattedTags = Components.formatTags(tags);
     const linkHtml = link
       ? `<a href="${link}" target="_blank" class="project-modal-visit"><i class="fa fa-external-link"></i><span>Visit project</span></a>`
@@ -302,9 +369,7 @@ const Components = {
 
               <div class="project-modal-grid">
                 <aside class="project-modal-gallery-col">
-                  <div class="project-gallery ${hasCollage ? 'gallery-collage' : 'gallery-single'}">
-                    ${images.map(Components.projectModalImage).join('')}
-                  </div>
+                  ${Components.projectModalGallery(id, images)}
                 </aside>
                 <section class="project-modal-content-col">
                   <div class="project-content">
