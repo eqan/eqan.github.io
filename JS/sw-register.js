@@ -4,6 +4,36 @@
   if (!('serviceWorker' in navigator)) return;
   var hasControllerAtBoot = !!navigator.serviceWorker.controller;
   var hasReloadedForUpdate = false;
+  var pendingControllerRefresh = false;
+  var VERSION_CHECK_INTERVAL_MS = 6 * 60 * 60 * 1000;
+  var LAST_VERSION_CHECK_KEY = 'portfolio-sw-last-version-check';
+
+  function idle(callback, timeout) {
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(callback, { timeout: timeout || 4000 });
+    } else {
+      window.setTimeout(callback, timeout || 1800);
+    }
+  }
+
+  function now() {
+    return Date.now ? Date.now() : new Date().getTime();
+  }
+
+  function shouldRefreshVersionMetadata() {
+    try {
+      var last = Number(window.localStorage.getItem(LAST_VERSION_CHECK_KEY) || '0');
+      return !last || (now() - last) > VERSION_CHECK_INTERVAL_MS;
+    } catch (err) {
+      return true;
+    }
+  }
+
+  function markVersionMetadataChecked() {
+    try {
+      window.localStorage.setItem(LAST_VERSION_CHECK_KEY, String(now()));
+    } catch (err) {}
+  }
 
   function isSameOrigin(url) {
     try {
@@ -49,8 +79,10 @@
 
   function refreshWorkerIfNeeded(registration) {
     if (!window.caches || !registration) return;
+    if (!shouldRefreshVersionMetadata()) return;
 
     fetchDeployedCacheName().then(function (deployedCacheName) {
+      markVersionMetadataChecked();
       if (!deployedCacheName) return;
 
       return caches.keys().then(function (cacheNames) {
@@ -60,15 +92,28 @@
            update() asks the browser to fetch it now instead of waiting. */
         return registration.update();
       });
+    }).catch(function () {
+      markVersionMetadataChecked();
     });
+  }
+
+  function flushPendingRefresh() {
+    if (!pendingControllerRefresh || hasReloadedForUpdate) return;
+    if (document.visibilityState !== 'hidden') return;
+    hasReloadedForUpdate = true;
+    pendingControllerRefresh = false;
+    window.location.reload();
   }
 
   function reloadWhenNewWorkerTakesControl() {
     navigator.serviceWorker.addEventListener('controllerchange', function () {
       if (!hasControllerAtBoot || hasReloadedForUpdate) return;
-      hasReloadedForUpdate = true;
-      window.location.reload();
+      pendingControllerRefresh = true;
+      flushPendingRefresh();
     });
+
+    document.addEventListener('visibilitychange', flushPendingRefresh);
+    window.addEventListener('pagehide', flushPendingRefresh);
   }
 
   window.PortfolioCacheAsset = cacheAsset;
@@ -79,15 +124,16 @@
   }, true);
 
   window.addEventListener('load', function () {
-    navigator.serviceWorker.register('./service-worker.js', { updateViaCache: 'none' }).then(function (registration) {
-      registration.update().catch(function () {
-        /* Best effort only. If update checks fail, keep the current worker. */
+    idle(function () {
+      navigator.serviceWorker.register('./service-worker.js', { updateViaCache: 'none' }).then(function (registration) {
+        idle(function () {
+          navigator.serviceWorker.ready.then(function () {
+            refreshWorkerIfNeeded(registration);
+          });
+        }, 6000);
+      }).catch(function () {
+        /* Cache is an enhancement; the site should keep working if registration fails. */
       });
-      return navigator.serviceWorker.ready.then(function () {
-        refreshWorkerIfNeeded(registration);
-      });
-    }).catch(function () {
-      /* Cache is an enhancement; the site should keep working if registration fails. */
-    });
+    }, 2500);
   });
 })();
