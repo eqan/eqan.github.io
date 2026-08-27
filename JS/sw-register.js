@@ -3,8 +3,9 @@
 
   if (!('serviceWorker' in navigator)) return;
   var hasControllerAtBoot = !!navigator.serviceWorker.controller;
-  var hasReloadedForUpdate = false;
-  var pendingControllerRefresh = false;
+  var userAcceptedUpdate = false;
+  var updateToast = null;
+  var updateWorker = null;
   var VERSION_CHECK_INTERVAL_MS = 6 * 60 * 60 * 1000;
   var LAST_VERSION_CHECK_KEY = 'portfolio-sw-last-version-check';
 
@@ -97,27 +98,78 @@
     });
   }
 
-  function flushPendingRefresh() {
-    if (!pendingControllerRefresh || hasReloadedForUpdate) return;
-    if (document.visibilityState !== 'hidden') return;
-    hasReloadedForUpdate = true;
-    pendingControllerRefresh = false;
-    window.location.reload();
-  }
+  function ensureUpdateToast() {
+    if (updateToast) return updateToast;
 
-  function reloadWhenNewWorkerTakesControl() {
-    navigator.serviceWorker.addEventListener('controllerchange', function () {
-      if (!hasControllerAtBoot || hasReloadedForUpdate) return;
-      pendingControllerRefresh = true;
-      flushPendingRefresh();
+    updateToast = document.createElement('div');
+    updateToast.className = 'site-update-toast';
+    updateToast.setAttribute('role', 'status');
+    updateToast.setAttribute('aria-live', 'polite');
+    updateToast.innerHTML = [
+      '<div class="site-update-toast-copy">',
+      '<strong>New website content is ready</strong>',
+      '<span>Refresh when you are ready to view the latest version.</span>',
+      '</div>',
+      '<button class="site-update-toast-refresh" type="button">Refresh</button>',
+      '<button class="site-update-toast-dismiss" type="button" aria-label="Dismiss update notice">&times;</button>'
+    ].join('');
+
+    updateToast.querySelector('.site-update-toast-refresh').addEventListener('click', function () {
+      userAcceptedUpdate = true;
+      updateToast.classList.remove('is-visible');
+
+      if (updateWorker) {
+        updateWorker.postMessage({ type: 'SKIP_WAITING' });
+      } else {
+        window.location.reload();
+      }
     });
 
-    document.addEventListener('visibilitychange', flushPendingRefresh);
-    window.addEventListener('pagehide', flushPendingRefresh);
+    updateToast.querySelector('.site-update-toast-dismiss').addEventListener('click', function () {
+      updateToast.classList.remove('is-visible');
+    });
+
+    document.body.appendChild(updateToast);
+    return updateToast;
+  }
+
+  function showUpdateToast(worker) {
+    if (!hasControllerAtBoot) return;
+    updateWorker = worker || updateWorker;
+    ensureUpdateToast();
+    window.setTimeout(function () {
+      updateToast.classList.add('is-visible');
+    }, 80);
+  }
+
+  function reloadAfterAcceptedUpdate() {
+    navigator.serviceWorker.addEventListener('controllerchange', function () {
+      if (!userAcceptedUpdate) return;
+      window.location.reload();
+    });
+  }
+
+  function watchForWaitingWorker(registration) {
+    if (!registration) return;
+
+    if (registration.waiting) {
+      showUpdateToast(registration.waiting);
+    }
+
+    registration.addEventListener('updatefound', function () {
+      var installingWorker = registration.installing;
+      if (!installingWorker) return;
+
+      installingWorker.addEventListener('statechange', function () {
+        if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
+          showUpdateToast(registration.waiting || installingWorker);
+        }
+      });
+    });
   }
 
   window.PortfolioCacheAsset = cacheAsset;
-  reloadWhenNewWorkerTakesControl();
+  reloadAfterAcceptedUpdate();
 
   document.addEventListener('load', function (event) {
     cacheAsset(assetUrl(event.target));
@@ -126,6 +178,7 @@
   window.addEventListener('load', function () {
     idle(function () {
       navigator.serviceWorker.register('./service-worker.js', { updateViaCache: 'none' }).then(function (registration) {
+        watchForWaitingWorker(registration);
         idle(function () {
           navigator.serviceWorker.ready.then(function () {
             refreshWorkerIfNeeded(registration);

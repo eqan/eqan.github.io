@@ -607,6 +607,106 @@
   .preview-theme { width: 18px; height: 18px; }
 }
 
+/* ============ SITE UPDATE TOAST ============ */
+.site-update-toast {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 10002;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 0.8rem;
+  width: min(440px, calc(100vw - 2rem));
+  padding: 0.9rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--contact-border) 28%, transparent);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--content-bg) 94%, var(--contact-border) 6%);
+  color: inherit;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(14px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+.site-update-toast.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+body.modal-open .site-update-toast,
+body.project-image-dialog-open .site-update-toast {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(14px);
+}
+.site-update-toast-copy {
+  display: grid;
+  gap: 0.2rem;
+  min-width: 0;
+}
+.site-update-toast-copy strong {
+  font-size: 0.92rem;
+  line-height: 1.25;
+  font-weight: 850;
+}
+.site-update-toast-copy span {
+  font-size: 0.78rem;
+  line-height: 1.4;
+  opacity: 0.72;
+}
+.site-update-toast-refresh,
+.site-update-toast-dismiss {
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+}
+.site-update-toast-refresh {
+  padding: 0.62rem 0.9rem;
+  border-radius: 999px;
+  background: var(--contact-border);
+  color: var(--contrast-color);
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.site-update-toast-dismiss {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--contact-border) 10%, transparent);
+  color: inherit;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+.site-update-toast-refresh:hover,
+.site-update-toast-refresh:focus-visible,
+.site-update-toast-dismiss:hover,
+.site-update-toast-dismiss:focus-visible {
+  outline: 2px solid var(--contact-border);
+  outline-offset: 2px;
+}
+
+@media (max-width: 575px) {
+  .site-update-toast {
+    left: 1rem;
+    right: 1rem;
+    bottom: 0.85rem;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .site-update-toast-refresh {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+  .site-update-toast-dismiss {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}
+
 /* ============ PAGE SEARCH ============ */
 .site-search {
   position: fixed;

@@ -5,6 +5,13 @@
   'use strict';
   var CACHE_PREFIX = 'portfolio-static';
   var cacheNamePromise = null;
+  var CACHE_BATCH_SIZE = 3;
+  var CACHE_BATCH_DELAY_MS = 120;
+  var ASSET_QUEUE_BATCH_SIZE = 2;
+  var ASSET_QUEUE_DELAY_MS = 180;
+  var assetCacheQueue = [];
+  var queuedAssetUrls = {};
+  var assetQueuePromise = null;
 
   function getCacheName(force) {
     if (cacheNamePromise && !force) return cacheNamePromise;
@@ -31,6 +38,13 @@
       return caches.open(name);
     });
   }
+
+  function delay(ms) {
+    return new Promise(function (resolve) {
+      setTimeout(resolve, ms);
+    });
+  }
+
   var CORE_ASSETS = [
     './',
     './index.html',
@@ -45,6 +59,7 @@
     './JS/lazy-loader.js',
     './JS/data.js',
     './JS/components.js',
+    './JS/project-modal-gallery.js',
     './JS/project-image-dialog.js',
     './JS/theme-switcher.js',
     './JS/holiday-loader.js',
@@ -87,15 +102,22 @@
     });
   }
 
-  function networkFirstStatic(request) {
+  function staleWhileRevalidateStatic(request) {
     return openCache(false).then(function (cache) {
-      return fetch(request, { cache: 'no-store' }).then(function (response) {
+      var fetchPromise = fetch(request, { cache: 'no-store' }).then(function (response) {
         if (response && response.ok) {
           cache.put(request, response.clone());
         }
         return response;
       }).catch(function () {
-        return cache.match(request);
+        return null;
+      });
+
+      return cache.match(request).then(function (cached) {
+        if (cached) return cached;
+        return fetchPromise.then(function (response) {
+          return response || Response.error();
+        });
       });
     });
   }
@@ -131,21 +153,63 @@
   }
 
   function cacheCoreAssets(cache) {
-    return Promise.all(CORE_ASSETS.map(function (asset) {
-      var request = new Request(asset, { cache: 'reload' });
-      return cache.add(request).catch(function () {
-        /* Some generated media may not exist in local/dev checkouts.
-           Keep the service worker install resilient. */
+    var index = 0;
+
+    function cacheNextBatch() {
+      var batch = CORE_ASSETS.slice(index, index + CACHE_BATCH_SIZE);
+      index += CACHE_BATCH_SIZE;
+
+      if (!batch.length) return Promise.resolve();
+
+      return Promise.all(batch.map(function (asset) {
+        var request = new Request(asset, { cache: 'reload' });
+        return cache.add(request).catch(function () {
+          /* Some generated media may not exist in local/dev checkouts.
+             Keep the service worker install resilient. */
+        });
+      })).then(function () {
+        return index < CORE_ASSETS.length
+          ? delay(CACHE_BATCH_DELAY_MS).then(cacheNextBatch)
+          : undefined;
       });
-    }));
+    }
+
+    return cacheNextBatch();
+  }
+
+  function processAssetQueue() {
+    if (!assetCacheQueue.length) {
+      assetQueuePromise = null;
+      return Promise.resolve();
+    }
+
+    var batch = assetCacheQueue.splice(0, ASSET_QUEUE_BATCH_SIZE);
+
+    return Promise.all(batch.map(function (request) {
+      return cacheStatic(request).catch(function () {}).then(function () {
+        delete queuedAssetUrls[request.url];
+      });
+    })).then(function () {
+      return assetCacheQueue.length
+        ? delay(ASSET_QUEUE_DELAY_MS).then(processAssetQueue)
+        : processAssetQueue();
+    });
+  }
+
+  function enqueueCacheAsset(request) {
+    if (queuedAssetUrls[request.url]) return assetQueuePromise || Promise.resolve();
+    queuedAssetUrls[request.url] = true;
+    assetCacheQueue.push(request);
+    if (!assetQueuePromise) {
+      assetQueuePromise = processAssetQueue();
+    }
+    return assetQueuePromise;
   }
 
   self.addEventListener('install', function (event) {
     event.waitUntil(
       openCache(true).then(function (cache) {
         return cacheCoreAssets(cache);
-      }).then(function () {
-        return self.skipWaiting();
       })
     );
   });
@@ -191,7 +255,7 @@
     if (isStaticAsset(url)) {
       event.respondWith(
         isVersionSensitiveAsset(url)
-          ? networkFirstStatic(event.request)
+          ? staleWhileRevalidateStatic(event.request)
           : cacheStatic(event.request)
       );
     }
@@ -199,9 +263,14 @@
 
   self.addEventListener('message', function (event) {
     var data = event.data || {};
+    if (data.type === 'SKIP_WAITING') {
+      event.waitUntil(self.skipWaiting());
+      return;
+    }
+
     var request = data.type === 'CACHE_ASSET' ? staticRequest(data.url) : null;
     if (!request) return;
 
-    event.waitUntil(cacheStatic(request).catch(function () {}));
+    event.waitUntil(enqueueCacheAsset(request));
   });
 })();
