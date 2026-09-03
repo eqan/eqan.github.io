@@ -130,4 +130,44 @@
       sections.forEach(reveal);
     }
   });
+
+  ready(function () {
+    var heroAvatar = document.getElementById('hero-avatar-trigger');
+    var fullResSrc = heroAvatar ? heroAvatar.getAttribute('data-fullres-src') : '';
+    if (!heroAvatar || !fullResSrc) return;
+
+    function upgradeHeroAvatar() {
+      if (heroAvatar.currentSrc.indexOf(fullResSrc) !== -1 || heroAvatar.src.indexOf(fullResSrc) !== -1) return;
+      heroAvatar.src = fullResSrc;
+      heroAvatar.srcset = fullResSrc + ' 867w';
+    }
+
+    function upgradeAfterWindowLoad() {
+      if (document.readyState === 'complete') {
+        upgradeHeroAvatar();
+      } else {
+        window.addEventListener('load', upgradeHeroAvatar, { once: true });
+      }
+    }
+
+    if (window.PortfolioCacheAsset) {
+      window.PortfolioCacheAsset(fullResSrc);
+    }
+
+    if (!window.caches || !window.caches.match) {
+      upgradeAfterWindowLoad();
+      return;
+    }
+
+    window.caches.match(fullResSrc).then(function (cachedResponse) {
+      if (cachedResponse) {
+        upgradeHeroAvatar();
+        return;
+      }
+
+      upgradeAfterWindowLoad();
+    }).catch(function () {
+      upgradeAfterWindowLoad();
+    });
+  });
 })();
