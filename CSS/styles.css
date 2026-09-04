@@ -25,6 +25,8 @@
   --scrollbar-track: rgba(0, 0, 0, 0.05);
   --contact-border: #000;
   --contrast-color: #fff;
+  --on-accent-divider: color-mix(in srgb, var(--contrast-color) 16%, transparent);
+  --on-accent-surface: color-mix(in srgb, var(--contrast-color) 12%, transparent);
   --content-bg: rgba(0, 0, 0, 0.03);
   --content-item-bg: rgba(0, 0, 0, 0.02);
   --content-item-hover: rgba(0, 0, 0, 0.05);
@@ -2465,7 +2467,7 @@ body.modal-open .preview-themes {
 .about-stat {
   text-align: center;
   padding: 1rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.15);
+  border-bottom: 1px solid var(--on-accent-divider);
 }
 .about-stat:last-of-type { border-bottom: none; }
 .about-stat-number {
@@ -2491,7 +2493,8 @@ body.modal-open .preview-themes {
   gap: 0.5rem;
   margin-top: 1.5rem;
   padding: 0.75rem;
-  background: rgba(255,255,255,0.1);
+  background: var(--on-accent-surface);
+  border: 1px solid var(--on-accent-divider);
   border-radius: 12px;
   font-size: 0.85rem;
   font-weight: 600;
