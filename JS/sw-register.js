@@ -6,8 +6,10 @@
   var userAcceptedUpdate = false;
   var updateToast = null;
   var updateWorker = null;
+  var activeRegistration = null;
   var VERSION_CHECK_INTERVAL_MS = 6 * 60 * 60 * 1000;
   var LAST_VERSION_CHECK_KEY = 'portfolio-sw-last-version-check';
+  var PROJECT_IMAGE_WARM_DELAY_MS = 2000;
 
   function idle(callback, timeout) {
     if ('requestIdleCallback' in window) {
@@ -54,13 +56,141 @@
     return '';
   }
 
-  function cacheAsset(url) {
-    var controller = navigator.serviceWorker.controller;
-    if (!url || !controller || !isSameOrigin(url)) return;
+  function toAbsoluteUrl(url) {
+    try {
+      return new URL(url, window.location.href).href;
+    } catch (err) {
+      return '';
+    }
+  }
 
-    controller.postMessage({
-      type: 'CACHE_ASSET',
-      url: url
+  function getServiceWorkerTarget() {
+    var controller = navigator.serviceWorker.controller;
+    if (controller) return Promise.resolve(controller);
+
+    if (activeRegistration) {
+      return Promise.resolve(
+        activeRegistration.active ||
+        activeRegistration.waiting ||
+        activeRegistration.installing ||
+        null
+      );
+    }
+
+    return navigator.serviceWorker.ready.then(function (registration) {
+      activeRegistration = registration;
+      return (
+        navigator.serviceWorker.controller ||
+        registration.active ||
+        registration.waiting ||
+        registration.installing ||
+        null
+      );
+    }).catch(function () {
+      return null;
+    });
+  }
+
+  function cacheAsset(url) {
+    if (!url || !isSameOrigin(url)) return Promise.resolve(false);
+
+    return getServiceWorkerTarget().then(function (target) {
+      if (!target || typeof target.postMessage !== 'function') return false;
+
+      target.postMessage({
+        type: 'CACHE_ASSET',
+        url: url
+      });
+
+      return true;
+    }).catch(function () {
+      return false;
+    });
+  }
+
+  function collectProjectImageUrls() {
+    if (typeof PORTFOLIO_DATA === 'undefined' || !PORTFOLIO_DATA) return [];
+
+    var seen = {};
+    var urls = [];
+
+    function add(url) {
+      var absoluteUrl = toAbsoluteUrl(url);
+      if (!absoluteUrl || !isSameOrigin(absoluteUrl) || seen[absoluteUrl]) return;
+      seen[absoluteUrl] = true;
+      urls.push(absoluteUrl);
+    }
+
+    (PORTFOLIO_DATA.featuredProjects || []).forEach(function (project) {
+      add(project && project.img);
+    });
+
+    (PORTFOLIO_DATA.projects || []).forEach(function (project) {
+      add(project && project.img);
+    });
+
+    Object.keys(PORTFOLIO_DATA.projectModals || {}).forEach(function (key) {
+      var modal = PORTFOLIO_DATA.projectModals[key];
+      (modal && modal.images || []).forEach(function (image) {
+        add(image && image.src);
+      });
+    });
+
+    return urls;
+  }
+
+  function findPortfolioCacheName() {
+    if (!window.caches || !window.caches.keys) return Promise.resolve('');
+
+    return Promise.all([
+      fetchDeployedCacheName(),
+      caches.keys()
+    ]).then(function (results) {
+      var deployedCacheName = results[0];
+      var cacheNames = results[1] || [];
+
+      if (deployedCacheName && cacheNames.indexOf(deployedCacheName) !== -1) {
+        return deployedCacheName;
+      }
+
+      return cacheNames.find(function (name) {
+        return name === 'portfolio-static' || name.indexOf('portfolio-static-') === 0;
+      }) || '';
+    }).catch(function () {
+      return '';
+    });
+  }
+
+  function hasCachedProjectImages(cacheName, projectImageUrls) {
+    if (!cacheName || !projectImageUrls.length || !window.caches) {
+      return Promise.resolve(false);
+    }
+
+    return caches.open(cacheName).then(function (cache) {
+      return Promise.all(projectImageUrls.map(function (url) {
+        return cache.match(url);
+      })).then(function (matches) {
+        return matches.some(Boolean);
+      });
+    }).catch(function () {
+      return false;
+    });
+  }
+
+  function warmProjectImagesIfNeeded() {
+    var projectImageUrls = collectProjectImageUrls();
+    if (!projectImageUrls.length) return;
+
+    findPortfolioCacheName().then(function (cacheName) {
+      return hasCachedProjectImages(cacheName, projectImageUrls).then(function (hasProjectImagesCached) {
+        if (hasProjectImagesCached) return;
+
+        projectImageUrls.forEach(function (url) {
+          cacheAsset(url);
+        });
+      });
+    }).catch(function () {
+      /* Background warming is an enhancement; ignore failures quietly. */
     });
   }
 
@@ -178,7 +308,16 @@
   window.addEventListener('load', function () {
     idle(function () {
       navigator.serviceWorker.register('./service-worker.js', { updateViaCache: 'none' }).then(function (registration) {
+        activeRegistration = registration;
         watchForWaitingWorker(registration);
+        window.setTimeout(function () {
+          navigator.serviceWorker.ready.then(function (readyRegistration) {
+            activeRegistration = readyRegistration;
+            warmProjectImagesIfNeeded();
+          }).catch(function () {
+            /* Ignore warm-up failures; the page already loaded. */
+          });
+        }, PROJECT_IMAGE_WARM_DELAY_MS);
         idle(function () {
           navigator.serviceWorker.ready.then(function () {
             refreshWorkerIfNeeded(registration);
@@ -187,6 +326,6 @@
       }).catch(function () {
         /* Cache is an enhancement; the site should keep working if registration fails. */
       });
-    }, 2500);
+    }, 2000);
   });
 })();
