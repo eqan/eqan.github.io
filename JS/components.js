@@ -132,9 +132,9 @@ const Components = {
 
   projectCard: ({ id, img, title, subtitle, tags, priority, size, featured, category, year, status, metrics, renderIndex }) => {
     const skillPillsHtml = Components.formatSkillPills(tags, featured ? 6 : 4);
-    const isPriorityImage = featured && renderIndex < 2;
+    const isPriorityImage = featured && renderIndex < 4;
     const imageLoading = isPriorityImage ? 'eager' : 'lazy';
-    const imageFetchPriority = isPriorityImage ? 'high' : 'low';
+    const imageFetchPriority = isPriorityImage ? 'high' : 'auto';
 
     const metricsHtml = Array.isArray(metrics) && metrics.length
       ? `<div class="project-metrics">${metrics.map(m => `<span class="project-metric">${m}</span>`).join('')}</div>`

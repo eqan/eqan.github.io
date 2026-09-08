@@ -2,28 +2,31 @@
   'use strict';
 
   if (!('serviceWorker' in navigator)) return;
+
+  var CACHE_PREFIX = 'portfolio-static';
+  var PROJECT_CARD_WARM_DELAY_MS = 250;
+  var TESTIMONIAL_WARM_DELAY_MS = 5000;
+  var VERSION_CHECK_INTERVAL_MS = 6 * 60 * 60 * 1000;
+  var LAST_VERSION_CHECK_KEY = 'portfolio-sw-last-version-check';
+
   var hasControllerAtBoot = !!navigator.serviceWorker.controller;
   var userAcceptedUpdate = false;
   var updateToast = null;
   var updateWorker = null;
-  var activeRegistration = null;
   var registrationPromise = null;
-  var VERSION_CHECK_INTERVAL_MS = 6 * 60 * 60 * 1000;
-  var LAST_VERSION_CHECK_KEY = 'portfolio-sw-last-version-check';
-  var PRIORITY_PROJECT_IMAGE_WARM_DELAY_MS = 250;
-  var PROJECT_IMAGE_WARM_DELAY_MS = 2000;
-  var TESTIMONIAL_IMAGE_WARM_DELAY_MS = 5000;
-
-  function idle(callback, timeout) {
-    if ('requestIdleCallback' in window) {
-      window.requestIdleCallback(callback, { timeout: timeout || 4000 });
-    } else {
-      window.setTimeout(callback, timeout || 1800);
-    }
-  }
+  var cacheNamePromise = null;
+  var warmupPromises = Object.create(null);
 
   function now() {
     return Date.now ? Date.now() : new Date().getTime();
+  }
+
+  function idle(callback, timeout) {
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(callback, { timeout: timeout || 3000 });
+    } else {
+      window.setTimeout(callback, timeout || 1200);
+    }
   }
 
   function shouldRefreshVersionMetadata() {
@@ -49,6 +52,14 @@
     }
   }
 
+  function toAbsoluteUrl(url) {
+    try {
+      return new URL(url, window.location.href).href;
+    } catch (err) {
+      return '';
+    }
+  }
+
   function assetUrl(target) {
     if (!target || !target.tagName) return '';
 
@@ -59,240 +70,141 @@
     return '';
   }
 
-  function toAbsoluteUrl(url) {
-    try {
-      return new URL(url, window.location.href).href;
-    } catch (err) {
-      return '';
-    }
-  }
+  function getDeployedCacheName(force) {
+    if (cacheNamePromise && !force) return cacheNamePromise;
 
-  function getServiceWorkerTarget() {
-    var controller = navigator.serviceWorker.controller;
-    if (controller) return Promise.resolve(controller);
-
-    if (activeRegistration) {
-      return Promise.resolve(
-        activeRegistration.active ||
-        activeRegistration.waiting ||
-        activeRegistration.installing ||
-        null
-      );
-    }
-
-    return navigator.serviceWorker.ready.then(function (registration) {
-      activeRegistration = registration;
-      return (
-        navigator.serviceWorker.controller ||
-        registration.active ||
-        registration.waiting ||
-        registration.installing ||
-        null
-      );
-    }).catch(function () {
-      return null;
-    });
-  }
-
-  function cacheAsset(url) {
-    if (!url || !isSameOrigin(url)) return Promise.resolve(false);
-
-    return getServiceWorkerTarget().then(function (target) {
-      if (!target || typeof target.postMessage !== 'function') return false;
-
-      target.postMessage({
-        type: 'CACHE_ASSET',
-        url: url
-      });
-
-      return true;
-    }).catch(function () {
-      return false;
-    });
-  }
-
-  function collectProjectImageUrls() {
-    if (typeof PORTFOLIO_DATA === 'undefined' || !PORTFOLIO_DATA) return [];
-
-    var seen = {};
-    var urls = [];
-
-    function add(url) {
-      var absoluteUrl = toAbsoluteUrl(url);
-      if (!absoluteUrl || !isSameOrigin(absoluteUrl) || seen[absoluteUrl]) return;
-      seen[absoluteUrl] = true;
-      urls.push(absoluteUrl);
-    }
-
-    (PORTFOLIO_DATA.featuredProjects || []).forEach(function (project) {
-      add(project && project.img);
-    });
-
-    (PORTFOLIO_DATA.projects || []).forEach(function (project) {
-      add(project && project.img);
-    });
-
-    Object.keys(PORTFOLIO_DATA.projectModals || {}).forEach(function (key) {
-      var modal = PORTFOLIO_DATA.projectModals[key];
-      (modal && modal.images || []).forEach(function (image) {
-        add(image && image.src);
-      });
-    });
-
-    return urls;
-  }
-
-  function collectTestimonialImageUrls() {
-    if (typeof PORTFOLIO_DATA === 'undefined' || !PORTFOLIO_DATA) return [];
-
-    var seen = {};
-    var urls = [];
-
-    function add(url) {
-      var absoluteUrl = toAbsoluteUrl(url);
-      if (!absoluteUrl || !isSameOrigin(absoluteUrl) || seen[absoluteUrl]) return;
-      seen[absoluteUrl] = true;
-      urls.push(absoluteUrl);
-    }
-
-    (PORTFOLIO_DATA.testimonials || []).forEach(function (testimonial) {
-      add(testimonial && testimonial.img);
-    });
-
-    return urls;
-  }
-
-  function findPortfolioCacheName() {
-    if (!window.caches || !window.caches.keys) return Promise.resolve('');
-
-    return Promise.all([
-      fetchDeployedCacheName(),
-      caches.keys()
-    ]).then(function (results) {
-      var deployedCacheName = results[0];
-      var cacheNames = results[1] || [];
-
-      if (deployedCacheName && cacheNames.indexOf(deployedCacheName) !== -1) {
-        return deployedCacheName;
-      }
-
-      return cacheNames.find(function (name) {
-        return name === 'portfolio-static' || name.indexOf('portfolio-static-') === 0;
-      }) || '';
-    }).catch(function () {
-      return '';
-    });
-  }
-
-  function filterUncachedAssetUrls(cacheName, assetUrls) {
-    if (!assetUrls.length || !window.caches) {
-      return Promise.resolve(assetUrls);
-    }
-
-    if (!cacheName) {
-      return Promise.resolve(assetUrls);
-    }
-
-    return caches.open(cacheName).then(function (cache) {
-      return Promise.all(assetUrls.map(function (url) {
-        return cache.match(url);
-      })).then(function (matches) {
-        return assetUrls.filter(function (_, index) {
-          return !matches[index];
-        });
-      });
-    }).catch(function () {
-      return assetUrls;
-    });
-  }
-
-  function warmAssetUrlsIfNeeded(assetUrls) {
-    if (!assetUrls.length) return;
-
-    findPortfolioCacheName().then(function (cacheName) {
-      return filterUncachedAssetUrls(cacheName, assetUrls).then(function (uncachedAssetUrls) {
-        if (!uncachedAssetUrls.length) return;
-
-        uncachedAssetUrls.forEach(function (url) {
-          cacheAsset(url);
-        });
-      });
-    }).catch(function () {
-      /* Background warming is an enhancement; ignore failures quietly. */
-    });
-  }
-
-  function warmProjectImagesIfNeeded() {
-    warmAssetUrlsIfNeeded(collectProjectImageUrls());
-  }
-
-  function warmTestimonialImagesIfNeeded() {
-    warmAssetUrlsIfNeeded(collectTestimonialImageUrls());
-  }
-
-  function collectPriorityProjectImageUrls(limit) {
-    if (typeof PORTFOLIO_DATA === 'undefined' || !PORTFOLIO_DATA) return [];
-
-    var featuredProjects = PORTFOLIO_DATA.featuredProjects || [];
-
-    return featuredProjects
-      .slice(0, Math.max(0, limit || 0))
-      .map(function (project) {
-        return toAbsoluteUrl(project && project.img);
-      })
-      .filter(function (url, index, list) {
-        return url && isSameOrigin(url) && list.indexOf(url) === index;
-      });
-  }
-
-  function primeBrowserImageCache(urls) {
-    if (!urls.length || !window.fetch) return Promise.resolve();
-
-    return Promise.all(urls.map(function (url) {
-      return fetch(url, {
-        credentials: 'same-origin',
-        cache: 'force-cache'
-      }).then(function (response) {
-        if (!response || !response.ok) return;
-        return response.blob().catch(function () {});
-      }).catch(function () {
-        /* Best-effort browser-cache warmup only. */
-      });
-    })).then(function () {});
-  }
-
-  function fetchDeployedCacheName() {
-    return fetch('./cache-version.json', {
+    cacheNamePromise = fetch('./cache-version.json', {
       cache: 'no-store',
       credentials: 'same-origin'
     }).then(function (response) {
       if (!response.ok) return '';
       return response.json();
     }).then(function (data) {
-      return data && data.cacheName ? data.cacheName : '';
+      return data && data.cacheName ? String(data.cacheName).trim() : '';
     }).catch(function () {
       return '';
     });
+
+    return cacheNamePromise;
   }
 
-  function refreshWorkerIfNeeded(registration) {
-    if (!window.caches || !registration) return;
-    if (!shouldRefreshVersionMetadata()) return;
+  function getPortfolioCacheName() {
+    if (!window.caches || !window.caches.keys) return Promise.resolve(CACHE_PREFIX);
 
-    fetchDeployedCacheName().then(function (deployedCacheName) {
-      markVersionMetadataChecked();
-      if (!deployedCacheName) return;
+    return Promise.all([
+      getDeployedCacheName(false),
+      caches.keys()
+    ]).then(function (results) {
+      var deployedName = results[0];
+      var cacheNames = results[1] || [];
 
-      return caches.keys().then(function (cacheNames) {
-        if (cacheNames.indexOf(deployedCacheName) !== -1) return;
+      if (deployedName) return deployedName;
 
-        /* A new cache name means a new service-worker.js should be deployed too.
-           update() asks the browser to fetch it now instead of waiting. */
-        return registration.update();
+      return cacheNames.find(function (name) {
+        return name === CACHE_PREFIX || name.indexOf(CACHE_PREFIX + '-') === 0;
+      }) || CACHE_PREFIX;
+    }).catch(function () {
+      return CACHE_PREFIX;
+    });
+  }
+
+  function openPortfolioCache() {
+    if (!window.caches || !window.caches.open) return Promise.resolve(null);
+    return getPortfolioCacheName().then(function (cacheName) {
+      return caches.open(cacheName);
+    }).catch(function () {
+      return null;
+    });
+  }
+
+  function uniqueSameOriginUrls(urls) {
+    var seen = Object.create(null);
+
+    return (urls || []).map(toAbsoluteUrl).filter(function (url) {
+      if (!url || !isSameOrigin(url) || seen[url]) return false;
+      seen[url] = true;
+      return true;
+    });
+  }
+
+  function collectAssetUrls(items, picker) {
+    var urls = [];
+    (items || []).forEach(function (item) {
+      var value = picker(item);
+      if (Array.isArray(value)) {
+        value.forEach(function (url) { urls.push(url); });
+        return;
+      }
+      urls.push(value);
+    });
+    return uniqueSameOriginUrls(urls);
+  }
+
+  function portfolioData() {
+    return typeof PORTFOLIO_DATA !== 'undefined' ? PORTFOLIO_DATA : null;
+  }
+
+  function collectProjectCardImageUrls() {
+    var data = portfolioData();
+    if (!data) return [];
+    return collectAssetUrls((data.featuredProjects || []).concat(data.projects || []), function (project) {
+      return project && project.img;
+    });
+  }
+
+  function collectTestimonialImageUrls() {
+    var data = portfolioData();
+    if (!data) return [];
+    return collectAssetUrls(data.testimonials || [], function (testimonial) {
+      return testimonial && testimonial.img;
+    });
+  }
+
+  function fetchIntoCaches(url, cache) {
+    if (warmupPromises[url]) return warmupPromises[url];
+
+    warmupPromises[url] = Promise.resolve().then(function () {
+      if (cache) {
+        return cache.match(url).then(function (cached) {
+          if (cached) return cached;
+          return null;
+        });
+      }
+      return null;
+    }).then(function (cached) {
+      if (cached) return cached;
+
+      return fetch(url, {
+        credentials: 'same-origin',
+        cache: 'force-cache'
+      }).then(function (response) {
+        if (response && response.ok && cache) {
+          cache.put(url, response.clone());
+        }
+        return response;
       });
     }).catch(function () {
-      markVersionMetadataChecked();
+      return null;
+    }).finally(function () {
+      delete warmupPromises[url];
     });
+
+    return warmupPromises[url];
+  }
+
+  function warmAssetUrls(urls) {
+    var dedupedUrls = uniqueSameOriginUrls(urls);
+    if (!dedupedUrls.length) return Promise.resolve();
+
+    return openPortfolioCache().then(function (cache) {
+      return Promise.all(dedupedUrls.map(function (url) {
+        return fetchIntoCaches(url, cache);
+      }));
+    }).then(function () {});
+  }
+
+  function cacheAsset(url) {
+    return warmAssetUrls([url]);
   }
 
   function ensureUpdateToast() {
@@ -365,37 +277,29 @@
     });
   }
 
-  function scheduleWarmups() {
-    window.setTimeout(function () {
-      var priorityProjectUrls = collectPriorityProjectImageUrls(2);
-      primeBrowserImageCache(priorityProjectUrls);
-      warmAssetUrlsIfNeeded(priorityProjectUrls);
-    }, PRIORITY_PROJECT_IMAGE_WARM_DELAY_MS);
+  function refreshWorkerIfNeeded(registration) {
+    if (!window.caches || !registration) return;
+    if (!shouldRefreshVersionMetadata()) return;
 
-    window.setTimeout(function () {
-      navigator.serviceWorker.ready.then(function (readyRegistration) {
-        activeRegistration = readyRegistration;
-        warmProjectImagesIfNeeded();
-      }).catch(function () {
-        /* Ignore warm-up failures; the page already loaded. */
-      });
-    }, PROJECT_IMAGE_WARM_DELAY_MS);
+    getDeployedCacheName(true).then(function (deployedCacheName) {
+      markVersionMetadataChecked();
+      if (!deployedCacheName) return;
 
-    window.setTimeout(function () {
-      navigator.serviceWorker.ready.then(function (readyRegistration) {
-        activeRegistration = readyRegistration;
-        warmTestimonialImagesIfNeeded();
-      }).catch(function () {
-        /* Ignore warm-up failures; the page already loaded. */
+      return caches.keys().then(function (cacheNames) {
+        if (cacheNames.indexOf(deployedCacheName) !== -1) return;
+        return registration.update();
       });
-    }, TESTIMONIAL_IMAGE_WARM_DELAY_MS);
+    }).catch(function () {
+      markVersionMetadataChecked();
+    });
   }
 
   function registerServiceWorker() {
     if (registrationPromise) return registrationPromise;
 
-    registrationPromise = navigator.serviceWorker.register('./service-worker.js', { updateViaCache: 'none' }).then(function (registration) {
-      activeRegistration = registration;
+    registrationPromise = navigator.serviceWorker.register('./service-worker.js', {
+      updateViaCache: 'none'
+    }).then(function (registration) {
       watchForWaitingWorker(registration);
       idle(function () {
         navigator.serviceWorker.ready.then(function () {
@@ -410,13 +314,27 @@
     return registrationPromise;
   }
 
+  function scheduleWarmups() {
+    window.setTimeout(function () {
+      warmAssetUrls(collectProjectCardImageUrls());
+    }, PROJECT_CARD_WARM_DELAY_MS);
+
+    window.setTimeout(function () {
+      warmAssetUrls(collectTestimonialImageUrls());
+    }, TESTIMONIAL_WARM_DELAY_MS);
+  }
+
   window.PortfolioCacheAsset = cacheAsset;
   reloadAfterAcceptedUpdate();
+  registerServiceWorker();
 
   document.addEventListener('load', function (event) {
     cacheAsset(assetUrl(event.target));
   }, true);
 
-  idle(registerServiceWorker, 250);
-  window.addEventListener('load', scheduleWarmups, { once: true });
+  if (document.readyState === 'complete') {
+    scheduleWarmups();
+  } else {
+    window.addEventListener('load', scheduleWarmups, { once: true });
+  }
 })();
