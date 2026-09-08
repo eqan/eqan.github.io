@@ -184,19 +184,25 @@
     });
   }
 
-  function hasCachedProjectImages(cacheName, projectImageUrls) {
-    if (!cacheName || !projectImageUrls.length || !window.caches) {
-      return Promise.resolve(false);
+  function filterUncachedAssetUrls(cacheName, assetUrls) {
+    if (!assetUrls.length || !window.caches) {
+      return Promise.resolve(assetUrls);
+    }
+
+    if (!cacheName) {
+      return Promise.resolve(assetUrls);
     }
 
     return caches.open(cacheName).then(function (cache) {
-      return Promise.all(projectImageUrls.map(function (url) {
+      return Promise.all(assetUrls.map(function (url) {
         return cache.match(url);
       })).then(function (matches) {
-        return matches.some(Boolean);
+        return assetUrls.filter(function (_, index) {
+          return !matches[index];
+        });
       });
     }).catch(function () {
-      return false;
+      return assetUrls;
     });
   }
 
@@ -204,10 +210,10 @@
     if (!assetUrls.length) return;
 
     findPortfolioCacheName().then(function (cacheName) {
-      return hasCachedProjectImages(cacheName, assetUrls).then(function (hasAssetsCached) {
-        if (hasAssetsCached) return;
+      return filterUncachedAssetUrls(cacheName, assetUrls).then(function (uncachedAssetUrls) {
+        if (!uncachedAssetUrls.length) return;
 
-        assetUrls.forEach(function (url) {
+        uncachedAssetUrls.forEach(function (url) {
           cacheAsset(url);
         });
       });
