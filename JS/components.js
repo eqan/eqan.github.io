@@ -130,8 +130,11 @@ const Components = {
     return html;
   },
 
-  projectCard: ({ id, img, title, subtitle, tags, priority, size, featured, category, year, status, metrics }) => {
+  projectCard: ({ id, img, title, subtitle, tags, priority, size, featured, category, year, status, metrics, renderIndex }) => {
     const skillPillsHtml = Components.formatSkillPills(tags, featured ? 6 : 4);
+    const isPriorityImage = featured && renderIndex < 2;
+    const imageLoading = isPriorityImage ? 'eager' : 'lazy';
+    const imageFetchPriority = isPriorityImage ? 'high' : 'low';
 
     const metricsHtml = Array.isArray(metrics) && metrics.length
       ? `<div class="project-metrics">${metrics.map(m => `<span class="project-metric">${m}</span>`).join('')}</div>`
@@ -173,7 +176,7 @@ const Components = {
                data-featured="${featured ? 'true' : 'false'}">
         <a class="${cardClass}" href="#${id}" data-bs-toggle="modal">
           <figure class="project-card-img">
-            <img src="${img}" alt="${title}" loading="lazy" />
+            <img src="${img}" alt="${title}" loading="${imageLoading}" fetchpriority="${imageFetchPriority}" decoding="async" />
             ${badgesHtml}
             <span class="card-arrow" aria-hidden="true"></span>
           </figure>
@@ -225,10 +228,14 @@ const Components = {
       ...featured.map(project => ({ ...project, featured: true })),
       ...regular.map(project => ({ ...project, featured: false }))
     ];
+    const renderedProjects = all.map((project, renderIndex) => ({
+      ...project,
+      renderIndex
+    }));
     return `
       ${Components.projectsControls(all)}
       <div class="projects-bento animation-translate animation-item-3">
-        ${all.map(Components.projectCard).join('')}
+        ${renderedProjects.map(Components.projectCard).join('')}
       </div>
       <div class="projects-empty" hidden>
         <p>No projects match this filter yet.</p>

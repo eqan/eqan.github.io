@@ -7,8 +7,10 @@
   var updateToast = null;
   var updateWorker = null;
   var activeRegistration = null;
+  var registrationPromise = null;
   var VERSION_CHECK_INTERVAL_MS = 6 * 60 * 60 * 1000;
   var LAST_VERSION_CHECK_KEY = 'portfolio-sw-last-version-check';
+  var PRIORITY_PROJECT_IMAGE_WARM_DELAY_MS = 250;
   var PROJECT_IMAGE_WARM_DELAY_MS = 2000;
   var TESTIMONIAL_IMAGE_WARM_DELAY_MS = 5000;
 
@@ -222,6 +224,37 @@
     warmAssetUrlsIfNeeded(collectTestimonialImageUrls());
   }
 
+  function collectPriorityProjectImageUrls(limit) {
+    if (typeof PORTFOLIO_DATA === 'undefined' || !PORTFOLIO_DATA) return [];
+
+    var featuredProjects = PORTFOLIO_DATA.featuredProjects || [];
+
+    return featuredProjects
+      .slice(0, Math.max(0, limit || 0))
+      .map(function (project) {
+        return toAbsoluteUrl(project && project.img);
+      })
+      .filter(function (url, index, list) {
+        return url && isSameOrigin(url) && list.indexOf(url) === index;
+      });
+  }
+
+  function primeBrowserImageCache(urls) {
+    if (!urls.length || !window.fetch) return Promise.resolve();
+
+    return Promise.all(urls.map(function (url) {
+      return fetch(url, {
+        credentials: 'same-origin',
+        cache: 'force-cache'
+      }).then(function (response) {
+        if (!response || !response.ok) return;
+        return response.blob().catch(function () {});
+      }).catch(function () {
+        /* Best-effort browser-cache warmup only. */
+      });
+    })).then(function () {});
+  }
+
   function fetchDeployedCacheName() {
     return fetch('./cache-version.json', {
       cache: 'no-store',
@@ -326,6 +359,51 @@
     });
   }
 
+  function scheduleWarmups() {
+    window.setTimeout(function () {
+      var priorityProjectUrls = collectPriorityProjectImageUrls(2);
+      primeBrowserImageCache(priorityProjectUrls);
+      warmAssetUrlsIfNeeded(priorityProjectUrls);
+    }, PRIORITY_PROJECT_IMAGE_WARM_DELAY_MS);
+
+    window.setTimeout(function () {
+      navigator.serviceWorker.ready.then(function (readyRegistration) {
+        activeRegistration = readyRegistration;
+        warmProjectImagesIfNeeded();
+      }).catch(function () {
+        /* Ignore warm-up failures; the page already loaded. */
+      });
+    }, PROJECT_IMAGE_WARM_DELAY_MS);
+
+    window.setTimeout(function () {
+      navigator.serviceWorker.ready.then(function (readyRegistration) {
+        activeRegistration = readyRegistration;
+        warmTestimonialImagesIfNeeded();
+      }).catch(function () {
+        /* Ignore warm-up failures; the page already loaded. */
+      });
+    }, TESTIMONIAL_IMAGE_WARM_DELAY_MS);
+  }
+
+  function registerServiceWorker() {
+    if (registrationPromise) return registrationPromise;
+
+    registrationPromise = navigator.serviceWorker.register('./service-worker.js', { updateViaCache: 'none' }).then(function (registration) {
+      activeRegistration = registration;
+      watchForWaitingWorker(registration);
+      idle(function () {
+        navigator.serviceWorker.ready.then(function () {
+          refreshWorkerIfNeeded(registration);
+        });
+      }, 6000);
+      return registration;
+    }).catch(function () {
+      return null;
+    });
+
+    return registrationPromise;
+  }
+
   window.PortfolioCacheAsset = cacheAsset;
   reloadAfterAcceptedUpdate();
 
@@ -333,35 +411,6 @@
     cacheAsset(assetUrl(event.target));
   }, true);
 
-  window.addEventListener('load', function () {
-    idle(function () {
-      navigator.serviceWorker.register('./service-worker.js', { updateViaCache: 'none' }).then(function (registration) {
-        activeRegistration = registration;
-        watchForWaitingWorker(registration);
-        window.setTimeout(function () {
-          navigator.serviceWorker.ready.then(function (readyRegistration) {
-            activeRegistration = readyRegistration;
-            warmProjectImagesIfNeeded();
-          }).catch(function () {
-            /* Ignore warm-up failures; the page already loaded. */
-          });
-        }, PROJECT_IMAGE_WARM_DELAY_MS);
-        window.setTimeout(function () {
-          navigator.serviceWorker.ready.then(function (readyRegistration) {
-            activeRegistration = readyRegistration;
-            warmTestimonialImagesIfNeeded();
-          }).catch(function () {
-            /* Ignore warm-up failures; the page already loaded. */
-          });
-        }, TESTIMONIAL_IMAGE_WARM_DELAY_MS);
-        idle(function () {
-          navigator.serviceWorker.ready.then(function () {
-            refreshWorkerIfNeeded(registration);
-          });
-        }, 6000);
-      }).catch(function () {
-        /* Cache is an enhancement; the site should keep working if registration fails. */
-      });
-    }, 2000);
-  });
+  idle(registerServiceWorker, 250);
+  window.addEventListener('load', scheduleWarmups, { once: true });
 })();
