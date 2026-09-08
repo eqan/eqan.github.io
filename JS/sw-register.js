@@ -10,6 +10,7 @@
   var VERSION_CHECK_INTERVAL_MS = 6 * 60 * 60 * 1000;
   var LAST_VERSION_CHECK_KEY = 'portfolio-sw-last-version-check';
   var PROJECT_IMAGE_WARM_DELAY_MS = 2000;
+  var TESTIMONIAL_IMAGE_WARM_DELAY_MS = 5000;
 
   function idle(callback, timeout) {
     if ('requestIdleCallback' in window) {
@@ -139,6 +140,26 @@
     return urls;
   }
 
+  function collectTestimonialImageUrls() {
+    if (typeof PORTFOLIO_DATA === 'undefined' || !PORTFOLIO_DATA) return [];
+
+    var seen = {};
+    var urls = [];
+
+    function add(url) {
+      var absoluteUrl = toAbsoluteUrl(url);
+      if (!absoluteUrl || !isSameOrigin(absoluteUrl) || seen[absoluteUrl]) return;
+      seen[absoluteUrl] = true;
+      urls.push(absoluteUrl);
+    }
+
+    (PORTFOLIO_DATA.testimonials || []).forEach(function (testimonial) {
+      add(testimonial && testimonial.img);
+    });
+
+    return urls;
+  }
+
   function findPortfolioCacheName() {
     if (!window.caches || !window.caches.keys) return Promise.resolve('');
 
@@ -177,21 +198,28 @@
     });
   }
 
-  function warmProjectImagesIfNeeded() {
-    var projectImageUrls = collectProjectImageUrls();
-    if (!projectImageUrls.length) return;
+  function warmAssetUrlsIfNeeded(assetUrls) {
+    if (!assetUrls.length) return;
 
     findPortfolioCacheName().then(function (cacheName) {
-      return hasCachedProjectImages(cacheName, projectImageUrls).then(function (hasProjectImagesCached) {
-        if (hasProjectImagesCached) return;
+      return hasCachedProjectImages(cacheName, assetUrls).then(function (hasAssetsCached) {
+        if (hasAssetsCached) return;
 
-        projectImageUrls.forEach(function (url) {
+        assetUrls.forEach(function (url) {
           cacheAsset(url);
         });
       });
     }).catch(function () {
       /* Background warming is an enhancement; ignore failures quietly. */
     });
+  }
+
+  function warmProjectImagesIfNeeded() {
+    warmAssetUrlsIfNeeded(collectProjectImageUrls());
+  }
+
+  function warmTestimonialImagesIfNeeded() {
+    warmAssetUrlsIfNeeded(collectTestimonialImageUrls());
   }
 
   function fetchDeployedCacheName() {
@@ -318,6 +346,14 @@
             /* Ignore warm-up failures; the page already loaded. */
           });
         }, PROJECT_IMAGE_WARM_DELAY_MS);
+        window.setTimeout(function () {
+          navigator.serviceWorker.ready.then(function (readyRegistration) {
+            activeRegistration = readyRegistration;
+            warmTestimonialImagesIfNeeded();
+          }).catch(function () {
+            /* Ignore warm-up failures; the page already loaded. */
+          });
+        }, TESTIMONIAL_IMAGE_WARM_DELAY_MS);
         idle(function () {
           navigator.serviceWorker.ready.then(function () {
             refreshWorkerIfNeeded(registration);
